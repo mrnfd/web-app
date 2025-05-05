@@ -1,0 +1,16 @@
+# created by virtualenv automatically
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/Lib
+
+# Pycharm
+.idea/
+.idea
+idea/
