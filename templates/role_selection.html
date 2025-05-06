@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Type</title>
+    {% load static %}
+    <link rel="stylesheet" href={% static 'css/role_style.css' %}>
+</head>
+<body>
+     {% include "_navigation.html" %}
+     <div class="user_type_container">
+         <h1 id="type">User Type</h1>
+         <div class="btn_container">
+             <div class="type_btn">
+                 <a href="{% url 'login_as_buyer' %}">
+                     <button class="btn">Buyer</button>
+                 </a>
+             </div>
+             <div class="type_btn">
+                 <a href="{% url 'login_as_seller' %}">
+                     <button class="btn">Seller</button>
+                 </a>
+             </div>
+        </div>
+    </div>
+</body>
+</html>
