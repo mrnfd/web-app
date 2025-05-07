@@ -42,19 +42,24 @@
             </div>
         </div>
     <div class="property-grid">
-        {% for i in "123456" %}
-        <div class="property-card">
-            <img src="https://via.placeholder.com/300x200" alt="Property image">
-            <div class="property-info">
-                <p class="property-address">Placeholder street 123</p>
-                <div class="rooms-seller">
-                    <span><strong>Rooms:</strong>3</span>
-                    <span><strong>Seller:</strong>Elin J.</span>
+        
+        {% for property in propertys %}
+        <a href="{% url 'listing-by-id' id=property.id %}">
+            <div  class="property-card">
+                <img src="https://via.placeholder.com/300x200" alt="Property image">
+                <div class="property-info">
+                    <p class="property-address">{{property.street}} {{property.number}}</p>
+                    <div class="rooms-seller">
+                        <span><strong>Rooms:</strong>{{property.rooms}}</span>
+                        <span><strong>Seller:</strong>{{property.seller}}</span>
+                    </div>
+                    
                 </div>
             </div>
-        </div>
+        </a>
+        {% endfor %}
+        
     </div>
-    {% endfor %}
     </div>
 </body>
 </html>
