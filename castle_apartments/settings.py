@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     "Listings.apps.ListingsConfig",
     "Offers.apps.OffersConfig",
     "Sellers.apps.SellersConfig",
-    "Transactions.apps.TransactionsConfig",
+    "Transactions.apps.TransactionsConfig"
 ]
 
 

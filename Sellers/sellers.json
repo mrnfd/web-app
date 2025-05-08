@@ -1,0 +1,15 @@
+[
+  {
+    "model": "Sellers.seller",
+    "pk": 1,
+    "fields": {
+      "name": "Saul Goodman",
+      "email": "bettercallme@yahoo.com",
+      "contact_number": "555-5555",
+      "seller_type": "The Best",
+      "city": "Los Angeles, Baby!",
+      "postal_code": 69,
+      "bio": "Better Call Saul!"
+    }
+  }
+]

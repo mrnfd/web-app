@@ -1,5 +1,7 @@
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import  Buyer
+from .forms import BuyerProfileForm
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render
 
 # Create your views here.
 def index(request):
@@ -12,3 +14,19 @@ def register(request):
         return render(request,'buyer/register.html', {
             'form': UserCreationForm()
         })
+
+
+# Create your views here.
+
+def edit_profile(request, buyer_id):
+    buyer = get_object_or_404(Buyer, id=buyer_id)
+
+    if request.method == "POST":
+        form = BuyerProfileForm(request.POST, request.FILES, instance=buyer)
+        if form.is_valid():
+            form.save()
+            return redirect('profile', buyer_id=buyer_id)
+    else:
+        form = BuyerProfileForm(instance=buyer)
+
+    return render(request, 'edit_profile.html', {'form': form})
