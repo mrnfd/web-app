@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 
+from Sellers.models import Seller
+
 class PropertyType(models.TextChoices):
     HOUSE = 'HOUSE', 'House'
     CONDO = 'CONDO', 'Condo'
@@ -19,6 +21,8 @@ class ListingStatus(models.TextChoices):
 
 # Create your models here.
 class Listing(models.Model):
+    seller_id = models.ForeignKey(Seller, on_delete=models.CASCADE,related_name='images',null=True)
+
     street = models.CharField(max_length=255,null=True)
     number = models.IntegerField(null=True)
     description = models.TextField(blank=True)
