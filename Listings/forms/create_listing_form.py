@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 
-from Offers.models import Listing
+from Listings.models import Listing
 
 class CreateListingForm(ModelForm):
     image = forms.CharField(required=False,widget=forms.TextInput(attrs={'class':'form-control'}))
