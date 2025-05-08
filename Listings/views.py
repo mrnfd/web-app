@@ -1,6 +1,8 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
+from Listings.models import Listing
+
 # Create your views here.
 
 # Er að assume-a að listing object heiti Listing
@@ -13,14 +15,14 @@ def catalogue(request):
     #          } for x in Listing.objects.filter(name__icontains=request.GET['search_filter'].order_by('name'))]
     #    })
     #
-    # propertys = Listings.objects.all()
+    propertys = Listing.objects.all()
     return render(request,"catalogue.html",{
         "propertys":propertys
     })
 
 def get_listing_by_id(request,id):
-    # listing = Listing.objects.get(id=id)
-    listing = [x for x in propertys if x['id'] == id][0]
+    listing = Listing.objects.get(id=id)
+    #listing = [x for x in propertys if x['id'] == id][0]
     return render(request,"listing_detail.html.",{
         "listing":listing
     })
