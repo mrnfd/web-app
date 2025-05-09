@@ -82,3 +82,6 @@ def finalization_revision(request):
 
 def finalization_success(request):
     return render(request, 'buyer/finalization_success.html')
+
+def buyer_profile(request):
+    return render(request, 'buyer/buyer_profile.html')

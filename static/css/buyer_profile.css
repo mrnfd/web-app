@@ -1,0 +1,132 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-container {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin: 3rem;
+}
+
+.profile-pic-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+img {
+    width: 8rem;
+    height: 8rem;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #cccccc;
+    margin-bottom: 1rem;
+}
+
+.btn {
+    border: 2px solid #cccccc;
+    border-radius: 6px;
+    background-color: #F8F8FF;
+    font-family: inherit;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+
+form {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.input-field {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem;
+}
+
+.input-field label{
+    flex: 0 0 120px;
+    font-size: 18px;
+    text-align: left;
+}
+
+.input-field input {
+    flex: 0.6;
+    padding: 0.4rem;
+    font-size: 16px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    width: 95%;
+}
+
+input {
+    font-family: inherit;
+}
+
+input:focus {
+  background-color: #fff;
+}
+
+input:hover {
+  border-color: #888;
+}
+
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.buttons button{
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 100px;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    background-color: #F8F8FF;
+    font-family: inherit;
+    color: black;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.buttons button[type="submit"]{
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 100px;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    background-color: #F8F8FF;
+    font-family: inherit;
+    color: black;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.buttons button:hover,
+.btn:hover {
+    background-color: #DCDCFF;
+}
