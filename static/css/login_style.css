@@ -1,0 +1,92 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.credentials-constructor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    gap: 1rem;
+    font-size: 1.2rem;
+}
+
+.credentials-constructor input {
+    width: 300px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.input-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.input-row label {
+    width: 120px;
+    text-align: right;
+}
+
+.input-row input {
+    flex: 1;
+    width: 300px;
+    padding: 10px;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    border: 1px solid #cccccc;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.buttons button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 100px;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    background-color: #F8F8FF;
+    font-family: inherit;
+    color: black;
+    transition: background-color 0.2s ease-in-out;
+}
+.buttons input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 100px;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    background-color: #F8F8FF;
+    font-family: inherit;
+    color: black;
+    transition: background-color 0.2s ease-in-out;
+}
+
+input {
+    font-family: inherit;
+}
+
+.buttons button:hover,
+.buttons input[type="submit"]:hover {
+    background-color: #DCDCFF;
+}
+
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}

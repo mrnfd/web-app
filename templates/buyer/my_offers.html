@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Offers</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/buyer_offers_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    {% include "_navigation.html" %}
+    <div class="search-container">
+        <input type="text" placeholder="Enter an address">
+        <div class="status-filter">
+            <select id="status-filter" name="status">
+                    <option value="">Status</option>
+                    <option value="any">Any</option>
+                    <option value="accepted">Accepted</option>
+                    <option value="pending">Pending</option>
+                    <option value="contingent">Contingent</option>
+                    <option value="rejected">Rejected</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="my-offer-grid">
+        {% for i in "123456" %}
+        <div class="property-card">
+            <div class="property-content">
+                 <img src="https://i.pinimg.com/736x/d6/83/a0/d683a0dc882304dd58fa5d7c3038e096.jpg" alt="Property image">
+                <div class="property-details">
+                    <p><strong>Fjallastræti 2, 110 Reykjavík, Single family home</strong></p>
+                    <p><a href="#">Property details</a> </p>
+                    <p>Date of submission: 12.01.2025</p>
+                    <p>Expiration date: 05.06.2025</p>
+                    <p>Seller: Mia Wong</p>
+                    <p>Purchase offer price: 200,000$</p>
+                    <p>Status: <span class="status pending">Pending</span></p>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="button" id="cancel-btn">Cancel offer</button>
+                <button type="button">Resubmit offer</button>
+                <button type="button" onclick="redirectToFinalize()">Finalize offer</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% include "_footer.html" %}
+
+    <script>
+        function redirectToFinalize() {
+            // Redirecting directly to the buyer's interface (e.g., catalogue page) without checking login credentials
+            window.location.href = "{% url 'finalization' %}";
+        }
+    </script>
+
+</body>
+</html>

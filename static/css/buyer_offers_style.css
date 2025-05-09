@@ -1,0 +1,134 @@
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 1rem 2rem;
+}
+
+.search-container input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    width: 60%;
+    font-family: 'Times New Roman', serif;
+}
+
+.status-filter select {
+    padding: 0.5rem;
+    width: 180px;
+    font-family: 'Times New Roman', serif;
+}
+
+.search-container input[type="text"],
+.status-filter select {
+    padding: 10px;
+    background-color: #F8F8FF;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.my-offer-grid {
+    display: grid;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.property-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    padding: 20px;
+}
+.property-content {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.property-image {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    margin-right: 8px;
+    max-font-size: 100%;
+    max-height: 250px;
+}
+
+
+.property-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.status {
+    padding: 4px 8px;
+    display: inline-block;
+}
+
+.status.accepted {
+    background-color: #9CFF9F;
+}
+
+.status.pending {
+    background-color: #91CEFF;
+}
+
+.status.contingent {
+    background-color: #FF99F3;
+}
+
+.status.rejected {
+    background-color: #FF9999;
+}
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    justify-content: flex-end;
+}
+
+.buttons button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border: 2px solid #cccccc;
+    background-color: white;
+    border-radius: 0.5rem;
+    font-family: 'Times New Roman', serif;
+}
+
+
+.buttons button:hover {
+    background-color: #DCDCFF;
+}
+
+@media (max-width: 768px) {
+    .property-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .property-image {
+        width: 80%;
+        height: auto;
+        margin-right: 0;
+    }
+
+    .property-details {
+        align-items: center;
+        text-align: center;
+    }
+
+    .buttons {
+        justify-content: center;
+    }
+}

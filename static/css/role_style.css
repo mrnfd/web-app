@@ -1,11 +1,25 @@
-.user_type_container {
-    height: 50vh;
+html, body {
+    height: 100%;
     margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-container {
+    flex: 1;
+}
+
+.user_type_container {
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    margin-bottom: auto;
 }
 
 #type {
@@ -34,4 +48,11 @@
 
 .btn:hover {
     background-color: #DCDCFF;
+}
+
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
 }
