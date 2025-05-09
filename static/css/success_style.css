@@ -1,0 +1,14 @@
+.alert-success {
+    margin: 1rem;
+    border: 1px solid #cccccc;
+    border-radius: 0.5rem;
+    background-color: #d1ffbd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    height: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    width: auto;
+}

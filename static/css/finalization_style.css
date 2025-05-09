@@ -1,0 +1,91 @@
+.input-fields-container {
+    max-width: 600px;
+    margin: auto;
+
+}
+
+.input-fields, .form-control,
+.payment, .payment-fields {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.input-fields label,
+.form-control label,
+.payment label {
+    font-size: 18px;
+    width: 150px;
+}
+
+input {
+  flex: 1;
+  width: 50%;
+  padding: 0.2rem;
+  margin: 0.5rem 0;
+  border: 2px solid #cccccc;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+input:focus {
+  background-color: #fff;
+}
+
+input:hover {
+  border-color: #888;
+}
+
+.form-control {
+    width: 50%;
+    padding: 0.2rem;
+    margin: 8px 0;
+    border: 2px solid #cccccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.payment-fields {
+    display: none;
+    margin-top: 1em;
+}
+
+.payment-fields label {
+    text-align: right;
+}
+
+.payment-fields input {
+    flex: 0.6;
+    margin-left: 0.5rem;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.buttons button {
+    padding: 10px 20px;
+    font-family: inherit;
+    font-size: 1rem;
+    border-radius: 100px;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    background-color: #F8F8FF;
+    color: black;
+    transition: background-color 0.2s ease-in-out;
+}
+
+
+.buttons button:hover,
+.buttons input[type="submit"]:hover {
+    background-color: #DCDCFF;
+}

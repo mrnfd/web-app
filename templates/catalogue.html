@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalogue</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/catalogue_style.css' %}">
+</head>
+<body>
+    {% include "_navigation.html" %}
+
+    <div class="search-and-filters">
+        <input type="text" placeholder="Enter an address, City, Zip or Neighborhood">
+        <div class="filter-container">
+            <div class="price-container">
+                <select id="price-filter" name="price">
+                    <option value="">Price</option>
+                    <option value="any">Any</option>
+                    <option value="20000">Less than $20,000</option>
+                    <option value="50000">Less than $50,000</option>
+                    <option value="100000">Less than $100,000</option>
+                </select>
+            </div>
+            <div class="property-container">
+                <select id="property-filter" name="property">
+                    <option value="">Property type</option>
+                    <option value="any">Any</option>
+                    <option value="house">House</option>
+                    <option value="condo">Condo</option>
+                    <option value="townhome">Townhome</option>
+                    <option value="multi_fam">Multi family</option>
+                    <option value="mobile">Mobile</option>
+                    <option value="farm">Farm</option>
+                    <option value="land">Land</option>
+                    <option value="commercial">Commercial</option>
+                </select>
+            </div>
+            <div class="more-container">
+                <select id="more-filter" name="more">
+                    <option value="">More</option>
+                    <option value="">2 bedroom property</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="property-grid">
+        {% for i in "123456" %}
+        <div class="property-card">
+            <div class="property-image">
+                <img src="https://i.pinimg.com/736x/ef/2b/a5/ef2ba5f94fde61fe2450fa1251e10f0e.jpg" alt="Property image">
+            </div>
+            <div class="property-info">
+                <p class="property-address"><strong>Placeholder street 123</strong></p>
+                <div class="rooms-seller">
+                    <span>Rooms: 3</span>
+                    <span>Seller: Elin J.</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Finalization</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/finalization_style.css' %}">
+</head>
+<body>
+    {% include "_navigation.html" %}
+
+    <div class="input-fields-container">
+        <h2>Finalizing offer for {{ offer.property_details }}</h2>
+        <form  id="finalization-form" method="POST" action="{% url 'finalization_revision' %}">
+            {% csrf_token %}
+            <div class="input-fields">
+                <label for="contact-name">Contact name:</label>
+                <input type="text" id="contact-name" name="contact-name" value="{{ buyer.contact_name }}" required>
+            </div>
+
+            <div class="input-fields">
+                <label for="contact-email">Contact email:</label>
+                <input type="email" id="contact-email" name="contact-email" value="{{ buyer.contact_email }}" required>
+            </div>
+
+            <div class="input-fields">
+                <label for="contact-address">Contact address</label>
+                <input type="text" id="contact-address" name="contact-address" value="{{ buyer.contact_address }}" required>
+            </div>
+
+            <div class="input-fields">
+                <label for="contact-zip">Contact postal code</label>
+                <input type="text" id="contact-zip" name="contact-zip" value="{{ buyer.contact_zip }}" required>
+            </div>
+
+            <div class="input-fields">
+                <label for="country">Country</label>
+                {% for country in countries %}
+                    <option value="{{ country }}" {% if buyer.country == country %}selected{% endif %}>{{ country }}</option>
+                {% endfor %}
+            </div>
+
+            <div class="input-fields">
+                <label for="contact-id">National ID</label>
+                <input type="text" id="contact-id" name="contact-id" value="{{ buyer.contact_id }}" required>
+            </div>
+
+            <div class="payment">
+                <label>Payment option</label>
+                <input type="radio" id="credit-card" name="payment-option" value="credit_card" onclick="showPaymentFields('credit')">
+                <label for="credit-card">Credit card</label>
+                <input type="radio" id="bank_transfer" name="payment-option" value="bank_transfer" onclick="showPaymentFields('bank')">
+                <label for="bank_transfer">Bank transfer</label>
+                <input type="radio" id="mortgage" name="payment-option" value="mortgage" onclick="showPaymentFields('mortgage')">
+                <label for="mortgage">Mortgage</label>
+            </div>
+
+            <div id="credit-fields" class="payment-fields">
+                <div class="input-fields">
+                    <label for="cardholder-name">Cardholder name:</label>
+                    <input type="text" id="cardholder-name" name="cardholder-name">
+                </div>
+                <div class="input-fields">
+                    <label for="card-number">Card number:</label>
+                    <input type="text"  id="card-number" name="card-number">
+                </div>
+                <div class="input-fields">
+                    <label for="expiry-date">Expiry date:</label>
+                    <input type="month" id="expiry-date" name="expiry-date">
+                </div>
+                <div class="input-fields">
+                    <label for="cvc">CVC:</label>
+                    <input type="text" id="cvc" name="cvc">
+                </div>
+            </div>
+
+            <div id="bank-fields" class="payment-fields">
+                <div class="input-fields">
+                    <label for="bank_acc">Bank account: </label>
+                    <input type="text" id="bank_acc" name="bank-acc">
+                </div>
+            </div>
+
+            <div id="mortgage-fields" class="payment-fields">
+                <div class="input-fields">
+                    <label for="provider">Mortgage provider:</label>
+                    <input type="text" id="provider" name="provider">
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="button" onclick="window.history.back()">Cancel</button>
+                <button type="submit">Submit</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <script src="{% static 'js/finalization.js' %}"></script>
+</body>
+</html>
