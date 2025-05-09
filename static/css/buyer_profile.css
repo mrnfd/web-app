@@ -87,13 +87,6 @@ input:hover {
   border-color: #888;
 }
 
-footer {
-    margin-top: auto;
-    background-color: #f1f1f1;
-    padding: 20px;
-    text-align: center;
-}
-
 .buttons {
     display: flex;
     justify-content: center;
@@ -129,4 +122,11 @@ footer {
 .buttons button:hover,
 .btn:hover {
     background-color: #DCDCFF;
+}
+
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
 }
