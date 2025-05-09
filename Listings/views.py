@@ -8,9 +8,6 @@ from django.db.models import Q
 
 # Er að assume-a að listing object heiti Listing
 
-
-
-
 def catalogue(request):
     # Check if filtering is applied
     filter_applied = any(param in request.GET for param in ['search_filter', 'min_price', 'max_price', 'property_type', 'more'])
@@ -85,37 +82,37 @@ def get_listing_by_id(request,id):
 
 
 # Fyrir testing
-propertys = [
-    {
-        'id': 1,
-        'street': 'Main St',
-        'number': '121',
-        'zip': '10001',
-        'rooms': '331',
-        'seller':'McJohn',
-    },
-    {
-        'id': 2,
-        'street': 'Main St',
-        'number': '122',
-        'zip': '10001',
-        'rooms': '332',
-        'seller':'McJeff',
-    },
-    {
-        'id': 3,
-        'street': 'Main St',
-        'number': '123',
-        'zip': '10001',
-        'rooms': '333',
-        'seller':'McClause',
-    },
-    {
-        'id': 4,
-        'street': 'Main St',
-        'number': '124',
-        'zip': '10001',
-        'rooms': '334',
-        'seller':'McGeorge',
-    },
-]
+#propertys = [
+#    {
+#        'id': 1,
+#        'street': 'Main St',
+#        'number': '121',
+#        'zip': '10001',
+#        'rooms': '331',
+#        'seller':'McJohn',
+#    },
+#    {
+#        'id': 2,
+#        'street': 'Main St',
+#        'number': '122',
+#        'zip': '10001',
+#        'rooms': '332',
+#        'seller':'McJeff',
+#    },
+#    {
+#        'id': 3,
+#        'street': 'Main St',
+#        'number': '123',
+#        'zip': '10001',
+#        'rooms': '333',
+#        'seller':'McClause',
+#    },
+#    {
+#        'id': 4,
+#        'street': 'Main St',
+#        'number': '124',
+#        'zip': '10001',
+#        'rooms': '334',
+#        'seller':'McGeorge',
+#    },
+#]

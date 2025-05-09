@@ -15,6 +15,7 @@ venv.bak/
 .idea
 idea/
 
+/__pycache__/*
 **/__pycache__
 */__pycache__
 /castle_apartments/__pycache__
