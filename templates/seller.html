@@ -30,7 +30,7 @@
 
             <div class="properties-container">
                 <p><strong>Properties:</strong></p>
-                {% for property in seller.properties %}
+                {% for property in properties %}
                     <a href="{% url 'property_detail' property.id %}" class="property-card">
                         <img src="{{ property.thumbnail.url }}" alt="Property Image">
                         <p>{{ property.address }}</p>
