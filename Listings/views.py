@@ -84,7 +84,7 @@ def catalogue(request):
                 'seller': property.seller_id.id,
                 'price': str(property.price),
                 'type': property.type
-            } for property in propertys.order_by('street')]
+            } for property in propertys]
         })
     
     
