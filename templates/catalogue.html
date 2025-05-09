@@ -44,18 +44,19 @@
                 </div>
 
                 <!-- property filter -->
-                <div class="property-container">
-                    <select id="property-filter" name="property_type">
-                        <option value="">Property type</option>
-                        <option value="any">Any</option>
-                        <option value="house">House</option>
-                        <option value="condo">Condo</option>
-                        <option value="townhome">Townhome</option>
-                        <option value="multi_fam">Multi family</option>
-                        <option value="mobile">Mobile</option>
-                        <option value="farm">Farm</option>
-                        <option value="land">Land</option>
-                        <option value="commercial">Commercial</option>
+                <div class="mb-3">
+                    <!-- <label for="property-filter" class="form-label">Property Type</label> -->
+                    <select class="form-select" id="property-filter" name="type">
+                        <option value="" disabled selected>Property type</option>
+                        <option value="ANY">Any</option>
+                        <option value="HOUSE">House</option>
+                        <option value="CONDO">Condo</option>
+                        <option value="TOWNHOME">Townhome</option>
+                        <option value="MULTIFAMILY">Multi family</option>
+                        <option value="MOBILE">Mobile</option>
+                        <option value="FARM">Farm</option>
+                        <option value="LAND">Land</option>
+                        <option value="COMMERCIAL">Commercial</option>
                     </select>
                 </div>
 
@@ -69,7 +70,7 @@
             </div>
             <button type="button" id="apply-filters" class="search-button">Apply</button>
         </form>
-        
+
     <div class="property-grid" id="properties-listed">
         
         {% for property in propertys %}
@@ -77,7 +78,8 @@
             <div  class="property-card">
                 <img src="https://via.placeholder.com/300x200" alt="Property image">
                 <div class="property-info">
-                    <p class="property-address">{{property.street}} {{property.number}}</p>
+                    <p class="property-address">{{property.street}} {{property.number}} , {{property.type}}</p>
+                    <p class="property-address">{{property.price}}</p>
                     <div class="rooms-seller">
                         <span><strong>Rooms:</strong>{{property.rooms}}</span>
                         <span><strong>Seller:</strong>{{property.seller}}</span>

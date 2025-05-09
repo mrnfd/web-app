@@ -12,16 +12,20 @@ document.addEventListener('DOMContentLoaded', function() {
             const moreFilter = document.getElementById('more-filter').value;
 
             const propertyPlaceholder = document.getElementById('properties-listed')
-
             const url = new URL(window.location.href);
             url.search = ''; 
             
             // Smiða url bara þeir filterar sem voru include-aðir
-            if (searchFilter) url.searchParams.append('search_filter', searchFilter);
-            if (minPrice) url.searchParams.append('min_price', minPrice);
-            if (maxPrice) url.searchParams.append('max_price', maxPrice);
-            if (propertyType) url.searchParams.append('property_type', propertyType);
-            if (moreFilter) url.searchParams.append('more', moreFilter);
+            //if (searchFilter) url.searchParams.append('search_filter', searchFilter);
+            //if (minPrice) url.searchParams.append('min_price', minPrice);
+            //if (maxPrice) url.searchParams.append('max_price', maxPrice);
+            //if (propertyType) url.searchParams.append('type', propertyType);
+            //if (moreFilter) url.searchParams.append('more', moreFilter);
+            url.searchParams.append('search_filter', searchFilter || '');
+            url.searchParams.append('min_price', minPrice || '');
+            url.searchParams.append('max_price', maxPrice || '');
+            url.searchParams.append('type', propertyType || '');
+            url.searchParams.append('more', moreFilter || '');
 
             const response = await fetch(url);
 
@@ -35,7 +39,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="property-card">
                                 <img src="https://via.placeholder.com/300x200" alt="Property image">
                                 <div class="property-info">
-                                    <p class="property-address">${property.street} ${property.number}</p>
+                                    <p class="property-address">${property.street} ${property.number}, ${property.type}</p>
+                                    <p class="property-address">${property.price}</p>
                                     <div class="rooms-seller">
                                         <span><strong>Rooms:</strong> ${property.numb_of_rooms}</span>
                                         <span><strong>Seller:</strong> ${property.seller_id}</span>
@@ -47,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // Update the content with the filtered properties
                     propertyPlaceholder.innerHTML = properties.join('');
+                    
                 } else {
                     console.error('No properties match filter:', json);
                     propertyPlaceholder.innerHTML = '<p> No properties found matching your filters.</p>';
