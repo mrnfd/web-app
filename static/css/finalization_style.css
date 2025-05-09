@@ -1,7 +1,12 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 .input-fields-container {
+    flex: 1;
     max-width: 600px;
     margin: auto;
-
 }
 
 .input-fields, .form-control,
@@ -9,6 +14,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    margin-bottom: 2rem;
 }
 
 .input-fields label,
@@ -70,6 +76,7 @@ input:hover {
     justify-content: center;
     gap: 1rem;
     margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .buttons button {

@@ -5,6 +5,7 @@
     <title>Catalogue</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/catalogue_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     {% include "_navigation.html" %}
@@ -60,5 +61,7 @@
         </div>
         {% endfor %}
     </div>
+
+    {% include "_footer.html" %}
 </body>
 </html>

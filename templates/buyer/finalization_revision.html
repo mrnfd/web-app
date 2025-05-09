@@ -5,6 +5,7 @@
     <title>Review</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/finalization_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     {% include '_navigation.html' %}
@@ -80,10 +81,8 @@
                 <button type="button" onclick="window.history.back()">Go Back</button>
                 <button type="submit" formaction="{% url 'finalization_success' %}">Finalize</button>
             </div>
-
         </form>
-
     </div>
-
+    {% include "_footer.html"%}
 </body>
 </html>
