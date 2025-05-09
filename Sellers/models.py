@@ -12,7 +12,7 @@ class Seller(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     contact_number = models.CharField(max_length=20)
-    profile_image = models.ImageField(upload_to='seller_profiles/', blank=True, null=True)
+    profile_image_url = models.CharField(max_length=4096, blank=True)
 
     #seller type
     seller_type = models.CharField(max_length=20, choices=SELLER_TYPE_CHOICES)
