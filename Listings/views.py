@@ -12,11 +12,19 @@ def catalogue(request):
     # Check if filtering is applied
     filter_applied = any(param in request.GET for param in ['search_filter', 'min_price', 'max_price', 'type', 'more'])
     propertys = Listing.objects.all()
+
+    query_params = {
+        'search_filter': request.GET.get('search_filter'),
+        'min_price': request.GET.get('min_price'),
+        'max_price': request.GET.get('max_price'),
+        'type': request.GET.get('type'),
+        'more': request.GET.get('more'),
+        'sort': request.GET.get('sort'),
+    }
     
     # Þarf að chekka fyrir hverja tegund af filter
 
-    
-    if 'search_filter' in request.GET:
+    if query_params['search_filter']:
         search_filter = request.GET.get('search_filter', '')
         if search_filter and search_filter != '':
             propertys = propertys.filter(
@@ -26,30 +34,43 @@ def catalogue(request):
                 Q(number__icontains=search_filter) |
                 Q(street__icontains=search_filter) 
             )
-    if 'min_price' in request.GET:
+
+    if query_params['min_price']:
         min_price = request.GET.get('min_price', '')
         if min_price and min_price.strip():
             try:
                 propertys = propertys.filter(price__gte=float(min_price))
             except ValueError:
                 pass
-    if 'max_price' in request.GET:  
+    
+    if query_params['max_price']:
         max_price = request.GET.get('max_price', '')
         if max_price and max_price.strip():
             try:
                 propertys = propertys.filter(price__lte=float(max_price))
             except ValueError:
-                pass  
-    if 'type' in request.GET:
+                pass
+             
+    if query_params['type']:
         type = request.GET.get('type', '')
         if type and type != 'ANY':
             propertys = propertys.filter(type=type)
     
-    if 'more' in request.GET:
+    if query_params['more']:
         more_filter = request.GET.get('more', '')
         if more_filter:
             if more_filter == '2br':
                 propertys = propertys.filter(rooms=2)
+
+    # sort by
+    sort_options = {
+        'price_asc': 'price',
+        'price_desc': '-price',
+        'street': 'street',
+    }
+    if query_params['sort'] in sort_options:
+        propertys = propertys.order_by(sort_options[query_params['sort']])
+
 
     if filter_applied:     
         # Return JSON response
@@ -66,8 +87,6 @@ def catalogue(request):
             } for property in propertys.order_by('street')]
         })
     
-    for x in propertys:
-        print(x)
     
     # If no filter return normal
     return render(request, "catalogue.html", {
