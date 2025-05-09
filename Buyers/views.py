@@ -33,13 +33,13 @@ def edit_buyer_profile(request, buyer_id):
     return render(request, 'edit_buyer_profile.html', {'form': form})
 
 def index(request):
-    return render(request, 'buyers/index.html')
+    return render(request, 'buyers/base_buyer.html')
 
 def buyer_home(request):
     return render(request, 'buyers/buyer_home.html')
 
 def my_offers(request):
-    return render(request, 'buyer/my_offers.html')
+    return render(request, 'buyers/my_offers.html')
 
 def finalization(request):
     if request.method == "POST":
@@ -74,7 +74,7 @@ def finalization(request):
 
         return redirect('finalization_revision')
 
-    return render(request, 'buyer/finalize_offer.html')
+    return render(request, 'buyers/finalize_offer.html')
 def finalization_revision(request):
     contact_name = request.session.get('contact_name')
     contact_email = request.session.get('contact_email')
@@ -91,7 +91,7 @@ def finalization_revision(request):
     bank_acc = request.session.get('bank_acc')
     provider = request.session.get('provider')
 
-    return render(request, 'buyer/finalization_revision.html', {
+    return render(request, 'buyers/finalization_revision.html', {
         'contact_name': contact_name,
         'contact_email': contact_email,
         'contact_address': contact_address,
@@ -108,6 +108,6 @@ def finalization_revision(request):
     })
 
 def finalization_success(request):
-    return render(request, 'buyer/finalization_success.html')
+    return render(request, 'buyers/finalization_success.html')
 def buyer_catalogue(request):
     return render(request, 'buyers/catalogue.html')

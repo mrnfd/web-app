@@ -80,7 +80,7 @@ class Listing(models.Model):
         return self.images.first()
 
 class ListingImage(models.Model):
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE,related_name='images',null=True)
+    listing_id = models.ForeignKey(Listing, on_delete=models.CASCADE,related_name='images',null=True)
 
     image_url =models.CharField(max_length=4096,blank=True)
     thumbnail = models.BooleanField(default=False)
@@ -95,3 +95,4 @@ class ListingImage(models.Model):
 #
 ## Getting pending offers only
 #pending_offers = property.offers.filter(status=OfferStatus.PENDING)
+

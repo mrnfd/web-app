@@ -28,9 +28,9 @@ def catalogue(request):
         search_filter = request.GET.get('search_filter', '')
         if search_filter and search_filter != '':
             propertys = propertys.filter(
-                #Q(city__icontains=search_filter) | 
+                Q(city__icontains=search_filter) | 
                 #Q(neighborhood__icontains=search_filter) | 
-                #Q(zip__icontains=search_filter) |
+                Q(zip__icontains=search_filter) |
                 Q(number__icontains=search_filter) |
                 Q(street__icontains=search_filter) 
             )
@@ -71,7 +71,6 @@ def catalogue(request):
     if query_params['sort'] in sort_options:
         propertys = propertys.order_by(sort_options[query_params['sort']])
 
-
     if filter_applied:     
         # Return JSON response
         print("Filters applied, returning JSON response")
@@ -83,6 +82,7 @@ def catalogue(request):
                 'rooms': property.numb_of_rooms,
                 'seller': property.seller_id.id,
                 'price': str(property.price),
+                'thumbnail': property.primary_image(),
                 'type': property.type
             } for property in propertys]
         })

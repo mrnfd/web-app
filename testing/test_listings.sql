@@ -36,7 +36,7 @@ VALUES
 -- First, let's get the listing IDs by assuming the auto-increment started at 1
 -- Property 1 images for listings 1, 3, 5, 7
 INSERT INTO "Listings_listingimage" (
-    listing_id,
+    listing_id_id,
     image_url,
     thumbnail
 )
