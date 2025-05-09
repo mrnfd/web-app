@@ -9,16 +9,13 @@ def catalogue(request):
     return render(request, 'catalogue.html')
 
 def sellers(request):
-    return HttpResponse("sellers page")
-
-def my_offers(request):
-    return HttpResponse("log in to see your offers")
+    return render(request, 'sellers.html')
 
 def log_in(request):
     return render(request, 'role_selection.html')
 
 def login_as_buyer(request):
-    return HttpResponse("log in as buyer page")
+    return render(request, 'login.html')
 
 def login_as_seller(request):
-    return HttpResponse("log in as seller page")
+    return render(request, 'login.html')

@@ -24,7 +24,6 @@ urlpatterns = [
     path('', include('Buyers.urls')),
     path('catalogue/', views.catalogue, name='catalogue'),
     path('sellers/', views.sellers, name='sellers'),
-    path('my-offers/', views.my_offers, name='my_offers'),
     path('log-in/', views.log_in, name='log_in'),
     path('log-in/buyer/', views.login_as_buyer, name='login_as_buyer'),
     path('log-in/seller/', views.login_as_seller, name='login_as_seller'),

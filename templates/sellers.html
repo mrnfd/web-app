@@ -3,8 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Sellers</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/sellers_style.css' %}">
 </head>
 <body>
-
+    {% include "_navigation.html" %}
+    <div class="sellers-page-container">
+        <div class="sellers-grid">
+            {% for i in "123456" %}
+            <div class="seller-card">
+                <img src="https://i.pinimg.com/736x/e4/09/6c/e4096c3ede142549af8d02a2b480dfb4.jpg" alt="Seller image">
+                <p class="seller-name">Mia Wong</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 </html>
