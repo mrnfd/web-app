@@ -79,6 +79,13 @@ class Listing(models.Model):
         """Returns the first image of the property or None if no images"""
         return self.images.first()
 
+class ListingImage(models.Model):
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE,related_name='images',null=True)
+
+    image_url =models.CharField(max_length=4096,blank=True)
+    thumbnail = models.BooleanField(default=False)
+    
+
 ## Getting all offers for a property
 #property = PropertyListing.objects.get(id=1)
 #all_offers = property.offers.all()  # Returns a QuerySet of all related Offer objects
@@ -88,11 +95,3 @@ class Listing(models.Model):
 #
 ## Getting pending offers only
 #pending_offers = property.offers.filter(status=OfferStatus.PENDING)
-
-class ListingImage(models.Model):
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE,related_name='images',null=True)
-
-    image_url =models.CharField(max_length=4096,blank=True)
-    thumbnail = models.BooleanField(default=False)
-    
-
