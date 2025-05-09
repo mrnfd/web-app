@@ -53,7 +53,7 @@ class City(models.TextChoices):
 
 # Create your models here.
 class Listing(models.Model):
-    seller_id = models.ForeignKey(Seller, on_delete=models.CASCADE,related_name='images',null=True)
+    seller_id = models.ForeignKey(Seller, on_delete=models.CASCADE,related_name='seller',null=True)
 
     street = models.CharField(max_length=255,null=True)
     number = models.IntegerField(null=True)
