@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const properties = json.propertys.map(property => `
                         <a href="/catalogue/${property.id}">
                             <div class="property-card">
-                                <img src="${property.thumbnail}" alt="Property image">
+                                <img src="/static/${ property.thumbnail }" alt="Property image">
                                 <div class="property-info">
                                     <p class="property-address">${property.street} ${property.number}, ${property.type}</p>
                                     <p class="property-address">${property.price}</p>

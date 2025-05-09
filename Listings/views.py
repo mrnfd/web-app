@@ -1,7 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
-from Listings.models import Listing
+from Listings.models import Listing, ListingImage
 from django.db.models import Q
 
 # Create your views here.
@@ -74,6 +74,25 @@ def catalogue(request):
     if filter_applied:     
         # Return JSON response
         print("Filters applied, returning JSON response")
+        #property_array = []
+        #for property in propertys:
+        #    property_images = ListingImage.objects.filter(listing_id=property.id)
+        #    thumbnail = property_images.filter(thumbnail=True).first()
+        #    thumbnail_url = thumbnail.image_url
+        #    print("THIS IS MY THUUUUMBNAIAIIAIAL : "+ thumbnail_url)
+        #    property_info = {
+        #        'id': property.id,
+        #        'street': property.street,
+        #        'number': property.number,
+        #        'rooms': property.numb_of_rooms,
+        #        'seller': property.seller_id.id,
+        #        'price': str(property.price),
+        #        'thumbnail': thumbnail_url,
+        #        'type': property.type
+        #    }
+        #    property_array.append(property_info)
+        #return JsonResponse({'propertys':property_array})
+        
         return JsonResponse({
             'propertys': [{
                 'id': property.id,
@@ -82,11 +101,10 @@ def catalogue(request):
                 'rooms': property.numb_of_rooms,
                 'seller': property.seller_id.id,
                 'price': str(property.price),
-                'thumbnail': property.primary_image(),
+                'thumbnail': property.thumbnail,
                 'type': property.type
             } for property in propertys]
         })
-    
     
     # If no filter return normal
     return render(request, "catalogue.html", {

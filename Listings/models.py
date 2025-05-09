@@ -71,6 +71,8 @@ class Listing(models.Model):
     size_sqm = models.IntegerField(null=True)
     status = models.CharField(max_length =20,choices = ListingStatus,default = ListingStatus.PENDING)
 
+    thumbnail = models.CharField(max_length=4096,blank=True)
+    
     def __str__(self):
         return self.street
     
