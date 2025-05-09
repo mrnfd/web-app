@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     "Listings.apps.ListingsConfig",
     "Offers.apps.OffersConfig",
     "Sellers.apps.SellersConfig",
-    "Transactions.apps.TransactionsConfig",
+    "Transactions.apps.TransactionsConfig"
 ]
 
 
@@ -81,8 +81,12 @@ WSGI_APPLICATION = 'castle_apartments.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'verklegt_namskeid_db',
+        'USER': 'verklegt_db_user',
+        'PASSWORD': 'M96qeX5MeGdrfjhxbBxxxcqa',
+        'HOST': 'db-verklegt-namskeid-ii-eu-geuysi.postgres.database.azure.com',
+        'PORT': '5432'
     }
 }
 
@@ -130,13 +134,3 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # PostgreSQL
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'verklegt_namskeid_db',
-        'USER': 'verklegt_db_user',
-        'PASSWORD': 'M96qeX5MeGdrfjhxbBxxxcqa',
-        'HOST': 'db-verklegt-namskeid-ii-eu-geuysi.postgres.database.azure.com',
-        'PORT': '5432'
-    }
-}

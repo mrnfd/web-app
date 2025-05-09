@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalogue</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/catalogue_style.css' %}">
+</head>
+<body>
+    {% include "_navigation.html" %}
+    
+        
+     
+    <div class="property-card">
+        <img src="https://via.placeholder.com/300x200" alt="Property image">
+        <div class="property-info">
+            <p class="property-address">{{listing.street}} {{listing.number}}</p>
+            <div class="rooms-seller">
+                <span><strong>Rooms:</strong>{{listing.rooms}}</span>
+                <span><strong>Seller:</strong>{{listing.seller}}</span>
+            </div>
+        </div>
+    </div>
+    
+        
+</body>
+</html>
