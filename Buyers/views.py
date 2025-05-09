@@ -18,3 +18,12 @@ def edit_buyer_profile(request, buyer_id):
     else:
         form = BuyerProfileForm(instance=buyer)
     return render(request, 'edit_buyer_profile.html', {'form': form})
+
+def index(request):
+    return render(request, 'buyers/index.html')
+
+def buyer_home(request):
+    return render(request, 'buyers/buyer_home.html')
+
+def buyer_catalogue(request):
+    return render(request, 'buyers/catalogue.html')

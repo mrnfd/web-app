@@ -5,6 +5,9 @@ class Buyer(models.Model):
     email = models.EmailField(unique=True)
     contact_number = models.CharField(max_length=20)
     profile_image_url = models.CharField(max_length=4096, blank = True)
+    address = models.CharField(max_length=255, null=True, blank=True)
+    zip_code = models.IntegerField()
+    country = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
