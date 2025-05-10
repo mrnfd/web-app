@@ -2,6 +2,8 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
 from Listings.models import Listing, ListingImage
+from Sellers.models import Seller
+
 from django.db.models import Q
 
 # Create your views here.
@@ -114,10 +116,12 @@ def catalogue(request):
 def get_listing_by_id(request,id):
     listing = Listing.objects.get(id=id)
     property_images = ListingImage.objects.filter(listing_id=id)
+    seller = Seller.objects.get(id = listing.seller_id)
     #listing = [x for x in propertys if x['id'] == id][0]
     return render(request,"listing_detail.html.",{
         "listing":listing,
-        "images":property_images
+        "images":property_images,
+        "seller":seller
     })
 
 
