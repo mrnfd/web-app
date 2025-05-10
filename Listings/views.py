@@ -113,9 +113,11 @@ def catalogue(request):
 
 def get_listing_by_id(request,id):
     listing = Listing.objects.get(id=id)
+    property_images = ListingImage.objects.filter(listing_id=id)
     #listing = [x for x in propertys if x['id'] == id][0]
     return render(request,"listing_detail.html.",{
-        "listing":listing
+        "listing":listing,
+        "images":property_images
     })
 
 
