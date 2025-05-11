@@ -1,6 +1,7 @@
+from django.utils import timezone
 from django.db import models
 from Listings.models import Listing
-# from Buyers.models import Buyer       TODO
+from Buyers.models import Buyer    
 
 # Create your models here.
 
@@ -11,10 +12,11 @@ class OfferStatus(models.TextChoices):
     COUNTERED = 'COUNTERED', 'Countered'
 
 class Offer(models.Model):
-    property_listing = models.ForeignKey(Listing, on_delete=models.CASCADE,null=True) #, related_name='offers'),
-    # buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE),
-
+    buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE,null=True)
+    property_listing = models.ForeignKey(Listing, on_delete=models.CASCADE,null=True)
+    
     price = models.FloatField(null=True)
+    submission_date = models.DateField(default=timezone.now)
     expiration_date = models.DateTimeField(null=True)
     status = models.CharField(max_length=20, choices=OfferStatus.choices, default=OfferStatus.PENDING)
     

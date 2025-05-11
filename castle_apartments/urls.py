@@ -31,6 +31,4 @@ urlpatterns = [
     path('log-in/buyer/', views.login_as_buyer, name='login_as_buyer'),
     path('log-in/seller/', views.login_as_seller, name='login_as_seller'),
 
-    
-
 ]

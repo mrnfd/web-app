@@ -1,38 +1,3 @@
--- First, insert the Listings with all the new attributes
-INSERT INTO "Listings_listing" (
-    seller_id_id, 
-    street, 
-    number, 
-    zip, 
-    city, 
-    description, 
-    type, 
-    price, 
-    listing_date, 
-    numb_of_rooms, 
-    bath_rooms, 
-    bed_rooms, 
-    size_sqm, 
-    status,
-    thumbnail
-)
-VALUES 
-(1, 'Maple Street', 123, 10001, 'New York', 'Charming family home with garden.', 'HOUSE', 350000, '2024-05-01', 4, 2, 3, 120, 'ACTIVE','images\propertys_photos\test_property1\property1_thumb.jpg'),
-
-(3, 'Elm Avenue', 56, 90210, 'Los Angeles', 'Modern condo near downtown.', 'CONDO', 275000, '2024-04-15', 3, 2, 2, 85, 'PENDING','images\propertys_photos\test_property2\property2_thumb.jpeg'),
-
-(2, 'Oak Drive', 89, 60007, 'Chicago', 'Townhome with garage and balcony.', 'TOWNHOME', 310000, '2024-03-22', 3, 2, 2, 95, 'ACTIVE','images\propertys_photos\test_property1\property1_thumb.jpg'),
-
-(3, 'Pine Road', 12, 33101, 'Miami', 'Multifamily building with 4 units.', 'MULTIFAMILY', 800000, '2024-01-10', 8, 4, 5, 300, 'ACTIVE','images\propertys_photos\test_property2\property2_thumb.jpeg'),
-
-(2, 'Willow Lane', 7, 78701, 'Austin', 'Mobile home in quiet community.', 'MOBILE', 95000, '2024-02-05', 2, 1, 1, 60, 'PENDING','images\propertys_photos\test_property1\property1_thumb.jpg'),
-
-(3, 'Sunset Farm', 1, 97302, 'Salem', 'Beautiful farm with open fields.', 'FARM', 500000, '2023-11-01', 5, 3, 4, 250, 'SOLD','images\propertys_photos\test_property2\property2_thumb.jpeg'),
-
-(2, 'Hilltop', NULL, 80014, 'Denver', 'Large plot of undeveloped land.', 'LAND', 150000, '2024-05-05', NULL, NULL, NULL, 1000, 'ACTIVE','images\propertys_photos\test_property1\property1_thumb.jpg'),
-
-(3, 'Commerce Blvd', 200, 19103, 'Philadelphia', 'Commercial property with warehouse.', 'COMMERCIAL', 1200000, '2023-12-12', NULL, NULL, NULL, 500, 'ACTIVE','images\propertys_photos\test_property2\property2_thumb.jpeg');
-
 
 INSERT INTO "Listings_listingimage" (
     listing_id_id,

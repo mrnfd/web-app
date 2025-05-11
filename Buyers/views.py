@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 from .models import  Buyer
 from .forms import BuyerProfileForm
 from django.contrib.auth.forms import UserCreationForm
@@ -17,49 +18,26 @@ def register(request):
 
 
 # Create your views here.
-
-def edit_profile(request, buyer_id):
+def edit_buyer_profile(request, buyer_id):
     buyer = get_object_or_404(Buyer, id=buyer_id)
 
     if request.method == "POST":
         form = BuyerProfileForm(request.POST, request.FILES, instance=buyer)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Your profile was successfully updated!')
             return redirect('profile', buyer_id=buyer_id)
+        else:
+            messages.error(request, 'Please correct the error below.')
     else:
         form = BuyerProfileForm(instance=buyer)
+    return render(request, 'edit_buyer_profile.html', {'form': form})
 
-    return render(request, 'edit_profile.html', {'form': form})
-def register(request):
-    if request.method == 'POST':
-        print(1)
-    else:
-        return render(request,'buyer/register.html', {
-            'form': UserCreationForm()
-        })
-
-
-# Create your views here.
-
-def edit_profile(request, buyer_id):
-    buyer = get_object_or_404(Buyer, id=buyer_id)
-
-    if request.method == "POST":
-        form = BuyerProfileForm(request.POST, request.FILES, instance=buyer)
-        if form.is_valid():
-            form.save()
-            return redirect('profile', buyer_id=buyer_id)
-    else:
-        form = BuyerProfileForm(instance=buyer)
-
-    return render(request, 'edit_profile.html', {'form': form})
-
-
-def buyer_catalogue(request):
-    return render(request, 'catalogue.html')
+def index(request):
+    return render(request, 'buyers/base_buyer.html')
 
 def buyer_home(request):
-    return render(request, 'buyer/base_buyer.html')
+    return render(request, 'buyers/buyer_home.html')
 
 def my_offers(request):
     return render(request, 'buyer/my_offers.html')
@@ -131,7 +109,9 @@ def finalization_revision(request):
     })
 
 def finalization_success(request):
-    return render(request, 'buyer/finalization_success.html')
+    return render(request, 'buyers/finalization_success.html')
+def buyer_catalogue(request):
+    return render(request, 'buyers/catalogue.html')
 
 def buyer_profile(request):
     return render(request, 'buyer/buyer_profile.html')

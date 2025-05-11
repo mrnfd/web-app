@@ -68,7 +68,20 @@
                     </select>
                 </div>
             </div>
+            
             <button type="button" id="apply-filters" class="search-button">Apply</button>
+
+            <div class="search_container">
+                <label for="sort-button"> Sort by </label>
+                <select class="search_show_img_1" id="sort-button" name="sort">
+                    <option class="sort_option" value="">  </option>
+                    <option class="sort_option" value="price_asc" {% if request.GET.sort == "price_asc" %}selected{% endif %}>Price (Low to High)</option>
+                    <option class="sort_option" value="price_desc" {% if request.GET.sort == "price_desc" %}selected{% endif %}>Price (High to Low)</option>
+                    <option class="sort_option" value="street" {% if request.GET.sort == "street" %}selected{% endif %}>Street name (Alphabetical)</option>
+                </select>
+                
+            </div>
+            
         </form>
 
     <div class="property-grid" id="properties-listed">
@@ -76,12 +89,12 @@
         {% for property in propertys %}
         <a href="{% url 'listing-by-id' id=property.id %}">
             <div  class="property-card">
-                <img src="https://via.placeholder.com/300x200" alt="Property image">
+                <img src="/static/{{ property.thumbnail }}" alt="Property image">
                 <div class="property-info">
                     <p class="property-address">{{property.street}} {{property.number}} , {{property.type}}</p>
                     <p class="property-address">{{property.price}}</p>
                     <div class="rooms-seller">
-                        <span><strong>Rooms:</strong>{{property.rooms}}</span>
+                        <span><strong>Rooms:</strong> {{property.rooms}}</span>
                         <span><strong>Seller:</strong>{{property.seller}}</span>
                     </div>
 
@@ -95,6 +108,6 @@
 
     {% include "_footer.html" %}
     <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
