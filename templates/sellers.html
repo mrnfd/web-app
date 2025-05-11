@@ -6,16 +6,27 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/sellers_style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- FYRIR FILTERA -->
+    <script src="{% static 'js/seller_filter.js' %}"></script>
 </head>
 <body>
     <div class="page-container">
         {% include "_navigation.html" %}
         <div class="sellers-page-container">
-            <div class="sellers-grid">
-                {% for i in "123456" %}
+            <!-- Search bar -->
+            <input type="search" id="search-value" name="search" placeholder="Enter sellers name, type, address or city">
+            <button type="button" id="apply-filters" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+            <div class="sellers-grid" id="sellers-listed">
+                {% for seller in sellers %}
                 <div class="seller-card">
-                    <img src="https://i.pinimg.com/736x/e4/09/6c/e4096c3ede142549af8d02a2b480dfb4.jpg" alt="Seller image">
-                    <p class="seller-name">Mia Wong</p>
+                    <img src="/static/{{ seller.profile_image_url }}" alt="Seller image">
+                    <p class="seller-name">{{seller.name}}, {{seller.seller_type}} </p>
+                    {% if seller.street %}
+                        <p class="seller-name"><br /> {{seller.city}}, {{seller.street}} {{seller.house_numb}} <br /></p>
+                    {% endif %}
+                    <a href="/sellers/{{seller.id}}/"> See more </a>
                 </div>
                 {% endfor %}
             </div>

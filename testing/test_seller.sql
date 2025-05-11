@@ -5,13 +5,13 @@ INSERT INTO "Sellers_seller" (
 VALUES
     (
         'test_seller1', 'test_seller1@example.com', '123-456-7890',
-        'images/seller_photos/test_seller1/profile_seller1.jpg',
+        'images/seller_photos/test_seller1/profile_seller1.png',
         'Individual',
         NULL, NULL, '', '', NULL, NULL, 'Test individual seller profile.'
     ),
     (
         'test_seller2', 'test_seller2@example.com', '987-654-3210',
-        'images/seller_photos/test_seller2/profile_seller2.jpg',
+        'images/seller_photos/test_seller2/profile_seller2.png',
         'Agency',
         '123 Main St', '500', 'Metropolis', '12345', 
         'images/seller_photos/test_seller2/logo_seller2.jpg', 
@@ -20,7 +20,7 @@ VALUES
     ),
     (
         'test_seller3', 'test_seller3@example.com', '222-333-4444',
-        'images/seller_photos/test_seller3/profile_seller3.jpg',
+        'images/seller_photos/test_seller3/profile_seller3.png',
         'Agency',
         '456 Elm St', 'Suite 12', 'Gotham', '67890',
         'images/seller_photos/test_seller3/logo_seller3.jpg',
