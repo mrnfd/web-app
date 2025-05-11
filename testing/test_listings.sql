@@ -17,7 +17,7 @@ INSERT INTO "Listings_listing" (
     thumbnail
 )
 VALUES 
-(2, 'Maple Street', 123, 10001, 'New York', 'Charming family home with garden.', 'HOUSE', 350000, '2024-05-01', 4, 2, 3, 120, 'ACTIVE','images\propertys_photos\test_property1\property1_thumb.jpg'),
+(1, 'Maple Street', 123, 10001, 'New York', 'Charming family home with garden.', 'HOUSE', 350000, '2024-05-01', 4, 2, 3, 120, 'ACTIVE','images\propertys_photos\test_property1\property1_thumb.jpg'),
 
 (3, 'Elm Avenue', 56, 90210, 'Los Angeles', 'Modern condo near downtown.', 'CONDO', 275000, '2024-04-15', 3, 2, 2, 85, 'PENDING','images\propertys_photos\test_property2\property2_thumb.jpeg'),
 
