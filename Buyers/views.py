@@ -42,6 +42,16 @@ def buyer_home(request):
 def my_offers(request):
     return render(request, 'buyers/my_offers.html')
 
+## Getting all offers for a property
+#property = PropertyListing.objects.get(id=1)
+#all_offers = property.offers.all()  # Returns a QuerySet of all related Offer objects
+#
+## Getting the count of offers
+#offer_count = property.offers.count()
+#
+## Getting pending offers only
+#pending_offers = property.offers.filter(status=OfferStatus.PENDING)
+
 def finalization(request):
     if request.method == "POST":
         contact_name = request.POST.get('contact_name')
@@ -76,6 +86,7 @@ def finalization(request):
         return redirect('finalization_revision')
 
     return render(request, 'buyers/finalize_offer.html')
+
 def finalization_revision(request):
     contact_name = request.session.get('contact_name')
     contact_email = request.session.get('contact_email')
