@@ -1,3 +1,13 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -182,4 +192,11 @@ select,
     .property-card {
         max-width: 100%;
     }
+}
+
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
 }
