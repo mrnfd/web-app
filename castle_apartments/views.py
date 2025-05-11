@@ -1,6 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from Sellers.models import Seller
+from Listings.models import Listing, ListingImage
 
 from django.db.models import Q
 
@@ -52,7 +53,33 @@ def sellers(request):
 
 
 def seller(request, seller_id):
-    return render(request, 'seller.html')
+    properties = Listing.objects.filter(seller_id_id=seller_id)
+    seller = Seller.objects.get(id=seller_id)
+
+    return render(request, 'seller.html', {
+        'seller': seller,
+        'properties': [{
+                'id': property.id,
+                'street': property.street,
+                'number': property.number,
+                'rooms': property.numb_of_rooms,
+                'seller': Seller.objects.get(id = property.seller_id.id).name ,
+                'price': str(property.price),
+                'thumbnail': property.thumbnail,
+                'type': property.type
+            } for property in properties]
+    })
+
+
+## Getting all offers for a property
+#property = PropertyListing.objects.get(id=1)
+#all_offers = property.offers.all()  # Returns a QuerySet of all related Offer objects
+#
+## Getting the count of offers
+#offer_count = property.offers.count()
+#
+## Getting pending offers only
+#pending_offers = property.offers.filter(status=OfferStatus.PENDING)
 
 def log_in(request):
     return render(request, 'role_selection.html')
