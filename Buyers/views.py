@@ -3,6 +3,9 @@ from django.contrib import messages
 from .models import  Buyer
 from .forms import BuyerProfileForm
 from django.contrib.auth.forms import UserCreationForm
+from Offers.models import Offer
+from django.db.models import Q
+from django.http import HttpResponse, JsonResponse
 
 # Create your views here.
 def index(request):
@@ -40,7 +43,57 @@ def buyer_home(request):
     return render(request, 'buyers/base_buyer.html')
 
 def my_offers(request):
-    return render(request, 'buyers/my_offers.html')
+    applied_filter = False
+    #all_offers = Offer.objects.get(buyer_id=request.user.id)
+    #all_offers = Offer.objects.filter(buyer_id = id)
+    all_offers = Offer.objects.all()
+
+    query_params = {
+        'search_filter': request.GET.get('search_filter'),
+        'sort': request.GET.get('sort'),
+    }
+
+    if query_params['search_filter']:
+        search_filter = request.GET.get('search_filter', '')
+        if search_filter and search_filter != '':
+            applied_filter = True
+            all_offers = all_offers.filter(
+                Q(city__icontains=search_filter) | 
+                Q(house_numb__icontains=search_filter) | 
+                Q(zip_code__icontains=search_filter) |
+                Q(name__icontains=search_filter) |
+                Q(street__icontains=search_filter) 
+            )
+            # Return JSON response
+            print("Filters applied, returning JSON response")
+    # sort by
+    sort_options = {
+        'price_asc': 'price',
+        'price_desc': '-price',
+        'street': 'street',
+    }
+    if query_params['sort'] in sort_options:
+        applied_filter = True
+        all_offers = all_offers.filter(status= sort_options[query_params['sort']])    
+
+    if applied_filter:        
+            return JsonResponse({
+                'offers': [{
+                    'id': offer.id,
+                    'name': offer.name,
+                    'seller_type': offer.seller_type,
+                    'street': offer.street,
+                    'house_numb': offer.house_numb,
+                    'city': offer.city,
+                    'profile_image_url': offer.profile_image_url
+                } for offer in all_offers]
+            })
+            
+    # If no filter return normal
+    return render(request, 'buyers/my_offers.html', {
+        "offers": all_offers
+    })
+    
 
 ## Getting all offers for a property
 #property = PropertyListing.objects.get(id=1)
