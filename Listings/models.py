@@ -88,13 +88,5 @@ class ListingImage(models.Model):
     thumbnail = models.BooleanField(default=False)
     
 
-## Getting all offers for a property
-#property = PropertyListing.objects.get(id=1)
-#all_offers = property.offers.all()  # Returns a QuerySet of all related Offer objects
-#
-## Getting the count of offers
-#offer_count = property.offers.count()
-#
-## Getting pending offers only
-#pending_offers = property.offers.filter(status=OfferStatus.PENDING)
+
 
