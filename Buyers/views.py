@@ -5,13 +5,14 @@ from .forms import BuyerProfileForm
 from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
-
+def index(request):
+    return render(request, 'base.html')
 
 def register(request):
     if request.method == 'POST':
         print(1)
     else:
-        return render(request,'buyer/register.html', {
+        return render(request,'buyers/register.html', {
             'form': UserCreationForm()
         })
 
@@ -36,7 +37,7 @@ def index(request):
     return render(request, 'buyers/base_buyer.html')
 
 def buyer_home(request):
-    return render(request, 'buyers/buyer_home.html')
+    return render(request, 'buyers/base_buyer.html')
 
 def my_offers(request):
     return render(request, 'buyers/my_offers.html')
@@ -122,3 +123,6 @@ def finalization_success(request):
     return render(request, 'buyers/finalization_success.html')
 def buyer_catalogue(request):
     return render(request, 'buyers/catalogue.html')
+
+def buyer_profile(request):
+    return render(request, 'buyers/buyer_profile.html')

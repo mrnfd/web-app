@@ -10,4 +10,5 @@ urlpatterns = [
     path('buyer/my_offers/finalization', views.finalization, name='finalization'),
     path('buyer/my_offers/finalization/revision', views.finalization_revision, name='finalization_revision'),
     path('buyer/my_offers/finalization/success', views.finalization_success, name='finalization_success'),
+    path('buyer/profile/', views.buyer_profile, name='buyer_profile'),
 ]
