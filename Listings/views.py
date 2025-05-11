@@ -127,7 +127,7 @@ def get_listing_by_id(request,id):
     property_images = ListingImage.objects.filter(listing_id=id)
     seller = Seller.objects.get(id = listing.seller_id.id)
     #listing = [x for x in propertys if x['id'] == id][0]
-    return render(request,"listing_detail.html.",{
+    return render(request,"listing_detail.html",{
         "listing":listing,
         "images":property_images,
         "seller":seller

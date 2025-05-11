@@ -37,7 +37,7 @@ def index(request):
     return render(request, 'buyers/base_buyer.html')
 
 def buyer_home(request):
-    return render(request, 'buyers/buyer_home.html')
+    return render(request, 'buyers/base_buyer.html')
 
 def my_offers(request):
     return render(request, 'buyers/my_offers.html')
