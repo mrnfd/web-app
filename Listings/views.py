@@ -101,7 +101,7 @@ def catalogue(request):
                 'street': property.street,
                 'number': property.number,
                 'rooms': property.numb_of_rooms,
-                'seller': property.seller_id.id,
+                'seller': Seller.objects.get(id = property.seller_id.id).name ,
                 'price': str(property.price),
                 'thumbnail': property.thumbnail,
                 'type': property.type
@@ -110,13 +110,22 @@ def catalogue(request):
     
     # If no filter return normal
     return render(request, "catalogue.html", {
-        "propertys": propertys
+        "propertys": [{
+                'id': property.id,
+                'street': property.street,
+                'number': property.number,
+                'rooms': property.numb_of_rooms,
+                'seller': Seller.objects.get(id = property.seller_id.id).name ,
+                'price': str(property.price),
+                'thumbnail': property.thumbnail,
+                'type': property.type
+            } for property in propertys]
     })
 
 def get_listing_by_id(request,id):
     listing = Listing.objects.get(id=id)
     property_images = ListingImage.objects.filter(listing_id=id)
-    seller = Seller.objects.get(id = listing.seller_id)
+    seller = Seller.objects.get(id = listing.seller_id.id)
     #listing = [x for x in propertys if x['id'] == id][0]
     return render(request,"listing_detail.html.",{
         "listing":listing,

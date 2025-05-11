@@ -67,7 +67,8 @@ def create_test_data():
             email='test_seller2@example.com',
             contact_number='987-654-3210',
             seller_type='Agency',
-            address='123 Main St, Suite 500',
+            street='Main St, Suite 500',
+            house_numb='123',
             city='Metropolis',
             postal_code='12345',
             bio='Test agency seller profile with office location.'
@@ -77,7 +78,8 @@ def create_test_data():
             email='test_seller3@example.com',
             contact_number='555-123-4567',
             seller_type='Individual',
-            address='789 Beach Rd',
+            street='Beach Rd',
+            house_numb='789',
             city='Coast City',
             postal_code='67890',
             bio='Experienced coastal property specialist.'

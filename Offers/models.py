@@ -12,8 +12,8 @@ class OfferStatus(models.TextChoices):
     COUNTERED = 'COUNTERED', 'Countered'
 
 class Offer(models.Model):
-    buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE)
-    property_listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
+    buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE,null=True)
+    property_listing = models.ForeignKey(Listing, on_delete=models.CASCADE,null=True)
     
     price = models.FloatField(null=True)
     submission_date = models.DateField(default=timezone.now)
