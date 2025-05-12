@@ -1,3 +1,14 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.input-fields-container {
+    flex: 1;
+    max-width: 600px;
+    margin: auto;
+}
+
 .homescreen {
     display: flex;
     justify-content: center;
@@ -14,4 +25,11 @@
     width: 90%;
     font-family: inherit;
     max-width: 1000px;
+}
+
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
 }

@@ -1,6 +1,5 @@
 html, body {
     height: 100%;
-    margin: 0;
 }
 
 body {
@@ -9,23 +8,44 @@ body {
 }
 
 .page-container {
-    flex: 1;
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
     gap: 2rem;
-    margin: 3rem;
 }
 
 .img-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
+    position: relative;
+    max-width: 1400px;
+    width: 100%;
+    max-height: 500px;
+    margin: 0 auto;
+    aspect-ratio: 3 / 1;
 }
 
-img {
+.img-container img:first-child {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    max-width: 100%;
+}
+
+.img-container img:last-child {
+    position: absolute;
+    bottom: -50px;
+    left: 3rem;
+    width: 115px;
+    height: 115px;
+    border-radius: 50%;
+    border: 1px solid #cccccc;
+    object-fit: cover;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#logo,
+#property-img {
     width: 8rem;
     height: 8rem;
     object-fit: cover;
@@ -39,6 +59,7 @@ img {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    margin: 3rem 3rem 2rem 3rem;
 }
 
 .info-container strong {
@@ -46,7 +67,44 @@ img {
 }
 
 .info-container p {
+    font-size: 18px;
+}
+
+.property-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    max-width: 1400px;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.property-cards a{
+    text-decoration: none;
+}
+
+.property-card {
+    max-width: 250px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+}
+
+.property-card img {
+    object-fit: contain;
+    display: block;
+    margin: 0.5rem auto auto auto;
+}
+
+.property-card:hover {
+    transform: scale(1.05);
+}
+
+.property-info p,
+.rooms {
     font-size: 16px;
+    color: black;
+    text-decoration: none;
 }
 
 .buttons {
@@ -54,6 +112,8 @@ img {
     justify-content: left;
     margin: 2rem;
 }
+
+
 
 .buttons button{
     padding: 10px 20px;
@@ -76,4 +136,44 @@ footer {
     background-color: #f1f1f1;
     padding: 20px;
     text-align: center;
+}
+
+@media (max-width: 768px) {
+    .img-container {
+        aspect-ratio: 3 / 1;
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+    }
+    .img-container img:first-child {
+        width: 100%;
+        max-width: 768px;
+    }
+
+    .page-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        width: 100%;
+    }
+
+    .info-container {
+        width: 100%;
+        max-width: 800px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+
+    .property-cards {
+        width: 100%;
+        max-width: 768px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+        padding: 2rem;
+    }
+
 }
