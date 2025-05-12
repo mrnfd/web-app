@@ -1,3 +1,14 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.input-fields-container {
+    flex: 1;
+    max-width: 600px;
+    margin: auto;
+}
+
 .search-container {
     display: flex;
     align-items: center;
@@ -109,6 +120,13 @@
 
 .buttons button:hover {
     background-color: #DCDCFF;
+}
+
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
 }
 
 @media (max-width: 768px) {

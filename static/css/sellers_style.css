@@ -12,6 +12,40 @@ body {
     flex: 1;
 }
 
+.search {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: stretch;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+}
+
+.search input[type="search"]{
+    flex-grow: 1;
+    padding: 0.2rem;
+    background-color: #F8F8FF;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: 'Times New Roman', serif;
+    max-width: 500px;
+}
+
+.search button {
+    padding: 0.2rem 0.5rem;
+    background-color: #DCDCFF;
+    color: black;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.search button:hover {
+    background-color: mediumpurple;
+}
+
 .sellers-page-container {
     padding: 2rem;
 }
@@ -41,6 +75,18 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.seller-address {
+    text-wrap: wrap;
+}
+
+.seller-info a{
+    color: black;
+}
+
+.seller-info a:hover{
+    color: blue;
 }
 
 .seller-card:hover {

@@ -13,8 +13,8 @@
 
         {% if seller.seller_type == "Agency" %}
             <div class="img-container">
-                <img src="/static/{{ seller.cover_image }}" alt="Cover Image">
-                <img src="/static/{{ seller.logo }}" alt="Logo">
+                <img class="cover-img" src="/static/{{ seller.cover_image }}" alt="Cover Image">
+                <img class="logo" src="/static/{{ seller.logo }}" alt="Logo">
             </div>
         {% endif %}
 
@@ -32,25 +32,28 @@
 
             <div class="properties-container">
                 <p><strong>Properties:</strong></p>
-                {% if properties%}
-                    {% for property in properties %}
-                        <a href="/catalogue/{{property.id}}/">
-                            <div  class="property-card">
-                                <img src="/static/{{ property.thumbnail }}" alt="Property image">
-                                <div class="property-info">
-                                    <p class="property-address">{{property.street}} {{property.number}} , {{property.type}}</p>
-                                    <p class="property-address">Price: {{property.price}}</p>
-                                    <div class="rooms-seller">
-                                        <span><strong>Rooms:</strong> {{property.rooms}}</span>
+
+                <div class="property-cards">
+                    {% if properties%}
+                        {% for property in properties %}
+                            <a href="/catalogue/{{property.id}}/">
+                                <div  class="property-card">
+                                    <img id="property-img" src="/static/{{ property.thumbnail }}" alt="Property image">
+                                    <div class="property-info">
+                                        <p class="property-address">{{property.street}} {{property.number}} , {{property.type}}</p>
+                                        <p class="property-address">Price: {{property.price}}</p>
+                                        <div class="rooms">
+                                            <span>Rooms: {{property.rooms}}</span>
+                                        </div>
                                     </div>
-                                
                                 </div>
-                            </div>
-                        </a>
-                    {% endfor %}
-                {% else %}
-                    <p>No properties available.</p>
-                {% endif %}
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <p>No properties available.</p>
+                    {% endif %}
+                </div>
+
             </div>
 
         </div>
