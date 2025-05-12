@@ -5,6 +5,7 @@
     <title>Catalogue</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/property_detail_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sellers_style.css' %}">
     <script src="{% static 'js/image_slideshow.js' %}"></script>
 
 </head>
@@ -38,7 +39,14 @@
             <p><strong>Sold: </strong>{{ listing.sold }}</p>
             <div class="seller">
                 <label for="seller-link"><strong>Seller: </strong></label>
-                <a href="#">some seller</a>
+                <div class="seller-card">
+                    <img src="/static/{{ seller.profile_image_url }}" alt="Seller image">
+                    <p class="seller-name">{{seller.name}}, {{seller.seller_type}} </p>
+                    {% if seller.street %}
+                        <p class="seller-name"><br /> {{seller.city}}, {{seller.street}} {{seller.house_numb}} <br /></p>
+                    {% endif %}
+                    <a href="/sellers/{{seller.id}}/"> See more </a>
+                </div>
             </div>
         </div>
 
