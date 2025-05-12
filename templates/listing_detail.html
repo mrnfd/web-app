@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Catalogue</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/property_detail_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/listing_detail_style.css' %}">
     <script src="{% static 'js/image_slideshow.js' %}"></script>
 
 </head>
@@ -42,6 +42,11 @@
             </div>
         </div>
 
+    </div>
+
+    <div class="buttons">
+        <button type="button" onclick="window.history.back()">Go back</button>
+        <button type="submit">Place a purchase offer</button>
     </div>
 
     {% include "_footer.html" %}
