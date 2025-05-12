@@ -1,0 +1,12 @@
+{% extends "register.html" %}
+
+{% block content %}
+<h1>Profile Page</h1>
+<!-- Add your profile details here -->
+
+<!-- Logout button -->
+<form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+{% endblock %}
