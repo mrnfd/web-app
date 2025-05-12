@@ -54,8 +54,19 @@ body {
     margin-bottom: 1rem;
 }
 
+.details-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 3rem;
+    box-sizing: border-box;
+}
+
 .info-container {
-    flex: 2;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -70,12 +81,25 @@ body {
     font-size: 18px;
 }
 
+.properties-container {
+    flex: 2;
+    margin: 3rem auto auto auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.properties-container p{
+    font-size: 18px;
+}
+
 .property-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    width: 100%;
     max-width: 1400px;
     gap: 1rem;
-    padding: 2rem;
+    box-sizing: border-box;
+    justify-items: flex-end;
 }
 
 .property-cards a{
@@ -83,11 +107,12 @@ body {
 }
 
 .property-card {
-    max-width: 250px;
+    width: 250px;
     display: flex;
     flex-direction: column;
     border: 1px solid #cccccc;
     border-radius: 10px;
+    height: 250px;
 }
 
 .property-card img {
@@ -105,6 +130,7 @@ body {
     font-size: 16px;
     color: black;
     text-decoration: none;
+    margin: 0 auto 0.5rem 0.5rem;
 }
 
 .buttons {
@@ -138,6 +164,12 @@ footer {
     text-align: center;
 }
 
+@media (min-width: 1024px) {
+    .property-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .img-container {
         aspect-ratio: 3 / 1;
@@ -158,13 +190,28 @@ footer {
         width: 100%;
     }
 
+    .details-container {
+        display: flex;
+        flex-direction: column;  /* Change to column */
+        justify-content: flex-start;
+        gap: 2rem;
+        width: 100%;
+        padding: 0 3rem;
+        box-sizing: border-box;
+    }
+
     .info-container {
         width: 100%;
-        max-width: 800px;
+        max-width: none;
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
         align-items: flex-start;
+    }
+
+     .properties-container {
+        width: 100%;
+        margin: 0;
     }
 
     .property-cards {
