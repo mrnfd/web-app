@@ -18,17 +18,20 @@
             </div>
         {% endif %}
 
-        <div class="info-container">
-            <p><strong>Name: </strong>{{ seller.name }}</p>
-            <p><strong>Type: </strong>{{ seller.seller_type }}</p>
 
-            {% if seller.seller_type == "Agency" %}
-                <p><strong>Street: </strong>{{ seller.street }}</p>
-                <p><strong>City: </strong>{{ seller.city }}</p>
-                <p><strong>ZIP: </strong>{{ seller.zip_code }}</p>
-            {% endif %}
+        <div class="details-container">
+            <div class="info-container">
+                <p><strong>Name: </strong>{{ seller.name }}</p>
+                <p><strong>Type: </strong>{{ seller.seller_type }}</p>
 
-            <p><strong>Bio: </strong>{{ seller.bio }}</p>
+                {% if seller.seller_type == "Agency" %}
+                    <p><strong>Street: </strong>{{ seller.street }}</p>
+                    <p><strong>City: </strong>{{ seller.city }}</p>
+                    <p><strong>ZIP: </strong>{{ seller.zip_code }}</p>
+                {% endif %}
+
+                <p><strong>Bio: </strong>{{ seller.bio }}</p>
+            </div>
 
             <div class="properties-container">
                 <p><strong>Properties:</strong></p>
@@ -53,12 +56,13 @@
                         <p>No properties available.</p>
                     {% endif %}
                 </div>
-
             </div>
 
         </div>
 
+
     </div>
+
 
     <div class="buttons">
         <button type="button" onclick="window.history.back()">Go Back</button>
