@@ -11,12 +11,19 @@
     {% include "_navigation.html" %}
     <div class="page-container">
 
-        {% if seller.seller_type == "Agency" %}
-            <div class="img-container">
-                <img class="cover-img" src="/static/{{ seller.cover_image }}" alt="Cover Image">
-                <img class="logo" src="/static/{{ seller.logo }}" alt="Logo">
-            </div>
-        {% endif %}
+        <div class="img-container">
+            {% if seller.cover_image %}
+        <img class="cover-img" src="/static/{{ seller.cover_image }}" alt="Cover Image">
+    {% else %}
+        <img class="cover-img" src="{% static 'images/seller_photos/banner_placeholder.png' %}" alt="Cover Placeholder">
+    {% endif %}
+
+    {% if seller.logo %}
+        <img class="logo" src="/static/{{ seller.logo }}" alt="Logo">
+    {% else %}
+        <img class="logo" src="{% static 'images/seller_photos/logo_placeholder.png' %}" alt="Logo Placeholder">
+    {% endif %}
+        </div>
 
 
         <div class="details-container">

@@ -17,11 +17,32 @@ html, body {
     padding: 1rem 2rem;
 }
 
-.search-container input[type="text"] {
-    flex: 1;
+.search-container input[type="search"],
+.status-filter select {
     padding: 10px;
-    width: 60%;
-    font-family: 'Times New Roman', serif;
+    background-color: #F8F8FF;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font: inherit;
+    font-size: 1rem;
+    width: 500px;
+    height: 40px;
+}
+
+.search-button {
+    padding: 0.2rem 0.5rem;
+    background-color: #DCDCFF;
+    color: black;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+}
+
+.search-button:hover {
+    background-color: mediumpurple;
 }
 
 .status-filter select {
@@ -78,6 +99,15 @@ html, body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.property-details a{
+    color: black;
+    text-decoration: none;
+}
+
+.property-details a:hover {
+    text-decoration: underline;
 }
 
 .status {

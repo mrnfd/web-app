@@ -37,14 +37,13 @@
             <p><strong>Listing date: </strong>{{ listing.date }}</p>
             <p><strong>Sold: </strong>{{ listing.sold }}</p>
             <div class="seller">
-                <label for="seller-link"><strong>Seller: </strong></label>
+                <label><strong>Seller: </strong></label>
                 <div class="seller-card">
                     <img src="/static/{{ seller.profile_image_url }}" alt="Seller image">
-                    <p class="seller-name">{{seller.name}}, {{seller.seller_type}} </p>
-                    {% if seller.street %}
-                        <p class="seller-name"><br /> {{seller.city}}, {{seller.street}} {{seller.house_numb}} <br /></p>
-                    {% endif %}
-                    <a href="/sellers/{{seller.id}}/"> See more </a>
+                    <div class="seller-info">
+                        <p class="seller-name">{{seller.name}}, {{seller.seller_type}} </p>
+                        <a href="/sellers/{{seller.id}}/"> See more </a>
+                    </div>
                 </div>
             </div>
         </div>

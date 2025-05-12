@@ -42,11 +42,11 @@
                     <p>Seller: {{offer.seller}}</p>
                     <p>Purchase offer price: {{offer.price}}$</p>
 
-                    {% if offer.status == REJECTED%}
-                        <p>Status: <span class="status pending">{{offer.status}}</span></p>
-                    {% elif offer.status == ACCEPTED %}
+                    {% if offer.status == "REJECTED" %}
+                        <p>Status: <span class="status rejected">{{offer.status}}</span></p>
+                    {% elif offer.status == "ACCEPTED" %}
                         <p>Status: <span class="status accepted">{{offer.status}}</span></p>
-                    {% elif offer.status == CONTINGENT %}
+                    {% elif offer.status == "CONTINGENT" %}
                         <p>Status: <span class="status contingent">{{offer.status}}</span></p>
                     {% else %}
                         <p>Status: <span class="status pending">{{offer.status}}</span></p>

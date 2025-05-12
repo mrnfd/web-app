@@ -99,6 +99,7 @@ body {
     color: black;
     border: 1px solid #cccccc;
     border-radius: 6px;
+    font: inherit;
     font-size: 1rem;
     cursor: pointer;
 }
@@ -120,7 +121,7 @@ select,
 
 .property-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Makes the grid responsive */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 2rem;
     padding: 2rem;
 }
