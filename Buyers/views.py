@@ -1,3 +1,4 @@
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from .models import  Buyer
@@ -27,3 +28,18 @@ def buyer_home(request):
 
 def buyer_catalogue(request):
     return render(request, 'buyers/catalogue.html')
+
+#Here below is stuff related to authentication
+def register(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('login')
+    else:
+        return render(request, 'buyer/register.html', {
+            'form': UserCreationForm(),
+        })
+
+def profile(request):
+    return render(request, 'user/profile.html')

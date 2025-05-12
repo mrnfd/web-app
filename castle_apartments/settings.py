@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "Offers.apps.OffersConfig",
     "Sellers.apps.SellersConfig",
     "Transactions.apps.TransactionsConfig",
+
 ]
 
 
@@ -140,3 +141,7 @@ DATABASES = {
         'PORT': '5432'
     }
 }
+
+#Olafur = working on authentication part, at 14:00 in video
+LOGIN_REDIRECT_URL = '/user/profile'
+LOGIN_URL = '/'

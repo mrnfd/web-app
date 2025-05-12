@@ -27,4 +27,6 @@ urlpatterns = [
     path('log-in/', views.log_in, name='log_in'),
     path('log-in/buyer/', views.login_as_buyer, name='login_as_buyer'),
     path('log-in/seller/', views.login_as_seller, name='login_as_seller'),
+    path('user', include('user.urls')),
+    path('profile', views.profile, name='profile'),
 ]
