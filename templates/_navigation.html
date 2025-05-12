@@ -55,6 +55,13 @@
         border-radius: 20px;
         cursor: pointer;
     }
+
+    .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    }
 </style>
 
 <nav class="navbar">
@@ -68,25 +75,37 @@
                 <li class="active">
                     <a class="new_link" href="{% url 'sellers' %}">Sellers</a>
                 </li>
-                <li class="active">
-                    <a class="new_link" href="{% url 'my_offers' %}">My offers</a>
-                </li>
-                <li class="active">
-                    <a class="new_link" id="logIn" href="{% url 'log_in' %}">Log In</a>
-                </li>
+
                 {% if user.is_authenticated %}
-                    <li class="nav-item">
-                    <a class="nav-link" href="{% url "logout" %}">Logout</a>
-                    </li>
+                    {% if user.buyerprofile %}
+                        <li class="active">
+                            <a class="new_link" href="{% url 'my_offers' %}">My offers</a>
+                        </li>
+                        <li class="active">
+                            <a class="new_link" href="{% url 'buyer_profile' %}">
+                                <img src="{{ user.profile_pic_url }} alt="Profile Picture" class="profile-pic">
+                            </a>
+                        </li>
+                    {% elif user.sellerprofile %}
+                        <li class="active">
+                            <a class="new_link" href="{% url 'statistics' %}">Statistics</a>
+                        </li>
+                        <li class="active">
+                            <a class="new_link" href="{% url 'manage_listings' %}">Manage Listings</a>
+                        </li>
+                        <li class="active">
+                            <a class="new_link" href="{% url 'profile' %}">
+                                <img src="{{ user.profile_pic_url }}" alt="Profile Pic" class="profile-pic">  <!-- Same here for seller -->
+                            </a>
+                        </li>
+                    {% endif %}
                 {% else %}
-                    <li class="nav-item">
-                    <a class="nav-link" href="{% url "register" %}">Register</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="{% url "login" %}">Login</a>
+                    <li class="active">
+                        <a class="new_link" id="logIn" href="{% url 'log_in' %}">Log In</a>
                     </li>
                 {% endif %}
             </ul>
         </div>
     </div>
 </nav>
+

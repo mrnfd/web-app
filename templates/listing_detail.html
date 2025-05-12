@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalogue</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/property_detail_style.css' %}">
+    <script src="{% static 'js/image_slideshow.js' %}"></script>
+
+</head>
+<body>
+    {% include "_navigation.html" %}
+    <div class="property-card">
+
+        <!-- IMAGE SLIDESHOW -->
+        <div class="custom-carousel">
+            <div class="carousel-images">
+                <img src="/static/{{ listing.thumbnail }}" class="carousel-item" alt="Property Image">
+                {% for image in images %}
+                    {% if not image.thumbnail %}
+                        <img src="/static/{{ image.image_url }}" class="carousel-item" alt="Property Image">
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <button class="carousel-prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="carousel-next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+
+        <!-- LISTING INFO -->
+        <div class="property-details">
+            <p class="property-address"><strong>Address: </strong>{{listing.street}} {{listing.number}}</p>
+            <p class="property-address"><strong>City: </strong>{{listing.city}}</p>
+            <p class="property-address"><strong>Postal Code: </strong>{{listing.zip}}</p>
+            <p><strong>Description: </strong>{{ listing.description }}</p>
+            <p><strong>Type of property: </strong>{{ listing.type }}</p>
+            <p><strong>Listing price: </strong>{{ listing.price }}</p>
+            <p><strong>Listing date: </strong>{{ listing.date }}</p>
+            <p><strong>Sold: </strong>{{ listing.sold }}</p>
+            <div class="seller">
+                <label for="seller-link"><strong>Seller: </strong></label>
+                <a href="#">some seller</a>
+            </div>
+        </div>
+
+    </div>
+
+    {% include "_footer.html" %}
+</body>
+
+</html>
+

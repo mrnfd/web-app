@@ -1,3 +1,17 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-container {
+    flex: 1;
+}
+
 .alert-success {
     margin: 1rem;
     border: 1px solid #cccccc;
@@ -8,7 +22,13 @@
     justify-content: center;
     align-items: center;
     padding: 2rem;
-    height: auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    width: auto;
+    flex: 1;
+}
+
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
 }

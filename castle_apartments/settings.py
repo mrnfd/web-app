@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,8 +42,7 @@ INSTALLED_APPS = [
     "Listings.apps.ListingsConfig",
     "Offers.apps.OffersConfig",
     "Sellers.apps.SellersConfig",
-    "Transactions.apps.TransactionsConfig",
-
+    "Transactions.apps.TransactionsConfig"
 ]
 
 
@@ -82,8 +82,12 @@ WSGI_APPLICATION = 'castle_apartments.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'verklegt_namskeid_db',
+        'USER': 'verklegt_db_user',
+        'PASSWORD': 'M96qeX5MeGdrfjhxbBxxxcqa',
+        'HOST': 'db-verklegt-namskeid-ii-eu-geuysi.postgres.database.azure.com',
+        'PORT': '5432'
     }
 }
 
@@ -130,18 +134,6 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# PostgreSQL
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'verklegt_namskeid_db',
-        'USER': 'verklegt_db_user',
-        'PASSWORD': 'M96qeX5MeGdrfjhxbBxxxcqa',
-        'HOST': 'db-verklegt-namskeid-ii-eu-geuysi.postgres.database.azure.com',
-        'PORT': '5432'
-    }
-}
-
-#Olafur = working on authentication part, at 14:00 in video
-LOGIN_REDIRECT_URL = '/user/profile'
-LOGIN_URL = '/'
+# Media
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
+#MEDIA_URL = '/images/'

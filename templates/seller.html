@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seller</title>
+    {% load static %}
+    <link rel="stylesheet" href={% static 'css/seller_profile.css' %}>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    {% include "_navigation.html" %}
+    <div class="page-container">
+
+        <div class="img-container">
+            <img src="{{ seller.cover_img }}" alt="Cover Image">
+            <img src="{{ seller.logo }}" alt="Logo">
+        </div>
+
+        <div class="info-container">
+            <p><strong>Name: </strong>{{ seller.name }}</p>
+            <p><strong>Type: </strong>{{ seller.type }}</p>
+
+            {% if seller.type == "Real Estate Agency" %}
+                <p><strong>Street: </strong>{{ seller.street }}</p>
+                <p><strong>City: </strong>{{ seller.city }}</p>
+                <p><strong>ZIP: </strong>{{ seller.zip }}</p>
+            {% endif %}
+
+            <p><strong>Bio: </strong>{{ seller.bio }}</p>
+
+            <div class="properties-container">
+                <p><strong>Properties:</strong></p>
+                {% for property in properties %}
+                    <a href="{% url 'property_detail' property.id %}" class="property-card">
+                        <img src="{{ property.thumbnail.url }}" alt="Property Image">
+                        <p>{{ property.address }}</p>
+                    </a>
+                {% empty %}
+                    <p>No properties available.</p>
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="buttons">
+        <button type="button" onclick="window.history.back()">Go Back</button>
+    </div>
+
+    {% include "_footer.html" %}
+</body>
+</html>

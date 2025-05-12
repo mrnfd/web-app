@@ -18,9 +18,10 @@ class Seller(models.Model):
     seller_type = models.CharField(max_length=20, choices=SELLER_TYPE_CHOICES)
 
     #Address info, only relevant if seller type has 'Agency'
-    address = models.TextField(blank=True, null=True)
-    city = models.CharField(max_length=50, blank=True)
-    postal_code = models.CharField(max_length=20, blank=True)
+    street = models.CharField(max_length=255, null=True, blank=True)
+    house_numb = models.CharField(max_length=255, null=True, blank=True)
+    city = models.CharField(max_length=50, null=True, blank=True)
+    zip_code = models.CharField(max_length=20, null=True, blank=True)
 
     #Branding image
     logo = models.ImageField(upload_to='seller_logos/', blank=True, null=True)
