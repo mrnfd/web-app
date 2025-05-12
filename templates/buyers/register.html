@@ -2,18 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Castle Apartments</title>
+    <title>Registration</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/base_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register_style.css' %}">
+    <script src="{% static 'js/password_check.js' %}"></script>
 </head>
 <body>
     {% include "_navigation.html" %}
-    
-    <form method="post" action="{% url 'register' %}">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" class = "btm btm-primary" value="Register"/>
-    </form>
+
+    <div class="input-fields-container">
+        <h2>Register</h2>
+        <form class="registration-form" method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+
+            <div class="input-field">
+                <label for="user_name">Name: </label>
+                <input type="text" id="user_name" name="user_name" value="{{ buyer.name }}" required>
+            </div>
+
+            <div class="input-field">
+                <label for="user_phone_num">Phone number: </label>
+                <input type="text" id="user_phone_num" name="user_phone_num" value="{{ buyer.phone_number }}" required>
+            </div>
+
+            <div class="input-field">
+                <label for="user_email">Email: </label>
+                <input type="email" id="user_email" name="user_email" value="{{ buyer.email }}" required>
+            </div>
+
+            <div class="input-field">
+                <label for="user_street">Street name: </label>
+                <input type="text" id="user_street" name="user_street" value="{{ buyer.street }}" required>
+            </div>
+
+            <div class="input-field">
+                <label for="user_zip">ZIP: </label>
+                <input type="text" id="user_zip" name="user_zip" value="{{ buyer.zip }}" required>
+            </div>
+
+            <div class="input-field">
+                <label for="user_city">City: </label>
+                <input type="text" id="user_city" name="user_city" value="{{ buyer.city }}" required>
+            </div>
+
+            <div class="input-field">
+                <label for="user_pw">Password: </label>
+                <input type="password" id="user_pw" name="user_pw" value="{{ buyer.password }}" required>
+            </div>
+
+            <div class="input-field">
+                <label for="confirm_pw">Confirm password: </label>
+                <input type="password" id="confirm_pw" name="confirm_pw" required>
+            </div>
+
+            <div class="buttons">
+                <button type="button" onclick="window.history.back()">Go back</button>
+                <button type="submit" >Register</button>
+            </div>
+
+        </form>
+    </div>
+
+    {% include "_footer.html" %}
 
 </body>
 </html>

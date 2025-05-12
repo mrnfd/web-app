@@ -1,0 +1,87 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-fields-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+    margin: auto;
+}
+
+input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid #cccccc;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+}
+
+input:focus {
+    background-color: #ffffff;
+}
+
+input:hover {
+    border-color: #888888;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 600px;
+    margin: 0.5rem 0;
+}
+
+.input-field label {
+    flex: 0 0 150px;
+    margin-right: 1rem;
+    font-weight: bold;
+}
+
+.input-field input {
+    flex: 1;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.buttons button {
+    padding: 10px 20px;
+    font-family: inherit;
+    font-size: 1rem;
+    border-radius: 100px;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    background-color: #F8F8FF;
+    color: black;
+    transition: background-color 0.2s ease-in-out;
+}
+
+
+.buttons button:hover,
+.buttons input[type="submit"]:hover {
+    background-color: #DCDCFF;
+}
+
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}

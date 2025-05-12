@@ -45,6 +45,17 @@ body {
     border: 1px solid #cccccc;
 }
 
+.registration-link {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+}
+
+.registration-link a{
+    color: #7D7D7D;
+}
+
+
 .buttons {
     display: flex;
     justify-content: center;
