@@ -16,20 +16,20 @@ def index(request):
     return render(request, 'base.html')
 
 def register(request):
-    """if request.method == 'POST':
+    if request.method == 'POST':
         print(1)
     else:
         return render(request,'buyers/register.html', {
             'form': UserCreationForm()
-        })"""
-    password = request.POST.get('user_pw')
-    confirm_password = request.POST.get('confirm_pw')
+        })
+    #password = request.POST.get('user_pw')
+    #confirm_password = request.POST.get('confirm_pw')
 
-    if password != confirm_password:
-        messages.error(request, "Passwords do not match.")
-        return render(request, "buyers/register.html", {})
+    #if password != confirm_password:
+    #    messages.error(request, "Passwords do not match.")
+    #    return render(request, "buyers/register.html", {})
 
-    return render(request, "buyers/register.html")
+    #return render(request, "buyers/register.html")
 
 # Create your views here.
 def edit_buyer_profile(request, buyer_id):

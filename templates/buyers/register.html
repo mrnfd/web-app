@@ -12,7 +12,14 @@
 
     <div class="input-fields-container">
         <h2>Register</h2>
-        <form class="registration-form" method="POST" action="{% url 'register' %}">
+
+        <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Register" />
+        </form>
+
+        <!-- <form class="registration-form" method="POST" action="{% url 'register' %}">
             {% csrf_token %}
 
             <div class="input-field">
@@ -58,7 +65,8 @@
             <div class="buttons">
                 <button type="button" onclick="window.history.back()">Go back</button>
                 <button type="submit">Register</button>
-            </div>
+                 <input type="submit" value="Register" 
+            </div> -->
 
         </form>
 
