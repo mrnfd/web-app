@@ -1,6 +1,6 @@
 
 from Offers.forms.create_offer_form import CreateOfferForm
-#from Offers.forms.update_offer_form import UpdateOfferForm TODO -------------------
+from Offers.forms.update_offer_form import UpdateOfferForm
 from django.utils import timezone
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
@@ -67,15 +67,18 @@ def delete_offer(request,id):
     messages.error(request, 'Offer deleted successfully')
     return redirect('my_offers')
 
-def update_offer(request,id):
-    offer = get_object_or_404(Offer,id=id)
+def update_offer(request,offer_id):
+    offer = get_object_or_404(Offer,id=offer_id)
+    listing = get_object_or_404(Listing,id=offer.property_listing.id)
     if request.method == 'POST':
-        form = CandUpdateForm(request.POST,instance=offer)
+        form = UpdateOfferForm(request.POST,instance=offer)
         if form.is_valid():
             form.save()
-            return redirect(f'offer-by-id',id=offer.id)
+            messages.error(request, 'Offer successfully resubmitted')
+            return redirect('my_offers')
     else:
-        return render(request, 'offer/update_offer.html', {
-            'id': id,
-            'form':OfferUpdateForm(instance=offer)
+        return render(request, 'offers/update_offer.html', {
+            'listing':listing,
+            'offer':offer,
+            'form':UpdateOfferForm(instance=offer)
         })

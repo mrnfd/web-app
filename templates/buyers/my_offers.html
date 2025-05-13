@@ -63,7 +63,7 @@
                 <!-- <a type="button" href="{% url 'delete-offer' id=offer.id %}"> Delete </a> -->
                 <!--<button data-id = "{{ offer.id }}" class='DeleteOffer-button'>Delete offer</button> -->
                 <button type="button" onclick = "redirectToDelete( '{{offer.id}}' )" >Delete offer</button>
-                <button type="button">Resubmit offer</button>
+                <button type="button"  onclick = "redirectToUpdate( '{{offer.id}}' )">Edit offer</button>
                 <!-- <button type="button" class='ToFinalizeOffer-button'>Finalize offer</button> -->
                  <button type="button" onclick = "redirectToFinalization()" >Finalize offer</button>
             </div>
@@ -79,8 +79,11 @@
             window.location.href = "{% url 'finalization' %}";
         }
         function redirectToDelete(offerID) {
-            // Redirecting directly to the buyer's interface (e.g., catalogue page) without checking login credentials
             window.location.href = `/offers/delete_offer/${offerID}`;
+        }
+        
+        function redirectToUpdate(offerID) {
+            window.location.href = `/offers/update_offer/${offerID}`;
         }
         //document.querySelector('.ToFinalizeOffer-button').addEventListener('click', function () {
         //    window.location.href = "{% url 'finalization' %}";
