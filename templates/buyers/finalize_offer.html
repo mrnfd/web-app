@@ -40,6 +40,13 @@
             </div>
 
             <div class="input-fields">
+                <label for="city">City</label>
+                {% for city in cities %}
+                    <option value="{{ city }}" {% if buyer.city == city %}selected{% endif %}>{{ city }}</option>
+                {% endfor %}
+            </div>
+
+            <div class="input-fields">
                 <label for="country">Country</label>
                 {% for country in countries %}
                     <option value="{{ country }}" {% if buyer.country == country %}selected{% endif %}>{{ country }}</option>
