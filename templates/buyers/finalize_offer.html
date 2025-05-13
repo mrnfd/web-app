@@ -11,7 +11,7 @@
     {% include "_navigation.html" %}
 
     <div class="input-fields-container">
-        <h2>Finalizing offer for {{ offer.property_details }}</h2>
+        <h2>Finalizing offer for {{ listing.address }}</h2>
         <form  id="finalization-form" method="POST" action="{% url 'finalization_revision' %}">
             {% csrf_token %}
             <div class="input-fields">
@@ -25,28 +25,34 @@
             </div>
 
             <div class="input-fields">
-                <label for="contact-address">Contact address</label>
-                <input type="text" id="contact-address" name="contact-address" value="{{ buyer.contact_address }}" required>
+                <label for="contact-address">Contact street: </label>
+                <input type="text" id="contact-address" name="contact-address" value="{{ buyer.street }}" required>
             </div>
 
             <div class="input-fields">
-                <label for="contact-zip">Contact ZIP</label>
+                <label for="contact-address">Contact house number: </label>
+                <input type="text" id="contact-address" name="contact-address" value="{{ buyer.house_num }}" required>
+            </div>
+
+            <div class="input-fields">
+                <label for="contact-zip">Contact ZIP: </label>
                 <input type="text" id="contact-zip" name="contact-zip" value="{{ buyer.contact_zip }}" required>
             </div>
 
+            <!--
             <div class="input-fields">
                 <label for="country">Country</label>
                 {% for country in countries %}
                     <option value="{{ country }}" {% if buyer.country == country %}selected{% endif %}>{{ country }}</option>
                 {% endfor %}
             </div>
+             -->
 
             <div class="input-fields">
                 <label for="contact-id">National ID</label>
                 <input type="text" id="contact-id" name="contact-id" value="{{ buyer.contact_id }}" required>
             </div>
 
-        <!--
             <div class="payment">
                 <label>Payment option</label>
                 <input type="radio" id="credit-card" name="payment-option" value="credit_card" onclick="showPaymentFields('credit')">
@@ -57,6 +63,7 @@
                 <label for="mortgage">Mortgage</label>
             </div>
 
+            <!--
             <div id="credit-fields" class="payment-fields">
                 <div class="input-fields">
                     <label for="cardholder-name">Cardholder name:</label>
@@ -93,7 +100,7 @@
 
             <div class="buttons">
                 <button type="button" onclick="window.history.back()">Cancel</button>
-                <button type="submit">Go to Payment Page</button>
+                <button type="submit" id="go-to-payment">Go to Payment Page</button>
             </div>
 
         </form>
@@ -102,5 +109,33 @@
     {% include "_footer.html" %}
 
   <!--  <script src="{% static 'js/finalization.js' %}"></script> -->
+
+    <script>
+        document.getElementById('finalization-form').addEventListener('submit', function(e) {
+            e.preventDefault();  // prevent actual form submission
+
+            const selectedOption = document.querySelector('input[name="payment-option"]:checked');
+            if (!selectedOption) {
+                alert("Please select a payment option.");
+                return;
+            }
+
+            // Redirect based on selected payment option
+            switch (selectedOption.value) {
+                case 'credit_card':
+                    window.location.href = "{% url 'finalization_credit' %}";
+                    break;
+               case 'bank_transfer':
+                    window.location.href = "{% url 'finalization_bank' %}";
+                    break;
+                case 'mortgage':
+                    window.location.href = "{% url 'finalization_mortgage' %}";
+                    break;
+                default:
+                    alert("Unknown payment method.");
+            }
+        });
+        </script>
+
 </body>
 </html>

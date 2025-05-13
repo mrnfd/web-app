@@ -9,7 +9,8 @@ html, body {
     margin: auto;
 }
 
-.input-fields, .form-control {
+.input-fields, .form-control,
+.payment, .payment-fields {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -17,7 +18,8 @@ html, body {
 }
 
 .input-fields label,
-.form-control label {
+.form-control label,
+.payment label {
     font-size: 18px;
     width: 150px;
 }
@@ -53,6 +55,26 @@ input:hover {
     background-color: #f9f9f9;
     transition: all 0.3s ease;
     font-family: inherit;
+}
+
+.payment {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 2rem;
+}
+
+.payment-fields {
+    display: none;
+    margin-top: 1em;
+}
+
+input:focus {
+  background-color: #fff;
+}
+
+input:hover {
+  border-color: #888;
 }
 
 .buttons {
