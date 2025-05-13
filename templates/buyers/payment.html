@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/payment_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    {% include "_navigation.html" %}
+
+    <main class="main-content">
+        <div class="page-container">
+
+            <form id="payment-form" method="post" action="{% url 'finalization_payment' %}">
+
+                <div class="payment">
+                    <label>Payment option</label>
+
+                    <div class="radio-btn">
+                        <input type="radio" id="credit-card" name="payment-option" value="credit_card" onclick="showPaymentFields('credit')">
+                        <label for="credit-card">Credit card</label>
+                    </div>
+                    <div id="credit-fields" class="payment-fields">
+                        <div class="input-fields">
+                            <label for="cardholder-name">Cardholder name:</label>
+                            <input type="text" id="cardholder-name" name="cardholder-name">
+                        </div>
+                        <div class="input-fields">
+                            <label for="card-number">Card number:</label>
+                            <input type="text"  id="card-number" name="card-number">
+                        </div>
+                        <div class="input-fields">
+                            <label for="expiry-date">Expiry date:</label>
+                            <input type="month" id="expiry-date" name="expiry-date">
+                        </div>
+                        <div class="input-fields">
+                            <label for="cvc">CVC:</label>
+                            <input type="text" id="cvc" name="cvc">
+                        </div>
+                    </div>
+
+                    <div class="radio-btn">
+                        <input type="radio" id="bank_transfer" name="payment-option" value="bank_transfer" onclick="showPaymentFields('bank')">
+                        <label for="bank_transfer">Bank transfer</label>
+                    </div>
+                    <div id="bank-fields" class="payment-fields">
+                        <div class="input-fields">
+                            <label for="bank_acc">Bank account: </label>
+                            <input type="text" id="bank_acc" name="bank-acc">
+                        </div>
+                    </div>
+
+                    <div class="radio-btn">
+                        <input type="radio" id="mortgage" name="payment-option" value="mortgage" onclick="showPaymentFields('mortgage')">
+                        <label for="mortgage">Mortgage</label>
+                    </div>
+                    <div id="mortgage-fields" class="payment-fields">
+                        <div class="input-fields">
+                            <label for="provider">Mortgage provider:</label>
+                            <input type="text" id="provider" name="provider">
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="buttons">
+            <button type="button" onclick="window.history.back()">Cancel</button>
+            <button type="submit" form="payment-form">Submit</button>
+        </div>
+
+    </main>
+
+    {% include "_footer.html" %}
+
+    <script src="{% static 'js/finalization.js' %}"></script>
+</body>
+</html>

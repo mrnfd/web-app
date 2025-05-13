@@ -46,6 +46,7 @@
                 <input type="text" id="contact-id" name="contact-id" value="{{ buyer.contact_id }}" required>
             </div>
 
+        <!--
             <div class="payment">
                 <label>Payment option</label>
                 <input type="radio" id="credit-card" name="payment-option" value="credit_card" onclick="showPaymentFields('credit')">
@@ -88,10 +89,11 @@
                     <input type="text" id="provider" name="provider">
                 </div>
             </div>
+            -->
 
             <div class="buttons">
                 <button type="button" onclick="window.history.back()">Cancel</button>
-                <button type="submit">Submit</button>
+                <button type="submit">Go to Payment Page</button>
             </div>
 
         </form>
@@ -99,6 +101,6 @@
 
     {% include "_footer.html" %}
 
-    <script src="{% static 'js/finalization.js' %}"></script>
+  <!--  <script src="{% static 'js/finalization.js' %}"></script> -->
 </body>
 </html>

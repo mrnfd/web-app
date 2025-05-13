@@ -179,6 +179,9 @@ def finalization(request):
 
     return render(request, 'buyers/finalize_offer.html')
 
+def finalization_payment(request):
+    return render(request, 'buyers/payment.html')
+
 def finalization_revision(request):
     contact_name = request.session.get('contact_name')
     contact_email = request.session.get('contact_email')
