@@ -106,7 +106,8 @@ def catalogue(request):
                 'seller': Seller.objects.get(id = property.seller_id.id).name ,
                 'price': str(property.price),
                 'thumbnail': property.thumbnail,
-                'type': property.type
+                'type': property.type,
+                'status':property.status
             } for property in propertys]
         })
     
@@ -120,7 +121,8 @@ def catalogue(request):
                 'seller': Seller.objects.get(id = property.seller_id.id).name ,
                 'price': str(property.price),
                 'thumbnail': property.thumbnail,
-                'type': property.type
+                'type': property.type,
+                'status':property.status
             } for property in propertys]
     })
 
@@ -151,9 +153,11 @@ def get_listing_by_id(request,id):
     
     button=''
     if buyer and listing.status != 'SOLD' and not offer:
-        button = f'<button data-id = "{{listing.id}}" class="ToCreateOffer-button" > Place a purchase offer</button>'
+        button = f'<button data-id = "{listing.id}" class="create-offer-button" > Place a purchase offer</button>'
     elif buyer and offer and listing.status != 'SOLD':
-        button = f'<button type="button"  onclick = "redirectToUpdate( {{offer.id}} )"> Edit offer </button>'
+        
+        button = f'<button data-id = "{listing.id}" class="update-offer-button" > Edit offer</button>'
+        #button = f'<button type="button"  onclick = "redirectToUpdate( {{offer.id}} )"> Edit offer </button>'
     
         
 
