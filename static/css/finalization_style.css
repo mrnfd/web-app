@@ -59,15 +59,10 @@ input:hover {
 
 .payment {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
-    margin: 2rem;
 }
 
-.payment-fields {
-    display: none;
-    margin-top: 1em;
-}
 
 input:focus {
   background-color: #fff;
