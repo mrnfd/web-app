@@ -23,18 +23,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 // display filtered content
                 const json = await response.json();
                 if (json.sellers && Array.isArray(json.sellers)) {
-                    const selleres = json.sellers.map(seller => `
-                        
+                    const selleres = json.sellers.map(seller => {
+
+                        let agencyInfo = '';
+
+                        switch(seller.seller_type) {
+                            case 'Agency':
+                                agencyInfo = `<p class="seller-address">${seller.city}, ${seller.street} ${seller.house_numb} <br /></p>`;
+                                break;
+                            default:
+                                agencyInfo = '';
+                        }
+                        return`
                         <div class="seller-card">
-                            <img src="/static/${ seller.profile_image_url }" alt="Seller image">
-                            <p class="seller-name">${seller.name}, ${seller.seller_type}<br /> </p>
-                            {% if seller.address}
-                                <p class="seller-name">${seller.name}, ${seller.seller_type}<br /></p> 
-                            {% endif %}
-                            <a href="/sellers/${seller.id}/"> See more </a>
+                            <div class="seller-img">
+                                <img src="/static/${ seller.profile_image_url }" alt="Seller image">
+                            </div>
+                            <div class="seller-info">
+                                <p class="seller-name">${seller.name}</p>
+                                <p class="seller-type">${seller.seller_type}</p>
+                                ${agencyInfo}
+                                <a href="/sellers/${seller.id}/"> See more </a>
+                            </div>
                         </div>
                         
-                    `);
+                    `});
                     
                     // Update the content with the filtered properties
                     sellerPlaceholder.innerHTML = selleres.join('');

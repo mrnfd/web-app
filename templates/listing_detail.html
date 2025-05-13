@@ -10,6 +10,10 @@
 </head>
 <body>
     {% include "_navigation.html" %}
+
+    {% for msg in messages %}
+            {{ msg }}
+    {% endfor %}
     <div class="property-card">
 
         <!-- IMAGE SLIDESHOW -->
@@ -33,11 +37,11 @@
             <p class="property-address"><strong>Postal Code: </strong>{{listing.zip}}</p>
             <p><strong>Description: </strong>{{ listing.description }}</p>
             <p><strong>Type of property: </strong>{{ listing.type }}</p>
-            <p><strong>Listing price: </strong>{{ listing.price }}</p>
+            <p><strong>Listing price: </strong>${{ listing.price }}</p>
             <p><strong>Listing date: </strong>{{ listing.date }}</p>
             <p><strong>Sold: </strong>{{ listing.sold }}</p>
             <div class="seller">
-                <label><strong>Seller: </strong></label>
+                <label for="seller-link"><strong>Seller: </strong></label>
                 <div class="seller-card">
                     <img src="/static/{{ seller.profile_image_url }}" alt="Seller image">
                     <div class="seller-info">
@@ -52,10 +56,17 @@
 
     <div class="buttons">
         <button type="button" onclick="window.history.back()">Go back</button>
-        <button type="submit">Place a purchase offer</button>
+        <button data-id = "{{listing.id}}" class='ToCreateOffer-button' > Place a purchase offer</button>
     </div>
 
     {% include "_footer.html" %}
+    <script>
+
+        document.querySelector('.ToCreateOffer-button').addEventListener('click', function () {
+            window.location.href = `/offers/${this.dataset.id}/create_offer`;
+        });
+
+    </script>
 </body>
 
 </html>
