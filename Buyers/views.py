@@ -49,7 +49,7 @@ def buyer_home(request):
 def my_offers(request):
     applied_filter = False
     #all_offers = Offer.objects.get(buyer_id=request.user.id)
-    #all_offers = Offer.objects.filter(buyer_id = id)
+    
     all_offers = Offer.objects.all()
     offer_array = []
 

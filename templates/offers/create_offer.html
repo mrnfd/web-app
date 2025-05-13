@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Offers</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/buyer_offers_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <script src="{% static 'js/offer_filter.js' %}"></script>
+</head>
+<body>
+    {% include "_navigation.html" %}
+
+    <div class="my-offer-grid" id="offer-listed">
+        <!-- MESSAGES -->
+        {% for msg in messages %}
+            {{ msg }}
+        {% endfor %}
+        {% if form.price.errors %}
+            <div class="text-danger">{{ form.price.errors }}</div>
+        {% endif %}
+        {% if form.expiration_date.errors %}
+            <div class="text-danger">{{ form.expiration_date.errors }}</div>
+        {% endif %}
+
+        <h3>Make an Offer for {{ listing.type }} at {{ listing.numb }} {{ listing.street }}</h3>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Property Details</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Type:</strong> {{ listing.type }}</p>
+                <p><strong>Address:</strong> {{ listing.number }} {{ listing.street }}, {{ listing.zip }} {{ listing.city }}</p>
+                <p><strong>Listed Price:</strong> ${{ listing.price }}</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h5>Your Offer</h5>
+            </div>
+            <div class="card-body">
+                <form method="post" action="{% url 'create-offer' listing.id %}">
+
+                    {% csrf_token %}
+
+                    <div class="form-group mb-3">
+                        <label for="{{ form.price.id_for_label }}">Your Offer Price ($):</label>
+                        {{ form.price }}
+                        
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="{{ form.expiration_date.id_for_label }}">Offer Valid Until:</label>
+                        {{ form.expiration_date }}
+                        <small class="form-text text-muted">The expiration date of the offer, please write - aswell.</small>
+                        
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit Offer</button>
+                    <button type="button" onclick="redirectToOffers()">cancel</button>
+
+                    
+                </form>
+            </div>
+        </div>
+        
+    </div>
+
+    {% include "_footer.html" %}
+
+    <script>
+        function redirectToOffers() {
+            // Redirecting directly to the buyer's interface (e.g., catalogue page) without checking login credentials
+            window.location.href = "{% url 'listing-by-id' listing.id %}";
+        }
+        const sortSelect = document.getElementById('sort-button');
+        if (sortSelect) {
+            sortSelect.addEventListener('change', function () {
+                document.getElementById('apply-filters').click();
+            });
+        }
+    </script>
+
+</body>
+</html>
