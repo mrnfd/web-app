@@ -14,10 +14,11 @@ class PropertyType(models.TextChoices):
     COMMERCIAL = 'COMMERCIAL', 'Commercial'
 
 class ListingStatus(models.TextChoices):
+    AVAILABLE = 'AVAILABLE','Available'
     PENDING = 'PENDING','Pending'
-    ACCEPTED = 'ACCEPTED','Accepted'
-    REJECTED = 'REJECTED','Rejected'
-    CONTINGENT = 'CONTINGENT','Contingent'
+    SOLD = 'SOLD','Sold'
+    EXPIRED = 'EXPIRED','Expired'
+    DELETED = 'DELETED','Deleted'
 
 class City(models.TextChoices):
     NEW_YORK = 'NEW_YORK', 'New York'
@@ -58,7 +59,7 @@ class Listing(models.Model):
     street = models.CharField(max_length=255,null=True)
     number = models.IntegerField(null=True)
     zip = models.IntegerField(null=True)
-    city = models.CharField(max_length =20,choices = ListingStatus,null= True)
+    city = models.CharField(max_length =20,choices = City,null= True)
     description = models.TextField(blank=True)
     type = models.CharField(max_length =20,choices = PropertyType,default='HOUSE')
     price = models.FloatField(null=True)
@@ -69,7 +70,7 @@ class Listing(models.Model):
     bed_rooms = models.IntegerField(null=True)
 
     size_sqm = models.IntegerField(null=True)
-    status = models.CharField(max_length =20,choices = ListingStatus,default = ListingStatus.PENDING)
+    status = models.CharField(max_length =20,choices = ListingStatus,default = ListingStatus.AVAILABLE)
 
     thumbnail = models.CharField(max_length=4096,blank=True)
     
