@@ -23,7 +23,7 @@ body {
     aspect-ratio: 3 / 1;
 }
 
-.img-container img:first-child {
+.cover-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -31,17 +31,32 @@ body {
     max-width: 100%;
 }
 
-.img-container img:last-child {
+.profile-pic {
     position: absolute;
     bottom: -50px;
     left: 3rem;
-    width: 115px;
-    height: 115px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     border: 1px solid #cccccc;
     object-fit: cover;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+.logo {
+    position: absolute;
+    bottom: -50px;
+    left: 15rem;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 1px solid #cccccc;
+    object-fit: cover;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 2;
 }
 
 #logo,

@@ -13,17 +13,23 @@
 
         <div class="img-container">
             {% if seller.cover_image %}
-        <img class="cover-img" src="/static/{{ seller.cover_image }}" alt="Cover Image">
-    {% else %}
-        <img class="cover-img" src="{% static 'images/seller_photos/banner_placeholder.png' %}" alt="Cover Placeholder">
-    {% endif %}
+                <img class="cover-img" src="/static/{{ seller.cover_image }}" alt="Cover Image">
+            {% else %}
+                <img class="cover-img" src="{% static 'images/seller_photos/banner_placeholder.png' %}" alt="Cover Placeholder">
+            {% endif %}
 
-    {% if seller.logo %}
-        <img class="logo" src="/static/{{ seller.logo }}" alt="Logo">
-    {% else %}
-        <img class="logo" src="{% static 'images/seller_photos/logo_placeholder.png' %}" alt="Logo Placeholder">
-    {% endif %}
-        </div>
+            {% if seller.profile_image_url %}
+                <img class="profile-pic" src="/static/{{ seller.profile_image_url }}" alt="Profile Picture">
+            {% else %}
+                <img src="{% static 'images/seller_photos/profile_placeholder.jpg' %}" alt="Profile Picture Placeholder">
+            {% endif %}
+
+            {% if seller.logo %}
+                <img class="logo" src="/static/{{ seller.logo }}" alt="Logo">
+            {% else %}
+                <img class="logo" src="{% static 'images/seller_photos/logo_placeholder.png' %}" alt="Logo Placeholder">
+            {% endif %}
+                </div>
 
 
         <div class="details-container">
