@@ -61,9 +61,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
 
                             <div class="buttons">
-                                <button type="button" id="cancel-btn">Delete offer</button>
-                                <button type="button">Resubmit offer</button>
-                                <button type="button" onclick="redirectToFinalize()">Finalize offer</button>
+                                <button type="button" onclick = "redirectToDelete( '${offer.id}' )" >Delete offer</button>
+                                <button type="button"  onclick = "redirectToUpdate( '${offer.id}' )">Edit offer</button>
+                                <button type="button" onclick = "redirectToFinalization()" >Finalize offer</button>
                             </div>
                         </div>
                     `});

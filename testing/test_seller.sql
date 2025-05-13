@@ -14,8 +14,8 @@ VALUES
         'images/seller_photos/test_seller2/profile_seller2.png',
         'Agency',
         '123 Main St', '500', 'Metropolis', '12345', 
-        'images/seller_photos/test_seller2/logo_seller2.jpg', 
-        'images/seller_photos/test_seller2/cover_seller2.jpg',
+        'images/seller_photos/test_seller2/logo_seller2.png', 
+        'images/seller_photos/test_seller2/cover_seller2.png',
          'Test agency seller profile with office location.'
     ),
     (
@@ -23,7 +23,7 @@ VALUES
         'images/seller_photos/test_seller3/profile_seller3.png',
         'Agency',
         '456 Elm St', 'Suite 12', 'Gotham', '67890',
-        'images/seller_photos/test_seller3/logo_seller3.jpg',
-        'images/seller_photos/test_seller3/cover_seller3.jpg',
+        'images/seller_photos/test_seller3/logo_seller3.png',
+        'images/seller_photos/test_seller3/cover_seller3.png',
         'Another test agency seller profile.'
     );
