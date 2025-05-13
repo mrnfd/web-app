@@ -49,8 +49,8 @@ def buyer_home(request):
 def my_offers(request):
     applied_filter = False
     #all_offers = Offer.objects.get(buyer_id=request.user.id)
-    
-    all_offers = Offer.objects.all()
+    all_offers = Offer.objects.filter(buyer_id=1)
+    #all_offers = Offer.objects.all()
     offer_array = []
 
     query_params = {
@@ -117,7 +117,7 @@ def my_offers(request):
         else:
             offer_array.append(offer_info)
 
-    print(applied_filter)
+    
     if applied_filter:
         return JsonResponse({'offers':offer_array})        
             

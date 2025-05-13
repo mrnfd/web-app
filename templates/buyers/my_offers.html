@@ -30,6 +30,10 @@
     </div>
 
     <div class="my-offer-grid" id="offer-listed">
+        {% for msg in messages %}
+            {{ msg }}
+        {% endfor %}
+
         {% for offer in offers %}
         <div class="property-card">
             <div class="property-content">
@@ -42,7 +46,7 @@
                     <p>Seller: {{offer.seller}}</p>
                     <p>Purchase offer price: {{offer.price}}$</p>
 
-                    {% if offer.status == REJECTED%}
+                    {% if offer.status == REJECTED %}
                         <p>Status: <span class="status pending">{{offer.status}}</span></p>
                     {% elif offer.status == ACCEPTED %}
                         <p>Status: <span class="status accepted">{{offer.status}}</span></p>
@@ -55,9 +59,10 @@
             </div>
 
             <div class="buttons">
-                <button type="button" id="cancel-btn">Delete offer</button>
+                <!-- <button type="button" data-id = "{{offer.id}}" class='DeleteOffer-button'>Delete offer</button> -->
+                <a type="button" href="{% url 'delete-offer' id=offer.id %}"> Delete </a>
                 <button type="button">Resubmit offer</button>
-                <button type="button" onclick="redirectToFinalize()">Finalize offer</button>
+                <button type="button" class='ToFinalizeOffer-button'>Finalize offer</button>
             </div>
         </div>
         {% endfor %}
@@ -66,10 +71,16 @@
     {% include "_footer.html" %}
 
     <script>
-        function redirectToFinalize() {
-            // Redirecting directly to the buyer's interface (e.g., catalogue page) without checking login credentials
+        //function redirectToFinalize() {
+        //    // Redirecting directly to the buyer's interface (e.g., catalogue page) without checking login credentials
+        //    window.location.href = "{% url 'finalization' %}";
+        //}
+        document.querySelector('.ToFinalizeOffer-button').addEventListener('click', function () {
             window.location.href = "{% url 'finalization' %}";
-        }
+        });
+        document.querySelector('.DeleteOffer-button').addEventListener('click', function () {
+            window.location.href = `/offers/delete_offer/${this.dataset.id}`;
+        });
     </script>
 
 </body>

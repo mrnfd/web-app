@@ -64,7 +64,8 @@ def create_offer(request,listing_id):
 def delete_offer(request,id):
     offer = get_object_or_404(Offer, id=id)
     offer.delete()
-    return redirect('offer-index')
+    messages.error(request, 'Offer deleted successfully')
+    return redirect('my_offers')
 
 def update_offer(request,id):
     offer = get_object_or_404(Offer,id=id)
