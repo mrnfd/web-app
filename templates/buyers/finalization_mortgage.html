@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+    {% load static %}
+   <link rel="stylesheet" href="{% static 'css/finalization_payment_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    {% include "_navigation.html" %}
+
+    <main class="main-content">
+
+        <div class="page-container">
+
+            <form id="payment-form" method="post" action="{% url 'finalization_credit' %}">
+
+                <div class="payment">
+                    <label>Payment option</label>
+
+                    <div id="mortgage-fields" class="payment-fields">
+                        <div class="input-fields">
+                            <label for="provider">Mortgage provider:</label>
+                            <input type="text" id="provider" name="provider">
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+        <div class="buttons">
+            <button type="button" onclick="window.history.back()">Cancel</button>
+            <button type="submit" form="payment-form">Submit</button>
+        </div>
+
+    </main>
+
+    {% include "_footer.html" %}
+
+</body>
+</html>

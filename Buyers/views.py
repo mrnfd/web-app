@@ -179,6 +179,15 @@ def finalization(request):
 
     return render(request, 'buyers/finalize_offer.html')
 
+def finalization_credit(request):
+    return render(request, 'buyers/finalization_credit.html')
+
+def finalization_bank(request):
+    return render(request, 'buyers/finalization_bank.html')
+
+def finalization_mortgage(request):
+    return render(request, 'buyers/finalization_mortgage.html')
+
 def finalization_revision(request):
     contact_name = request.session.get('contact_name')
     contact_email = request.session.get('contact_email')
