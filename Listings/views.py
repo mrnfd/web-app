@@ -3,6 +3,8 @@ from django.shortcuts import render
 
 from Listings.models import Listing, ListingImage
 from Sellers.models import Seller
+from Buyers.models import Buyer
+from Offers.models import Offer
 
 from django.db.models import Q
 
@@ -123,14 +125,47 @@ def catalogue(request):
     })
 
 def get_listing_by_id(request,id):
+
     listing = Listing.objects.get(id=id)
+    buyer = None
+    
+    buyer = Buyer.objects.get(id=1) # TODO   (bara fyrir testing)
+
+    if request.user.is_authenticated:
+        try:
+            buyer = Buyer.objects.get(user=request.user) 
+            
+        except Buyer.DoesNotExist:
+            pass
+    
+    # Skoða hvort offer sé til
+    offer = None
+    if buyer:
+        try:
+            offer = Offer.objects.get(
+                buyer_id=buyer.id,
+                property_listing_id=listing.id
+            )
+        except Offer.DoesNotExist:
+            pass
+    
+    button=''
+    if buyer and listing.status != 'SOLD' and not offer:
+        button = f'<button data-id = "{{listing.id}}" class="ToCreateOffer-button" > Place a purchase offer</button>'
+    elif buyer and offer and listing.status != 'SOLD':
+        button = f'<button type="button"  onclick = "redirectToUpdate( {{offer.id}} )"> Edit offer </button>'
+    
+        
+
+
     property_images = ListingImage.objects.filter(listing_id=id)
     seller = Seller.objects.get(id = listing.seller_id.id)
-    #listing = [x for x in propertys if x['id'] == id][0]
+
     return render(request,"listing_detail.html",{
         "listing":listing,
         "images":property_images,
-        "seller":seller
+        "seller":seller,
+        "button":button
     })
 
 
