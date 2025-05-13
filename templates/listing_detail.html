@@ -64,7 +64,10 @@
 
     <div class="buttons">
         <button type="button" onclick="window.history.back()">Go back</button>
-        <button data-id = "{{listing.id}}" class='ToCreateOffer-button' > Place a purchase offer</button>
+        {% autoescape off %}
+            {{ button }}
+        {% endautoescape %}
+        
     </div>
 
     {% include "_footer.html" %}
@@ -73,6 +76,9 @@
         document.querySelector('.ToCreateOffer-button').addEventListener('click', function () {
             window.location.href = `/offers/${this.dataset.id}/create_offer`;
         });
+        function redirectToUpdate(offerID) {
+            window.location.href = `/offers/update_offer/${offerID}`;
+        }
 
     </script>
 </body>
