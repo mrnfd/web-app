@@ -9,7 +9,7 @@ class OfferStatus(models.TextChoices):
     PENDING = 'PENDING', 'Pending'
     ACCEPTED = 'ACCEPTED', 'Accepted'
     REJECTED = 'REJECTED', 'Rejected'
-    COUNTERED = 'COUNTERED', 'Countered'
+    CONTINGENT = 'CONTINGENT', 'Contingent'
 
 class Offer(models.Model):
     buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE,null=True)
