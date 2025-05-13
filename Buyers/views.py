@@ -102,6 +102,8 @@ def my_offers(request):
             
             'seller': listing_seller.name,
             'seller_id': listing_seller.id,
+            'seller_profile_image_url': listing_seller.profile_image_url,
+            'seller_type': listing_seller.seller_type,
         
         }
         

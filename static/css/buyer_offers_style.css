@@ -110,6 +110,42 @@ html, body {
     text-decoration: underline;
 }
 
+.seller {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.seller-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    padding: 0.2rem;
+}
+
+.seller-card:hover {
+    transform: scale(1.05);
+}
+
+.seller-card img {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+}
+
+.seller-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.seller-info a{
+    color: black;
+    font-size: 16px;
+}
+
 .status {
     padding: 4px 8px;
     display: inline-block;
@@ -174,6 +210,10 @@ footer {
     .property-details {
         align-items: center;
         text-align: center;
+    }
+
+    .seller-card {
+        margin-top: 1rem;
     }
 
     .buttons {
