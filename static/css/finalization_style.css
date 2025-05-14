@@ -60,9 +60,8 @@ input:hover {
 .payment {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
 }
-
 
 input:focus {
   background-color: #fff;

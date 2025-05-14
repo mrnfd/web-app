@@ -12,3 +12,14 @@ function updateSlidePosition() {
     const slideWidth = document.querySelector('.carousel-item').clientWidth;
     slides.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
 }
+
+document.addEventListener('DOMContentLoaded', function (){
+    const label = document.getElementById('toggle-info');
+    const info = document.getElementById('additional-info');
+
+    if (label && info) {
+        label.addEventListener('click', function () {
+            info.classList.toggle('additional-info');
+        });
+    }
+});

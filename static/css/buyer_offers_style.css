@@ -3,6 +3,22 @@ html, body {
     margin: 0;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-container {
+    flex: 1;
+}
+
 .input-fields-container {
     flex: 1;
     max-width: 600px;
@@ -193,6 +209,7 @@ footer {
     background-color: #f1f1f1;
     padding: 20px;
     text-align: center;
+    flex-shrink: 0; /* Ensure the footer doesn't shrink */
 }
 
 @media (max-width: 768px) {

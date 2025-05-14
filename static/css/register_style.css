@@ -46,7 +46,7 @@ input:hover {
 .input-field label {
     flex: 0 0 150px;
     margin-right: 1rem;
-    font-weight: bold;
+    font-size: 18px;
 }
 
 .input-field input {

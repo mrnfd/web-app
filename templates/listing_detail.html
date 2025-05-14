@@ -5,7 +5,6 @@
     <title>Catalogue</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/listing_detail_style.css' %}">
-    <script src="{% static 'js/image_slideshow.js' %}"></script>
 
 </head>
 <body>
@@ -64,8 +63,9 @@
                 </div>
             </div>
 
-            <div class="additional-info">
-                <label><strong>Additional information: </strong></label>
+            <label id="toggle-info" style="cursor: pointer;"><strong>Additional information</strong></label>
+
+            <div class="additional-info" id="additional-info">
                     <p>Total number of rooms: {{ listing.num_of_rooms }}</p>
                     <p>Number of bedrooms: {{ listing.num_of_bedrooms }}</p>
                     <p>Number of bathrooms: {{ listing.num_of_bathrooms }}</p>
@@ -84,7 +84,8 @@
     </div>
 
     {% include "_footer.html" %}
-    <script>
+    {% load static %}
+    <script src="{% static 'js/listing_detail.js' %}">
 
         document.querySelector('.ToCreateOffer-button').addEventListener('click', function () {
             window.location.href = `/offers/${this.dataset.id}/create_offer`;

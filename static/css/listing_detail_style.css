@@ -135,12 +135,14 @@ body {
     font-size: 16px;
 }
 
-.additional-info {
+#toggle-info {
     margin-top: 1.5rem;
+    text-decoration: underline;
+    text-underline-offset: 5px;
 }
 
-.additional-info p {
-    margin-left: 1.5rem;
+.additional-info {
+    display: none;
 }
 
 .buttons {

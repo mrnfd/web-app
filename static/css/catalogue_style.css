@@ -196,7 +196,7 @@ select,
 
     .search-and-filters input[type="search"] {
         flex-grow: 1;
-        width: 100%; /* Make the search input longer */
+        width: 100%;
         min-height: 3rem;
     }
 
