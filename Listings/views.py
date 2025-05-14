@@ -159,9 +159,6 @@ def get_listing_by_id(request,id):
         button = f'<button data-id = "{listing.id}" class="update-offer-button" > Edit offer</button>'
         #button = f'<button type="button"  onclick = "redirectToUpdate( {{offer.id}} )"> Edit offer </button>'
     
-        
-
-
     property_images = ListingImage.objects.filter(listing_id=id)
     seller = Seller.objects.get(id = listing.seller_id.id)
 

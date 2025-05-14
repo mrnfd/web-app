@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.models import Group
 from django.contrib import messages
 from .models import  Buyer
-from .forms import BuyerProfileForm
+from .forms import BuyerProfileForm, CreateBuyerForm
 from django.contrib.auth.forms import UserCreationForm
 from Offers.models import Offer
 from django.db.models import Q
@@ -15,13 +16,25 @@ from Sellers.models import Seller
 def index(request):
     return render(request, 'base.html')
 
-def register(request):
-    if request.method == 'POST':
-        print(1)
-    else:
-        return render(request,'buyers/register.html', {
-            'form': UserCreationForm()
-        })
+#def register(request):
+#    if request.method == 'POST':
+#        form = BuyerProfileForm(request.POST)
+#        if form.is_valid():
+#            messages.success(request, 'Form submission successful')
+#            user = form.save(commit=False)
+#
+#            buyer_form = CreateBuyerForm('user'=user,'email'=user.email)
+#            
+#
+#            form.save()
+#            return redirect('login_as_buyer')
+#        else:
+#            messages.error(request, 'Form submission incorrect')
+#            return redirect('register_as_buyer')
+#    else:
+#        return render(request,'buyers/buyer_register.html', {
+#            'form': BuyerProfileForm()
+#        })
     #password = request.POST.get('user_pw')
     #confirm_password = request.POST.get('confirm_pw')
 
@@ -30,6 +43,36 @@ def register(request):
     #    return render(request, "buyers/register.html", {})
 
     #return render(request, "buyers/register.html")
+
+def register(request):
+    if request.method == 'POST':
+        form = BuyerProfileForm(request.POST)
+        if form.is_valid():
+
+            user = form.save()
+            
+            try:
+                buyer_group = Group.objects.get(name="buyers_group")
+                buyer_group.user_set.add(user)
+            except Group.DoesNotExist:
+                messages.warning(request, 'Buyer group not found. User permissions may be limited.')
+            
+            buyer = Buyer(
+                user=user,
+                email=user.email,
+                country='Default'  
+            )
+            buyer.save()
+            
+            messages.success(request, 'Registration successful! You can now log in.')
+            return redirect('login_as_buyer')
+        else:
+            messages.error(request, 'Form submission incorrect')
+            return render(request, 'buyers/buyer_register.html', {'form': form})
+    else:
+        return render(request,'buyers/buyer_register.html', {
+            'form': BuyerProfileForm()
+        })
 
 # Create your views here.
 def edit_buyer_profile(request, buyer_id):

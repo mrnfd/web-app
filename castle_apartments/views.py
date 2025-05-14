@@ -1,5 +1,5 @@
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from Sellers.models import Seller
 from Listings.models import Listing, ListingImage
 
@@ -89,3 +89,17 @@ def login_as_buyer(request):
 
 def login_as_seller(request):
     return render(request, 'login.html')
+
+def login_success(request):
+    """
+    Redirects users based on whether they are in the admins/seller/buyer group
+    """
+    if request.user.groups.filter(name="admins").exists():
+        # user is an admin
+        return redirect("admin_list")
+    elif request.user.groups.filter(name="buyer").exists():
+        return redirect("buyer_profile")
+    elif request.user.groups.filter(name="seller").exists():
+        return redirect("buyer_profile")
+    else:
+        return redirect("buyer_home")

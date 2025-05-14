@@ -4,9 +4,9 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('buyer/register', views.register, name='register'),
-    path('buyer/login', LoginView.as_view(template_name='login.html'), name='login'),
-    path('buyer/logout', LogoutView.as_view(), name='logout'),
+    path('buyer/register', views.register, name='register_as_buyer'),
+    path('buyer/login', LoginView.as_view(template_name='buyers/buyer_login.html'), name='login_as_buyer'),
+    path('buyer/logout', LogoutView.as_view(next_page='index'), name='logout_as_buyer'),
 
     path('buyer/home/', views.buyer_home, name='buyer_home'),
     path('buyer/catalogue/', views.buyer_catalogue, name='buyer_catalogue'),

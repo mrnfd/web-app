@@ -12,14 +12,26 @@
 
     <div class="input-fields-container">
         <h2>Register</h2>
+        {% for msg in messages %}
+            {{ msg }}
+        {% endfor %}
 
-        <form method="post" action="{% url 'register' %}">
+        <form method="post" action="{% url 'register_as_buyer' %}">
             {% csrf_token %}
-            {{ form }}
+            
+            <h5>{{form.username.label}}</h5>
+            {{form.username}}
+            <h5>{{form.email.label}}</h5>
+            {{form.email}}
+            <h5>{{form.password1.label}}</h5>
+            {{form.password1}}
+            <h5>{{form.password2.label}}</h5>
+            {{form.password2}}
+            
             <input type="submit" value="Register" />
         </form>
 
-        <!-- <form class="registration-form" method="POST" action="{% url 'register' %}">
+        <!-- <form class="registration-form" method="POST" action="{% url 'register_as_buyer' %}">
             {% csrf_token %}
 
             <div class="input-field">

@@ -9,6 +9,21 @@
 </head>
 <body>
     {% include "_navigation.html" %}
+
+    {% for msg in messages %}
+            {{ msg }}
+    {% endfor %}
+    <h3>Login temp</h3>
+    <form method="post" action="{% url 'login_as_buyer' %}">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Login">
+    </form>
+
+    <div class="registration-link">
+        <a href="{% url 'register_as_buyer' %}">Register here</a>
+    </div>
+    <!--
     <div class="credentials-constructor">
         <div class="input-row">
             <label for="email">Email: </label>
@@ -21,13 +36,13 @@
     </div>
 
     <div class="registration-link">
-        <a href="{% url 'register' %}">Register here</a>
+        <a href="{% url 'register_as_buyer' %}">Register here</a>
     </div>
 
     <div class="buttons">
         <button type="button" onclick="window.history.back()">Cancel</button>
         <input type="submit" value="OK" onclick="redirectToBuyer()">
-    </div>
+    </div> -->
 
     {% include "_footer.html" %}
     <script>
