@@ -286,8 +286,8 @@ def buyer_profile(request):
     user_profile = Buyer.objects.filter(user=request.user).first()
     
     if request.method == 'POST':
-        form = CreateBuyerForm(request.POST, instance= user_profile)
-        # print(form)
+        form = CreateBuyerForm(request.POST, request.FILES, instance= user_profile)
+        print(form)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.user = request.user
