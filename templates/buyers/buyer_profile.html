@@ -10,6 +10,9 @@
 <body>
     {% include "_navigation.html" %}
 
+    {% for msg in messages %}
+            {{ msg }}
+    {% endfor %}
     <!--
     <form method="post" action="{% url 'buyer_profile' %}">
         {% csrf_token %}
@@ -22,7 +25,7 @@
         <form method="post" enctype="multipart/form-data" action="{% url 'buyer_profile' %}">
             {% csrf_token %}
             <div class="profile-pic-container">
-                <img src="{{buyer.profile_image_url }}" alt="Profile Picture">
+                <img src="/media/{{user.buyer.profile_image_url}}" alt="Profile Picture">
                 <h5>Set new profile picture</h5>
                 {{form.profile_image_url}}
                 

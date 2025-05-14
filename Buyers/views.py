@@ -287,15 +287,17 @@ def buyer_profile(request):
     
     if request.method == 'POST':
         form = CreateBuyerForm(request.POST, request.FILES, instance= user_profile)
-        print(form)
+        
         if form.is_valid():
             instance = form.save(commit=False)
             instance.user = request.user
             instance.save()
             user_profile.save()
+            messages.success(request, 'Your profile was successfully updated!')
             return redirect('buyer_profile')
-        print("invalid")
-
+        messages.error(request, 'Please correct the error below.')
+        return redirect('buyer_profile')
+        
     return render(request, 'buyers/buyer_profile.html', {
         'form': CreateBuyerForm(instance=user_profile),
     })

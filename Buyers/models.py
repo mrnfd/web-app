@@ -33,7 +33,7 @@ class Buyer(models.Model):
     name = models.CharField(max_length=100,null=True)
     email = models.EmailField(unique=True)
     contact_number = models.CharField(max_length=20,null=True)
-    profile_image_url = models.ImageField(null=True, blank=True, upload_to='images/')
+    profile_image_url = models.ImageField(upload_to='images/',null=True, blank=True)
     
     street = models.CharField(max_length=255, null=True, blank=True)
     house_numb = models.CharField(max_length=255, null=True, blank=True)
