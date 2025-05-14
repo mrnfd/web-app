@@ -4,6 +4,7 @@ from Offers.forms.update_offer_form import UpdateOfferForm
 from django.utils import timezone
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.decorators import login_required
 from Listings.models import Listing
 from Buyers.models import Buyer
 from Offers.models import Offer
@@ -13,7 +14,7 @@ from Offers.models import Offer
 
 
 # form related views
-
+@login_required
 def create_offer(request,listing_id):
 
     listing = get_object_or_404(Listing,id=listing_id)
@@ -60,13 +61,13 @@ def create_offer(request,listing_id):
             'form': CreateOfferForm(),
             'listing':listing
         })
-
+@login_required
 def delete_offer(request,id):
     offer = get_object_or_404(Offer, id=id)
     offer.delete()
     messages.error(request, 'Offer deleted successfully')
     return redirect('my_offers')
-
+@login_required
 def update_offer(request,offer_id):
     offer = get_object_or_404(Offer,id=offer_id)
     listing = get_object_or_404(Listing,id=offer.property_listing.id)

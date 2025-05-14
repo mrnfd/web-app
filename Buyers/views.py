@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.contrib import messages
 from .models import  Buyer
@@ -75,6 +76,7 @@ def register(request):
         })
 
 # Create your views here.
+@login_required
 def edit_buyer_profile(request, buyer_id):
     buyer = get_object_or_404(Buyer, id=buyer_id)
 
@@ -82,6 +84,7 @@ def edit_buyer_profile(request, buyer_id):
         form = BuyerProfileForm(request.POST, request.FILES, instance=buyer)
         if form.is_valid():
             form.save()
+            buyer.save()
             messages.success(request, 'Your profile was successfully updated!')
             return redirect('profile', buyer_id=buyer_id)
         else:
@@ -96,6 +99,7 @@ def index(request):
 def buyer_home(request):
     return render(request, 'buyers/base_buyer.html')
 
+@login_required
 def my_offers(request):
     applied_filter = False
     #all_offers = Offer.objects.get(buyer_id=request.user.id)
@@ -189,6 +193,7 @@ def my_offers(request):
 ## Getting pending offers only
 #pending_offers = property.offers.filter(status=OfferStatus.PENDING)
 
+@login_required
 def finalization(request):
     if request.method == "POST":
         contact_name = request.POST.get('contact_name')
@@ -224,15 +229,19 @@ def finalization(request):
 
     return render(request, 'buyers/finalize_offer.html')
 
+@login_required
 def finalization_credit(request):
     return render(request, 'buyers/finalization_credit.html')
 
+@login_required
 def finalization_bank(request):
     return render(request, 'buyers/finalization_bank.html')
 
+@login_required
 def finalization_mortgage(request):
     return render(request, 'buyers/finalization_mortgage.html')
 
+@login_required
 def finalization_revision(request):
     contact_name = request.session.get('contact_name')
     contact_email = request.session.get('contact_email')
@@ -265,10 +274,28 @@ def finalization_revision(request):
         'provider': provider,
     })
 
+@login_required
 def finalization_success(request):
     return render(request, 'buyers/finalization_success.html')
+@login_required
 def buyer_catalogue(request):
     return render(request, 'buyers/catalogue.html')
 
+@login_required
 def buyer_profile(request):
-    return render(request, 'buyers/buyer_profile.html')
+    user_profile = Buyer.objects.filter(user=request.user).first()
+    
+    if request.method == 'POST':
+        form = CreateBuyerForm(request.POST, instance= user_profile)
+        # print(form)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
+            user_profile.save()
+            return redirect('buyer_profile')
+        print("invalid")
+
+    return render(request, 'buyers/buyer_profile.html', {
+        'form': CreateBuyerForm(instance=user_profile),
+    })

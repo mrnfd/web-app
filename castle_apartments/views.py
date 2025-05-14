@@ -97,9 +97,9 @@ def login_success(request):
     if request.user.groups.filter(name="admins").exists():
         # user is an admin
         return redirect("admin_list")
-    elif request.user.groups.filter(name="buyer").exists():
-        return redirect("buyer_profile")
-    elif request.user.groups.filter(name="seller").exists():
+    elif request.user.groups.filter(name="buyers_group").exists():
+        return redirect('buyer_profile')
+    elif request.user.groups.filter(name="sellers_group").exists():
         return redirect("buyer_profile")
     else:
         return redirect("buyer_home")

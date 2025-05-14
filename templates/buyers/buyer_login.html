@@ -13,36 +13,36 @@
     {% for msg in messages %}
             {{ msg }}
     {% endfor %}
-    <h3>Login temp</h3>
-    <form method="post" action="{% url 'login_as_buyer' %}">
+    
+    
+    <!--<form method="post" action="{% url 'login_as_buyer' %}">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="Login">
+    </form> 
+    <div class="registration-link">
+        <a href="{% url 'register_as_buyer' %}">Register here</a>
+    </div> 
+    -->
+
+    
+    <form method="post" action="{% url 'login_as_buyer' %}">
+        {% csrf_token %}
+        <div class="credentials-constructor">
+            <h3>Login</h3>
+            {{ form }}
+        </div>
+
+        <div class="buttons">
+            <button type="button" onclick="window.history.back()">Cancel</button>
+            <input type="submit" value="Login">
+        </div>
+
     </form>
-
     <div class="registration-link">
         <a href="{% url 'register_as_buyer' %}">Register here</a>
     </div>
-    <!--
-    <div class="credentials-constructor">
-        <div class="input-row">
-            <label for="email">Email: </label>
-            <input type="text" id="email">
-        </div>
-        <div class="input-row">
-            <label for="pw">Password: </label>
-            <input type="text" id="pw">
-        </div>
-    </div>
-
-    <div class="registration-link">
-        <a href="{% url 'register_as_buyer' %}">Register here</a>
-    </div>
-
-    <div class="buttons">
-        <button type="button" onclick="window.history.back()">Cancel</button>
-        <input type="submit" value="OK" onclick="redirectToBuyer()">
-    </div> -->
+    
 
     {% include "_footer.html" %}
     <script>

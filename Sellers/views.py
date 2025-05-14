@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Seller
 from .forms import SellerProfileForm
 
 # Create your views here.
+@login_required
 def edit_seller_profile(request, seller_id):
     seller = get_object_or_404(Seller, pk=seller_id)
 
