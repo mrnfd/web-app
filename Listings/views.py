@@ -106,7 +106,8 @@ def catalogue(request):
                 'seller': Seller.objects.get(id = property.seller_id.id).name ,
                 'price': str(property.price),
                 'thumbnail': property.thumbnail,
-                'type': property.type
+                'type': property.type,
+                'status': property.status
             } for property in propertys]
         })
     
@@ -120,7 +121,8 @@ def catalogue(request):
                 'seller': Seller.objects.get(id = property.seller_id.id).name ,
                 'price': str(property.price),
                 'thumbnail': property.thumbnail,
-                'type': property.type
+                'type': property.type,
+                'status': property.status
             } for property in propertys]
     })
 

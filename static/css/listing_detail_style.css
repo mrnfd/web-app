@@ -71,6 +71,25 @@ body {
     right: 10px;
 }
 
+.image-and-status p{
+    font-size: 18px;
+}
+
+.status.available {
+    background-color: #9CFF9F;
+    padding: 0.2rem;
+}
+
+.status.pending {
+    background-color: #91CEFF;
+    padding: 0.2rem;
+}
+
+.status.sold {
+    background-color: #FF9999;
+    padding: 0.2rem;
+}
+
 .property-details {
     margin-top: 1.5rem;
     padding-left: 2rem;

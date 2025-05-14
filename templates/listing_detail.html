@@ -16,19 +16,32 @@
     {% endfor %}
     <div class="property-card">
 
-        <!-- IMAGE SLIDESHOW -->
-        <div class="custom-carousel">
-            <div class="carousel-images">
-                <img src="/static/{{ listing.thumbnail }}" class="carousel-item" alt="Property Image">
-                {% for image in images %}
-                    {% if not image.thumbnail %}
-                        <img src="/static/{{ image.image_url }}" class="carousel-item" alt="Property Image">
-                    {% endif %}
-                {% endfor %}
+        <div class="image-and-status">
+            <!-- IMAGE SLIDESHOW -->
+            <div class="custom-carousel">
+                <div class="carousel-images">
+                    <img src="/static/{{ listing.thumbnail }}" class="carousel-item" alt="Property Image">
+                    {% for image in images %}
+                        {% if not image.thumbnail %}
+                            <img src="/static/{{ image.image_url }}" class="carousel-item" alt="Property Image">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <button class="carousel-prev" onclick="moveSlide(-1)">&#10094;</button>
+                <button class="carousel-next" onclick="moveSlide(1)">&#10095;</button>
             </div>
-            <button class="carousel-prev" onclick="moveSlide(-1)">&#10094;</button>
-            <button class="carousel-next" onclick="moveSlide(1)">&#10095;</button>
+
+
+            {% if listing.status == "AVAILABLE" %}
+                <p><strong>Listing status: </strong> <span class="status available">{{ listing.status }}</span></p>
+            {% elif listing.status == "PENDING" %}
+                <p><strong>Listing status: </strong> <span class="status pending">{{ listing.status }}</span></p>
+            {% elif listing.status == "SOLD" %}
+                <p><strong>Listing status: </strong> <span class="status sold">{{ listing.status }}</span></p>
+            {% endif %}
+
         </div>
+
 
         <!-- LISTING INFO -->
         <div class="property-details">
@@ -39,7 +52,7 @@
             <p><strong>Type of property: </strong>{{ listing.type }}</p>
             <p><strong>Listing price: </strong>${{ listing.price }}</p>
             <p><strong>Listing date: </strong>{{ listing.listing_date }}</p>
-            <p><strong>Sold: </strong>{{ listing.sold }}</p>
+            <p><strong>Listing status: </strong>{{ listing.status }}</p>
             <div class="seller">
                 <label for="seller-link"><strong>Seller: </strong></label>
                 <div class="seller-card">
