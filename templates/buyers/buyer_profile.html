@@ -12,7 +12,7 @@
 
     <div class="page-container">
         <div class="profile-pic-container">
-            <img src="{{ buyer.profile_picture }}" alt="Profile Picture">
+            <img src="{{ buyer.profile_image_url }}" alt="Profile Picture">
             <button class="btn">Set new profile picture</button>
             <button class="btn">Remove profile picture</button>
         </div>
@@ -33,7 +33,7 @@
             </div>
             <div class="input-field">
                 <label for="address">Address:</label>
-                <input type="text" name="address" id="address" value="{{ buyer.address }}">
+                <input type="text" name="address" id="address" value="{{ buyer.street }}, {{ buyer.house_numb }}">
             </div>
             <div class="input-field">
                 <label for="zip">ZIP:</label>

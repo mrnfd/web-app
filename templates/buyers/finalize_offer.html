@@ -79,11 +79,9 @@
 
     {% include "_footer.html" %}
 
-  <!--  <script src="{% static 'js/finalization.js' %}"></script> -->
-
     <script>
         document.getElementById('finalization-form').addEventListener('submit', function(e) {
-            e.preventDefault();  // prevent actual form submission
+            e.preventDefault();
 
             const selectedOption = document.querySelector('input[name="payment-option"]:checked');
             if (!selectedOption) {
