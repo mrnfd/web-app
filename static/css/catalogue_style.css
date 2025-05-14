@@ -168,6 +168,21 @@ select,
     justify-content: space-between;
 }
 
+.status.available {
+    background-color: #9CFF9F;
+    padding: 0.1rem;
+}
+
+.status.pending {
+    background-color: #91CEFF;
+    padding: 0.1rem;
+}
+
+.status.sold {
+    background-color: #FF9999;
+    padding: 0.1rem;
+}
+
 .rooms-seller {
     display: flex;
     justify-content: space-between;
