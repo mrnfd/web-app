@@ -31,7 +31,7 @@
 
             <div class="input-fields">
                 <label for="contact-address">Contact house number: </label>
-                <input type="text" id="contact-address" name="contact-address" value="{{ buyer.house_num }}" required>
+                <input type="number" id="contact-address" name="contact-address" value="{{ buyer.house_num }}" required>
             </div>
 
             <div class="input-fields">
@@ -40,26 +40,26 @@
             </div>
 
             <div class="input-fields">
-                <label for="city">City</label>
+                <label for="city">City:</label>
                 {% for city in cities %}
                     <option value="{{ city }}" {% if buyer.city == city %}selected{% endif %}>{{ city }}</option>
                 {% endfor %}
             </div>
 
             <div class="input-fields">
-                <label for="country">Country</label>
+                <label for="country">Country:</label>
                 {% for country in countries %}
                     <option value="{{ country }}" {% if buyer.country == country %}selected{% endif %}>{{ country }}</option>
                 {% endfor %}
             </div>
 
             <div class="input-fields">
-                <label for="contact-id">National ID</label>
+                <label for="contact-id">National ID:</label>
                 <input type="text" id="contact-id" name="contact-id" value="{{ buyer.contact_id }}" required>
             </div>
 
             <div class="payment">
-                <label>Payment option</label>
+                <label>Payment option:</label>
                 <input type="radio" id="credit-card" name="payment-option" value="credit_card" onclick="showPaymentFields('credit')">
                 <label for="credit-card">Credit card</label>
                 <input type="radio" id="bank_transfer" name="payment-option" value="bank_transfer" onclick="showPaymentFields('bank')">
