@@ -68,11 +68,8 @@
 
                     <div class="buttons">
 
-                        <!-- <a type="button" href="{% url 'delete-offer' id=offer.id %}"> Delete </a> -->
-                        <!--<button data-id = "{{ offer.id }}" class='DeleteOffer-button'>Delete offer</button> -->
                         <button type="button" onclick = "redirectToDelete( '{{offer.id}}' )" >Delete offer</button>
                         <button type="button"  onclick = "redirectToUpdate( '{{offer.id}}' )">Edit offer</button>
-                        <!-- <button type="button" class='ToFinalizeOffer-button'>Finalize offer</button> -->
                          <button type="button" onclick = "redirectToFinalization()" >Finalize offer</button>
                     </div>
                 </div>

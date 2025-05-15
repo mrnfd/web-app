@@ -1,0 +1,154 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+}
+
+.search input[type="search"] {
+    flex-grow: 1;
+    padding: 0.2rem;
+    background-color: #F8F8FF;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: 'Times New Roman', serif;
+    height: 40px;
+}
+
+.search-button {
+    padding: 0.2rem 0.5rem;
+    background-color: #DCDCFF;
+    color: black;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    height: 30px;
+    width: 40px;
+}
+
+.search-button:hover {
+    background-color: mediumpurple;
+}
+
+.offers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    justify-items: center;
+}
+
+.offer-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: fit-content;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    padding: 10px;
+}
+
+.offer-content {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.offer-content img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    margin-right: 8px;
+    max-font-size: 100%;
+    max-height: 250px;
+    border-radius: 8px;
+}
+
+.buyer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.buyer-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    padding: 0.1rem;
+}
+
+.buyer-card:hover {
+    transform: scale(1.05);
+}
+
+.buyer-card img {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+}
+
+.buyer-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.buyer-info a{
+    color: black;
+    font-size: 16px;
+}
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    justify-content: flex-end;
+}
+
+.buttons button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border: 2px solid #cccccc;
+    border-radius: 8px;
+    font-family: 'Times New Roman', serif;
+}
+
+#decline {
+    background-color: #FFE3E3;
+}
+
+#accept {
+    background-color: #E9FFEA;
+}
+
+#decline:hover {
+    background-color: #FCB3B3
+}
+
+#accept:hover {
+    background-color: #B3FCB3;
+}
+
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}
