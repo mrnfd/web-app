@@ -10,6 +10,13 @@
 <body>
     {% include "_navigation.html" %}
 
+    <form  id="finalization-form" method="POST" action="{% url 'finalization' %}">
+        {% csrf_token %}
+        {{ form }}
+        
+    </form>
+
+    <!-- 
     <div class="input-fields-container">
         <h2>Finalizing offer for {{ listing.address }}</h2>
         <form  id="finalization-form" method="POST" action="{% url 'finalization_revision' %}">
@@ -74,7 +81,23 @@
                 <button type="submit" id="go-to-payment">Go to Payment Page</button>
             </div>
 
-        </form>
+        </form> -->
+
+        <div class="payment">
+            <label>Payment option:</label>
+            <input type="radio" id="credit-card" name="payment-option" value="credit_card" onclick="showPaymentFields('credit')">
+            <label for="credit-card">Credit card</label>
+            <input type="radio" id="bank_transfer" name="payment-option" value="bank_transfer" onclick="showPaymentFields('bank')">
+            <label for="bank_transfer">Bank transfer</label>
+            <input type="radio" id="mortgage" name="payment-option" value="mortgage" onclick="showPaymentFields('mortgage')">
+            <label for="mortgage">Mortgage</label>
+        </div>
+
+
+        <div class="buttons">
+            <button type="button" onclick="window.history.back()">Cancel</button>
+            <button type="submit" form="finalization-form" id="go-to-payment">Go to Payment Page</button>
+        </div>
     </div>
 
     {% include "_footer.html" %}

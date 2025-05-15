@@ -3,7 +3,7 @@ from django.db import models
 from django.db import models
 from django.utils import timezone
 
-from Sellers.models import Seller
+from Offers.models import Offer
 
 class Country(models.TextChoices):
     UNITED_STATES = 'UNITED_STATES', 'United States'
@@ -33,6 +33,7 @@ class Country(models.TextChoices):
 
 # Create your models here.
 class Transaction(models.Model):
+    offer_id = models.ForeignKey(Offer, on_delete=models.CASCADE,related_name='offer')
     
     contact_name = models.CharField(max_length=255)
     contact_email = models.EmailField(max_length = 254)
