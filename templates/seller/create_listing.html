@@ -100,7 +100,7 @@
     const input = document.getElementById("images");
     const preview = document.getElementById("preview");
 
-    // Highlight on drag
+
     ["dragenter", "dragover"].forEach(eventName => {
         dropArea.addEventListener(eventName, e => {
             e.preventDefault();
@@ -108,24 +108,24 @@
         });
     });
 
-    // Unhighlight on drag leave or drop
+
     ["dragleave", "drop"].forEach(eventName => {
         dropArea.addEventListener(eventName, () => {
             dropArea.classList.remove("hover");
         });
     });
 
-    // Handle drop
+
     dropArea.addEventListener("drop", e => {
         e.preventDefault();
         const files = e.dataTransfer.files;
         handleFiles(files);
     });
 
-    // Open file dialog on click
+
     dropArea.addEventListener("click", () => input.click());
 
-    // Handle file selection
+
     input.addEventListener("change", () => {
         handleFiles(input.files);
     });
