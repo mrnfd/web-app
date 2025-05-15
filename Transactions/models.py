@@ -3,6 +3,8 @@ from django.db import models
 from django.db import models
 from django.utils import timezone
 
+
+
 from Offers.models import Offer
 
 class Country(models.TextChoices):
@@ -33,7 +35,7 @@ class Country(models.TextChoices):
 
 # Create your models here.
 class Transaction(models.Model):
-    offer_id = models.ForeignKey(Offer, on_delete=models.CASCADE,related_name='offer')
+    offer = models.OneToOneField(Offer,on_delete=models.CASCADE,related_name='offer')
     
     contact_name = models.CharField(max_length=255)
     contact_email = models.EmailField(max_length = 254)
@@ -45,19 +47,19 @@ class Transaction(models.Model):
 
 
 class PaymentMethodCreditCard(models.Model):
-    transaction_id = models.ForeignKey(Transaction, on_delete=models.CASCADE,related_name='transactionCC')
+    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE,related_name='transactionCC')
 
     contact_name = models.CharField(max_length=255)
     card_number = models.CharField(max_length=16)
-    expiry_date = models.DateField()
+    expiry_date = models.DateField(blank=True,null=True)
     CVC = models.CharField(max_length=4)
 
 class PaymentMethodBankTransfer(models.Model):
-    transaction_id = models.ForeignKey(Transaction, on_delete=models.CASCADE,related_name='transactionBT')
+    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE,related_name='transactionBT')
 
     bank_account =  models.CharField(max_length=17)
 
 class PaymentMethodMortgage(models.Model):
-    transaction_id = models.ForeignKey(Transaction, on_delete=models.CASCADE,related_name='transactionM')
+    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE,related_name='transactionM')
 
     mortgage_provider =  models.CharField(max_length=255)

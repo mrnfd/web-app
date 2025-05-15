@@ -5,10 +5,10 @@ from django.contrib.auth.views import LoginView,LogoutView
 from . import views
 
 urlpatterns = [
-    path('buyer/my_offers/finalization', views.finalization, name='finalization'),
-    path('buyer/my_offers/finalization/credit-card', views.finalization_credit, name='finalization_credit'),
-    path('buyer/my_offers/finalization/bank-transafer', views.finalization_bank, name='finalization_bank'),
-    path('buyer/my_offers/finalization/mortgage', views.finalization_mortgage, name='finalization_mortgage'),
-    path('buyer/my_offers/finalization/revision', views.finalization_revision, name='finalization_revision'),
-    path('buyer/my_offers/finalization/success', views.finalization_success, name='finalization_success'),
+    path('<int:offer_id>/finalization', views.finalization, name='finalization'),
+    path('finalization/<int:transaction_id>/credit-card', views.finalization_credit, name='finalization_credit'),
+    path('finalization/<int:transaction_id>/bank-transafer', views.finalization_bank, name='finalization_bank'),
+    path('finalization/<int:transaction_id>/mortgage', views.finalization_mortgage, name='finalization_mortgage'),
+    path('finalization/<int:transaction_id>/revision', views.finalization_revision, name='finalization_revision'),
+    path('finalization/<int:transaction_id>/success', views.finalization_success, name='finalization_success'),
 ]

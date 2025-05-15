@@ -3,18 +3,21 @@ from django.core.validators import RegexValidator
 from datetime import date
 from Transactions.models import Transaction, PaymentMethodCreditCard, PaymentMethodBankTransfer, PaymentMethodMortgage, Country
 
+from django import forms
+from Transactions.forms.fields import CreditCardField, ExpiryDateField, VerificationValueField
+
 class TransactionForm(forms.ModelForm):
     # Add validators for fields that need specific formats
     contact_SSN = forms.CharField(
         max_length=10,
-        widget=forms.TextInput(attrs={'placeholder': 'XXXXXX-XXXX'}),
-        validators=[
-            RegexValidator(
-                regex=r'^\d{6}-\d{4}$',
-                message='SSN must be in the format XXXXXX-XXXX',
-                code='invalid_ssn'
-            )
-        ]
+        widget=forms.TextInput(attrs={'placeholder': 'XXX-XX-XXXX'}),
+        #validators=[
+        #    RegexValidator(
+        #        regex=r'^\d{3}-\d{2}-\d{4}$',
+        #        message='SSN must be in the format XXX-XX-XXXX',
+        #        code='invalid_ssn'
+        #    )
+        #]
     )
     
     contact_house_number = forms.IntegerField(min_value=1)
@@ -36,59 +39,71 @@ class TransactionForm(forms.ModelForm):
             'contact_email': forms.EmailInput(attrs={'class': 'form-control'}),
         }
         
-    def clean_contact_SSN(self):
-        # Format the SSN if it's entered without dashes
-        ssn = self.cleaned_data.get('contact_SSN')
-        if ssn and len(ssn) == 10 and ssn.isdigit():
-            ssn = f"{ssn[:6]}-{ssn[6:10]}"
-        return ssn
-
+    #def clean_contact_SSN(self):
+    #    # Format the SSN if it's entered without dashes
+    #    ssn = self.cleaned_data.get('contact_SSN')
+    #    if ssn and len(ssn) == 9 and ssn.isdigit():
+    #        ssn = f"{ssn[:3]}-{ssn[3:5]}-{ssn[5:]}"
+    #    return ssn
 
 class CreditCardForm(forms.ModelForm):
-    # Add validators for credit card details
-    card_number = forms.CharField(
-        max_length=16,
-        validators=[
-            RegexValidator(
-                regex=r'^\d{16}$',
-                message='Card number must be 16 digits',
-                code='invalid_card_number'
-            )
-        ],
-        widget=forms.TextInput(attrs={'placeholder': '1234567890123456'})
-    )
-    
-    expiry_date = forms.DateField(
-        widget=forms.DateInput(attrs={'type': 'date'})
-    )
-    
-    CVC = forms.CharField(
-        max_length=4,
-        validators=[
-            RegexValidator(
-                regex=r'^\d{3,4}$',
-                message='CVC must be 3 or 4 digits',
-                code='invalid_cvc'
-            )
-        ],
-        widget=forms.TextInput(attrs={'placeholder': '123'})
-    )
-    
+
+    contact_name = forms.CharField(max_length=50, required=True)
+    card_number = CreditCardField(required=True)
+    expiry_date = ExpiryDateField(required=True)
+    CVC = VerificationValueField(required=True)
+
     class Meta:
         model = PaymentMethodCreditCard
         fields = [
-            'contact_name',
-            'card_number',
-            'expiry_date',
-            'CVC',
+            'contact_name','card_number','expiry_date','CVC'
         ]
-        
-    def clean_expiry_date(self):
-        # Check if expiry date is in the future
-        expiry_date = self.cleaned_data.get('expiry_date')
-        if expiry_date and expiry_date < date.today():
-            raise forms.ValidationError("The expiry date cannot be in the past.")
-        return expiry_date
+
+#class CreditCardForm(forms.ModelForm):
+#    # Add validators for credit card details
+#    card_number = forms.CharField(
+#        max_length=16,
+#        validators=[
+#            RegexValidator(
+#                regex=r'^\d{16}$',
+#                message='Card number must be 16 digits',
+#                code='invalid_card_number'
+#            )
+#        ],
+#        widget=forms.TextInput(attrs={'placeholder': '1234567890123456'})
+#    )
+#    
+#    expiry_date = forms.DateField(
+#        widget=forms.DateInput(attrs={'type': 'date'})
+#    )
+#    
+#    CVC = forms.CharField(
+#        max_length=4,
+#        validators=[
+#            RegexValidator(
+#                regex=r'^\d{3,4}$',
+#                message='CVC must be 3 or 4 digits',
+#                code='invalid_cvc'
+#            )
+#        ],
+#        widget=forms.TextInput(attrs={'placeholder': '123'})
+#    )
+#    
+#    class Meta:
+#        model = PaymentMethodCreditCard
+#        fields = [
+#            'contact_name',
+#            'card_number',
+#            'expiry_date',
+#            'CVC',
+#        ]
+#        
+#    #def clean_expiry_date(self):
+#    #    # Check if expiry date is in the future
+#    #    expiry_date = self.cleaned_data.get('expiry_date')
+#    #    if expiry_date and expiry_date < date.today():
+#    #        raise forms.ValidationError("The expiry date cannot be in the past.")
+#    #    return expiry_date
 
 
 class BankTransferForm(forms.ModelForm):

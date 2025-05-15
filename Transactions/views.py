@@ -6,105 +6,96 @@ from django.contrib.auth.decorators import login_required
 from Listings.models import Listing
 from Buyers.models import Buyer
 from Offers.models import Offer
-
-# Create your views here.
-@login_required
-def create_offer(request,listing_id):
-
-    listing = get_object_or_404(Listing,id=listing_id)
-
-    buyer = Buyer.objects.get(user=request.user)
-    #buyer = Buyer.objects.get(id=1)
-
-    # Skoða hvort til se offer fra buyer fyrir listing
-    offer_exists = Offer.objects.filter(
-        buyer_id=buyer.id,
-        property_listing_id = listing.id
-    )
-    if offer_exists:
-        messages.error(request, 'You have already made an offer for this listing.')
-        return redirect('listing-by-id',id=listing.id)
-    
-
-    if request.method == "POST":
-        form = CreateOfferForm(request.POST)
-        
-
-        if form.is_valid():
-            messages.success(request, 'Form submission successful')
-            offer = form.save(commit=False)
-            
-            offer.buyer = buyer
-            offer.property_listing = listing
-            offer.submission_date = timezone.now()
-            offer.status = 'PENDING'
-            offer.save()
-            return redirect('listing-by-id',id=listing.id)
-            ##return redirect('offer-by-id',id = offer.id)
-        else:
-            messages.error(request, 'Form submission incorrect')
-            print(form.errors)
-            # Rendera síðu ánþess að missa upplýsingar
-            return render(request,'offers/create_offer.html',{"form":form,'listing':listing})
-        
-    else:
-        return render(request, 'offers/create_offer.html',{
-            'form': CreateOfferForm(),
-            'listing':listing
-        })
-    
+from Transactions.models import Transaction
+import datetime
 
 @login_required
-def finalization(request):
+def finalization(request, offer_id):
+
+    offer = get_object_or_404(Offer, id=offer_id)
+
     if request.method == "POST":
+        print("POST request received!")  # Debug print
         form = TransactionForm(request.POST)
+        print(f"Form data: {request.POST}")  # Debug print to see all POST data
 
         if form.is_valid():
-            messages.success(request, 'Form submission successful')
-            contact_info = form.save(commit=False)
+            print("Form is valid")  # Debug print
+            transaction = form.save(commit=False)
+            transaction.offer_id = offer.id
+            transaction.save()  # Save to generate an ID
+            print(f"Transaction created with ID: {transaction.id}")  # Debug print
             
-            contact_info.save()
-            return render(request,'transactions/finalize_offer.html',{"form":form})
-        
+            # Get the payment option from the form data
+            payment_option = request.POST.get('payment_option')
+            print(f"Selected payment option: {payment_option}")  # Debug print
+            
+            # Redirect based on the payment option
+            if payment_option == 'credit_card':
+                return redirect('finalization_credit', transaction_id=transaction.id)
+            elif payment_option == 'bank_transfer':
+                return redirect('finalization_bank', transaction_id=transaction.id)
+            elif payment_option == 'mortgage':
+                return redirect('finalization_mortgage', transaction_id=transaction.id)
+            
+            else:
+                messages.error(request, 'Invalid payment option selected.')
+                return render(request, 'transactions/finalize_offer.html', {
+                    "form": form, 
+                    'offer': offer_id,
+                    'transaction_id': transaction.id
+                })
         else:
-            messages.error(request, 'Form submission incorrect')
-            print(form.errors)
-            # Rendera síðu ánþess að missa upplýsingar
-            return render(request,'transactions/finalize_offer.html',{"form":form})
+            print("Form is invalid")  # Debug print
+            print(f"Form errors: {form.errors}")  # Debug print to see validation errors
+            messages.error(request, 'Please correct the errors in the form.')
+            return render(request, 'transactions/finalize_offer.html', {
+                "form": form, 
+                'offer': offer_id,
+                'transaction_id': None
+            })
     else:
-    
-        return render(request, 'transactions/finalize_offer.html',{
-            'form': TransactionForm(initial={
-                    'contact_email': request.user.email,
-                    'contact_name': request.user.buyer.name,
-                    'contact_street': request.user.buyer.street,
-                    'contact_house_number': request.user.buyer.house_numb,
-                    'contact_zip': request.user.buyer.zip_code,
-                    'contact_country': request.user.buyer.country,
-                }),
+
+        form = TransactionForm(initial={
+            'contact_email': request.user.email,
+            'contact_name': request.user.buyer.name,
+            'contact_street': request.user.buyer.street,
+            'contact_house_number': request.user.buyer.house_numb,
+            'contact_zip': request.user.buyer.zip_code,
+            'contact_country': request.user.buyer.country,
+        })
+        
+        return render(request, 'transactions/finalize_offer.html', {
+            'form': form,
+            'offer': offer_id,
+            'transaction_id': None,
         })
 
 @login_required
-def finalization_credit(request):
+def finalization_credit(request,transactionid):
+    transaction=get_object_or_404(Transaction,id=transactionid)
     if request.method == "POST":
-        form = TransactionForm(request.POST)
+        
+        form = CreditCardForm(request.POST)
 
         if form.is_valid():
-            messages.success(request, 'Form submission successful')
-            contact_info = form.save(commit=False)
+
+            payment_info = form.save(commit=False)
+            payment_info.transaction_id = transaction
             
-            contact_info.save()
-            return render(request,'transactions/finalize_offer.html',{"form":form})
+            #payment_info.save()
+            return render(request,'transactions/finalization_credit.html',{"form":form})
         
         else:
             messages.error(request, 'Form submission incorrect')
             print(form.errors)
+            
             # Rendera síðu ánþess að missa upplýsingar
-            return render(request,'transactions/finalize_offer.html',{"form":form})
+            return render(request,'transactions/finalization_credit.html',{"form":form})
     else:
     
         return render(request, 'transactions/finalization_credit.html',{
-            'form': TransactionForm(),
+            'form': CreditCardForm(),
         })
    
 

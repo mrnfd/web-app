@@ -139,7 +139,11 @@ def my_offers(request):
     for offer in all_offers:
         offer_listing = Listing.objects.get(id=offer.property_listing_id)
         listing_seller = Seller.objects.get(id=offer_listing.seller_id_id)
-        
+
+        button=''
+        if offer.status == 'ACCEPTED':
+            button = f'<button data-id = "{offer.id}" type="button" class="finalize-offer-button" >Finalize offer</button>'
+            
         offer_info = {
             'id': offer.id,
             'price': str(offer.price),
@@ -159,6 +163,8 @@ def my_offers(request):
             'seller_id': listing_seller.id,
             'seller_profile_image_url': listing_seller.profile_image_url,
             'seller_type': listing_seller.seller_type,
+
+            'button': button,
         
         }
         

@@ -13,29 +13,33 @@
     <main class="main-content">
 
         <div class="page-container">
+            {% for msg in messages %}
+                {{ msg }}
+            {% endfor %}
 
-            <form id="payment-form" method="post" action="{% url 'finalization_credit' %}">
+            <form id="payment-form" method="post" action="{% url 'finalization_credit' transaction_id %}">
                 {% csrf_token %}
-                <div class="payment">
-
+                
+                 <div class="payment">
                     <div id="credit-fields" class="payment-fields">
                         <div class="input-fields">
-                            <label for="cardholder-name">Cardholder name:</label>
-                            <input type="text" id="cardholder-name" name="cardholder-name">
+                            <label for="contact-name">Name:</label>
+                            {{ form.contact_name}}
                         </div>
                         <div class="input-fields">
                             <label for="card-number">Card number:</label>
-                            <input type="text"  id="card-number" name="card-number">
+                            {{ form.card_number }}
                         </div>
                         <div class="input-fields">
                             <label for="expiry-date">Expiry date:</label>
-                            <input type="month" id="expiry-date" name="expiry-date">
+                            <!-- <input type="month" id="expiry-date" name="expiry-date" > -->
+                            {{ form.expiry_date }}
                         </div>
                         <div class="input-fields">
-                            <label for="cvc">CVC:</label>
-                            <input type="text" id="cvc" name="cvc">
+                            <label for="CVC">CVC:</label>
+                            {{ form.CVC }}
                         </div>
-                    </div>
+                    </div> 
 
                 </div>
             </form>
