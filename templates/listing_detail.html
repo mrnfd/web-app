@@ -77,22 +77,38 @@
 
     <div class="buttons">
         <button type="button" onclick="window.history.back()">Go back</button>
+        
         {% autoescape off %}
             {{ button }}
         {% endautoescape %}
-        
     </div>
 
     {% include "_footer.html" %}
     {% load static %}
     <script src="{% static 'js/listing_detail.js' %}">
 
-        document.querySelector('.ToCreateOffer-button').addEventListener('click', function () {
-            window.location.href = `/offers/${this.dataset.id}/create_offer`;
+        document.addEventListener('DOMContentLoaded', function() {
+            const createOfferBtn = document.querySelector('.create-offer-button');
+            if (createOfferBtn) {
+                createOfferBtn.addEventListener('click', function() {
+                    const listingId = this.getAttribute('data-id');
+                    window.location.href = `/offers/${listingId}/create_offer`;
+                });
+            }
+            const updateoffer = document.querySelector('.update-offer-button');
+            if (updateoffer) {
+                updateoffer.addEventListener('click', function () {
+                    const offerId = this.getAttribute('data-id');
+                    window.location.href = `/offers/update_offer/${offerId}`;
+                });
+            }
+
         });
+        
+        
         function redirectToUpdate(offerID) {
             window.location.href = `/offers/update_offer/${offerID}`;
-        }
+        };
 
     </script>
 </body>

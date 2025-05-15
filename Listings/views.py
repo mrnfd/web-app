@@ -1,4 +1,5 @@
 from django.http import HttpResponse, JsonResponse
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from Listings.models import Listing, ListingImage
@@ -153,12 +154,11 @@ def get_listing_by_id(request,id):
     
     button=''
     if buyer and listing.status != 'SOLD' and not offer:
-        button = f'<button data-id = "{{listing.id}}" class="ToCreateOffer-button" > Place a purchase offer</button>'
+        button = f'<button data-id = "{listing.id}" class="create-offer-button" > Place a purchase offer</button>'
     elif buyer and offer and listing.status != 'SOLD':
-        button = f'<button type="button"  onclick = "redirectToUpdate( {{offer.id}} )"> Edit offer </button>'
-    
         
-
+        button = f'<button data-id = "{listing.id}" class="update-offer-button" > Edit offer</button>'
+        #button = f'<button type="button"  onclick = "redirectToUpdate( {{offer.id}} )"> Edit offer </button>'
 
     property_images = ListingImage.objects.filter(listing_id=id)
     seller = Seller.objects.get(id = listing.seller_id.id)

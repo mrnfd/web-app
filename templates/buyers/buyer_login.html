@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    {% include "_navigation.html" %}
+
+    {% for msg in messages %}
+            {{ msg }}
+    {% endfor %}
+    
+    
+    <!--<form method="post" action="{% url 'login_as_buyer' %}">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Login">
+    </form> 
+    <div class="registration-link">
+        <a href="{% url 'register_as_buyer' %}">Register here</a>
+    </div> 
+    -->
+
+    
+    <form method="post" action="{% url 'login_as_buyer' %}">
+        {% csrf_token %}
+        <div class="credentials-constructor">
+            <h3>Login</h3>
+            {{ form }}
+        </div>
+
+        <div class="buttons">
+            <button type="button" onclick="window.history.back()">Cancel</button>
+            <input type="submit" value="Login">
+        </div>
+
+    </form>
+    <div class="registration-link">
+        <a href="{% url 'register_as_buyer' %}">Register here</a>
+    </div>
+    
+
+    {% include "_footer.html" %}
+    <script>
+        function redirectToBuyer() {
+            // Redirecting directly to the buyer's interface (e.g., catalogue page) without checking login credentials
+            window.location.href = "{% url 'buyer_home' %}";
+        }
+    </script>
+</body>
+</html>

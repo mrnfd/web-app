@@ -16,6 +16,8 @@ Including another URLconf
 """
 
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 
 from django.urls import path, include
 from . import  views
@@ -25,12 +27,14 @@ urlpatterns = [
     path('', include('Buyers.urls')),
     path('catalogue/', include('Listings.urls')),
     path('offers/', include('Offers.urls')),
+
+    path('login_success/', views.login_success, name='login_success'),
     
     path('sellers/', views.sellers, name='sellers'),
     path('sellers/<int:seller_id>/', views.seller, name='seller'),
     path('log-in/', views.log_in, name='log_in'),
-    path('log-in/buyer/', views.login_as_buyer, name='login_as_buyer'),
+    #path('log-in/buyer/', views.login_as_buyer, name='login_as_buyer'),
     path('log-in/seller/', views.login_as_seller, name='login_as_seller'),
     path('', include('Sellers.urls')),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

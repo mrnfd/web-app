@@ -129,11 +129,18 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+
+LOGIN_REDIRECT_URL = 'login_success'
+#LOGIN_URL = ''
 # Media
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
 #MEDIA_URL = '/images/'
