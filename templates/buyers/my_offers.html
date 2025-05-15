@@ -30,50 +30,58 @@
                     </select>
                 </div>
             </div>
+            
+            {% for msg in messages %}
+                {{ msg }}
+            {% endfor %}
 
             <div class="my-offer-grid" id="offer-listed">
-                {% for offer in offers %}
-                <div class="property-card">
-                    <div class="property-content">
-                        <img src="/static/{{ offer.thumbnail }}" alt="Property image">
-                        <div class="property-details">
-                            <a href="/catalogue/{{offer.listing_id}}"> <strong>{{offer.street}} {{offer.house_numb}}, {{offer.zip}} {{offer.city}}, {{offer.type}}</strong></a>
+                {% if offers %}
+                    {% for offer in offers %}
+                    <div class="property-card">
+                        <div class="property-content">
+                            <img src="/static/{{ offer.thumbnail }}" alt="Property image">
+                            <div class="property-details">
+                                <a href="/catalogue/{{offer.listing_id}}"> <strong>{{offer.street}} {{offer.house_numb}}, {{offer.zip}} {{offer.city}}, {{offer.type}}</strong></a>
 
-                            <div class="seller">
-                                <label for="seller-card">Seller: </label>
-                                <div class="seller-card">
-                                    <img src="/static/{{ offer.seller_profile_image_url }}" alt="Seller image">
-                                    <div class="seller-info">
-                                        <p class="seller-name">{{offer.seller}}, {{offer.seller_type}} </p>
-                                        <a href="/sellers/{{offer.seller_id}}/"> See more </a>
+                                <div class="seller">
+                                    <label for="seller-card">Seller: </label>
+                                    <div class="seller-card">
+                                        <img src="/static/{{ offer.seller_profile_image_url }}" alt="Seller image">
+                                        <div class="seller-info">
+                                            <p class="seller-name">{{offer.seller}}, {{offer.seller_type}} </p>
+                                            <a href="/sellers/{{offer.seller_id}}/"> See more </a>
+                                        </div>
                                     </div>
                                 </div>
+
+                                <p>Date of submission: {{offer.submission_date}}</p>
+                                <p>Expiration date: {{offer.expiration_date}}</p>
+                                <p>Purchase offer price: {{offer.price}}$</p>
+
+                                {% if offer.status == "REJECTED" %}
+                                    <p>Offer status: <span class="status rejected">{{offer.status}}</span></p>
+                                {% elif offer.status == "ACCEPTED" %}
+                                    <p>Offer status: <span class="status accepted">{{offer.status}}</span></p>
+                                {% elif offer.status == "CONTINGENT" %}
+                                    <p>Offer status: <span class="status contingent">{{offer.status}}</span></p>
+                                {% else %}
+                                    <p>Offer status: <span class="status pending">{{offer.status}}</span></p>
+                                {% endif %}
                             </div>
+                        </div>
 
-                            <p>Date of submission: {{offer.submission_date}}</p>
-                            <p>Expiration date: {{offer.expiration_date}}</p>
-                            <p>Purchase offer price: {{offer.price}}$</p>
+                        <div class="buttons">
 
-                            {% if offer.status == "REJECTED" %}
-                                <p>Offer status: <span class="status rejected">{{offer.status}}</span></p>
-                            {% elif offer.status == "ACCEPTED" %}
-                                <p>Offer status: <span class="status accepted">{{offer.status}}</span></p>
-                            {% elif offer.status == "CONTINGENT" %}
-                                <p>Offer status: <span class="status contingent">{{offer.status}}</span></p>
-                            {% else %}
-                                <p>Offer status: <span class="status pending">{{offer.status}}</span></p>
-                            {% endif %}
+                            <button type="button" onclick = "redirectToDelete( '{{offer.id}}' )" >Delete offer</button>
+                            <button type="button"  onclick = "redirectToUpdate( '{{offer.id}}' )">Edit offer</button>
+                             <button type="button" onclick = "redirectToFinalization()" >Finalize offer</button>
                         </div>
                     </div>
-
-                    <div class="buttons">
-
-                        <button type="button" onclick = "redirectToDelete( '{{offer.id}}' )" >Delete offer</button>
-                        <button type="button"  onclick = "redirectToUpdate( '{{offer.id}}' )">Edit offer</button>
-                         <button type="button" onclick = "redirectToFinalization()" >Finalize offer</button>
-                    </div>
-                </div>
-                {% endfor %}
+                    {% endfor %}
+                {% else %}
+                    <p> No offers for display</p>
+                {% endif %}
             </div>
 
         </div>

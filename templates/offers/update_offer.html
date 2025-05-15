@@ -69,8 +69,8 @@
         </div>
 
     <div class="buttons">
-        <button type="button" form="offer-form" onclick="redirectToOffers()">Cancel</button>
-        <button type="submit" class="btn btn-primary" value="update">Resubmit Offer</button>
+        <button type="button"  onclick="redirectToOffers()">Cancel</button>
+        <button type="submit" class="btn btn-primary" form="offer-form">Resubmit Offer</button>
     </div>
         
     </div>
@@ -80,7 +80,7 @@
     <script>
         function redirectToOffers() {
             // Redirecting directly to the buyer's interface (e.g., catalogue page) without checking login credentials
-            window.location.href = "{% url 'listing-by-id' listing.id %}";
+            window.location.href = "{% url 'my_offers' %}";
         }
         const sortSelect = document.getElementById('sort-button');
         if (sortSelect) {

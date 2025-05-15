@@ -69,6 +69,7 @@ def register(request):
             return redirect('login_as_buyer')
         else:
             messages.error(request, 'Form submission incorrect')
+            print(form.errors)
             return render(request, 'buyers/buyer_register.html', {'form': form})
     else:
         return render(request,'buyers/buyer_register.html', {
@@ -102,8 +103,15 @@ def buyer_home(request):
 @login_required
 def my_offers(request):
     applied_filter = False
-    #all_offers = Offer.objects.get(buyer_id=request.user.id)
-    all_offers = Offer.objects.filter(buyer_id=1)
+    
+    try:
+        all_offers = Offer.objects.filter(buyer_id=request.user.buyer.id)
+            
+    except Offer.DoesNotExist:
+        return render(request, 'buyers/my_offers.html', {
+            "offers": None
+        })
+    #all_offers = Offer.objects.filter(buyer_id=1)
     #all_offers = Offer.objects.all()
     offer_array = []
 

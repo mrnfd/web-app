@@ -22,4 +22,20 @@ document.addEventListener('DOMContentLoaded', function (){
             info.classList.toggle('additional-info');
         });
     }
+
+    const createOfferBtn = document.querySelector('.create-offer-button');
+    
+    if (createOfferBtn) {
+        createOfferBtn.addEventListener('click', function() {
+            const listingId = this.getAttribute('data-id');
+            window.location.href = `/offers/${listingId}/create_offer`;
+        });
+    }
+    const updateoffer = document.querySelector('.update-offer-button');
+    if (updateoffer) {
+        updateoffer.addEventListener('click', function () {
+            const offerId = this.getAttribute('data-id');
+            window.location.href = `/offers/update_offer/${offerId}`;
+        });
+    }
 });
