@@ -84,7 +84,7 @@
                         </li>
                         <li class="active">
                             <a class="new_link" href="{% url 'buyer_profile' %}">
-                                <img src="{{ user.profile_pic_url }}" alt="Profile Picture" class="profile-pic">
+                                <img src=" /media/{{user.buyer.profile_image_url}}" alt="Profile Picture" class="profile-pic"> 
                             </a>
                         </li>
                     {% elif user.seller %}
@@ -96,7 +96,7 @@
                         </li>
                         <li class="active">
                             <a class="new_link" href="{% url 'profile' %}">
-                                <img src="{{ user.profile_pic_url }}" alt="Profile Pic" class="profile-pic">  <!-- Same here for seller -->
+                                <img src="/media/{{user.seller.profile_image_url}}" alt="Profile Pic" class="profile-pic">  <!-- Same here for seller -->
                             </a>
                         </li>
                     {% endif %}
