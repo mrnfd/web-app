@@ -5,6 +5,7 @@
     <title>Registration</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/register_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="{% static 'js/password_check.js' %}"></script>
 </head>
 <body>
@@ -12,52 +13,40 @@
 
     <div class="input-fields-container">
         <h2>Register</h2>
+
         {% for msg in messages %}
+          <div class="message {{ msg.tags }}">
             {{ msg }}
+          </div>
         {% endfor %}
 
-        <!-- 
-        <form method="post" action="{% url 'register_as_buyer' %}">
-            {% csrf_token %}
-            
-            <h5>{{form.username.label}}</h5>
-            {{form.username}}
-            <h5>{{form.email.label}}</h5>
-            {{form.email}}
-            <h5>{{form.password1.label}}</h5>
-            {{form.password1}}
-            <h5>{{form.password2.label}}</h5>
-            {{form.password2}}
-            
-            <input type="submit" value="Register" />
-        </form> -->
 
         <form class="registration-form" method="POST" action="{% url 'register_as_buyer' %}">
             {% csrf_token %}
 
             <div class="input-field">
-                <h5>{{form.username.label}}</h5>
+                <label> {{form.username.label}}</label>
                 {{form.username}}
             </div>
 
             <div class="input-field">
-                <h5>{{form.email.label}}</h5>
+                <label>{{form.email.label}}</label>
                 {{form.email}}    
             </div>
 
             <div class="input-field">
-                <h5>{{form.password1.label}}</h5>
+                <label>{{form.password1.label}}</label>
                 {{form.password1}}
             </div>
 
             <div class="input-field">
-                <h5>{{form.password2.label}}</h5>
+                <label>{{form.password2.label}}</label>
                 {{form.password2}}
             </div>
 
             <div class="buttons">
                 <button type="button" onclick="window.history.back()">Go back</button>
-                <input type="submit" value="Register" />
+                <button type="submit">Register</button>
             </div> 
 
         </form>

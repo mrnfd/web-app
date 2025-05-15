@@ -22,7 +22,7 @@ def edit_seller_profile(request, seller_id):
     return render(request, 'edit_seller_profile.html', {'form': form})
 """
 def seller_home(request):
-    return render(request, 'seller/seller_offers.html')
+    return render(request, 'seller/base_seller.html')
 
 def seller_offers(request):
     return render(request, 'seller/seller_offers.html')

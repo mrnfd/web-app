@@ -41,6 +41,7 @@ body {
 
 .search-button:hover {
     background-color: mediumpurple;
+    color: white;
 }
 
 .offers-grid {

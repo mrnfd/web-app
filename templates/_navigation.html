@@ -50,15 +50,25 @@
     #logIn {
         padding: 0.5rem 1rem;
         background-color: #DCDCFF;
-        border: gray;
+        border: 1px solid #cccccc;
         color: black;
         border-radius: 20px;
         cursor: pointer;
     }
 
+    #logOut {
+        padding: 0.5rem 1rem;
+        background-color: #DCDCFF;
+        border: 1px solid #cccccc;
+        color: black;
+        border-radius: 20px;
+        cursor: pointer;
+        font: inherit;
+    }
+
     .profile-pic {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     object-fit: cover;
     }
@@ -77,20 +87,17 @@
                 </li>
 
                 {% if user.is_authenticated %}
-                    
+
                     {% if user.buyer  %}
                         <li class="active">
                             <a class="new_link" href="{% url 'my_offers' %}">My offers</a>
                         </li>
                         <li class="active">
                             <a class="new_link" href="{% url 'buyer_profile' %}">
-                                <img src=" /media/{{user.buyer.profile_image_url}}" alt="Profile Picture" class="profile-pic"> 
+                                <img src=" /media/{{user.buyer.profile_image_url}}" alt="Profile Picture" class="profile-pic">
                             </a>
                         </li>
                     {% elif user.seller %}
-                        <li class="active">
-                            <a class="new_link" href="{% url 'statistics' %}">Statistics</a>
-                        </li>
                         <li class="active">
                             <a class="new_link" href="{% url 'manage_listings' %}">Manage Listings</a>
                         </li>
@@ -100,12 +107,11 @@
                             </a>
                         </li>
                     {% endif %}
-                    <li>
+                    <li class="active">
                         <form method="post" action="{% url 'logout' %}">
                             {% csrf_token %}
-                            <button type="submit" >Logout</button>
+                            <button type="submit" class="new_link" id="logOut">Logout</button>
                         </form>
-                        <!-- <a href="{% url 'logout' %}">Logout</a> -->
                     </li>
                 {% else %}
                     <li class="active">

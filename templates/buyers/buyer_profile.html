@@ -11,57 +11,61 @@
     {% include "_navigation.html" %}
 
     {% for msg in messages %}
-            {{ msg }}
+      <div class="message {{ msg.tags }}">
+        {{ msg }}
+      </div>
     {% endfor %}
-    <!--
-    <form method="post" action="{% url 'buyer_profile' %}">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Update"/>
-    </form> -->
 
 
     <div class="page-container">
         <form method="post" enctype="multipart/form-data" action="{% url 'buyer_profile' %}">
             {% csrf_token %}
-            <div class="profile-pic-container">
-                <img src="/media/{{user.buyer.profile_image_url}}" alt="Profile Picture">
-                <h5>Set new profile picture</h5>
-                {{form.profile_image_url}}
 
+            <div class="form-container">
+                <div class="profile-pic-container">
+                    <img src="/media/{{user.buyer.profile_image_url}}" alt="Profile Picture">
+                    <label>Set new profile picture</label>
+                    <div class="file-input-wrapper">
+                        {{ form.profile_image_url }}
+                    </div>
+                </div>
+
+                <div class="input-fields-container">
+                    <div class="input-field">
+                        <label>{{form.name.label}}</label>
+                        {{form.name}}
+                    </div>
+                    <div class="input-field">
+                        <label>{{form.contact_number.label}}</label>
+                        {{form.contact_number}}
+                    </div>
+                    <div class="input-field">
+                        <label>{{form.email.label}}</label>
+                        {{form.email}}
+                    </div>
+                    <div class="input-field">
+                        <label>{{form.street.label}}</label>
+                        {{form.street}}
+                    </div>
+                    <div class="input-field">
+                        <label>House number</label>
+                        {{form.house_numb}}
+                    </div>
+                    <div class="input-field">
+                        <label>{{form.zip_code.label}}</label>
+                        {{form.zip_code}}
+                    </div>
+                    <div class="input-field">
+                        <label>{{form.country.label}}</label>
+                        {{form.country}}
+                    </div>
+                </div>
             </div>
 
-            <div class="input-field">
-                <h5>{{form.name.label}}</h5>
-                {{form.name}}
-            </div>
-            <div class="input-field">
-                <h5>{{form.name.contact_number}}</h5>
-                {{form.contact_number}}
-            </div>
-            <div class="input-field">
-                <h5>{{form.name.email}}</h5>
-                {{form.email}}
-            </div>
-            <div class="input-field">
-                <h5>{{form.name.street}}</h5>
-                {{form.street}}
-            </div>
-            <div class="input-field">
-                <h5>{{form.name.house_numb}}</h5>
-                {{form.house_numb}}
-            </div>
-            <div class="input-field">
-                <h5>{{form.name.zip_code}}</h5>
-                {{form.zip_code}}
-            </div>
-            <div class="input-field">
-                <h5>{{form.name.country}}</h5>
-                {{form.country}}
-            </div>
+
             <div class="buttons">
                 <button type="button" onclick="window.history.back()">Go Back</button>
-                <input type="submit" value="Save" onclick="console.log(form)"/>
+                <input type="submit" value="Save" onclick="console.log(form)">
             </div>
         </form>
     </div>
