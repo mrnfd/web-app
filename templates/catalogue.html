@@ -85,10 +85,19 @@
 
             {% for property in propertys %}
             <a href="{% url 'listing-by-id' id=property.id %}">
-                <div  class="property-card">
+                <div class="property-card">
                     <img src="/static/{{ property.thumbnail }}" alt="Property image">
                     <div class="property-info">
                         <p class="property-address">{{property.street}} {{property.number}} , {{property.type}}</p>
+
+                        {% if property.status == "AVAILABLE" %}
+                            <p><strong>Listing status: </strong> <span class="status available">{{ property.status }}</span></p>
+                        {% elif property.status == "PENDING" %}
+                            <p><strong>Listing status: </strong> <span class="status pending">{{ property.status }}</span></p>
+                        {% elif property.status == "SOLD" %}
+                            <p><strong>Listing status: </strong> <span class="status sold">{{ property.status }}</span></p>
+                        {% endif %}
+
                         <p class="property-address">Price: ${{property.price}}</p>
                         <div class="rooms-seller">
                             <span><strong>Rooms:</strong> {{property.rooms}}</span>

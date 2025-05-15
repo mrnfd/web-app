@@ -35,5 +35,6 @@ urlpatterns = [
     path('log-in/', views.log_in, name='log_in'),
     #path('log-in/buyer/', views.login_as_buyer, name='login_as_buyer'),
     path('log-in/seller/', views.login_as_seller, name='login_as_seller'),
+    path('', include('Sellers.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

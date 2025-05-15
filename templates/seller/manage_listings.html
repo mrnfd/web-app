@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listings</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/seller_listings_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    {% include '_navigation.html' %}
+    <div class="page-container">
+        <div class="search-and-add">
+            <input type="search" id="search-value" name="search" placeholder="Enter an address, City, Zip or Neighborhood">
+            <button type="button" id="apply-filters" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+            <button type="button" id="new-listing-btn">+ new listing</button>
+        </div>
+
+        <!-- place holder -->
+        <div class="listings-grid">
+            {% for listing in "123456" %}
+                    <div class="listing-card">
+                        <img src="/static/images/background.png" alt="Property image">
+                        <div class="listing-info">
+                            <p class="listing-address"><strong>Street 123 , house</strong></p>
+                            <p class="listing-description"><strong>Description: </strong>lalalalalalala, very nice house, lalalalaallalalalaa</p>
+                            <p><strong>Rooms:</strong> 5</p>
+                            {% if listing.status == "AVAILABLE" %}
+                                <p><strong>Listing status: </strong> <span class="status available">{{ listing.status }}</span></p>
+                            {% elif listing.status == "PENDING" %}
+                                <p><strong>Listing status: </strong> <span class="status pending">{{ listing.status }}</span></p>
+                            {% elif listing.status == "SOLD" %}
+                                <p><strong>Listing status: </strong> <span class="status sold">{{ listing.status }}</span></p>
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+
+    {% include '_footer.html' %}
+
+
+
+
+
+
+
+       <!-- <div class="listing-card">
+                {% for listing in listings %}
+                    <a href="{% url 'listing-by-id' id=property.id %}">
+                        <div class="property-card">
+                            <img src="/static/{{ listing.thumbnail }}" alt="Property image">
+                            <div class="property-info">
+                                <p class="listing-address"><strong>{{listing.street}} {{listing.number}} , {{listing.type}}</strong></p>
+                                <p class="listing-description"><strong>Description: </strong>{{listing.description}}</p>
+                                <p><strong>Rooms:</strong> {{listing.rooms}}</p>
+                                {% if listing.status == "AVAILABLE" %}
+                                    <p><strong>Listing status: </strong> <span class="status available">{{ listing.status }}</span></p>
+                                {% elif listing.status == "PENDING" %}
+                                    <p><strong>Listing status: </strong> <span class="status pending">{{ listing.status }}</span></p>
+                                {% elif listing.status == "SOLD" %}
+                                    <p><strong>Listing status: </strong> <span class="status sold">{{ listing.status }}</span></p>
+                                {% endif %}
+
+                            </div>
+                        </div>
+
+                    </a>
+                {% endfor %}
+            </div> -->
+
+</body>
+</html>

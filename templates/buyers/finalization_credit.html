@@ -15,9 +15,8 @@
         <div class="page-container">
 
             <form id="payment-form" method="post" action="{% url 'finalization_credit' %}">
-
+                {% csrf_token %}
                 <div class="payment">
-                    <label>Payment option</label>
 
                     <div id="credit-fields" class="payment-fields">
                         <div class="input-fields">

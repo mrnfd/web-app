@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Seller
 from .forms import SellerProfileForm
-
+"""
 # Create your views here.
 @login_required
 def edit_seller_profile(request, seller_id):
@@ -20,3 +20,21 @@ def edit_seller_profile(request, seller_id):
     else:
         form = SellerProfileForm(instance=seller)
     return render(request, 'edit_seller_profile.html', {'form': form})
+"""
+def seller_home(request):
+    return render(request, 'seller/seller_offers.html')
+
+def seller_offers(request):
+    return render(request, 'seller/seller_offers.html')
+
+def seller_listings(request):
+    return render(request, 'seller/manage_listings.html')
+
+def seller_add_listing(request):
+    return render(request, 'seller/create_listing.html')
+
+def seller_edit_listing(request):
+    return render(request, 'seller/seller_offers.html')
+
+def seller_profile(request):
+    return render(request, 'seller/seller_offers.html')

@@ -108,7 +108,7 @@ def catalogue(request):
                 'price': str(property.price),
                 'thumbnail': property.thumbnail,
                 'type': property.type,
-                'status':property.status
+                'status': property.status
             } for property in propertys]
         })
     
@@ -123,7 +123,7 @@ def catalogue(request):
                 'price': str(property.price),
                 'thumbnail': property.thumbnail,
                 'type': property.type,
-                'status':property.status
+                'status': property.status
             } for property in propertys]
     })
 

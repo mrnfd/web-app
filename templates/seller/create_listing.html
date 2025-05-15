@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Listing</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/seller_create_listing_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    {% include '_navigation.html' %}
+    <div class="page-container">
+        <h2>Create listing</h2>
+        <form method="POST" id="create-listing">
+            {% csrf_token %}
+            <div class="form-fields">
+                <div class="input-fields">
+                    <div class="input-field">
+                        <label for="name"><strong>Name:</strong></label>
+                        <input type="text" name="name" id="name" required>
+                    </div>
+                    <div class="input-field">
+                        <label for="street"><strong>Street:</strong></label>
+                        <input type="text" name="street" id="street" required>
+                    </div>
+                    <div class="input-field">
+                        <label for="house_numb"><strong>House number:</strong></label>
+                        <input type="number" name="house_numb" id="house_numb" required>
+                    </div>
+                    <div class="input-field">
+                        <label for="zip"><strong>ZIP:</strong></label>
+                        <input type="text" name="zip" id="zip" required>
+                    </div>
+                    <div class="input-field">
+                        <label for="description"><strong>Description:</strong></label>
+                        <input type="text" name="description" id="description" required>
+                    </div>
+                    <div class="input-field">
+                        <label for="type"><strong>Type:</strong></label>
+                        <input type="text" name="type" id="type" required>
+                    </div>
+                    <div class="input-field">
+                        <label for="price"><strong>Listing price:</strong></label>
+                        <input type="text" name="price" id="price" required>
+                    </div>
+                    <div class="input-field">
+                        <label for="date"><strong>Listing date:</strong></label>
+                        <input type="date" name="date" id="date" required>
+                    </div>
+                    <div class="input-field">
+                        <label for="seller"><strong>Seller:</strong></label>
+                        <input type="text" name="seller" id="seller" required>
+                    </div>
+                    <div class="input-field">
+                        <label for="rooms"><strong>Number of rooms:</strong></label>
+                        <input type="text" name="rooms" id="rooms">
+                    </div>
+                    <div class="input-field">
+                        <label for="bedrooms"><strong>Number of bedrooms:</strong></label>
+                        <input type="text" name="bedrooms" id="bedrooms">
+                    </div>
+                    <div class="input-field">
+                        <label for="bathrooms"><strong>Number of bathrooms:</strong></label>
+                        <input type="text" name="bathrooms" id="bathrooms">
+                    </div>
+                    <div class="input-field">
+                        <label for="square_meters"><strong>Number of square meters:</strong></label>
+                        <input type="text" name="square_meters" id="square_meters">
+                    </div>
+
+                </div>
+
+                <div class="images-input">
+
+                    <label for="images"><strong>Upload Images: </strong></label>
+                    <div id="drop-area">
+                        <label for="images" class="upload-label">
+                            <i class="fa-solid fa-file-image"></i><br />
+                            <span class="click-to-upload">Drag and drop or click here</span><br />
+                            <span class="file-types">PNG, JPEG (max 10 MB)</span>
+                        </label>
+                        <input type="file" id="images" accept="image/png, image/jpeg" multiple>
+                    </div>
+
+                    <div id="preview"></div>
+                </div>
+
+            </div>
+        </form>
+
+        <div class="buttons">
+            <button type="button" onclick="window.history.back()">Go Back</button>
+            <button type="submit" form="create-listing" >Save</button>
+        </div>
+    </div>
+
+    {% include '_footer.html' %}
+<script>
+    const dropArea = document.getElementById("drop-area");
+    const input = document.getElementById("images");
+    const preview = document.getElementById("preview");
+
+
+    ["dragenter", "dragover"].forEach(eventName => {
+        dropArea.addEventListener(eventName, e => {
+            e.preventDefault();
+            dropArea.classList.add("hover");
+        });
+    });
+
+
+    ["dragleave", "drop"].forEach(eventName => {
+        dropArea.addEventListener(eventName, () => {
+            dropArea.classList.remove("hover");
+        });
+    });
+
+
+    dropArea.addEventListener("drop", e => {
+        e.preventDefault();
+        const files = e.dataTransfer.files;
+        handleFiles(files);
+    });
+
+
+    dropArea.addEventListener("click", () => input.click());
+
+
+    input.addEventListener("change", () => {
+        handleFiles(input.files);
+    });
+
+    function handleFiles(files) {
+        preview.innerHTML = "";
+        [...files].forEach(file => {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const img = document.createElement("img");
+                img.src = reader.result;
+                preview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+</script>
+</body>
+</html>
