@@ -15,20 +15,23 @@ def finalization(request, offer_id):
     offer = get_object_or_404(Offer, id=offer_id)
 
     if request.method == "POST":
-        print("POST request received!")  # Debug print
-        form = TransactionForm(request.POST)
-        print(f"Form data: {request.POST}")  # Debug print to see all POST data
 
+        try:
+            transaction = Transaction.objects.get(offer=offer)
+            form = TransactionForm(request.POST,instance=transaction)
+        except Transaction.DoesNotExist:
+            form = TransactionForm(request.POST)
+        
         if form.is_valid():
-            print("Form is valid")  # Debug print
+           
             transaction = form.save(commit=False)
             transaction.offer_id = offer.id
             transaction.save()  # Save to generate an ID
-            print(f"Transaction created with ID: {transaction.id}")  # Debug print
+            
             
             # Get the payment option from the form data
             payment_option = request.POST.get('payment_option')
-            print(f"Selected payment option: {payment_option}")  # Debug print
+            
             
             # Redirect based on the payment option
             if payment_option == 'credit_card':
@@ -56,15 +59,19 @@ def finalization(request, offer_id):
             })
     else:
 
-        form = TransactionForm(initial={
+        try:
+            transaction = Transaction.objects.get(offer=offer)
+            form = TransactionForm(instance=transaction)
+        except Transaction.DoesNotExist:
+            form = TransactionForm(initial={
             'contact_email': request.user.email,
             'contact_name': request.user.buyer.name,
             'contact_street': request.user.buyer.street,
             'contact_house_number': request.user.buyer.house_numb,
             'contact_zip': request.user.buyer.zip_code,
             'contact_country': request.user.buyer.country,
-        })
-        
+            }
+        )
         return render(request, 'transactions/finalize_offer.html', {
             'form': form,
             'offer': offer_id,
@@ -72,8 +79,8 @@ def finalization(request, offer_id):
         })
 
 @login_required
-def finalization_credit(request,transactionid):
-    transaction=get_object_or_404(Transaction,id=transactionid)
+def finalization_credit(request,transaction_id):
+    transaction=get_object_or_404(Transaction,id=transaction_id)
     if request.method == "POST":
         
         form = CreditCardForm(request.POST)
@@ -84,18 +91,23 @@ def finalization_credit(request,transactionid):
             payment_info.transaction_id = transaction
             
             #payment_info.save()
-            return render(request,'transactions/finalization_credit.html',{"form":form})
+            return render(request,'transactions/finalization_credit.html',{
+                'form':form,
+                'transaction':transaction,
+                })
         
         else:
             messages.error(request, 'Form submission incorrect')
             print(form.errors)
             
             # Rendera síðu ánþess að missa upplýsingar
-            return render(request,'transactions/finalization_credit.html',{"form":form})
+            return render(request,'transactions/finalization_credit.html',{"form":form,
+                                                                           'transaction':transaction,})
     else:
     
         return render(request, 'transactions/finalization_credit.html',{
             'form': CreditCardForm(),
+            'transaction':transaction,
         })
    
 

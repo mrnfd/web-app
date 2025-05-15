@@ -17,7 +17,7 @@
                 {{ msg }}
             {% endfor %}
 
-            <form id="payment-form" method="post" action="{% url 'finalization_credit' transaction_id %}">
+            <form id="payment-form" method="post" action="{% url 'finalization_credit' transaction.id %}">
                 {% csrf_token %}
                 
                  <div class="payment">
