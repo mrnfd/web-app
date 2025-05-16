@@ -73,8 +73,9 @@
 
                         <div class="buttons">
 
-                            <button type="button" onclick = "redirectToDelete( '{{offer.id}}' )" >Delete offer</button>
-                            <button type="button"  onclick = "redirectToUpdate( '{{offer.id}}' )">Edit offer</button>
+                            <button data-id1 = "{{offer.id}}" type="button" class="delete-offer-button" >Delete offer</button>
+                            
+                                
                             {% autoescape off %}
                                 {{offer.button}}
                             {% endautoescape %}

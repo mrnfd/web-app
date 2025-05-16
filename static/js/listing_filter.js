@@ -33,13 +33,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 // display filtered content
                 const json = await response.json();
                 if (json.propertys && Array.isArray(json.propertys)) {
-                    const properties = json.propertys.map(property => `
+                    const properties = json.propertys.map(property => {
+                        let statusclass = "status available";
+                        
+                        switch (property.status) {
+                            case 'AVAILABLE': 
+                                statusclass = "status available";
+                                break;
+                            case 'PENDING':
+                                statusclass = "status pending";
+                                break;
+                            case 'SOLD':
+                                statusclass = "status sold";
+                                break;
+                        }
+                        return`
                         <a href="/catalogue/${property.id}">
                             <div class="property-card">
                                 <img src="/static/${ property.thumbnail }" alt="Property image">
                                 <div class="property-info">
                                     <p class="property-address">${property.street} ${property.number}, ${property.type}</p>
-                                    <p class="property-address">${property.price}</p>
+                                    <p class="property-address">Price: $${property.price}</p>
+                                    <p><strong>Listing status: </strong> <span class="${statusclass}">${property.status}</span></p>
                                     <div class="rooms-seller">
                                         <span><strong>Rooms:</strong> ${property.numb_of_rooms}</span>
                                         <span><strong>Seller:</strong> ${property.seller}</span>
@@ -47,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </div>
                             </div>
                         </a>
-                    `);
+                    `});
                     
                     // Update the content with the filtered properties
                     propertyPlaceholder.innerHTML = properties.join('');

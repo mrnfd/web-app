@@ -115,7 +115,10 @@ def my_offers(request):
         button=''
         if offer.status == 'ACCEPTED':
             button = f'<button data-id = "{offer.id}" type="button" class="finalize-offer-button" >Finalize offer</button>'
-            
+        elif offer.status == 'BOUGHT':
+            pass
+        else:
+            button = f'<button data-id = "{offer.id}" type="button" class="edit-offer-button" >Edit offer</button>'
         offer_info = {
             'id': offer.id,
             'price': str(offer.price),

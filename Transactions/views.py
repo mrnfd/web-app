@@ -264,6 +264,9 @@ def finalization_revision(request,transaction_id,paymentmethod):
 def finalization_success(request,transaction_id):
     transaction = get_object_or_404(Transaction, id=transaction_id)
     transaction.finalized = True
+    offer = transaction.offer
+    offer.status = 'BOUGHT'
+    offer.save()
     transaction.save()
     return render(request, 'transactions/finalization_success.html',{'transaction_id':transaction_id})
 

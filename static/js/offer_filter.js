@@ -2,6 +2,15 @@ document.addEventListener('DOMContentLoaded', function () {
     registerSearchButtonHandler();
     bindFinalizeOfferButtons();
 
+    function redirectToDelete(offerID) {
+        window.location.href = `/offers/delete_offer/${offerID}`;
+
+    }
+    function redirectToUpdate(offerID) {
+        window.location.href = `/offers/update_offer/${offerID}`;
+
+    }
+
     const sortSelect = document.getElementById('status-filter');
     if (sortSelect) {
         sortSelect.addEventListener('change', function () {
@@ -53,8 +62,9 @@ document.addEventListener('DOMContentLoaded', function () {
                                 </div>
                             </div>
                             <div class="buttons">
-                                <button type="button" onclick="redirectToDelete('${offer.id}')">Delete offer</button>
-                                <button type="button" onclick="redirectToUpdate('${offer.id}')">Edit offer</button>
+                                <button data-id1 = "${offer.id}" type="button" class="delete-offer-button" >Delete offer</button>
+                                
+                                
                                 ${offer.button}
                             </div>
                         </div>`;
@@ -75,6 +85,18 @@ document.addEventListener('DOMContentLoaded', function () {
             button.addEventListener('click', function () {
                 const offerID = this.getAttribute('data-id');
                 window.location.href = `/transaction/${offerID}/finalization`;
+            });
+        });
+        document.querySelectorAll(".delete-offer-button").forEach(button => {
+            button.addEventListener('click', function () {
+                const offerID = this.getAttribute('data-id1');
+                window.location.href = `/offers/delete_offer/${offerID}`;
+            });
+        });
+        document.querySelectorAll(".edit-offer-button").forEach(button => {
+            button.addEventListener('click', function () {
+                const offerID = this.getAttribute('data-id2');
+                window.location.href = `/offers/update_offer/${offerID}`;
             });
         });
     }
