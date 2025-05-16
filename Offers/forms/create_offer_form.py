@@ -6,38 +6,26 @@ from django.core.exceptions import ValidationError
 from Offers.models import Offer
 
 class CreateOfferForm(ModelForm):
-    #image = forms.CharField(required=True,widget=forms.TextInput(attrs={'class':'form-control'}))
+    # Define a form for creating or editing an Offer model instance
     class Meta:
         model = Offer
-        #exclude = ['id','property_listing_id','buyer_id','status','submission_date']
-        fields = ['price','expiration_date']
+        fields = ['price','expiration_date'] # Only include price and expiration_date fields in the form
         widgets ={
             'price': forms.NumberInput(attrs={
                 'class': 'form-control',
                 'min': 0
                 }),
             'expiration_date': forms.SelectDateWidget(
-                attrs={ # eða SelectDateWidget
-                'class':'form-control',
-                #'placeholder': 'YYYY-MM-DD',
-                #'pattern': r'\d{4}-\d{2}-\d{2}',
-                #'type': 'date',
-
-                },
+                attrs={ 'class':'form-control'},
                 years=range(timezone.now().year, timezone.now().year + 50)),
         }
-    #def clean_expiration_date(self):
-    #    expiration_date = self.cleaned_data['expiration_date']
-    #    today = timezone.now().date()
-    #    if expiration_date < today:
-    #        raise ValidationError("Expiration date cannot be in the past.")
-    #    return expiration_date
+
     def clean_expiration_date(self):
+        # Custom validation method for expiration_date field
         expiration_date = self.cleaned_data['expiration_date']
-        #today = date.today()
         today =timezone.now()
         
-        # Validate that expiration_date is after today
+        # Ensure expiration date is in the future (not today or past)
         if expiration_date <= today:
             raise ValidationError("Expiration date must be in the future.")
         return expiration_date

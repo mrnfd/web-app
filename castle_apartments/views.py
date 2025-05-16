@@ -8,8 +8,10 @@ from django.db.models import Q
 
 # Create your views here.
 # Render the base homepage
+"""
 def index(request):
-    return render(request, 'base.html')
+    return render(request, 'buyers/base_buyer.html')
+"""
 
 # Render the catalogue page
 def catalogue(request):

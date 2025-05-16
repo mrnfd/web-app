@@ -56,49 +56,36 @@ def catalogue(request):
             try:
                 propertys = propertys.filter(price__lte=float(max_price))
             except ValueError:
+                # Ignore invalid max_price values (non-numeric)
                 pass
-             
+
+    # Filter by property type if specified and not 'ANY'
     if query_params['type']:
         type = request.GET.get('type', '')
         if type and type != 'ANY':
             propertys = propertys.filter(type=type)
-    
+
+    # Additional filters under "more" parameter, e.g., number of bedrooms
     if query_params['more']:
         more_filter = request.GET.get('more', '')
         if more_filter:
             if more_filter == '2br':
                 propertys = propertys.filter(rooms=2)
 
-    # sort by
+    # Sorting options mapped to Django ORM order_by values
     sort_options = {
         'price_asc': 'price',
         'price_desc': '-price',
         'street': 'street',
     }
+    # Apply sorting if valid option provided
     if query_params['sort'] in sort_options:
         propertys = propertys.order_by(sort_options[query_params['sort']])
 
+    # If any filters applied, return JSON response (likely for AJAX requests)
     if filter_applied:     
         # Return JSON response
         print("Filters applied, returning JSON response")
-        #property_array = []
-        #for property in propertys:
-        #    property_images = ListingImage.objects.filter(listing_id=property.id)
-        #    thumbnail = property_images.filter(thumbnail=True).first()
-        #    thumbnail_url = thumbnail.image_url
-        #    print("THIS IS MY THUUUUMBNAIAIIAIAL : "+ thumbnail_url)
-        #    property_info = {
-        #        'id': property.id,
-        #        'street': property.street,
-        #        'number': property.number,
-        #        'rooms': property.numb_of_rooms,
-        #        'seller': property.seller_id.id,
-        #        'price': str(property.price),
-        #        'thumbnail': thumbnail_url,
-        #        'type': property.type
-        #    }
-        #    property_array.append(property_info)
-        #return JsonResponse({'propertys':property_array})
         
         return JsonResponse({
             'propertys': [{
@@ -114,7 +101,7 @@ def catalogue(request):
             } for property in propertys]
         })
     
-    # If no filter return normal
+    # If no filters applied, render the catalogue page with property data
     return render(request, "catalogue.html", {
         "propertys": [{
                 'id': property.id,
@@ -130,12 +117,11 @@ def catalogue(request):
     })
 
 def get_listing_by_id(request,id):
-
+    # Retrieve a listing by its ID
     listing = Listing.objects.get(id=id)
     buyer = None
-    #buyer = Buyer.objects.get(user=request.user)
-    #buyer = Buyer.objects.get(id=1) # TODO   (bara fyrir testing)
 
+    # Check if the user is authenticated and retrieve Buyer object
     if request.user.is_authenticated:
         try:
             buyer = Buyer.objects.get(user=request.user) 
@@ -143,7 +129,7 @@ def get_listing_by_id(request,id):
         except Buyer.DoesNotExist:
             pass
     
-    # Skoða hvort offer sé til
+    # Check if this buyer has made an offer on this listing
     offer = None
     if buyer:
         try:
@@ -153,7 +139,8 @@ def get_listing_by_id(request,id):
             )
         except Offer.DoesNotExist:
             pass
-    
+
+    # Determine which button to show on the listing detail page based on offer and listing status
     button=''
     if buyer and listing.status != 'SOLD' and not offer:
         button = f'<button data-id = "{listing.id}" class="create-offer-button" > Place a purchase offer</button>'
@@ -162,9 +149,12 @@ def get_listing_by_id(request,id):
         button = f'<button data-id = "{offer.id}" class="update-offer-button" > Edit offer</button>'
         #button = f'<button type="button"  onclick = "redirectToUpdate( {{offer.id}} )"> Edit offer </button>'
 
+    # Retrieve all images related to the listing
     property_images = ListingImage.objects.filter(listing_id=id)
+    # Retrieve seller information for this listing
     seller = Seller.objects.get(id = listing.seller_id.id)
 
+    # Render the listing detail page with all relevant data
     return render(request,"listing_detail.html",{
         "listing":listing,
         "images":property_images,
