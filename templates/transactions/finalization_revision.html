@@ -12,7 +12,7 @@
     <div class="input-fields-container">
         <h2>Review Your payment information</h2>
 
-        <form method="GET" action="{% url 'finalization_revision' transaction.id %}">
+        <form id="finalization-form" method="GET" action="{% url 'finalization_revision' transaction.id %}">
             <h3> contact info</h3>
             <div class="input-fields">
                 <label for="contact-name">Contact name:</label>
@@ -73,12 +73,16 @@
                     <input type="text" id="provider" name="provider" value="{{ provider }}" readonly>
                 </div>
             {% endif %} -->
-
+            <!-- 
             <div class="buttons">
                 <button type="button" data-id2= "{{ paymentmethod }}" data-id = "{{ transaction.id }}" class= "change-finalize-button">Edit</button>
-                <button type="submit" formaction="{% url 'finalization_success' transaction.id %}">Finalize</button>
-            </div>
+                <button type="submit"  form="finalization-form" data-id3 = "{{ transaction.id }}" class="finalize-button">Finalize</button>
+            </div> -->
         </form>
+        <div class="buttons">
+            <button type="button" data-id2= "{{ paymentmethod }}" data-id = "{{ transaction.id }}" class= "change-finalize-button">Edit</button>
+            <button type="button" data-id3 = "{{ transaction.id }}" class="finalize-button">Finalize</button>
+        </div>
     </div>
     {% include "_footer.html"%}
 </body><script>
@@ -102,6 +106,17 @@
                                 window.location.href = `/transaction/finalization/${transactionID}/credit-card`;
                               
                         }
+            });
+        }
+
+        const FinalizeOfferBtn = document.querySelector(".finalize-button");
+       
+        if (FinalizeOfferBtn) {
+            
+            FinalizeOfferBtn.addEventListener('click', function() {
+                const transactionID2 = this.getAttribute('data-id3');
+                window.location.href = `/transaction/finalization/${transactionID2}/success`;
+
             });
         }
 

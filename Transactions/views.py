@@ -215,31 +215,35 @@ def finalization_mortgage(request,transaction_id):
 def finalization_revision(request,transaction_id):
     transaction=get_object_or_404(Transaction,id=transaction_id)
 
-    form1 = TransactionForm(instance=transaction)
+    if request.method == "POST":
+        return redirect('finalization_success', transaction.id)
     
-    paymentmethod = ''
-    if hasattr(transaction, 'transactionCC'):
-        paymentmethod = 'transactionCC'
-        form2 = CreditCardForm(instance=transaction.transactionCC)
-    elif hasattr(transaction, 'transactionBT'):
-        paymentmethod = 'transactionBT'
-        form2 = BankTransferForm(instance=transaction.transactionBT)
-    elif hasattr(transaction, 'transactionM'):
-        paymentmethod = 'transactionM'
-        form2 = MortgageForm(instance=transaction.transactionM)
+    else:
+        form1 = TransactionForm(instance=transaction)
 
-    # Gera form readonly
-    for field in form1.fields.values():
-            field.disabled = True
-    for field in form2.fields.values():
-            field.disabled = True
+        paymentmethod = ''
+        if hasattr(transaction, 'transactionCC'):
+            paymentmethod = 'transactionCC'
+            form2 = CreditCardForm(instance=transaction.transactionCC)
+        elif hasattr(transaction, 'transactionBT'):
+            paymentmethod = 'transactionBT'
+            form2 = BankTransferForm(instance=transaction.transactionBT)
+        elif hasattr(transaction, 'transactionM'):
+            paymentmethod = 'transactionM'
+            form2 = MortgageForm(instance=transaction.transactionM)
 
-    return render(request, 'transactions/finalization_revision.html', {
-        'form1':form1,
-        'form2':form2,
-        'transaction':transaction,
-        'paymentmethod':paymentmethod
-    })
+        # Gera form readonly
+        for field in form1.fields.values():
+                field.disabled = True
+        for field in form2.fields.values():
+                field.disabled = True
+
+        return render(request, 'transactions/finalization_revision.html', {
+            'form1':form1,
+            'form2':form2,
+            'transaction':transaction,
+            'paymentmethod':paymentmethod
+        })
 
 @login_required
 def finalization_success(request,transaction_id):

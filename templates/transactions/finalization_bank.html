@@ -14,14 +14,15 @@
 
         <div class="page-container">
 
-            <form id="payment-form" method="post" action="{% url 'finalization_credit' %}">
+            <form id="payment-form" method="post" action="{% url 'finalization_bank' transaction.id %}">
                 {% csrf_token %}
                 <div class="payment">
+
 
                     <div id="bank-fields" class="payment-fields">
                         <div class="input-fields">
                             <label for="provider">Bank account:</label>
-                            <input type="text" id="provider" name="provider">
+                            {{ form.bank_account }}
                         </div>
                     </div>
 

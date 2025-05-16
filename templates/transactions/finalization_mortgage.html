@@ -14,14 +14,14 @@
 
         <div class="page-container">
 
-            <form id="payment-form" method="post" action="{% url 'finalization_credit' %}">
+            <form id="payment-form" method="post" action="{% url 'finalization_mortgage' transaction.id %}">
                 {% csrf_token %}
                 <div class="payment">
 
                     <div id="mortgage-fields" class="payment-fields">
                         <div class="input-fields">
                             <label for="provider">Mortgage provider:</label>
-                            <input type="text" id="provider" name="provider">
+                            {{ form.mortgage_provider }}
                         </div>
                     </div>
 
