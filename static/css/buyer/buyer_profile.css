@@ -103,7 +103,8 @@ body {
     margin-right: 2rem;
 }
 
-.buttons button{
+.buttons button,
+.buttons input {
     padding: 10px 20px;
     font-size: 1rem;
     border-radius: 100px;
@@ -119,18 +120,6 @@ body {
 .buttons input[type="submit"]:hover,
 .file-input-wrapper input[type="file"]:hover {
     background-color: #DCDCFF;
-}
-
-.buttons input{
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 100px;
-    border: 1px solid #cccccc;
-    cursor: pointer;
-    background-color: #F8F8FF;
-    font-family: inherit;
-    color: black;
-    transition: background-color 0.2s ease-in-out;
 }
 
 footer {

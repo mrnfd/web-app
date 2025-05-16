@@ -98,6 +98,10 @@
                             </a>
                         </li>
                     {% elif user.seller %}
+                        <a class="navbar-brand" href="{% url 'seller_home' %}">Castle Apartments</a>
+                        <li class="active">
+                            <a class="new_link" href="{% url 'seller_offers' %}">Offers</a>
+                        </li>
                         <li class="active">
                             <a class="new_link" href="{% url 'manage_listings' %}">Manage Listings</a>
                         </li>

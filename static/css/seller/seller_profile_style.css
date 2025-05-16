@@ -1,0 +1,112 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-upload {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+}
+
+.custom-upload img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.overlay-btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    text-align: center;
+    padding: 8px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.custom-upload:hover .overlay-btn {
+    opacity: 1;
+}
+
+.overlay-btn button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.input-fields-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.input-field {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.input-field label {
+    flex: 0 0 120px;
+    font-size: 18px;
+    text-align: left;
+}
+
+.input-field input {
+    padding: 0.4rem;
+    font-size: 16px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    font-family: inherit;
+}
+
+.img-input-field {
+    background: pink;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem;
+}
+
+.buttons button,
+.buttons input {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 100px;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    background-color: #F8F8FF;
+    font-family: inherit;
+    color: black;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.buttons button:hover,
+.buttons input:hover {
+    background-color: #DCDCFF;
+}
+
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}

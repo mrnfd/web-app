@@ -2,15 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/seller_base_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/seller/seller_base_style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     {% include '_navigation.html' %}
     <div class="page-container">
-        <p>seller homepage</p>
+        <div class="offers-container">
+            <h2>Offers</h2>
+            <div class="offers-grid">
+                {% for offer in "12345" %}
+                    <div class="offer-card">
+                        <div class="offer-content">
+                            <img src="/static/images/background.png" alt="Property Image">
+                            <div class="offer-details">
+                                <p><strong>Street 123, 76002 City, Type</strong></p>
+                                <p>Date of submission: 25.03.25</p>
+                                <p>Listing price: $ 635000</p>
+                                <p>Offer price: $ 615000</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="listings-container">
+            <h2>Listings</h2>
+            <div class="listings-grid">
+                {% for listing in "12345" %}
+                    <div class="listing-card">
+                        <div class="listing-content">
+                            <img src="/static/images/background.png" alt="Property image">
+                            <div class="listing-details">
+                                <p class="listing-address"><strong>Street 123 , house</strong></p>
+                                <p class="listing-description"><strong>Description: </strong>lalalalalalala, very nice house, lalalalaallalalalaa</p>
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
     </div>
     {% include '_footer.html' %}
 </body>

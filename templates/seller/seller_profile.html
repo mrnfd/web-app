@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/seller/seller_profile_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    {% include '_navigation.html' %}
+
+    <div class="page-container">
+        <form method="post" enctype="multipart/form-data" action="{% url 'seller_profile' %}">
+            {% csrf_token %}
+
+            <div class="form-container">
+
+                <div class="images-container">
+                    <div class="banner-container custom-upload">
+                        <img id="banner-preview" src="/static/images/seller_photos/test_seller2/cover_seller2.png" alt="Cover Image">
+                        <div class="overlay-btn">
+                            <button type="button" onclick="document.getElementById('coverInput').click()">Change Cover Image</button>
+                            <input type="file" id="coverInput" name="profile_image_url" accept="image/*" style="display:none;" onchange="previewImage(this, 'banner-preview')">
+                        </div>
+                    </div>
+                    <div class="img-container custom-upload">
+                        <img id="profile-preview" src="/static/images/seller_photos/test_seller2/profile_seller2.png" alt="Profile Picture">
+                        <div class="overlay-btn">
+                            <button type="button" onclick="document.getElementById('profileInput').click()">Change Profile Picture</button>
+                            <input type="file" id="profileInput" name="profile_image_url" accept="image/*" style="display:none;" onchange="previewImage(this, 'profile-preview')">
+                        </div>
+                    </div>
+                    <div class="logo-container custom-upload">
+                        <img id="logo-preview" src="/static/images/seller_photos/test_seller2/logo_seller2.png" alt="Logo">
+                        <div class="overlay-btn">
+                            <button type="button" onclick="document.getElementById('logoInput').click()">Change Logo</button>
+                            <input type="file" id="logoInput" name="profile_image_url" accept="image/*" style="display:none;" onchange="previewImage(this, 'logo-preview')">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-fields-container">
+                    <div class="input-field">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" value="{{ user.seller.name }}">
+                    </div>
+                    <div class="input-field">
+                        <label>Type: </label>
+                        {{form.seller_type}}
+                    </div>
+                    <div class="input-field">
+                        <label>Email: </label>
+                        {{form.email}}
+                    </div>
+                    <div class="input-field">
+                        <label>Street: </label>
+                        {{form.street}}
+                    </div>
+                    <div class="input-field">
+                        <label>House number: </label>
+                        {{form.house_numb}}
+                    </div>
+                    <div class="input-field">
+                        <label>City: </label>
+                        {{form.city}}
+                    </div>
+                    <div class="input-field">
+                        <label>ZIP: </label>
+                        {{form.zip_code}}
+                    </div>
+                    <div class="input-field">
+                        <label>Bio: </label>
+                        {{form.bio}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="button" onclick="window.history.back()">Go Back</button>
+                <input type="submit" value="Save" onclick="console.log(form)">
+            </div>
+
+        </form>
+    </div>
+    {% include '_footer.html' %}
+
+    <script>
+        function previewImage(input, previewId) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById(previewId).src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>
