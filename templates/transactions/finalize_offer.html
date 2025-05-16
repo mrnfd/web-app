@@ -22,7 +22,6 @@
         
         <div class="input-fields">
                 <label for="contact-name">Contact name:</label>
-                
                 {{ form.contact_name }}
             </div>
 
@@ -63,13 +62,25 @@
 
         <!-- Payment options radio buttons -->
         <div class="payment">
-            <label>Payment option:</label>
-            <input type="radio" id="credit-card" name="payment_option" value="credit_card" required>
-            <label for="credit-card">Credit card</label>
-            <input type="radio" id="bank_transfer" name="payment_option" value="bank_transfer" required>
-            <label for="bank_transfer">Bank transfer</label>
-            <input type="radio" id="mortgage" name="payment_option" value="mortgage" required>
-            <label for="mortgage">Mortgage</label>
+            <div class="payment-label">
+                <label>Payment option:</label>
+            </div>
+            <div class="payment-options">
+                <div class="payment-option">
+                    <input type="radio" id="credit-card" name="payment_option" value="credit_card" required>
+                    <label for="credit-card">Credit card</label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" id="bank_transfer" name="payment_option" value="bank_transfer" required>
+                    <label for="bank_transfer">Bank transfer</label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" id="mortgage" name="payment_option" value="mortgage" required>
+                    <label for="mortgage">Mortgage</label>
+                </div>
+            </div>
+
+
         </div>
 
          <!-- Buttons -->

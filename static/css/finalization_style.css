@@ -36,6 +36,7 @@ form {
 .input-fields, .form-control,
 .payment, .payment-fields {
     width: 100%;
+    max-width: 600px;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -46,15 +47,17 @@ form {
 .form-control label,
 .payment label {
     font-size: 18px;
+    text-align: right;
     width: 150px;
 }
 
 /* Style all input fields for consistency */
-input {
+input:not([type="radio"]),
+select {
   flex: 1;
   width: 50%;
   padding: 0.2rem;
-  margin: 0.5rem 0;
+  margin: 1rem 0;
   border: 2px solid #cccccc;
   border-radius: 8px;
   font-size: 16px;
@@ -64,12 +67,14 @@ input {
 }
 
 /* Highlight input when focused */
-input:focus {
+input:focus,
+select:focus {
   background-color: #fff;
 }
 
 /* Change border color on hover for better UX */
-input:hover {
+input:hover,
+select:hover {
   border-color: #888;
 }
 
@@ -89,12 +94,26 @@ input:hover {
 /* Payment options container with horizontal layout and spacing */
 .payment {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
+    align-items: flex-start;
     width: 100%;
     max-width: 600px;
     margin: 0 auto 2rem auto;
+}
+
+.payment-label {
+    width: 150px;
+    text-align: right;
+    padding-right: 1rem;
+    font-size: 18px;
+}
+
+.payment-options {
+    display: flex;
+    flex-direction: row;
+}
+
+.payment-option {
+    margin-right: 1.5rem;
 }
 
 /* Buttons container with space between and gap */
