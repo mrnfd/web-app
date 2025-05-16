@@ -83,11 +83,11 @@ def seller(request, seller_id):
 def log_in(request):
     return render(request, 'role_selection.html')
 
-# Render the login page for buyers
-def login_as_buyer(request):
-    return render(request, 'login.html')
-
-# Render the login page for sellers
+## Render the login page for buyers
+#def login_as_buyer(request):
+#    return render(request, 'login.html')
+#
+## Render the login page for sellers
 def login_as_seller(request):
     return render(request, 'login.html')
 

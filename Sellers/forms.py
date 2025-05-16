@@ -22,6 +22,7 @@ class CreateSellerForm(ModelForm):
                   'house_numb',
                   'city',
                   'zip_code',
+                  'country',
                   'bio']
 
         widgets = {
@@ -34,6 +35,7 @@ class CreateSellerForm(ModelForm):
             'house_numb': forms.NumberInput(attrs={'class': 'form-control'}),
             'city': forms.TextInput(attrs={'class': 'form-control'}),
             'zip_code': forms.TextInput(attrs={'class': 'form-control'}),
+            'country': forms.TextInput(attrs={'class': 'form-control'}),
             'bio': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
