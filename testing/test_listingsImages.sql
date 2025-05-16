@@ -6,36 +6,29 @@ INSERT INTO "Listings_listingimage" (
 )
 VALUES
 
-(1, 'images\propertys_photos\test_property1\property1_img1.jpg', FALSE),
-(1, 'images\propertys_photos\test_property1\property1_img2.jpg', FALSE),
-(1, 'images\propertys_photos\test_property1\property1_img3.jpg', FALSE),
-(1, 'images\propertys_photos\test_property1\property1_img4.jpg', FALSE),
-(1, 'images\propertys_photos\test_property1\property1_thumb.jpg', TRUE),
-
-(3, 'images\propertys_photos\test_property1\property1_img1.jpg', FALSE),
-(3, 'images\propertys_photos\test_property1\property1_img2.jpg', FALSE),
-(3, 'images\propertys_photos\test_property1\property1_img3.jpg', FALSE),
-(3, 'images\propertys_photos\test_property1\property1_thumb.jpg', TRUE),
-
-(5, 'images\propertys_photos\test_property1\property1_img1.jpg', FALSE),
-(5, 'images\propertys_photos\test_property1\property1_img2.jpg', FALSE),
-(5, 'images\propertys_photos\test_property1\property1_thumb.jpg', TRUE),
-
-(7, 'images\propertys_photos\test_property1\property1_img1.jpg', FALSE),
-(7, 'images\propertys_photos\test_property1\property1_thumb.jpg', TRUE),
-
-(2, 'images\propertys_photos\test_property2\property2_img1.jpg', FALSE),
-(2, 'images\propertys_photos\test_property2\property2_img2.jpg', FALSE),
-(2, 'images\propertys_photos\test_property2\property2_img3.jpg', FALSE),
-(2, 'images\propertys_photos\test_property2\property2_thumb.jpeg', TRUE),
-
-(4, 'images\propertys_photos\test_property2\property2_img1.jpg', FALSE),
-(4, 'images\propertys_photos\test_property2\property2_img2.jpg', FALSE),
-(4, 'images\propertys_photos\test_property2\property2_thumb.jpeg', TRUE),
-
-(6, 'images\propertys_photos\test_property2\property2_img1.jpg', FALSE),
-(6, 'images\propertys_photos\test_property2\property2_img3.jpg', FALSE),
-(6, 'images\propertys_photos\test_property2\property2_thumb.jpeg', TRUE),
-
-(8, 'images\propertys_photos\test_property2\property2_img2.jpg', FALSE),
-(8, 'images\propertys_photos\test_property2\property2_thumb.jpeg', TRUE);
+(9, 'property_images\property1_img1.jpg', FALSE),
+(9, 'property_images\property1_img2.jpg', FALSE),
+(9, 'property_images\property1_img3.jpg', FALSE),
+(9, 'property_images\property1_img4.jpg', FALSE),
+(9, 'property_images\property1_thumb.jpg', TRUE),
+(10, 'property_images\property1_img1.jpg', FALSE),
+(10, 'property_images\property1_img2.jpg', FALSE),
+(10, 'property_images\property1_img3.jpg', FALSE),
+(10, 'property_images\property1_thumb.jpg', TRUE),
+(11, 'property_images\property1_img1.jpg', FALSE),
+(11, 'property_images\property1_img2.jpg', FALSE),
+(11, 'property_images\property1_thumb.jpg', TRUE),
+(12, 'property_images\property1_img1.jpg', FALSE),
+(12, 'property_images\property1_thumb.jpg', TRUE),
+(13, 'property_images\property2_img1.jpg', FALSE),
+(13, 'property_images\property2_img2.jpg', FALSE),
+(13, 'property_images\property2_img3.jpg', FALSE),
+(13, 'property_images\property2_thumb.jpeg', TRUE),
+(14, 'property_images\property2_img1.jpg', FALSE),
+(14, 'property_images\property2_img2.jpg', FALSE),
+(14, 'property_images\property2_thumb.jpeg', TRUE),
+(15, 'property_images\property2_img1.jpg', FALSE),
+(15, 'property_images\property2_img3.jpg', FALSE),
+(15, 'property_images\property2_thumb.jpeg', TRUE),
+(16, 'property_images\property2_img2.jpg', FALSE),
+(16, 'property_images\property2_thumb.jpeg', TRUE);
