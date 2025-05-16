@@ -1,121 +1,73 @@
-<style>
-    .footer {
-        background-color: #F8F8FF;
-        padding-bottom: 0.5rem;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Footer</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/_footer_style.css' %}">
+</head>
+<body>
+    <footer class="footer">
+        <div class="footer-row">
+            <!-- Clickable text links for toggling extra info -->
+            <div class="footer-links">
+                <label id="about-us" style="cursor: pointer">About us</label>
+                <label id="terms-of-service" style="cursor: pointer">Terms of Service</label>
+            </div>
 
-    .footer-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        margin: 0;
-        padding: 0.5rem 0;
-    }
-
-    .footer-links {
-        display: flex;
-        align-items: center;
-        max-width: 600px;
-        flex: 1;
-        margin-left: 0;
-    }
-
-    .footer-links label {
-        display: inline-block;
-        cursor: pointer;
-        margin-right: 0.2rem;
-        margin-top: 0.5rem;
-    }
-
-    .about-us-p,
-    .terms-of-service-p {
-        display: none;
-        background-color: white;
-        border: 1px solid #cccccc;
-        padding: 0.5rem;
-        border-radius: 8px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        margin-top: 1rem;
-        text-align: left;
-    }
-
-
-    .social-icons {
-        margin-right: 1rem;
-    }
-
-    .footer-links label,
-    .social-icons a {
-        color: black;
-        font-size: 18px;
-        margin: 0 0.5rem;
-        text-decoration: none;
-    }
-
-    .footer-links label:hover,
-    .social-icons a:hover {
-        text-decoration: underline;
-    }
-
-    .footer-copyright {
-        color: grey;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-</style>
-
-<footer class="footer">
-    <div class="footer-row">
-        <div class="footer-links">
-            <label id="about-us" style="cursor: pointer">About us</label>
-            <label id="terms-of-service" style="cursor: pointer">Terms of Service</label>
+            <!-- Social media icons -->
+            <div class="social-icons">
+                <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook fa-lg"></i></a>
+                <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin fa-lg"></i></a>
+            </div>
         </div>
 
-        <div class="social-icons">
-            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook fa-lg"></i></a>
-            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram fa-lg"></i></a>
-            <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter fa-lg"></i></a>
-            <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin fa-lg"></i></a>
+        <!-- Hidden content for About us -->
+        <div class="about-us-p">
+            <p>We’re a new real estate company that helps people buy and sell homes in a simple and modern way. Our website lets you explore properties, view photos, read details, and make offers — all in one place.</p>
+            <p>We want to make finding a home easy and stress-free. Whether you're looking for your first apartment or your dream house, Castle Apartments is here to help.</p>
+            <p>Our team is made up of developers and real estate experts working together to create a safe and user-friendly platform for everyone.</p>
         </div>
-    </div>
-    <div class="about-us-p">
-        <p>We’re a new real estate company that helps people buy and sell homes in a simple and modern way. Our website lets you explore properties, view photos, read details, and make offers — all in one place.</p>
-        <p>We want to make finding a home easy and stress-free. Whether you're looking for your first apartment or your dream house, Castle Apartments is here to help.</p>
-        <p>Our team is made up of developers and real estate experts working together to create a safe and user-friendly platform for everyone.</p>
-    </div>
 
-    <div class="terms-of-service-p">
-        <p><strong>Account:</strong> To use some parts of the site, you’ll need to create an account. Keep your login info safe and don’t share it with others.</p>
-        <p><strong>Property Info:</strong> The property listings are added by sellers. We try to keep everything accurate, but we can’t guarantee all details are always correct.</p>
-        <p><strong>Making an Offer:</strong> When you make a purchase offer, it’s not final until the seller accepts it. After that, you’ll go through a few steps to confirm the deal.</p>
-        <p><strong>Privacy:</strong> We care about your privacy and follow local laws. We won’t share your personal information without your permission.</p>
-        <p><strong>Use the Site Respectfully:</strong> Don’t use the website to do anything illegal or harmful.</p>
-    </div>
+        <!-- Hidden content for Terms of Service -->
+        <div class="terms-of-service-p">
+            <p><strong>Account:</strong> To use some parts of the site, you’ll need to create an account. Keep your login info safe and don’t share it with others.</p>
+            <p><strong>Property Info:</strong> The property listings are added by sellers. We try to keep everything accurate, but we can’t guarantee all details are always correct.</p>
+            <p><strong>Making an Offer:</strong> When you make a purchase offer, it’s not final until the seller accepts it. After that, you’ll go through a few steps to confirm the deal.</p>
+            <p><strong>Privacy:</strong> We care about your privacy and follow local laws. We won’t share your personal information without your permission.</p>
+            <p><strong>Use the Site Respectfully:</strong> Don’t use the website to do anything illegal or harmful.</p>
+        </div>
 
-    <p class="footer-copyright">&copy; 2025 Castle Apartments. All rights reserved.</p>
+        <!-- Bottom copyright -->
+        <p class="footer-copyright">&copy; 2025 Castle Apartments. All rights reserved.</p>
 
-    <script>
-        const about = document.querySelector(".about-us-p");
-        const terms = document.querySelector(".terms-of-service-p");
+        <script>
+            // Grab both hidden sections
+            const about = document.querySelector(".about-us-p");
+            const terms = document.querySelector(".terms-of-service-p");
 
-        document.getElementById("about-us").addEventListener("click", function () {
-            const isAboutVisible = about.style.display === "block";
-            about.style.display = "none";
-            terms.style.display = "none";
-            if (!isAboutVisible) {
-                about.style.display = "block";
-            }
-        });
+            // Toggle logic for "About us" label
+            document.getElementById("about-us").addEventListener("click", function () {
+                const isAboutVisible = about.style.display === "block";
+                about.style.display = "none";
+                terms.style.display = "none";
+                if (!isAboutVisible) {
+                    about.style.display = "block";
+                }
+            });
 
-        document.getElementById("terms-of-service").addEventListener("click", function () {
-            const isTermsVisible = terms.style.display === "block";
-            about.style.display = "none";
-            terms.style.display = "none";
-            if (!isTermsVisible) {
-                terms.style.display = "block";
-            }
-        });
-    </script>
-</footer>
+            // Toggle logic for "Terms of Service" label
+            document.getElementById("terms-of-service").addEventListener("click", function () {
+                const isTermsVisible = terms.style.display === "block";
+                about.style.display = "none";
+                terms.style.display = "none";
+                if (!isTermsVisible) {
+                    terms.style.display = "block";
+                }
+            });
+        </script>
+    </footer>
+</body>
+</html>

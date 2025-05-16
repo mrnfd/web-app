@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Review</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/finalization_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/buyer/finalization_style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -43,84 +43,52 @@
             {{ form2.as_p}}
         </form>
 
-        
-            <!-- 
-            {% if payment_option == 'credit_card' %}
-                <div class="input-fields">
-                    <label for="cardholder-name">Cardholder name:</label>
-                    <input type="text" id="cardholder-name" name="cardholder-name" value="{{ cardholder_name }}" readonly>
-                </div>
-                <div class="input-fields">
-                    <label for="card-number">Card number:</label>
-                    <input type="text" id="card-number" name="card-number" value="{{ card_number }}" readonly>
-                </div>
-                <div class="input-fields">
-                    <label for="expiry-date">Expiry date:</label>
-                    <input type="month" id="expiry-date" name="expiry-date" value="{{ expiry_date }}" readonly>
-                </div>
-                <div class="input-fields">
-                    <label for="cvc">CVC:</label>
-                    <input type="text" id="cvc" name="cvc" value="{{ cvc }}" readonly>
-                </div>
-            {% elif payment_option == 'bank_transfer' %}
-                <div class="input-fields">
-                    <label for="bank-acc">Bank account:</label>
-                    <input type="text" id="bank-acc" name="bank-acc" value="{{ bank_acc }}" readonly>
-                </div>
-            {% elif payment_option == 'mortgage' %}
-                <div class="input-fields">
-                    <label for="provider">Mortgage provider:</label>
-                    <input type="text" id="provider" name="provider" value="{{ provider }}" readonly>
-                </div>
-            {% endif %} -->
-            <!-- 
-            <div class="buttons">
-                <button type="button" data-id2= "{{ paymentmethod }}" data-id = "{{ transaction.id }}" class= "change-finalize-button">Edit</button>
-                <button type="submit"  form="finalization-form" data-id3 = "{{ transaction.id }}" class="finalize-button">Finalize</button>
-            </div> -->
-        </form>
         <div class="buttons">
             <button type="button" data-id2= "{{ paymentmethod }}" data-id = "{{ transaction.id }}" class= "change-finalize-button">Edit</button>
             <button type="button" data-id3 = "{{ transaction.id }}" class="finalize-button">Finalize</button>
         </div>
     </div>
+
     {% include "_footer.html"%}
-</body><script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const ChangePaymentInfoOfferBtn = document.querySelector(".change-finalize-button");
-       
-        if (ChangePaymentInfoOfferBtn) {
-            
-            ChangePaymentInfoOfferBtn.addEventListener('click', function() {
-                const transactionID = this.getAttribute('data-id');
-                const paymentmethod = this.getAttribute('data-id2');
 
-                switch(paymentmethod) {
-                            case 'transactionBT':
-                                window.location.href = `/transaction/finalization/${transactionID}/bank-transafer`;
-                                break;
-                            case 'transactionM':
-                                window.location.href = `/transaction/finalization/${transactionID}/mortgage`;
-                                break;
-                            default:
-                                window.location.href = `/transaction/finalization/${transactionID}/credit-card`;
-                              
-                        }
-            });
-        }
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ChangePaymentInfoOfferBtn = document.querySelector(".change-finalize-button");
 
-        const FinalizeOfferBtn = document.querySelector(".finalize-button");
-       
-        if (FinalizeOfferBtn) {
-            
-            FinalizeOfferBtn.addEventListener('click', function() {
-                const transactionID2 = this.getAttribute('data-id3');
-                window.location.href = `/transaction/finalization/${transactionID2}/success`;
+            if (ChangePaymentInfoOfferBtn) {
 
-            });
-        }
+                ChangePaymentInfoOfferBtn.addEventListener('click', function() {
+                    const transactionID = this.getAttribute('data-id');
+                    const paymentmethod = this.getAttribute('data-id2');
 
-    })
-    console.log("HELLOO MAAAAAAAA")
-</script>
+                    switch(paymentmethod) {
+                                case 'transactionBT':
+                                    window.location.href = `/transaction/finalization/${transactionID}/bank-transafer`;
+                                    break;
+                                case 'transactionM':
+                                    window.location.href = `/transaction/finalization/${transactionID}/mortgage`;
+                                    break;
+                                default:
+                                    window.location.href = `/transaction/finalization/${transactionID}/credit-card`;
+
+                            }
+                });
+            }
+
+            const FinalizeOfferBtn = document.querySelector(".finalize-button");
+
+            if (FinalizeOfferBtn) {
+
+                FinalizeOfferBtn.addEventListener('click', function() {
+                    const transactionID2 = this.getAttribute('data-id3');
+                    window.location.href = `/transaction/finalization/${transactionID2}/success`;
+
+                });
+            }
+
+        })
+        console.log("HELLOO MAAAAAAAA")
+    </script>
+
+</body>
 </html>

@@ -1,0 +1,73 @@
+/* Footer background and padding */
+        .footer {
+            background-color: #F8F8FF;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Layout for the main footer row (links and social icons) */
+        .footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin: 0;
+            padding: 0.5rem 0;
+        }
+
+         /* Container for About us / Terms links */
+        .footer-links {
+            display: flex;
+            align-items: center;
+            max-width: 600px;
+            flex: 1;
+            margin-left: 0;
+        }
+
+        /* Individual link labels */
+        .footer-links label {
+            display: inline-block;
+            cursor: pointer;
+            margin-right: 0.2rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Hidden info boxes for About us and Terms */
+        .about-us-p,
+        .terms-of-service-p {
+            display: none;
+            background-color: white;
+            border: 1px solid #cccccc;
+            padding: 0.5rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-top: 1rem;
+            text-align: left;
+        }
+
+        /* Social icon container */
+        .social-icons {
+            margin-right: 1rem;
+        }
+
+        /* Styling for both labels and social icon links */
+        .footer-links label,
+        .social-icons a {
+            color: black;
+            font-size: 18px;
+            margin: 0 0.5rem;
+            text-decoration: none;
+        }
+
+        /* Hover effect for interactivity */
+        .footer-links label:hover,
+        .social-icons a:hover {
+            text-decoration: underline;
+        }
+
+        /* Centered copyright */
+        .footer-copyright {
+            color: grey;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
