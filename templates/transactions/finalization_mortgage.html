@@ -30,13 +30,14 @@
         </div>
 
         <div class="buttons">
-            <button type="button" onclick="window.history.back()">Cancel</button>
+            <button type="button" data-id="{{ transaction.offer.id }}" class="back-contact-info-button">Back</button>
             <button type="submit" form="payment-form">Submit</button>
         </div>
 
     </main>
 
     {% include "_footer.html" %}
+    <script src="{% static 'js/finalization.js' %}"></script>
 
 </body>
 </html>

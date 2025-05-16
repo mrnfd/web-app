@@ -45,7 +45,7 @@ def finalization(request, offer_id):
                 messages.error(request, 'Invalid payment option selected.')
                 return render(request, 'transactions/finalize_offer.html', {
                     "form": form, 
-                    'offer': offer_id,
+                    'offer': offer,
                     'transaction_id': transaction.id
                 })
         else:
@@ -54,7 +54,7 @@ def finalization(request, offer_id):
             messages.error(request, 'Please correct the errors in the form.')
             return render(request, 'transactions/finalize_offer.html', {
                 "form": form, 
-                'offer': offer_id,
+                'offer': offer,
                 'transaction_id': None
             })
     else:
@@ -62,6 +62,8 @@ def finalization(request, offer_id):
         try:
             transaction = Transaction.objects.get(offer=offer)
             form = TransactionForm(instance=transaction)
+            for field in form.fields.values():
+                field.disabled = False
         except Transaction.DoesNotExist:
             form = TransactionForm(initial={
             'contact_email': request.user.email,
@@ -74,7 +76,7 @@ def finalization(request, offer_id):
         )
         return render(request, 'transactions/finalize_offer.html', {
             'form': form,
-            'offer': offer_id,
+            'offer': offer,
             'transaction_id': None,
         })
 
@@ -95,10 +97,11 @@ def finalization_credit(request,transaction_id):
             payment_info.transaction = transaction
             
             payment_info.save()
-            return render(request,'transactions/finalization_credit.html',{
-                'form':form,
-                'transaction':transaction,
-                })
+            return redirect('finalization_revision', transaction.id)
+            #return render(request,'transactions/finalization_credit.html',{
+            #    'form':form,
+            #    'transaction':transaction,
+            #    })
         
         else:
             messages.error(request, 'Form submission incorrect')
@@ -111,6 +114,8 @@ def finalization_credit(request,transaction_id):
         try:
             transactionCC = PaymentMethodCreditCard.objects.get(transaction=transaction_id)
             form = CreditCardForm(instance=transactionCC)
+            for field in form.fields.values():
+                field.disabled = False
         except PaymentMethodCreditCard.DoesNotExist:
             form = CreditCardForm()
         
@@ -138,10 +143,8 @@ def finalization_bank(request,transaction_id):
             payment_info.transaction = transaction
             
             payment_info.save()
-            return render(request,'transactions/finalization_bank.html',{
-                'form':form,
-                'transaction':transaction,
-                })
+            return redirect('finalization_revision', transaction.id)
+            
         
         else:
             messages.error(request, 'Form submission incorrect')
@@ -154,6 +157,8 @@ def finalization_bank(request,transaction_id):
         try:
             transactionBT = PaymentMethodBankTransfer.objects.get(transaction=transaction_id)
             form = BankTransferForm(instance=transactionBT)
+            for field in form.fields.values():
+                field.disabled = False
         except PaymentMethodBankTransfer.DoesNotExist:
             form = BankTransferForm()
         
@@ -181,10 +186,7 @@ def finalization_mortgage(request,transaction_id):
             payment_info.transaction = transaction
             
             payment_info.save()
-            return render(request,'transactions/finalization_mortgage.html',{
-                'form':form,
-                'transaction':transaction,
-                })
+            return redirect('finalization_revision', transaction.id)
         
         else:
             messages.error(request, 'Form submission incorrect')
@@ -197,6 +199,8 @@ def finalization_mortgage(request,transaction_id):
         try:
             transactionM = PaymentMethodMortgage.objects.get(transaction=transaction_id)
             form = MortgageForm(instance=transactionM)
+            for field in form.fields.values():
+                field.disabled = False
         except PaymentMethodMortgage.DoesNotExist:
             form = MortgageForm()
         
@@ -210,43 +214,43 @@ def finalization_mortgage(request,transaction_id):
 @login_required
 def finalization_revision(request,transaction_id):
     transaction=get_object_or_404(Transaction,id=transaction_id)
-    contact_name = request.session.get('contact_name')
-    contact_email = request.session.get('contact_email')
-    contact_address = request.session.get('contact_address')
-    contact_zip = request.session.get('contact_zip')
-    country = request.session.get('country')
-    contact_id = request.session.get('contact_id')
-    payment_option = request.session.get('payment_option')
 
-    cardholder_name = request.session.get('cardholder_name')
-    card_number = request.session.get('card_number')
-    expiry_date = request.session.get('expiry_date')
-    cvc = request.session.get('cvc')
-    bank_acc = request.session.get('bank_acc')
-    provider = request.session.get('provider')
+    form1 = TransactionForm(instance=transaction)
+    
+    paymentmethod = ''
+    if hasattr(transaction, 'transactionCC'):
+        paymentmethod = 'transactionCC'
+        form2 = CreditCardForm(instance=transaction.transactionCC)
+    elif hasattr(transaction, 'transactionBT'):
+        paymentmethod = 'transactionBT'
+        form2 = BankTransferForm(instance=transaction.transactionBT)
+    elif hasattr(transaction, 'transactionM'):
+        paymentmethod = 'transactionM'
+        form2 = MortgageForm(instance=transaction.transactionM)
+
+    # Gera form readonly
+    for field in form1.fields.values():
+            field.disabled = True
+    for field in form2.fields.values():
+            field.disabled = True
 
     return render(request, 'transactions/finalization_revision.html', {
-        'contact_name': contact_name,
-        'contact_email': contact_email,
-        'contact_address': contact_address,
-        'contact_zip': contact_zip,
-        'country': country,
-        'contact_id': contact_id,
-        'payment_option': payment_option,
-        'cardholder_name': cardholder_name,
-        'card_number': card_number,
-        'expiry_date': expiry_date,
-        'cvc': cvc,
-        'bank_acc': bank_acc,
-        'provider': provider,
-
-        'transaction':transaction
+        'form1':form1,
+        'form2':form2,
+        'transaction':transaction,
+        'paymentmethod':paymentmethod
     })
 
 @login_required
 def finalization_success(request,transaction_id):
     return render(request, 'transactions/finalization_success.html',{'transaction_id':transaction_id})
 
+@login_required
+def delete_transaction(request,transaction_id):
+    transaction = get_object_or_404(Transaction, id=transaction_id)
+    transaction.delete()
+    
+    return redirect('my_offers')
 
 
 '''

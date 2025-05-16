@@ -4,50 +4,47 @@
     <meta charset="UTF-8">
     <title>Review</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/finalization.css' %}">
+    <link rel="stylesheet" href="{% static 'css/finalization_style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     {% include '_navigation.html' %}
     <div class="input-fields-container">
-        <h2>Review Your Finalization</h2>
-        <form method="POST">
-            {% csrf_token %}
+        <h2>Review Your payment information</h2>
+
+        <form method="GET" action="{% url 'finalization_revision' transaction.id %}">
+            <h3> contact info</h3>
             <div class="input-fields">
                 <label for="contact-name">Contact name:</label>
-                <input type="text" id="contact-name" name="contact-name" value="{{ contact_name }}" readonly>
+                {{form1.contact_name}}
             </div>
-
             <div class="input-fields">
-                <label for="contact-email">Contact email:</label>
-                <input type="email" id="contact-email" name="contact-email" value="{{ contact_email }}" readonly>
+                <label for="contact_email">Contact email:</label>
+                {{form1.contact_email}}
             </div>
-
             <div class="input-fields">
-                <label for="contact-address">Contact address</label>
-                <input type="text" id="contact-address" name="contact-address" value="{{ contact_address }}" readonly>
+                <label for="contact_street">Contact address:</label>
+                {{form1.contact_street}} {{form1.contact_house_number}}
             </div>
-
             <div class="input-fields">
-                <label for="contact-zip">Contact postal code</label>
-                <input type="text" id="contact-zip" name="contact-zip" value="{{ contact_zip }}" readonly>
+                <label for="contact_zip">Contact zip:</label>
+                {{form1.contact_zip}}
             </div>
-
             <div class="input-fields">
-                <label for="contact-country">Country</label>
-                <input type="text" id="contact-country" name="contact-country" value="{{ country }}" readonly>
+                <label for="contact_country">Contact country:</label>
+                {{form1.contact_country}}
             </div>
-
             <div class="input-fields">
-                <label for="contact-id">National ID</label>
-                <input type="text" id="contact-id" name="contact-id" value="{{ contact_id }}" readonly>
+                <label for="contact_SSN">Contact SSN:</label>
+                {{form1.contact_SSN}}
             </div>
+            
+            <h3> payment info</h3>
+            {{ form2.as_p}}
+        </form>
 
-            <div class="input-fields">
-                <label>Payment option:</label>
-                <input type="text" value="{{ payment_option }}" readonly>
-            </div>
-
+        
+            <!-- 
             {% if payment_option == 'credit_card' %}
                 <div class="input-fields">
                     <label for="cardholder-name">Cardholder name:</label>
@@ -75,17 +72,40 @@
                     <label for="provider">Mortgage provider:</label>
                     <input type="text" id="provider" name="provider" value="{{ provider }}" readonly>
                 </div>
-            {% endif %}
+            {% endif %} -->
 
             <div class="buttons">
-                <button type="button" onclick="window.history.back()">Go Back</button>
-                <!-- <button type="submit" formaction="{% url 'finalization_success' transaction.id %}">Finalize</button> -->
+                <button type="button" data-id2= "{{ paymentmethod }}" data-id = "{{ transaction.id }}" class= "change-finalize-button">Edit</button>
+                <button type="submit" formaction="{% url 'finalization_success' transaction.id %}">Finalize</button>
             </div>
         </form>
     </div>
     {% include "_footer.html"%}
 </body><script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ChangePaymentInfoOfferBtn = document.querySelector(".change-finalize-button");
+       
+        if (ChangePaymentInfoOfferBtn) {
+            
+            ChangePaymentInfoOfferBtn.addEventListener('click', function() {
+                const transactionID = this.getAttribute('data-id');
+                const paymentmethod = this.getAttribute('data-id2');
 
+                switch(paymentmethod) {
+                            case 'transactionBT':
+                                window.location.href = `/transaction/finalization/${transactionID}/bank-transafer`;
+                                break;
+                            case 'transactionM':
+                                window.location.href = `/transaction/finalization/${transactionID}/mortgage`;
+                                break;
+                            default:
+                                window.location.href = `/transaction/finalization/${transactionID}/credit-card`;
+                              
+                        }
+            });
+        }
+
+    })
     console.log("HELLOO MAAAAAAAA")
 </script>
 </html>

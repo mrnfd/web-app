@@ -59,51 +59,7 @@ class CreditCardForm(forms.ModelForm):
             'contact_name','card_number','expiry_date','CVC'
         ]
 
-#class CreditCardForm(forms.ModelForm):
-#    # Add validators for credit card details
-#    card_number = forms.CharField(
-#        max_length=16,
-#        validators=[
-#            RegexValidator(
-#                regex=r'^\d{16}$',
-#                message='Card number must be 16 digits',
-#                code='invalid_card_number'
-#            )
-#        ],
-#        widget=forms.TextInput(attrs={'placeholder': '1234567890123456'})
-#    )
-#    
-#    expiry_date = forms.DateField(
-#        widget=forms.DateInput(attrs={'type': 'date'})
-#    )
-#    
-#    CVC = forms.CharField(
-#        max_length=4,
-#        validators=[
-#            RegexValidator(
-#                regex=r'^\d{3,4}$',
-#                message='CVC must be 3 or 4 digits',
-#                code='invalid_cvc'
-#            )
-#        ],
-#        widget=forms.TextInput(attrs={'placeholder': '123'})
-#    )
-#    
-#    class Meta:
-#        model = PaymentMethodCreditCard
-#        fields = [
-#            'contact_name',
-#            'card_number',
-#            'expiry_date',
-#            'CVC',
-#        ]
-#        
-#    #def clean_expiry_date(self):
-#    #    # Check if expiry date is in the future
-#    #    expiry_date = self.cleaned_data.get('expiry_date')
-#    #    if expiry_date and expiry_date < date.today():
-#    #        raise forms.ValidationError("The expiry date cannot be in the past.")
-#    #    return expiry_date
+
 
 
 class BankTransferForm(forms.ModelForm):

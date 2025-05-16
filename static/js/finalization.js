@@ -1,3 +1,18 @@
+document.addEventListener('DOMContentLoaded', function() {
+        const ChangeContactInfoBtn = document.querySelector(".back-contact-info-button");
+        console.log("THIS WAS RUNN")
+        if (ChangeContactInfoBtn) {
+            console.log("THIS WAS RUNN")
+            ChangeContactInfoBtn.addEventListener('click', function() {
+                const offerID = this.getAttribute('data-id');
+
+                window.location.href = `/transaction/${offerID}/finalization`;
+
+            });
+        }
+
+    })
+
 function showPaymentFields(method) {
     // Hide all
     document.getElementById('credit-fields').style.display = 'none';
@@ -14,17 +29,3 @@ function showPaymentFields(method) {
     }
   }
 
-document.addEventListener('DOMContentLoaded', function (){
-  
-  const reviewOfferBtn = document.querySelector('.review-offer-button');
-  
-  if (reviewOfferBtn) {
-    
-    reviewOfferBtn.addEventListener('click', function() {
-        const transactionId = this.getAttribute('data-id');
-        console.log(transactionId)
-        window.location.href = `/transaction/finalization/${transactionId}/revision`;
-    });
-  }
-
-});
