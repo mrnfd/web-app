@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Review</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/buyer/finalization_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/finalization_style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -15,27 +15,27 @@
         <form id="finalization-form" method="GET" action="{% url 'finalization_revision' transaction.id paymentmethod %}">
             <h3> contact info</h3>
             <div class="input-fields">
-                <label for="contact-name">Contact name:</label>
+                {{ form1.contact_name.label_tag }}
                 {{form1.contact_name}}
             </div>
             <div class="input-fields">
-                <label for="contact_email">Contact email:</label>
+                {{ form1.contact_email.label_tag }}
                 {{form1.contact_email}}
             </div>
             <div class="input-fields">
-                <label for="contact_street">Contact address:</label>
+                {{ form1.contact_house_number.label_tag }}
                 {{form1.contact_street}} {{form1.contact_house_number}}
             </div>
             <div class="input-fields">
-                <label for="contact_zip">Contact zip:</label>
+                {{ form1.contact_zip.label_tag }}
                 {{form1.contact_zip}}
             </div>
             <div class="input-fields">
-                <label for="contact_country">Contact country:</label>
+                {{ form1.contact_country.label_tag }}
                 {{form1.contact_country}}
             </div>
             <div class="input-fields">
-                <label for="contact_SSN">Contact SSN:</label>
+                {{ form1.contact_SSN.label_tag }}
                 {{form1.contact_SSN}}
             </div>
             
