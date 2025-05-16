@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
+        // Select the button to change contact info, if it exists
         const ChangeContactInfoBtn = document.querySelector(".back-contact-info-button");
-        console.log("THIS WAS RUNN")
+
         if (ChangeContactInfoBtn) {
-            console.log("THIS WAS RUNN")
+            // Add click event to redirect to finalization page with the offer ID
             ChangeContactInfoBtn.addEventListener('click', function() {
                 const offerID = this.getAttribute('data-id');
-
                 window.location.href = `/transaction/${offerID}/finalization`;
 
             });
@@ -14,12 +14,12 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
 function showPaymentFields(method) {
-    // Hide all
+    // Hide all payment method fields
     document.getElementById('credit-fields').style.display = 'none';
     document.getElementById('mortgage-fields').style.display = 'none';
     document.getElementById('bank-fields').style.display = 'none';
 
-    // Show the selected one
+    // Show the fields for the selected payment method
     if (method === 'credit') {
       document.getElementById('credit-fields').style.display = 'block';
     } else if (method === 'mortgage') {
