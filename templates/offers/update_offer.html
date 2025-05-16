@@ -6,19 +6,19 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/buyer/update_offer_style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
     <script src="{% static 'js/offer_filter.js' %}"></script>
 </head>
 <body>
     {% include "_navigation.html" %}
 
     <div class="my-offer-grid" id="offer-listed">
-        <!-- MESSAGES -->
+        <!-- Display messages, including form errors -->
         {% if messages %}
             <div class="errors">
                 {% for msg in messages %}
                     <div>{{ msg }}</div>
                 {% endfor %}
+                <!-- Specific form field error messages -->
                 {% if form.price.errors %}
                     <div class="text-danger">{{ form.price.errors }}</div>
                 {% endif %}
@@ -28,15 +28,17 @@
             </div>
         {% endif %}
 
-
+        <!-- Heading shows listing details dynamically -->
         <h3>Make an Offer for {{ listing.type }} at {{ listing.numb }} {{ listing.street }}</h3>
 
 
         <div class="listing-and-offer">
             <div class="card">
                 <div class="card-body">
+                    <!-- Listing thumbnail -->
                     <img src="/static/{{ listing.thumbnail }}" alt="Listing Photo">
                     <div class="listing-details">
+                        <!-- Listing address and price -->
                         <p><strong>Address:</strong> {{ listing.number }} {{ listing.street }}, {{ listing.zip }} {{ listing.city }}</p>
                         <p><strong>Listed Price:</strong> ${{ listing.price }}</p>
 
@@ -45,18 +47,18 @@
                                 <h5>Your Offer</h5>
                             </div>
                             <div class="form-container">
+                                <!-- Form to update an offer -->
                                 <form id="offer-form" method="post" action="{% url 'update-offer' offer.id %}">
-
                                     {% csrf_token %}
 
                                     <div class="form-group">
                                         <label for="{{ form.price.id_for_label }}">Your Offer Price ($):</label>
-                                        {{ form.price }}
+                                        {{ form.price }} <!-- Render price input -->
                                     </div>
 
                                     <div class="form-group">
                                         <label for="{{ form.expiration_date.id_for_label }}">Offer Valid Until:</label>
-                                        {{ form.expiration_date }}
+                                        {{ form.expiration_date }} <!-- Render expiration date input -->
                                         <small class="form-text text-muted">The expiration date of the offer, please write - as well.</small>
                                     </div>
                                 </form>
@@ -69,7 +71,9 @@
         </div>
 
     <div class="buttons">
+        <!-- Cancel button redirects to my offers page -->
         <button type="button"  onclick="redirectToOffers()">Cancel</button>
+        <!-- Submit button tied to the form -->
         <button type="submit" class="btn btn-primary" form="offer-form">Resubmit Offer</button>
     </div>
         
@@ -79,9 +83,11 @@
 
     <script>
         function redirectToOffers() {
-            // Redirecting directly to the buyer's interface (e.g., catalogue page) without checking login credentials
+            // Redirect to 'my_offers' page on cancel
             window.location.href = "{% url 'my_offers' %}";
         }
+
+        // If there is a sort button, auto-submit filters on change
         const sortSelect = document.getElementById('sort-button');
         if (sortSelect) {
             sortSelect.addEventListener('change', function () {

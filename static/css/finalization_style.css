@@ -1,3 +1,4 @@
+/* Make html and body fill full viewport height and remove default margin */
 html, body {
     height: 100%;
     margin: 0;
@@ -5,10 +6,12 @@ html, body {
     flex-direction: column;
 }
 
+/* Allow body to flex and fill available space */
 body {
     flex: 1;
 }
 
+/* Style form to fill available space, center content vertically and horizontally */
 form {
     flex: 1;
     display: flex;
@@ -16,10 +19,12 @@ form {
     align-items: center;
 }
 
+/* Add margin to form from top */
 #finalization-form {
     margin-top: 2rem;
 }
 
+/* Containers for input fields and payment options - max width and centered */
 .input-fields-container,
 .payment {
     width: 100%;
@@ -27,6 +32,7 @@ form {
     margin: auto;
 }
 
+/* Group form controls and payment options with horizontal layout and spacing */
 .input-fields, .form-control,
 .payment, .payment-fields {
     width: 100%;
@@ -35,6 +41,7 @@ form {
     gap: 1rem;
 }
 
+/* Label styling with fixed width for alignment */
 .input-fields label,
 .form-control label,
 .payment label {
@@ -42,6 +49,7 @@ form {
     width: 150px;
 }
 
+/* Style all input fields for consistency */
 input {
   flex: 1;
   width: 50%;
@@ -55,14 +63,17 @@ input {
   box-sizing: border-box;
 }
 
+/* Highlight input when focused */
 input:focus {
   background-color: #fff;
 }
 
+/* Change border color on hover for better UX */
 input:hover {
   border-color: #888;
 }
 
+/* Specific styles for form controls to add margin and transition */
 .form-control {
     width: 50%;
     padding: 0.2rem;
@@ -75,6 +86,7 @@ input:hover {
     font-family: inherit;
 }
 
+/* Payment options container with horizontal layout and spacing */
 .payment {
     display: flex;
     flex-direction: row;
@@ -85,14 +97,7 @@ input:hover {
     margin: 0 auto 2rem auto;
 }
 
-input:focus {
-  background-color: #fff;
-}
-
-input:hover {
-  border-color: #888;
-}
-
+/* Buttons container with space between and gap */
 .buttons {
     display: flex;
     justify-content: space-between;
@@ -101,6 +106,7 @@ input:hover {
     margin-bottom: 2rem;
 }
 
+/* Styling buttons with rounded edges, subtle border, and hover effect */
 .buttons button {
     padding: 10px 20px;
     font-family: inherit;
@@ -113,11 +119,13 @@ input:hover {
     transition: background-color 0.2s ease-in-out;
 }
 
+/* Change background on hover for buttons */
 .buttons button:hover,
 .buttons input[type="submit"]:hover {
     background-color: #DCDCFF;
 }
 
+/* Footer style: stick to bottom, light background and centered text */
 footer {
     margin-top: auto;
     background-color: #f1f1f1;

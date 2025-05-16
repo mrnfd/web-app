@@ -14,16 +14,17 @@
     <div class="input-fields-container">
         <h2>Register</h2>
 
+        <!-- Loop over Django messages (success, error, warnings) and display them -->
         {% for msg in messages %}
           <div class="message {{ msg.tags }}">
             {{ msg }}
           </div>
         {% endfor %}
 
-
+        <!-- Registration form -->
         <form class="registration-form" method="POST" action="{% url 'register_as_buyer' %}">
             {% csrf_token %}
-
+            <!-- Input fields -->
             <div class="input-field">
                 <label> {{form.username.label}}</label>
                 {{form.username}}
@@ -44,8 +45,11 @@
                 {{form.password2}}
             </div>
 
+            <!-- Buttons container -->
             <div class="buttons">
+                <!-- Go back to previous page -->
                 <button type="button" onclick="window.history.back()">Go back</button>
+                <!-- Submit the form -->
                 <button type="submit">Register</button>
             </div> 
 

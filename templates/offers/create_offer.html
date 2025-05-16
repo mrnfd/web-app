@@ -13,7 +13,7 @@
     {% include "_navigation.html" %}
 
     <div class="my-offer-grid" id="offer-listed">
-        <!-- MESSAGES -->
+        <!-- Display error messages if any -->
         {% if messages %}
             <div class="text-danger">
                 {% for msg in messages %}
@@ -28,14 +28,17 @@
             </div>
         {% endif %}
 
+        <!-- Offer heading with listing type and address -->
         <h3>Make an Offer for {{ listing.type }} at {{ listing.numb }} {{ listing.street }}</h3>
 
 
         <div class="listing-and-offer">
              <div class="card">
                 <div class="card-body">
+                    <!-- Listing image -->
                     <img src="/static/{{ listing.thumbnail }}" alt="Listing Photo">
                     <div class="listing-details">
+                        <!-- Listing address -->
                         <p><strong>Address:</strong> {{ listing.number }} {{ listing.street }}, {{ listing.zip }} {{ listing.city }}</p>
                         <p><strong>Listed Price:</strong> ${{ listing.price }}</p>
 
@@ -47,13 +50,13 @@
                                 <form id="offer-form" method="post" action="{% url 'create-offer' listing.id %}">
 
                                     {% csrf_token %}
-
+                                    <!-- Offer Price input -->
                                     <div class="form-group">
                                         <label for="{{ form.price.id_for_label }}">Your Offer Price ($):</label>
                                         {{ form.price }}
-
                                     </div>
 
+                                    <!-- Offer expiration date input -->
                                     <div class="form-group">
                                         <label for="{{ form.expiration_date.id_for_label }}">Offer Valid Until:</label>
                                         {{ form.expiration_date }}
