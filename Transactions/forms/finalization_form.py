@@ -31,6 +31,7 @@ class TransactionForm(forms.ModelForm):
             'contact_street',
             'contact_house_number',
             'contact_zip',
+            'contact_city',
             'contact_country',
             'contact_SSN',
         ]
