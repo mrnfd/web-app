@@ -72,7 +72,7 @@ class Listing(models.Model):
     size_sqm = models.IntegerField(null=True)
     status = models.CharField(max_length =20,choices = ListingStatus,default = ListingStatus.AVAILABLE)
 
-    thumbnail = models.CharField(max_length=4096,blank=True)
+    thumbnail = models.ImageField(upload_to='property_images/',null=True, blank=True)
     
     def __str__(self):
         return self.street
@@ -85,7 +85,7 @@ class Listing(models.Model):
 class ListingImage(models.Model):
     listing_id = models.ForeignKey(Listing, on_delete=models.CASCADE,related_name='images',null=True)
 
-    image_url =models.CharField(max_length=4096,blank=True)
+    image_url =models.ImageField(upload_to='property_images/',null=True, blank=True)
     thumbnail = models.BooleanField(default=False)
     
 

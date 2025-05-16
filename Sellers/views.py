@@ -2,8 +2,10 @@ from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
+from Listings.forms.create_listing_form import ListingCreateForm, ListingImageForm
 from .models import Seller
-from Listings.models import Listing
+from Listings.models import Listing, ListingImage
 from django.contrib.auth.models import Group
 from .forms import SellerProfileForm, CreateSellerForm
 
@@ -140,13 +142,34 @@ def seller_listings(request):
         "listings": listing_array
     })
 
-@login_required
 def seller_add_listing(request):
-
     if request.method == "POST":
-        form = CreateOfferForm(request.POST)
+        form = ListingCreateForm(request.POST, request.FILES)
+        images_form = ListingImageForm(request.POST, request.FILES)
+        
+        if form.is_valid() and images_form.is_valid():
+            # Save the main listing
+            listing = form.save(commit=False)
+            listing.status = 'AVAILABLE'
+            listing.seller_id= request.user.seller
+            listing.save()
+           
+            images = images_form.save(commit=False)
+            images.listing_id = listing
+            images.save()
+            
+            messages.success(request, 'Listing created successfully')
+            return redirect('listing-by-id', id=listing.id)
+        else:
+            messages.error(request, 'Form submission incorrect')
     else:
-        return render(request, 'seller/create_listing.html')
+        form = ListingCreateForm()
+        images_form = ListingImageForm()
+        
+    return render(request, 'seller/create_listing.html', {
+        'form': form,
+        'form2': images_form,
+    })
 
 @login_required
 def seller_edit_listing(request):
