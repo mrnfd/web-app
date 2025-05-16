@@ -35,7 +35,6 @@ def finalization(request, offer_id):
             # Get the payment option from the form data
             payment_option = request.POST.get('payment_option')
             
-            
             # Redirect based on the payment option
             if payment_option == 'credit_card':
                 return redirect('finalization_credit', transaction_id=transaction.id)
@@ -61,23 +60,26 @@ def finalization(request, offer_id):
                 'transaction_id': None
             })
     else:
-
+        
         try:
             transaction = Transaction.objects.get(offer=offer)
-            if not transaction.finalized:
-                transaction.delete()
             
+            if not transaction.finalized:
+                
+                #transaction.contact_SSN = None
+                form = TransactionForm(instance=transaction)
+            else:
+                messages.error(request, 'Error has occurred the property is currently not available.')
+                return redirect('my_offers') 
         except Transaction.DoesNotExist:
-            pass
-        
-        form = TransactionForm(initial={
-        'contact_email': request.user.email,
-        'contact_name': request.user.buyer.name,
-        'contact_street': request.user.buyer.street,
-        'contact_house_number': request.user.buyer.house_numb,
-        'contact_zip': request.user.buyer.zip_code,
-        'contact_country': request.user.buyer.country,
-        })
+            form = TransactionForm(initial={
+            'contact_email': request.user.email,
+            'contact_name': request.user.buyer.name,
+            'contact_street': request.user.buyer.street,
+            'contact_house_number': request.user.buyer.house_numb,
+            'contact_zip': request.user.buyer.zip_code,
+            'contact_country': request.user.buyer.country,
+            })
         
         return render(request, 'transactions/finalize_offer.html', {
             'form': form,
@@ -87,11 +89,11 @@ def finalization(request, offer_id):
 
 @login_required
 def finalization_credit(request,transaction_id):
-    transaction=get_object_or_404(Transaction,id=transaction_id)
+    transactionX=get_object_or_404(Transaction,id=transaction_id)
     if request.method == "POST":
 
         try:
-            transactionCC = PaymentMethodCreditCard.objects.get(transaction=transaction_id)
+            transactionCC = PaymentMethodCreditCard.objects.get(transaction=transactionX)
             form = CreditCardForm(request.POST,instance=transactionCC)
         except PaymentMethodCreditCard.DoesNotExist:
             form = CreditCardForm(request.POST)
@@ -99,10 +101,10 @@ def finalization_credit(request,transaction_id):
         if form.is_valid():
 
             payment_info = form.save(commit=False)
-            payment_info.transaction = transaction
+            payment_info.transaction = transactionX
             
             payment_info.save()
-            return redirect('finalization_revision', transaction.id,'creditcard')
+            return redirect('finalization_revision', transactionX.id,'creditcard')
             #return render(request,'transactions/finalization_credit.html',{
             #    'form':form,
             #    'transaction':transaction,
@@ -114,10 +116,10 @@ def finalization_credit(request,transaction_id):
             
             # Rendera síðu ánþess að missa upplýsingar
             return render(request,'transactions/finalization_credit.html',{"form":form,
-                                                                           'transaction':transaction,})
+                                                                           'transaction':transactionX,})
     else:
         try:
-            transactionCC = PaymentMethodCreditCard.objects.get(transaction=transaction_id)
+            transactionCC = PaymentMethodCreditCard.objects.get(transaction=transactionX)
             form = CreditCardForm(instance=transactionCC)
             for field in form.fields.values():
                 field.disabled = False
@@ -127,7 +129,7 @@ def finalization_credit(request,transaction_id):
     
         return render(request, 'transactions/finalization_credit.html',{
             'form': form,
-            'transaction':transaction,
+            'transaction':transactionX,
         })
    
 
