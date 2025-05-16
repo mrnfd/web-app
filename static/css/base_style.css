@@ -1,14 +1,17 @@
+/* Make html and body take full height of viewport and remove default margin */
 html, body {
     height: 100%;
     margin: 0;
 }
 
+/* Container for input fields with max width and centered horizontally */
 .input-fields-container {
     flex: 1;
     max-width: 600px;
     margin: auto;
 }
 
+/* Styling for the home screen background and layout */
 .homescreen {
     background-image: url("../images/background.png");
     background-size: cover;
@@ -21,6 +24,7 @@ html, body {
     width: 100%;
 }
 
+/* Style the text input inside homescreen */
 .homescreen input[type=text] {
     font-size: 30px;
     padding: 0.75rem 1.5rem;
@@ -31,6 +35,7 @@ html, body {
     max-width: 1000px;
 }
 
+/* Footer styling */
 footer {
     margin-top: auto;
     background-color: #f1f1f1;

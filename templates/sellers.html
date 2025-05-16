@@ -14,7 +14,7 @@
     <div class="page-container">
         {% include "_navigation.html" %}
         <div class="sellers-page-container">
-            <!-- Search bar -->
+            <!-- Search bar for filtering sellers -->
             <div class="search">
                 <input type="search" id="search-value" name="search" placeholder="Enter sellers name, type, address or city"><button type="button" id="apply-filters" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
@@ -30,8 +30,10 @@
                             <p class="seller-name">{{seller.name}}</p>
                             <p class="seller-type">{{seller.seller_type}}</p>
                             {% if seller.street %}
+                                <!-- Show address only if street is available -->
                                 <p class="seller-address">{{seller.city}}, {{seller.street}} {{seller.house_numb}} <br /></p>
                             {% endif %}
+                            <!-- Link to seller detail page -->
                             <a href="/sellers/{{seller.id}}/"> See more </a>
                         </div>
                     </div>

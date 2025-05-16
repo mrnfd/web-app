@@ -10,35 +10,29 @@
 <body>
     {% include "_navigation.html" %}
 
+    <!-- Display any messages sent by the backend (e.g., login errors) -->
     {% for msg in messages %}
             {{ msg }}
     {% endfor %}
-    
-    
-    <!--<form method="post" action="{% url 'login_as_buyer' %}">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Login">
-    </form> 
-    <div class="registration-link">
-        <a href="{% url 'register_as_buyer' %}">Register here</a>
-    </div> 
-    -->
 
-    
+    <!-- Login form that posts to the 'login_as_buyer' URL -->
     <form method="post" action="{% url 'login_as_buyer' %}">
         {% csrf_token %}
         <div class="credentials-constructor">
             <h3>Login</h3>
+            <!-- Django form rendering -->
             {{ form }}
         </div>
 
         <div class="buttons">
+            <!-- Cancel button returns to previous page -->
             <button type="button" onclick="window.history.back()">Cancel</button>
+            <!-- Submit button to log in -->
             <input type="submit" value="Login">
         </div>
-
     </form>
+
+    <!-- Link to registration page for new users -->
     <div class="registration-link">
         <a href="{% url 'register_as_buyer' %}">Register here</a>
     </div>
@@ -47,7 +41,7 @@
     {% include "_footer.html" %}
     <script>
         function redirectToBuyer() {
-            // Redirecting directly to the buyer's interface (e.g., catalogue page) without checking login credentials
+            // Function to redirect user directly to buyer home page
             window.location.href = "{% url 'buyer_home' %}";
         }
     </script>

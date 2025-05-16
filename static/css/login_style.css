@@ -1,22 +1,26 @@
+/* Set full height for html and body, remove default margin */
 html, body {
     height: 100%;
     margin: 0;
 }
 
+/* Use flex layout for body to arrange content vertically */
 body {
     display: flex;
     flex-direction: column;
 }
 
+/* Container for login inputs */
 .credentials-constructor {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
-    gap: 1rem;
+    margin-top: 100px; /* space from top */
+    gap: 1rem; /* space between inputs */
     font-size: 1.2rem;
 }
 
+/* Style for all input fields inside credentials container */
 .credentials-constructor input {
     width: 300px;
     padding: 10px;
@@ -24,6 +28,7 @@ body {
     border: 1px solid #ccc;
 }
 
+/* Each input row: flex row layout, vertically centered, spaced out */
 .input-row {
     display: flex;
     align-items: center;
@@ -31,13 +36,15 @@ body {
     margin-bottom: 1rem;
 }
 
+/* Label inside input row: fixed width and right-aligned text */
 .input-row label {
     width: 120px;
     text-align: right;
 }
 
+/* Input inside input row: flexible width, padding, font size and styling */
 .input-row input {
-    flex: 1;
+    flex: 1; /* take remaining space */
     width: 300px;
     padding: 10px;
     font-size: 1.1rem;
@@ -45,17 +52,20 @@ body {
     border: 1px solid #cccccc;
 }
 
+/* Container for registration link: center aligned and small margin */
 .registration-link {
     text-align: center;
     margin-top: 0.5rem;
     font-size: 1rem;
 }
 
+/* Style the registration link text color */
 .registration-link a{
     color: #7D7D7D;
 }
 
 
+/* Button container */
 .buttons {
     display: flex;
     justify-content: center;
@@ -63,17 +73,20 @@ body {
     margin-top: 2rem;
 }
 
+/* Style for all buttons inside buttons container */
 .buttons button {
     padding: 10px 20px;
     font-size: 1rem;
-    border-radius: 100px;
+    border-radius: 100px; /* pill-shaped buttons */
     border: 1px solid #cccccc;
     cursor: pointer;
     background-color: #F8F8FF;
     font-family: inherit;
     color: black;
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out; /* smooth hover effect */
 }
+
+/* Submit inputs styled same as buttons */
 .buttons input[type="submit"] {
     padding: 10px 20px;
     font-size: 1rem;
@@ -86,15 +99,18 @@ body {
     transition: background-color 0.2s ease-in-out;
 }
 
+/* Inherit font family for all input elements */
 input {
     font-family: inherit;
 }
 
+/* Hover effect for buttons and submit inputs */
 .buttons button:hover,
 .buttons input[type="submit"]:hover {
     background-color: #DCDCFF;
 }
 
+/* Footer styling */
 footer {
     margin-top: auto;
     background-color: #f1f1f1;
@@ -102,6 +118,7 @@ footer {
     text-align: center;
 }
 
+/* General styling for message boxes: padding, margin, rounded corners */
 .message {
     padding: 10px 15px;
     margin-bottom: 10px;
@@ -109,18 +126,21 @@ footer {
     font-size: 1rem;
 }
 
+/* Success message: green background and border */
 .message.success {
     background-color: #d4edda;
     color: #155724;
     border: 1px solid #c3e6cb;
 }
 
+/* Error message: red background and border */
 .message.error {
     background-color: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
 }
 
+/* Warning message: yellow background and border */
 .message.warning {
     background-color: #fff3cd;
     color: #856404;

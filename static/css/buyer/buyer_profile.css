@@ -1,13 +1,16 @@
+/* Set full height and reset default margin on html and body */
 html body {
     height: 100%;
     margin: 0;
 }
 
+/* Use flexbox for body to arrange content vertically */
 body {
     display: flex;
     flex-direction: column;
 }
 
+/* Main page container for content, centered with max width and padding */
 .page-container {
     display: flex;
     flex-direction: column;

@@ -12,18 +12,21 @@
     <div class="page-container">
 
         <div class="img-container">
+            <!-- Display seller's cover image or fallback placeholder -->
             {% if seller.cover_image %}
                 <img class="cover-img" src="/static/{{ seller.cover_image }}" alt="Cover Image">
             {% else %}
                 <img class="cover-img" src="{% static 'images/seller_photos/banner_placeholder.png' %}" alt="Cover Placeholder">
             {% endif %}
 
+            <!-- Display seller's profile picture or placeholder -->
             {% if seller.profile_image_url %}
                 <img class="seller-profile-picture" src="/static/{{ seller.profile_image_url }}" alt="Profile Picture">
             {% else %}
                 <img class="seller-profile-picture" src="{% static 'images/seller_photos/profile_placeholder.jpg' %}" alt="Profile Picture Placeholder">
             {% endif %}
 
+            <!-- Display seller logo or placeholder -->
             {% if seller.logo %}
                 <img class="logo" src="/static/{{ seller.logo }}" alt="Logo">
             {% else %}
@@ -34,15 +37,18 @@
 
         <div class="details-container">
             <div class="info-container">
+                <!-- Basic seller info -->
                 <p><strong>Name: </strong>{{ seller.name }}</p>
                 <p><strong>Type: </strong>{{ seller.seller_type }}</p>
 
+                <!-- Show address fields only if seller type is "Agency" -->
                 {% if seller.seller_type == "Agency" %}
                     <p><strong>Street: </strong>{{ seller.street }}</p>
                     <p><strong>City: </strong>{{ seller.city }}</p>
                     <p><strong>ZIP: </strong>{{ seller.zip_code }}</p>
                 {% endif %}
 
+                <!-- Seller bio -->
                 <p><strong>Bio: </strong>{{ seller.bio }}</p>
             </div>
 
@@ -50,6 +56,7 @@
                 <p><strong>Properties:</strong></p>
 
                 <div class="property-cards">
+                    <!-- Loop through properties and display each as a card -->
                     {% if properties%}
                         {% for property in properties %}
                             <a href="/catalogue/{{property.id}}">
@@ -66,6 +73,7 @@
                             </a>
                         {% endfor %}
                     {% else %}
+                        <!-- Fallback if no properties available -->
                         <p>No properties available.</p>
                     {% endif %}
                 </div>
@@ -76,11 +84,10 @@
 
     </div>
 
-
+    <!-- Button to go back to previous page -->
     <div class="buttons">
         <button type="button" onclick="window.history.back()">Go Back</button>
     </div>
-
     {% include "_footer.html" %}
 </body>
 </html>
