@@ -6,16 +6,34 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/base_style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script src="{% static 'js/listing_filter.js' %}"></script>
+    
 </head>
 <body>
     {% include "_navigation.html" %}
     <!-- Main content area for the home screen -->
     <div class="homescreen">
         <!-- Search input for address, city, zip code or neighborhood -->
-        <input type="text" placeholder="Enter an address, City, Zip or Neighborhood">
+        <form id="search-form" action="/" method ="get">
+            <input type="text" id="search-value" name="search_filter" placeholder="Enter an address, City, Zip or Neighborhood">
+            <button type="submit" id="apply-filters" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+
+               
     </div>
 
     {% include "_footer.html" %}
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const searchForm = document.getElementById('main-search-form');
+        if (searchForm) {
+          searchForm.addEventListener('submit', function () {
+            
+            const searchInput = document.getElementById('main-search-input').value;
+            window.location.href = `/catalogue/?search_filter=${encodeURIComponent(searchInput)}`;
+            
+          });
+        }
+      });
+    </script>
 </body>
 </html>

@@ -84,5 +84,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchValue = urlParams.get('search_filter');
+    
+    if (searchValue) {
+      const input = document.getElementById('search-value');
+      if (input) input.value = searchValue;
+
+      const button = document.getElementById('apply-filters');
+      if (button) button.click();
+    }
 });
+
 

@@ -16,6 +16,11 @@ from Sellers.models import Seller
 # Create your views here.
 # Render the main base page
 def index(request):
+    search_filter = request.GET.get('search_filter')
+    if search_filter:
+       
+        return redirect(f'/catalogue/?search_filter={search_filter}')
+    
     return render(request, 'buyers/base_buyer.html')
 
 # User registration view for buyers

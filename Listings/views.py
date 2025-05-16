@@ -78,43 +78,21 @@ def catalogue(request):
     if query_params['sort'] in sort_options:
         propertys = propertys.order_by(sort_options[query_params['sort']])
 
-    if filter_applied:     
-        # Return JSON response
-        print("Filters applied, returning JSON response")
-        #property_array = []
-        #for property in propertys:
-        #    property_images = ListingImage.objects.filter(listing_id=property.id)
-        #    thumbnail = property_images.filter(thumbnail=True).first()
-        #    thumbnail_url = thumbnail.image_url
-        #    print("THIS IS MY THUUUUMBNAIAIIAIAL : "+ thumbnail_url)
-        #    property_info = {
-        #        'id': property.id,
-        #        'street': property.street,
-        #        'number': property.number,
-        #        'rooms': property.numb_of_rooms,
-        #        'seller': property.seller_id.id,
-        #        'price': str(property.price),
-        #        'thumbnail': thumbnail_url,
-        #        'type': property.type
-        #    }
-        #    property_array.append(property_info)
-        #return JsonResponse({'propertys':property_array})
-        
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         return JsonResponse({
             'propertys': [{
                 'id': property.id,
                 'street': property.street,
                 'number': property.number,
                 'rooms': property.numb_of_rooms,
-                'seller': Seller.objects.get(id = property.seller_id.id).name ,
+                'seller': Seller.objects.get(id=property.seller_id.id).name,
                 'price': str(property.price),
                 'thumbnail': property.thumbnail,
                 'type': property.type,
                 'status': property.status
             } for property in propertys]
         })
-    
-    # If no filter return normal
+        
     return render(request, "catalogue.html", {
         "propertys": [{
                 'id': property.id,

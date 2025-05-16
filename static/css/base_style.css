@@ -25,7 +25,7 @@ html, body {
 }
 
 /* Style the text input inside homescreen */
-.homescreen input[type=search] {
+.homescreen input[type=text] {
     font-size: 30px;
     padding: 0.75rem 1.5rem;
     border: 2px solid #ccc;
@@ -34,7 +34,7 @@ html, body {
     font-family: inherit;
     max-width: 1000px;
 }
-.homescreen input[type=button] {
+.homescreen input[type=submit] {
     font-size: 30px;
     padding: 0.75rem 1.5rem;
     border: 2px solid #ccc;
