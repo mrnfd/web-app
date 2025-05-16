@@ -9,6 +9,13 @@
 </head>
 <body>
     {% include "_navigation.html" %}
+
+    {% for msg in messages %}
+      <div class="message {{ msg.tags }}">
+        {{ msg }}
+      </div>
+    {% endfor %}
+
     <div class="credentials-constructor">
         <div class="input-row">
             <label for="email">Email: </label>

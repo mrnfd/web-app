@@ -100,6 +100,6 @@ def login_success(request):
     elif request.user.groups.filter(name="buyers_group").exists():
         return redirect('buyer_profile')
     elif request.user.groups.filter(name="sellers_group").exists():
-        return redirect("buyer_profile")
+        return redirect("seller_profile")
     else:
         return redirect("buyer_home")

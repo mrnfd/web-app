@@ -16,6 +16,31 @@ body {
     margin: auto;
 }
 
+.input-field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 700px;
+    margin: 0.5rem 0;
+}
+
+
+.input-field label {
+    flex: 0 0 150px;
+    margin-right: 1rem;
+    font-size: 20px;
+    text-align: right;
+}
+
+.input-field input {
+    flex: 1;
+    padding: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+}
+
 input {
     width: 100%;
     padding: 0.3rem;
@@ -44,36 +69,27 @@ input:hover {
     margin: 0.5rem 0;
 }
 
-.input-field label {
-    flex: 0 0 150px;
-    margin-right: 1rem;
-    font-size: 18px;
-}
-
-.input-field input {
-    flex: 1;
-}
-
 .buttons {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
-    margin-top: 2rem;
+    margin-top: 5rem;
     margin-bottom: 2rem;
 }
 
-.buttons button {
+.buttons button,
+.buttons input[type="submit"] {
+    width: 150px;
     padding: 10px 20px;
     font-family: inherit;
     font-size: 1rem;
-    border-radius: 100px;
+    border-radius: 50px;
     border: 1px solid #cccccc;
     cursor: pointer;
     background-color: #F8F8FF;
     color: black;
     transition: background-color 0.2s ease-in-out;
 }
-
 
 .buttons button:hover,
 .buttons input[type="submit"]:hover {
@@ -85,4 +101,29 @@ footer {
     background-color: #f1f1f1;
     padding: 20px;
     text-align: center;
+}
+
+.message {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.message.warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Seller</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/seller_profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/buyer/seller_profile.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -19,9 +19,9 @@
             {% endif %}
 
             {% if seller.profile_image_url %}
-                <img class="profile-pic" src="/static/{{ seller.profile_image_url }}" alt="Profile Picture">
+                <img class="seller-profile-picture" src="/static/{{ seller.profile_image_url }}" alt="Profile Picture">
             {% else %}
-                <img src="{% static 'images/seller_photos/profile_placeholder.jpg' %}" alt="Profile Picture Placeholder">
+                <img class="seller-profile-picture" src="{% static 'images/seller_photos/profile_placeholder.jpg' %}" alt="Profile Picture Placeholder">
             {% endif %}
 
             {% if seller.logo %}

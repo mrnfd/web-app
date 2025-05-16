@@ -17,34 +17,6 @@ from Sellers.models import Seller
 def index(request):
     return render(request, 'base.html')
 
-#def register(request):
-#    if request.method == 'POST':
-#        form = BuyerProfileForm(request.POST)
-#        if form.is_valid():
-#            messages.success(request, 'Form submission successful')
-#            user = form.save(commit=False)
-#
-#            buyer_form = CreateBuyerForm('user'=user,'email'=user.email)
-#            
-#
-#            form.save()
-#            return redirect('login_as_buyer')
-#        else:
-#            messages.error(request, 'Form submission incorrect')
-#            return redirect('register_as_buyer')
-#    else:
-#        return render(request,'buyers/buyer_register.html', {
-#            'form': BuyerProfileForm()
-#        })
-    #password = request.POST.get('user_pw')
-    #confirm_password = request.POST.get('confirm_pw')
-
-    #if password != confirm_password:
-    #    messages.error(request, "Passwords do not match.")
-    #    return render(request, "buyers/register.html", {})
-
-    #return render(request, "buyers/register.html")
-
 def register(request):
     if request.method == 'POST':
         form = BuyerProfileForm(request.POST)
