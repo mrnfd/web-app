@@ -14,21 +14,21 @@
         <div class="img-container">
             <!-- Display seller's cover image or fallback placeholder -->
             {% if seller.cover_image %}
-                <img class="cover-img" src="/static/{{ seller.cover_image }}" alt="Cover Image">
+                <img class="cover-img" src="/media/{{ seller.cover_image }}" alt="Cover Image">
             {% else %}
                 <img class="cover-img" src="{% static 'images/seller_photos/banner_placeholder.png' %}" alt="Cover Placeholder">
             {% endif %}
 
             <!-- Display seller's profile picture or placeholder -->
             {% if seller.profile_image_url %}
-                <img class="seller-profile-picture" src="/static/{{ seller.profile_image_url }}" alt="Profile Picture">
+                <img class="seller-profile-picture" src="/media/{{ seller.profile_image_url }}" alt="Profile Picture">
             {% else %}
                 <img class="seller-profile-picture" src="{% static 'images/seller_photos/profile_placeholder.jpg' %}" alt="Profile Picture Placeholder">
             {% endif %}
 
             <!-- Display seller logo or placeholder -->
             {% if seller.logo %}
-                <img class="logo" src="/static/{{ seller.logo }}" alt="Logo">
+                <img class="logo" src="/media/{{ seller.logo }}" alt="Logo">
             {% else %}
                 <img class="logo" src="{% static 'images/seller_photos/logo_placeholder.png' %}" alt="Logo Placeholder">
             {% endif %}
@@ -61,7 +61,7 @@
                         {% for property in properties %}
                             <a href="/catalogue/{{property.id}}">
                                 <div  class="property-card">
-                                    <img id="property-img" src="/static/{{ property.thumbnail }}" alt="Property image">
+                                    <img id="property-img" src="/media/{{ property.thumbnail }}" alt="Property image">
                                     <div class="property-info">
                                         <p class="property-address">{{property.street}} {{property.number}} , {{property.type}}</p>
                                         <p class="property-address">Price: {{property.price}}</p>

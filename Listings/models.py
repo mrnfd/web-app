@@ -72,7 +72,7 @@ class Listing(models.Model):
     size_sqm = models.IntegerField(null=True)
     status = models.CharField(max_length =20,choices = ListingStatus,default = ListingStatus.AVAILABLE)
 
-    thumbnail = models.ImageField(upload_to='property_images/',null=True, blank=True)
+    thumbnail =  models.CharField(max_length=4900, null=True, blank=True)
     
     def __str__(self):
         return self.street

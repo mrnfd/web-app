@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         return`
                         <div class="seller-card">
                             <div class="seller-img">
-                                <img src="/static/${ seller.profile_image_url }" alt="Seller image">
+                                <img src="/media/${seller.profile_image_url }" alt="Seller image">
                             </div>
                             <div class="seller-info">
                                 <p class="seller-name">${seller.name}</p>

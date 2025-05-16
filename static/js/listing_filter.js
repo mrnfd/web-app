@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         return`
                         <a href="/catalogue/${property.id}">
                             <div class="property-card">
-                                <img src="/static/${ property.thumbnail }" alt="Property image">
+                                <img src="/media/${ property.thumbnail }" alt="Property image">
                                 <div class="property-info">
                                     <p class="property-address">${property.street} ${property.number}, ${property.type}</p>
                                     <p class="property-address">Price: $${property.price}</p>
