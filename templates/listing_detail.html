@@ -51,7 +51,6 @@
             <p><strong>Type of property: </strong>{{ listing.type }}</p>
             <p><strong>Listing price: </strong>${{ listing.price }}</p>
             <p><strong>Listing date: </strong>{{ listing.listing_date }}</p>
-            <p><strong>Listing status: </strong>{{ listing.status }}</p>
             <div class="seller">
                 <label for="seller-link"><strong>Seller: </strong></label>
                 <div class="seller-card">
@@ -66,10 +65,10 @@
             <label id="toggle-info" style="cursor: pointer;"><strong>Additional information</strong></label>
 
             <div class="additional-info" id="additional-info">
-                    <p>Total number of rooms: {{ listing.rooms }}</p>
-                    <p>Number of bedrooms: {{ listing.num_of_bedrooms }}</p>
-                    <p>Number of bathrooms: {{ listing.num_of_bathrooms }}</p>
-                <p>Number of square meters: {{ listing.num_of_sq_m }}</p>
+                    <p>Total number of rooms: {{ listing.numb_of_rooms }}</p>
+                    <p>Number of bedrooms: {{ listing.bed_rooms }}</p>
+                    <p>Number of bathrooms: {{ listing.bath_rooms }}</p>
+                <p>Number of square meters: {{ listing.size_sqm }}</p>
             </div>
         </div>
 
@@ -89,6 +88,7 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             const createOfferBtn = document.querySelector('.create-offer-button');
+            console.log("hello!")
             if (createOfferBtn) {
                 createOfferBtn.addEventListener('click', function() {
                     const listingId = this.getAttribute('data-id');

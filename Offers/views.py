@@ -19,8 +19,8 @@ def create_offer(request,listing_id):
 
     listing = get_object_or_404(Listing,id=listing_id)
 
-    #buyer = Buyer.objects.get(user=request.user) TODO ----------------
-    buyer = Buyer.objects.get(id=1)
+    buyer = Buyer.objects.get(user=request.user)
+    #buyer = Buyer.objects.get(id=1)
 
     # Skoða hvort til se offer fra buyer fyrir listing
     offer_exists = Offer.objects.filter(

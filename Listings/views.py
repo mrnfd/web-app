@@ -131,8 +131,8 @@ def get_listing_by_id(request,id):
 
     listing = Listing.objects.get(id=id)
     buyer = None
-    
-    buyer = Buyer.objects.get(id=1) # TODO   (bara fyrir testing)
+    #buyer = Buyer.objects.get(user=request.user)
+    #buyer = Buyer.objects.get(id=1) # TODO   (bara fyrir testing)
 
     if request.user.is_authenticated:
         try:
@@ -157,7 +157,7 @@ def get_listing_by_id(request,id):
         button = f'<button data-id = "{listing.id}" class="create-offer-button" > Place a purchase offer</button>'
     elif buyer and offer and listing.status != 'SOLD':
         
-        button = f'<button data-id = "{listing.id}" class="update-offer-button" > Edit offer</button>'
+        button = f'<button data-id = "{offer.id}" class="update-offer-button" > Edit offer</button>'
         #button = f'<button type="button"  onclick = "redirectToUpdate( {{offer.id}} )"> Edit offer </button>'
 
     property_images = ListingImage.objects.filter(listing_id=id)
