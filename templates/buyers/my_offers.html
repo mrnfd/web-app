@@ -42,16 +42,16 @@
                     <div class="property-card">
                         <div class="property-content">
                         <!-- Property thumbnail image -->
-                            <img src="/static/{{ offer.thumbnail }}" alt="Property image">
+                            <img src="/media/{{ offer.thumbnail }}" alt="Property image">
                             <div class="property-details">
                             <!-- Link to the property listing details -->
-                                <a href="/catalogue/{{offer.listing_id}}"> <strong>{{offer.street}} {{offer.house_numb}}, {{offer.zip}} {{offer.city}}, {{offer.type}}</strong></a>
+                                <a href="/catalogue/{{offer.listing_id}}"> <strong>{{offer.street}} {{offer.number}}, {{offer.zip}} {{offer.city}}, {{offer.type}}</strong></a>
                                 <!-- Seller info -->
                                 <div class="seller">
                                     <label for="seller-card">Seller: </label>
                                     <div class="seller-card">
                                         <!-- Seller profile image -->
-                                        <img src="/static/{{ offer.seller_profile_image_url }}" alt="Seller image">
+                                        <img src="/media/{{ offer.seller_profile_image_url }}" alt="Seller image">
                                         <div class="seller-info">
                                             <p class="seller-name">{{offer.seller}}, {{offer.seller_type}} </p>
                                             <!-- Link to seller details page -->

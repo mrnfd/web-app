@@ -54,26 +54,47 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         return `
                         <div class="property-card">
-                            <div class="property-content">
-                                <img src="/static/${offer.thumbnail}" alt="Property image">
-                                <div class="property-details">
-                                    <a href="/catalogue/${offer.listing_id}">
-                                        <strong>${offer.street} ${offer.housenumber || ''}, ${offer.zip} ${offer.city}, ${offer.type}</strong>
-                                    </a>
-                                    <p>Date of submission: ${offer.submission_date}</p>
-                                    <p>Expiration date: ${offer.expiration_date}</p>
-                                    <p>Seller: ${offer.seller}</p>
-                                    <p>Purchase offer price: ${offer.price}$</p>
-                                    <p>Status: <span class="status ${statusClass}">${offer.status}</span></p>
+                        <div class="property-content">
+                        <!-- Property thumbnail image -->
+                            <img src="/media/${ offer.thumbnail }" alt="Property image">
+                            <div class="property-details">
+                            <!-- Link to the property listing details -->
+                                <a href="/catalogue/${offer.listing_id}"> <strong>${offer.street} ${offer.number}, ${offer.zip} ${offer.city}, ${offer.type}</strong></a>
+                                <!-- Seller info -->
+                                <div class="seller">
+                                    <label for="seller-card">Seller: </label>
+                                    <div class="seller-card">
+                                        <!-- Seller profile image -->
+                                        <img src="/media/${ offer.seller_profile_image_url }" alt="Seller image">
+                                        <div class="seller-info">
+                                            <p class="seller-name">${offer.seller}, ${offer.seller_type} </p>
+                                            <!-- Link to seller details page -->
+                                            <a href="/sellers/${offer.seller_id}$/"> See more </a>
+                                        </div>
+                                    </div>
                                 </div>
+
+                                 <!-- Offer submission and expiration dates -->
+                                <p>Date of submission: ${offer.submission_date}</p>
+                                <p>Expiration date: ${offer.expiration_date}</p>
+                                <p>Purchase offer price: ${offer.price}$</p>
+
+                                <p>Offer status: <span class="status ${statusClass}">${offer.status}</span></p>
+                            
                             </div>
-                            <div class="buttons">
-                                <button data-id1 = "${offer.id}" type="button" class="delete-offer-button" >Delete offer</button>
-                                
-                                
+                        </div>
+
+                        <div class="buttons">
+                            <!-- Button to delete offer, with offer id for JS -->
+                            <button data-id1 = "${offer.id}" type="button" class="delete-offer-button" >Delete offer</button>
+                            
+                            <!-- Render any additional offer-specific buttons, unescaped -->
+                            
                                 ${offer.button}
-                            </div>
-                        </div>`;
+                            
+                        </div>
+                    </div>
+                        `;
                     });
 
                      // Update page with offers
@@ -109,3 +130,4 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
