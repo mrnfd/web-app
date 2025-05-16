@@ -15,26 +15,21 @@ def finalization(request, offer_id):
     offer = get_object_or_404(Offer, id=offer_id)
 
     if request.method == "POST":
-
         try:
             transaction = Transaction.objects.get(offer=offer)
             form = TransactionForm(request.POST,instance=transaction)
             for field in form.fields.values():
                 field.disabled = False
-
         except Transaction.DoesNotExist:
             form = TransactionForm(request.POST)
         
         if form.is_valid():
-           
             transaction = form.save(commit=False)
             transaction.offer_id = offer.id
             transaction.save()  # Save to generate an ID
-            
-            
-            # Get the payment option from the form data
+
+            # Determine selected payment option and redirect accordingly
             payment_option = request.POST.get('payment_option')
-            
             # Redirect based on the payment option
             if payment_option == 'credit_card':
                 return redirect('finalization_credit', transaction_id=transaction.id)
@@ -42,7 +37,6 @@ def finalization(request, offer_id):
                 return redirect('finalization_bank', transaction_id=transaction.id)
             elif payment_option == 'mortgage':
                 return redirect('finalization_mortgage', transaction_id=transaction.id)
-            
             else:
                 messages.error(request, 'Invalid payment option selected.')
                 return render(request, 'transactions/finalize_offer.html', {
@@ -51,8 +45,7 @@ def finalization(request, offer_id):
                     'transaction_id': transaction.id
                 })
         else:
-            print("Form is invalid")  # Debug print
-            print(f"Form errors: {form.errors}")  # Debug print to see validation errors
+            # Form is invalid; show error and render form again
             messages.error(request, 'Please correct the errors in the form.')
             return render(request, 'transactions/finalize_offer.html', {
                 "form": form, 
@@ -60,18 +53,16 @@ def finalization(request, offer_id):
                 'transaction_id': None
             })
     else:
-        
         try:
             transaction = Transaction.objects.get(offer=offer)
-            
             if not transaction.finalized:
-                
-                #transaction.contact_SSN = None
                 form = TransactionForm(instance=transaction)
             else:
+                # Prevent editing of finalized transaction
                 messages.error(request, 'Error has occurred the property is currently not available.')
                 return redirect('my_offers') 
         except Transaction.DoesNotExist:
+            # Prefill form with user info if no transaction exists yet
             form = TransactionForm(initial={
             'contact_email': request.user.email,
             'contact_name': request.user.buyer.name,
@@ -80,7 +71,7 @@ def finalization(request, offer_id):
             'contact_zip': request.user.buyer.zip_code,
             'contact_country': request.user.buyer.country,
             })
-        
+
         return render(request, 'transactions/finalize_offer.html', {
             'form': form,
             'offer': offer,
@@ -91,7 +82,6 @@ def finalization(request, offer_id):
 def finalization_credit(request,transaction_id):
     transactionX=get_object_or_404(Transaction,id=transaction_id)
     if request.method == "POST":
-
         try:
             transactionCC = PaymentMethodCreditCard.objects.get(transaction=transactionX)
             form = CreditCardForm(request.POST,instance=transactionCC)
@@ -99,30 +89,21 @@ def finalization_credit(request,transaction_id):
             form = CreditCardForm(request.POST)
 
         if form.is_valid():
-
             payment_info = form.save(commit=False)
             payment_info.transaction = transactionX
-            
             payment_info.save()
             return redirect('finalization_revision', transactionX.id,'creditcard')
-            #return render(request,'transactions/finalization_credit.html',{
-            #    'form':form,
-            #    'transaction':transaction,
-            #    })
-        
         else:
             messages.error(request, 'Form submission incorrect')
-            print(form.errors)
-            
-            # Rendera síðu ánþess að missa upplýsingar
-            return render(request,'transactions/finalization_credit.html',{"form":form,
-                                                                           'transaction':transactionX,})
+            return render(request,'transactions/finalization_credit.html',{
+                "form":form,
+                'transaction':transactionX,})
     else:
         try:
             transactionCC = PaymentMethodCreditCard.objects.get(transaction=transactionX)
             form = CreditCardForm(instance=transactionCC)
             for field in form.fields.values():
-                field.disabled = False
+                field.disabled = False # Allow editing existing values
         except PaymentMethodCreditCard.DoesNotExist:
             form = CreditCardForm()
         
@@ -137,7 +118,6 @@ def finalization_credit(request,transaction_id):
 def finalization_bank(request,transaction_id):
     transaction=get_object_or_404(Transaction,id=transaction_id)
     if request.method == "POST":
-
         try:
             transactionBT = PaymentMethodBankTransfer.objects.get(transaction=transaction_id)
             form = BankTransferForm(request.POST,instance=transactionBT)
@@ -145,21 +125,16 @@ def finalization_bank(request,transaction_id):
             form = BankTransferForm(request.POST)
 
         if form.is_valid():
-
             payment_info = form.save(commit=False)
             payment_info.transaction = transaction
-            
             payment_info.save()
             return redirect('finalization_revision', transaction.id,'banktransfer')
-            
-        
         else:
             messages.error(request, 'Form submission incorrect')
             print(form.errors)
-            
-            # Rendera síðu ánþess að missa upplýsingar
-            return render(request,'transactions/finalization_bank.html',{"form":form,
-                                                                           'transaction':transaction,})
+            return render(request,'transactions/finalization_bank.html',{
+                "form":form,
+                'transaction':transaction,})
     else:
         try:
             transactionBT = PaymentMethodBankTransfer.objects.get(transaction=transaction_id)
@@ -168,8 +143,7 @@ def finalization_bank(request,transaction_id):
                 field.disabled = False
         except PaymentMethodBankTransfer.DoesNotExist:
             form = BankTransferForm()
-        
-    
+
         return render(request, 'transactions/finalization_bank.html',{
             'form': form,
             'transaction':transaction,
@@ -188,20 +162,16 @@ def finalization_mortgage(request,transaction_id):
             form = MortgageForm(request.POST)
 
         if form.is_valid():
-
             payment_info = form.save(commit=False)
             payment_info.transaction = transaction
-            
             payment_info.save()
             return redirect('finalization_revision', transaction.id,'mortgage')
         
         else:
             messages.error(request, 'Form submission incorrect')
-            print(form.errors)
-            
-            # Rendera síðu ánþess að missa upplýsingar
-            return render(request,'transactions/finalization_mortgage.html',{"form":form,
-                                                                           'transaction':transaction,})
+            return render(request,'transactions/finalization_mortgage.html',{
+                "form":form,
+                'transaction':transaction,})
     else:
         try:
             transactionM = PaymentMethodMortgage.objects.get(transaction=transaction_id)
@@ -210,8 +180,7 @@ def finalization_mortgage(request,transaction_id):
                 field.disabled = False
         except PaymentMethodMortgage.DoesNotExist:
             form = MortgageForm()
-        
-    
+
         return render(request, 'transactions/finalization_mortgage.html',{
             'form': form,
             'transaction':transaction,
@@ -227,8 +196,8 @@ def finalization_revision(request,transaction_id,paymentmethod):
     
     else:
         form1 = TransactionForm(instance=transaction)
-
         paymenttype = ''
+        # Load corresponding payment form based on method
         if paymentmethod == 'creditcard':
             paymenttype = 'transactionCC'
             form2 = CreditCardForm(instance=transaction.transactionCC)
@@ -239,17 +208,7 @@ def finalization_revision(request,transaction_id,paymentmethod):
             paymenttype = 'transactionM'
             form2 = MortgageForm(instance=transaction.transactionM)
 
-        #if hasattr(transaction, 'transactionCC'):
-        #    paymentmethod = 'transactionCC'
-        #    form2 = CreditCardForm(instance=transaction.transactionCC)
-        #elif hasattr(transaction, 'transactionBT'):
-        #    paymentmethod = 'transactionBT'
-        #    form2 = BankTransferForm(instance=transaction.transactionBT)
-        #elif hasattr(transaction, 'transactionM'):
-        #    paymentmethod = 'transactionM'
-        #    form2 = MortgageForm(instance=transaction.transactionM)
-
-        # Gera form readonly
+        # Make all fields readonly
         for field in form1.fields.values():
                 field.disabled = True
         for field in form2.fields.values():
@@ -267,7 +226,7 @@ def finalization_success(request,transaction_id):
     transaction = get_object_or_404(Transaction, id=transaction_id)
     transaction.finalized = True
     offer = transaction.offer
-    offer.status = 'BOUGHT'
+    offer.status = 'BOUGHT' # Update status to show it has been purchased
     offer.save()
     transaction.save()
     return render(request, 'transactions/finalization_success.html',{'transaction_id':transaction_id})
@@ -276,36 +235,4 @@ def finalization_success(request,transaction_id):
 def delete_transaction(request,transaction_id):
     transaction = get_object_or_404(Transaction, id=transaction_id)
     transaction.delete()
-    
     return redirect('my_offers')
-
-
-'''
-        contact_name = request.POST.get('contact_name')
-        contact_email = request.POST.get('contact_email')
-        contact_address = request.POST.get('contact_address')
-        contact_zip = request.POST.get('contact_zip')
-        country = request.POST.get('country')
-        contact_id = request.POST.get('contact_id')
-        payment_option = request.POST.get('payment_option')
-
-        cardholder_name = request.POST.get('cardholder_name')
-        card_number = request.POST.get('card_number')
-        expiry_date = request.POST.get('expiry_date')
-        cvc = request.POST.get('cvc')
-        bank_acc = request.POST.get('bank-acc')
-        provider = request.POST.get('provider')
-
-        request.session['contact_name'] = contact_name
-        request.session['contact_email'] = contact_email
-        request.session['contact_address'] = contact_address
-        request.session['contact_zip'] = contact_zip
-        request.session['country'] = country
-        request.session['contact_id'] = contact_id
-        request.session['payment_option'] = payment_option
-        request.session['cardholder_name'] = cardholder_name
-        request.session['card_number'] = card_number
-        request.session['expiry_date'] = expiry_date
-        request.session['cvc'] = cvc
-        request.session['bank_acc'] = bank_acc
-        request.session['provider'] = provider '''

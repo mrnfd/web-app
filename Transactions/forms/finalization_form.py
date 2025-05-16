@@ -11,13 +11,6 @@ class TransactionForm(forms.ModelForm):
     contact_SSN = forms.CharField(
         max_length=10,
         widget=forms.TextInput(attrs={'placeholder': 'XXX-XX-XXXX'}),
-        #validators=[
-        #    RegexValidator(
-        #        regex=r'^\d{3}-\d{2}-\d{4}$',
-        #        message='SSN must be in the format XXX-XX-XXXX',
-        #        code='invalid_ssn'
-        #    )
-        #]
     )
     
     contact_house_number = forms.IntegerField(min_value=1)
@@ -39,13 +32,6 @@ class TransactionForm(forms.ModelForm):
             'contact_country': forms.Select(attrs={'class': 'form-control'}),
             'contact_email': forms.EmailInput(attrs={'class': 'form-control'}),
         }
-        
-    #def clean_contact_SSN(self):
-    #    # Format the SSN if it's entered without dashes
-    #    ssn = self.cleaned_data.get('contact_SSN')
-    #    if ssn and len(ssn) == 9 and ssn.isdigit():
-    #        ssn = f"{ssn[:3]}-{ssn[3:5]}-{ssn[5:]}"
-    #    return ssn
 
 class CreditCardForm(forms.ModelForm):
 

@@ -2,27 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Seller
-#from .forms import SellerProfileForm, CreateSellerForm
+from .forms import SellerProfileForm, CreateSellerForm
 
-"""
 # Create your views here.
-@login_required
-def edit_seller_profile(request, seller_id):
-    seller = get_object_or_404(Seller, pk=seller_id)
-
-    if request.method == "POST":
-        form = SellerProfileForm(request.POST, request.FILES, instance=seller)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Your profile was updated successfully!')
-            return redirect('seller_profile', seller_id=seller_id)
-        else:
-            messages.error(request, 'Please correct the error below.')
-    else:
-        form = SellerProfileForm(instance=seller)
-    return render(request, 'edit_seller_profile.html', {'form': form})
-"""
-
 @login_required
 def seller_home(request):
     return render(request, 'seller/base_seller.html')
@@ -45,7 +27,6 @@ def seller_edit_listing(request):
 
 @login_required
 def seller_profile(request):
-    """
     user_profile = Seller.objects.filter(user=request.user).first()
 
     if request.method == "POST":
@@ -62,5 +43,4 @@ def seller_profile(request):
         return redirect('seller_profile')
 
     return render(request, 'seller/seller_profile.html', {
-        'form': CreateSellerForm(instance=user_profile)})"""
-    return render(request, 'seller/seller_profile.html', {})
+        'form': CreateSellerForm(instance=user_profile)})
