@@ -5,32 +5,36 @@
     <title>Catalogue</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/listing_detail_style.css' %}">
-
 </head>
 <body>
     {% include "_navigation.html" %}
 
+     <!-- Display any Django messages (e.g., success, error) -->
     {% for msg in messages %}
             {{ msg }}
     {% endfor %}
-    <div class="property-card">
 
+    <!-- Main property card container -->
+    <div class="property-card">
         <div class="image-and-status">
-            <!-- IMAGE SLIDESHOW -->
+            <!-- Image slideshow / carousel for property images -->
             <div class="custom-carousel">
                 <div class="carousel-images">
+                    <!-- Main thumbnail image -->
                     <img src="/static/{{ listing.thumbnail }}" class="carousel-item" alt="Property Image">
+                    <!-- Loop through additional images except thumbnails -->
                     {% for image in images %}
                         {% if not image.thumbnail %}
                             <img src="/static/{{ image.image_url }}" class="carousel-item" alt="Property Image">
                         {% endif %}
                     {% endfor %}
                 </div>
+                <!-- Carousel navigation buttons -->
                 <button class="carousel-prev" onclick="moveSlide(-1)">&#10094;</button>
                 <button class="carousel-next" onclick="moveSlide(1)">&#10095;</button>
             </div>
 
-
+            <!-- Show listing status with appropriate color badges -->
             {% if listing.status == "AVAILABLE" %}
                 <p><strong>Listing status: </strong> <span class="status available">{{ listing.status }}</span></p>
             {% elif listing.status == "PENDING" %}
@@ -42,7 +46,7 @@
         </div>
 
 
-        <!-- LISTING INFO -->
+        <!-- Property details section -->
         <div class="property-details">
             <p class="property-address"><strong>Address: </strong>{{listing.street}} {{listing.number}}</p>
             <p class="property-address"><strong>City: </strong>{{listing.city}}</p>
@@ -51,6 +55,7 @@
             <p><strong>Type of property: </strong>{{ listing.type }}</p>
             <p><strong>Listing price: </strong>${{ listing.price }}</p>
             <p><strong>Listing date: </strong>{{ listing.listing_date }}</p>
+            <!-- Seller information -->
             <div class="seller">
                 <label for="seller-link"><strong>Seller: </strong></label>
                 <div class="seller-card">
@@ -62,8 +67,9 @@
                 </div>
             </div>
 
+            <!-- Toggle for additional information -->
             <label id="toggle-info" style="cursor: pointer;"><strong>Additional information</strong></label>
-
+            <!-- Additional property info hidden/shown on toggle -->
             <div class="additional-info" id="additional-info">
                     <p>Total number of rooms: {{ listing.numb_of_rooms }}</p>
                     <p>Number of bedrooms: {{ listing.bed_rooms }}</p>
@@ -74,9 +80,11 @@
 
     </div>
 
+    <!-- Buttons for navigation and form actions -->
     <div class="buttons">
+        <!-- Go back button -->
         <button type="button" onclick="window.history.back()">Go back</button>
-        
+        <!-- Render dynamic button (e.g., Create or Update offer) with autoescape off -->
         {% autoescape off %}
             {{ button }}
         {% endautoescape %}
@@ -84,9 +92,11 @@
 
     {% include "_footer.html" %}
     {% load static %}
+    <!-- Listing detail page JavaScript -->
     <script src="{% static 'js/listing_detail.js' %}">
 
         document.addEventListener('DOMContentLoaded', function() {
+            // Redirect to create offer page when create-offer button clicked
             const createOfferBtn = document.querySelector('.create-offer-button');
             console.log("hello!")
             if (createOfferBtn) {
@@ -95,6 +105,7 @@
                     window.location.href = `/offers/${listingId}/create_offer`;
                 });
             }
+            // Redirect to update offer page when update-offer button clicked
             const updateoffer = document.querySelector('.update-offer-button');
             if (updateoffer) {
                 updateoffer.addEventListener('click', function () {
@@ -105,13 +116,12 @@
 
         });
         
-        
+        // Helper function to redirect to update offer page (called elsewhere)
         function redirectToUpdate(offerID) {
             window.location.href = `/offers/update_offer/${offerID}`;
         };
-
     </script>
-</body>
 
+</body>
 </html>
 

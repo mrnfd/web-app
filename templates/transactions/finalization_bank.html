@@ -4,21 +4,31 @@
     <meta charset="UTF-8">
     <title>Payment</title>
     {% load static %}
-   <link rel="stylesheet" href="{% static 'css/buyer/finalization_payment_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/buyer/finalization_payment_style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     {% include "_navigation.html" %}
 
     <main class="main-content">
-
+        <!-- Container to center form and limit max width -->
         <div class="page-container">
+            <!-- Display any Django messages -->
+            {% if messages %}
+              <div class="messages">
+                {% for message in messages %}
+                  <div class="message {{ message.tags }}">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
 
+            <!-- Payment form posting to bank finalization URL -->
             <form id="payment-form" method="post" action="{% url 'finalization_bank' transaction.id %}">
                 {% csrf_token %}
                 <div class="payment">
-
-
+                    <!-- Bank account input field container -->
                     <div id="bank-fields" class="payment-fields">
                         <div class="input-fields">
                             <label for="provider">Bank account:</label>
@@ -30,14 +40,17 @@
             </form>
         </div>
 
+        <!-- Buttons outside the form to allow 'Back' and 'Submit' -->
         <div class="buttons">
+            <!-- Back button: uses JS (finalization.js) to navigate -->
             <button type="button" data-id="{{ transaction.offer.id }}" class="back-contact-info-button">Back</button>
+             <!-- Submit button triggers form submission -->
             <button type="submit" form="payment-form">Submit</button>
         </div>
 
     </main>
-
     {% include "_footer.html" %}
+     <!-- External JS for button functionality -->
     <script src="{% static 'js/finalization.js' %}"></script>
 
 </body>

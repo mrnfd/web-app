@@ -11,14 +11,17 @@
 </head>
 <body>
     {% include "_navigation.html" %}
+    {% for msg in messages %}
+        {{ msg }}
+    {% endfor %}
     <div class="content-wrapper">
         <div class="page-container">
             <div class="search-container">
-
+                <!-- Search input for address, city, zip, or neighborhood -->
                 <input type="search" id="search-value" name="search" placeholder="Enter an address, City, Zip or Neighborhood">
-
+                <!-- Button to apply search filters -->
                 <button type="button" id="apply-filters" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
-
+                <!-- Dropdown filter for offer status -->
                 <div class="status-filter">
                     <select id="status-filter" name="status">
                             <option value="">Status</option>
@@ -30,35 +33,39 @@
                     </select>
                 </div>
             </div>
-            
-            {% for msg in messages %}
-                {{ msg }}
-            {% endfor %}
 
             <div class="my-offer-grid" id="offer-listed">
+            <!-- Check if there are any offers -->
                 {% if offers %}
+                    <!-- Loop through each offer and display property cards -->
                     {% for offer in offers %}
                     <div class="property-card">
                         <div class="property-content">
+                        <!-- Property thumbnail image -->
                             <img src="/static/{{ offer.thumbnail }}" alt="Property image">
                             <div class="property-details">
+                            <!-- Link to the property listing details -->
                                 <a href="/catalogue/{{offer.listing_id}}"> <strong>{{offer.street}} {{offer.house_numb}}, {{offer.zip}} {{offer.city}}, {{offer.type}}</strong></a>
-
+                                <!-- Seller info -->
                                 <div class="seller">
                                     <label for="seller-card">Seller: </label>
                                     <div class="seller-card">
+                                        <!-- Seller profile image -->
                                         <img src="/static/{{ offer.seller_profile_image_url }}" alt="Seller image">
                                         <div class="seller-info">
                                             <p class="seller-name">{{offer.seller}}, {{offer.seller_type}} </p>
+                                            <!-- Link to seller details page -->
                                             <a href="/sellers/{{offer.seller_id}}/"> See more </a>
                                         </div>
                                     </div>
                                 </div>
 
+                                 <!-- Offer submission and expiration dates -->
                                 <p>Date of submission: {{offer.submission_date}}</p>
                                 <p>Expiration date: {{offer.expiration_date}}</p>
                                 <p>Purchase offer price: {{offer.price}}$</p>
 
+                                <!-- Offer status with conditional styling -->
                                 {% if offer.status == "REJECTED" %}
                                     <p>Offer status: <span class="status rejected">{{offer.status}}</span></p>
                                 {% elif offer.status == "ACCEPTED" %}
@@ -72,19 +79,18 @@
                         </div>
 
                         <div class="buttons">
-
+                            <!-- Button to delete offer, with offer id for JS -->
                             <button data-id1 = "{{offer.id}}" type="button" class="delete-offer-button" >Delete offer</button>
                             
-                                
+                            <!-- Render any additional offer-specific buttons, unescaped -->
                             {% autoescape off %}
                                 {{offer.button}}
                             {% endautoescape %}
-                            <!-- <button type="button" onclick = "redirectToFinalization( '{{offer.id}}' )" >Finalize offer</button>
-                            -->
                         </div>
                     </div>
                     {% endfor %}
                 {% else %}
+                    <!-- Message when there are no offers -->
                     <p> No offers for display</p>
                 {% endif %}
             </div>
@@ -94,11 +100,7 @@
 
 
     {% include "_footer.html" %}
-
-    <script src="{% static 'js/offer_filter.js' %}">
-
-        
-    </script>
-
+     <!-- Link to external JS file for offer filtering -->
+    <script src="{% static 'js/offer_filter.js' %}"></script>
 </body>
 </html>

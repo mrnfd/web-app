@@ -2,17 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Castle Apartments</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/base_style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script src="{% static 'js/listing_filter.js' %}"></script>
 </head>
 <body>
     {% include "_navigation.html" %}
-    <!-- Main content area for the home screen -->
+
+    <!-- Search input field for homescreen -->
     <div class="homescreen">
-        <!-- Search input for address, city, zip code or neighborhood -->
         <input type="text" placeholder="Enter an address, City, Zip or Neighborhood">
     </div>
 

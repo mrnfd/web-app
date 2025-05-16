@@ -1,21 +1,26 @@
+/* Reset html and body height and margin */
 html, body {
     height: 100%;
     margin: 0;
 }
 
+/* Body layout: use flex column to allow footer positioning */
 body {
     display: flex;
     flex-direction: column;
 }
 
+/* Set box-sizing to border-box globally for easier sizing */
 * {
     box-sizing: border-box;
 }
 
+/* Main container padding */
 .catalogue-page-container {
     padding: 1rem 2rem;
 }
 
+/* Container for search bar and filters with spacing and wrapping */
 .search-and-filters {
     display: flex;
     gap: 1rem;
@@ -25,6 +30,7 @@ body {
     flex-shrink: 0;
 }
 
+/* Search input styling */
 .search-and-filters input[type="search"] {
     flex-grow: 1;
     padding: 0.2rem;
@@ -35,32 +41,38 @@ body {
     font-family: 'Times New Roman', serif;
 }
 
+/* Filter container aligns filter elements horizontally with spacing */
 .filter-container {
     display: flex;
     gap: 1rem;
     align-items: center;
 }
 
+/* Price container font size */
 .price-container {
     font-size: 17px;
 }
 
+/* Price range filter layout in column */
 .price-range-filter {
     display: flex;
     flex-direction: column;
 }
 
+/* Price header styling */
 .price-header {
     font-size: 0.9rem;
     margin-bottom: 0.3rem;
 }
 
+/* Price inputs arranged horizontally */
 .price-inputs {
     display: flex;
     gap: 0.5rem;
     align-items: center;
 }
 
+/* Text inputs for min and max price */
 .price-inputs input[type="text"] {
     width: 80px;
     padding: 0.5rem;
@@ -71,6 +83,7 @@ body {
     font-family: 'Times New Roman', serif;
 }
 
+/* Styling for dropdown filters */
 .filter-container .form-select {
     width: auto;
     padding: 0.5rem;
@@ -93,6 +106,7 @@ body {
     flex-shrink: 0;
 }
 
+/* Search button styling */
 .search-button {
     padding: 0.7rem 1.2rem;
     background-color: #DCDCFF;
@@ -104,11 +118,13 @@ body {
     cursor: pointer;
 }
 
+/* Hover effect on search button */
 .search-button:hover {
     background-color: mediumpurple;
     color: white;
 }
 
+/* General styling for select elements */
 select,
 .form-select {
     font-family: 'Times New Roman', serif;
@@ -120,6 +136,7 @@ select,
     flex-shrink: 0;
 }
 
+/* Grid layout for property cards */
 .property-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -127,11 +144,13 @@ select,
     padding: 2rem;
 }
 
+/* Link styling for property cards */
 .property-grid a{
     color: black;
     text-decoration: none;
 }
 
+/* Individual property card styling */
 .property-card {
     display: flex;
     flex-direction: column;
@@ -145,10 +164,12 @@ select,
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Hover scale effect for property card */
 .property-card:hover {
     transform: scale(1.05);
 }
 
+/* Container for property image */
 .property-image {
     width: 100%;
     height: 150px;
@@ -156,6 +177,7 @@ select,
     border-radius: 8px;
 }
 
+/* Image fills the container, with object-fit cover */
 .property-image img{
     width: 100%;
     height: 100%;
@@ -163,12 +185,14 @@ select,
     display: block;
 }
 
+/* Property info container */
 .property-info {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
+/* Status badge for availability with different background colors */
 .status.available {
     background-color: #9CFF9F;
     padding: 0.1rem;
@@ -189,34 +213,41 @@ select,
     justify-content: space-between;
 }
 
+/* Responsive styles for screens up to 768px */
 @media (max-width: 768px) {
+    /* Stack search and filters vertically on small screens */
     .search-and-filters {
         flex-direction: column;
         align-items: flex-start;
     }
 
+     /* Search input full width with min height */
     .search-and-filters input[type="search"] {
         flex-grow: 1;
         width: 100%;
         min-height: 3rem;
     }
 
+    /* Filter container stacked vertically with spacing */
     .filter-container {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
     }
 
+    /* Property grid uses smaller min column width */
     .property-grid {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
 
+    /* Property card width and height become fluid */
     .property-card {
         max-width: 100%;
         height: 100%;
     }
 }
 
+/* Footer styling */
 footer {
     margin-top: auto;
     background-color: #f1f1f1;

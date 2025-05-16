@@ -1,28 +1,26 @@
-// Wait for the DOM to be fully loaded
+// Run after the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     
     function registerSearchButtonHandler(){
-        // Register event handler for search button
         const searchButton = document.getElementById('apply-filters')
-        // when clicked retrive filtered content
+
+        // When the search button is clicked, fetch filtered sellers
         searchButton.addEventListener('click', async function(){
             const searchFilter = document.getElementById('search-value').value;
 
             const sellerPlaceholder = document.getElementById('sellers-listed')
             const url = new URL(window.location.href);
-            url.search = ''; 
+            url.search = '';  // Clear existing query parameters
             
-            // Smiða url bara þeir filterar sem voru include-aðir
-            
+            // Append search filter parameter if present
             url.searchParams.append('search_filter', searchFilter || '');
 
             const response = await fetch(url);
 
             if (response.ok){
-
-                // display filtered content
                 const json = await response.json();
                 if (json.sellers && Array.isArray(json.sellers)) {
+                    // Build HTML for each seller
                     const selleres = json.sellers.map(seller => {
 
                         let agencyInfo = '';

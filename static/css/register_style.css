@@ -1,30 +1,34 @@
+/* Make html and body take full height, remove default margin */
 html, body {
     height: 100%;
     margin: 0;
 }
 
+/* Use flexbox layout in vertical direction for the whole page */
 body {
     display: flex;
     flex-direction: column;
 }
 
+/* Container holding the registration input fields */
 .input-fields-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; /* stack children vertically */
+    align-items: center; /* center horizontally */
     max-width: 600px;
     margin: auto;
 }
 
+/* Each input field row container */
 .input-field {
-    display: flex;
+    display: flex; /* horizontal layout of label and input */
     flex-direction: row;
-    align-items: center;
+    align-items: center; /* vertically align label and input */
     width: 700px;
-    margin: 0.5rem 0;
+    margin: 0.5rem 0; /* vertical spacing between fields */
 }
 
-
+/* Label styling in input fields */
 .input-field label {
     flex: 0 0 150px;
     margin-right: 1rem;
@@ -32,8 +36,9 @@ body {
     text-align: right;
 }
 
+/* Input styling inside input-field */
 .input-field input {
-    flex: 1;
+    flex: 1; /* take remaining space */
     padding: 0.3rem;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -41,8 +46,9 @@ body {
     background-color: #f9f9f9;
 }
 
+/* General input styling applied to all input elements */
 input {
-    width: 100%;
+    width: 100%; /* input fills available width */
     padding: 0.3rem;
     border: 1px solid #cccccc;
     border-radius: 8px;
@@ -53,30 +59,26 @@ input {
     margin: 0.3rem;
 }
 
+/* Input focus style: white background for better visibility */
 input:focus {
     background-color: #ffffff;
 }
 
+/* Input hover style: darker border to indicate interactivity */
 input:hover {
     border-color: #888888;
 }
 
-.input-field {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 600px;
-    margin: 0.5rem 0;
-}
-
+/* Container for form buttons */
 .buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* space between buttons */
     gap: 1rem;
     margin-top: 5rem;
     margin-bottom: 2rem;
 }
 
+/* Styling for buttons inside .buttons container */
 .buttons button,
 .buttons input[type="submit"] {
     width: 150px;
@@ -85,17 +87,19 @@ input:hover {
     font-size: 1rem;
     border-radius: 50px;
     border: 1px solid #cccccc;
-    cursor: pointer;
+    cursor: pointer; /* pointer cursor on hover */
     background-color: #F8F8FF;
     color: black;
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out; /* smooth hover transition */
 }
 
+/* Hover effect for buttons */
 .buttons button:hover,
 .buttons input[type="submit"]:hover {
     background-color: #DCDCFF;
 }
 
+/* Footer styling */
 footer {
     margin-top: auto;
     background-color: #f1f1f1;
@@ -103,6 +107,7 @@ footer {
     text-align: center;
 }
 
+/* Common style for messages (success, error, warning) */
 .message {
     padding: 10px 15px;
     margin-bottom: 10px;
@@ -110,18 +115,21 @@ footer {
     font-size: 1rem;
 }
 
+/* Success message style */
 .message.success {
     background-color: #d4edda;
     color: #155724;
     border: 1px solid #c3e6cb;
 }
 
+/* Error message style */
 .message.error {
     background-color: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
 }
 
+/* Warning message style */
 .message.warning {
     background-color: #fff3cd;
     color: #856404;

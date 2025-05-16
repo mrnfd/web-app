@@ -11,15 +11,17 @@
 <body>
     {% include "_navigation.html" %}
 
+     <!-- Display any Django messages -->
     {% for msg in messages %}
         {{ msg }}
     {% endfor %}
 
-    <!-- The key fix is to include payment options IN the form and remove the JavaScript that prevents submission -->
+    <!-- Finalization form -->
     <form method="post" id="finalization-form" action="{% url 'finalization' offer.id %}">
         {% csrf_token %}
         {{ form }}
-        
+
+        <!-- Payment options radio buttons -->
         <div class="payment">
             <label>Payment option:</label>
             <input type="radio" id="credit-card" name="payment_option" value="credit_card" required>
@@ -30,25 +32,27 @@
             <label for="mortgage">Mortgage</label>
         </div>
 
+         <!-- Buttons -->
         <div class="buttons">
+            <!-- Cancel button navigates back to offers or deletes transaction -->
             <button type="button" data-id="{{ offer.offer.id }}" class="back-to-offers-button">Cancel</button>
-            
+            <!-- Submit button sends form to payment page -->
             <button type="submit" id="go-to-payment">Go to Payment Page</button>
         </div>
     </form>
 
     {% include "_footer.html" %}
-
+    <!-- JavaScript to handle Cancel button functionality -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const BackToOffersBtn = document.querySelector(".back-to-offers-button");
-            
-            if (BackToOffersBtn) {
 
+            if (BackToOffersBtn) {
                 BackToOffersBtn.addEventListener('click', function() {
                     const transactionID = this.getAttribute('data-id');
                     console.log(transactionID)
 
+                    // Redirect to delete transaction if ID is present, else to offers list
                     if (transactionID){
                         window.location.href = `/transaction/finalization/${transactionID}/delete-transaction`;
                     }

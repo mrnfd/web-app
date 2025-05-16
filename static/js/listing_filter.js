@@ -1,11 +1,11 @@
-// Wait for the DOM to be fully loaded
+// Run code after the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     
     function registerSearchButtonHandler(){
-        // Register event handler for search button
+        // Attach click event to the "apply filters" button
         const searchButton = document.getElementById('apply-filters')
-        // when clicked retrive filtered content
         searchButton.addEventListener('click', async function(){
+            // Get filter values from the inputs
             const searchFilter = document.getElementById('search-value').value;
             const minPrice = document.getElementById('min-price-input').value;
             const maxPrice = document.getElementById('max-price-input').value;
@@ -15,10 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const propertyPlaceholder = document.getElementById('properties-listed')
             const url = new URL(window.location.href);
-            url.search = ''; 
+            url.search = '';  // clear existing query parameters
             
-            // Smiða url bara þeir filterar sem voru include-aðir
-            
+             // Append only active filters to the URL
             url.searchParams.append('search_filter', searchFilter || '');
             url.searchParams.append('min_price', minPrice || '');
             url.searchParams.append('max_price', maxPrice || '');
@@ -26,13 +25,13 @@ document.addEventListener('DOMContentLoaded', function() {
             url.searchParams.append('more', moreFilter || '');
             url.searchParams.append('sort', sortBy || '');
 
+            // Fetch filtered properties from the server
             const response = await fetch(url);
 
             if (response.ok){
-
-                // display filtered content
                 const json = await response.json();
                 if (json.propertys && Array.isArray(json.propertys)) {
+                    // Build HTML for each property and update the page
                     const properties = json.propertys.map(property => {
                         let statusclass = "status available";
                         
@@ -63,11 +62,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                         </a>
                     `});
-                    
-                    // Update the content with the filtered properties
+
                     propertyPlaceholder.innerHTML = properties.join('');
                     
                 } else {
+                    // Handle case where no properties match filters
                     console.error('No properties match filter:', json);
                     propertyPlaceholder.innerHTML = '<p> No properties found matching your filters.</p>';
                 } 
@@ -77,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     registerSearchButtonHandler();
 
-
+    // Trigger filter application when sort option changes
     const sortSelect = document.getElementById('sort-button');
     if (sortSelect) {
         sortSelect.addEventListener('change', function () {

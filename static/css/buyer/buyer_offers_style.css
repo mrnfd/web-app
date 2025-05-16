@@ -1,30 +1,29 @@
+/* Make html and body full height and remove default margin */
 html, body {
     height: 100%;
     margin: 0;
 }
 
+/* Use flexbox to make body take full viewport height, column layout */
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
+/* Main wrapper that expands to fill available space */
 .content-wrapper {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
+/* Container for the page content */
 .page-container {
     flex: 1;
 }
 
-.input-fields-container {
-    flex: 1;
-    max-width: 600px;
-    margin: auto;
-}
-
+/* Search container styles: flex row with spacing */
 .search-container {
     display: flex;
     align-items: center;
@@ -33,6 +32,7 @@ body {
     padding: 1rem 2rem;
 }
 
+/* Search input and status dropdown share styles */
 .search-container input[type="search"],
 .status-filter select {
     padding: 10px;
@@ -45,6 +45,7 @@ body {
     height: 40px;
 }
 
+/* Search button styling */
 .search-button {
     padding: 0.2rem 0.5rem;
     background-color: #DCDCFF;
@@ -77,13 +78,14 @@ body {
     font-size: 1rem;
 }
 
+/* Grid container for property offer cards */
 .my-offer-grid {
     display: grid;
-    flex-direction: column;
     gap: 2rem;
     padding: 2rem;
 }
 
+/* Individual property card styling */
 .property-card {
     display: flex;
     flex-direction: column;
@@ -95,21 +97,22 @@ body {
     background-color: white;
     padding: 20px;
 }
+
+/* Property content flex container */
 .property-content {
     display: flex;
     gap: 1.5rem;
     padding: 1rem;
 }
 
+/* Property image */
 .property-image {
     width: 300px;
     height: 200px;
     object-fit: cover;
     margin-right: 8px;
-    max-font-size: 100%;
     max-height: 250px;
 }
-
 
 .property-details {
     flex: 1;
@@ -142,6 +145,7 @@ body {
     padding: 0.2rem;
 }
 
+/* Seller card hover effect */
 .seller-card:hover {
     transform: scale(1.05);
 }
@@ -168,6 +172,7 @@ body {
     display: inline-block;
 }
 
+/* Offer status color coding */
 .status.accepted {
     background-color: #9CFF9F;
 }
@@ -184,6 +189,7 @@ body {
     background-color: #FF9999;
 }
 
+/* Buttons container aligned to the right */
 .buttons {
     display: flex;
     gap: 1rem;
@@ -213,6 +219,7 @@ footer {
     flex-shrink: 0; /* Ensure the footer doesn't shrink */
 }
 
+/* Responsive styles for smaller screens */
 @media (max-width: 768px) {
     .property-content {
         flex-direction: column;

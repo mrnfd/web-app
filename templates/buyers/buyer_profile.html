@@ -9,28 +9,34 @@
 </head>
 <body>
     {% include "_navigation.html" %}
-
+    <!-- Display messages (success, error, warning) from backend -->
     {% for msg in messages %}
       <div class="message {{ msg.tags }}">
         {{ msg }}
       </div>
     {% endfor %}
 
-
+    <!-- Main container for the profile form -->
     <div class="page-container">
+        <!-- Form to update buyer profile, allows file uploads -->
         <form method="post" enctype="multipart/form-data" action="{% url 'buyer_profile' %}">
             {% csrf_token %}
 
             <div class="form-container">
+                <!-- Section for profile picture -->
                 <div class="profile-pic-container">
+                    <!-- Display current profile image -->
                     <img src="/media/{{user.buyer.profile_image_url}}" alt="Profile Picture">
                     <label>Set new profile picture</label>
+                    <!-- File input for new profile image -->
                     <div class="file-input-wrapper">
                         {{ form.profile_image_url }}
                     </div>
                 </div>
 
+                <!-- Container for all textual input fields -->
                 <div class="input-fields-container">
+                    <!-- Each input field with label -->
                     <div class="input-field">
                         <label>{{form.name.label}}</label>
                         {{form.name}}
@@ -62,16 +68,15 @@
                 </div>
             </div>
 
-
+            <!-- Form action buttons -->
             <div class="buttons">
+                 <!-- Go back to previous page -->
                 <button type="button" onclick="window.history.back()">Go Back</button>
+                <!-- Submit updated profile -->
                 <input type="submit" value="Save" onclick="console.log(form)">
             </div>
         </form>
     </div>
-
-    
-
     {% include "_footer.html" %}
 </body>
 </html>

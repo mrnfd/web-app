@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // Initialize event handlers
     registerSearchButtonHandler();
     bindFinalizeOfferButtons();
 
+    // Redirect helper functions
     function redirectToDelete(offerID) {
         window.location.href = `/offers/delete_offer/${offerID}`;
 
@@ -11,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
 
+     // Trigger filter application when status filter changes
     const sortSelect = document.getElementById('status-filter');
     if (sortSelect) {
         sortSelect.addEventListener('change', function () {
@@ -18,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Register the search/filter button click event
     function registerSearchButtonHandler() {
         const searchButton = document.getElementById('apply-filters');
 
@@ -27,8 +31,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const offerPlaceholder = document.getElementById('offer-listed');
             const url = new URL(window.location.href);
-            url.search = '';
+            url.search = '';  // Clear existing query parameters
 
+            // Append active filters to URL
             url.searchParams.append('search_filter', searchFilter || '');
             url.searchParams.append('sort', sortBy || '');
 
@@ -37,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (response.ok) {
                 const json = await response.json();
                 if (json.offers && Array.isArray(json.offers)) {
+                    // Build the HTML for each offer
                     const offerers = json.offers.map(offer => {
                         let statusClass = 'pending';
 
@@ -70,8 +76,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>`;
                     });
 
+                     // Update page with offers
                     offerPlaceholder.innerHTML = offerers.join('');
-                    // Endurbinda finalize event buttona
+                    // Re-bind buttons added dynamically
                     bindFinalizeOfferButtons(); 
                 } else {
                     offerPlaceholder.innerHTML = '<p>No offers found matching your filters.</p>';
@@ -80,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Attach click handlers to dynamic buttons for finalize, delete, and edit
     function bindFinalizeOfferButtons() {
         document.querySelectorAll(".finalize-offer-button").forEach(button => {
             button.addEventListener('click', function () {

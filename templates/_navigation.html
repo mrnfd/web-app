@@ -1,129 +1,71 @@
-<style>
-    .navbar {
-        background-color: #F8F8FF;
-        padding: 1rem;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Navigation</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/_navigation_style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container-fluid">
+             <!-- App logo/title -->
+            <a class="navbar-brand" href="/">Castle Apartments</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <!-- Static navigation links -->
+                    <li class="active">
+                        <a class="new_link" href="{% url 'catalogue' %}">Catalogue</a>
+                    </li>
+                    <li class="active">
+                        <a class="new_link" href="{% url 'sellers' %}">Sellers</a>
+                    </li>
 
-    .container-fluid {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+                    <!-- Conditional rendering if user is logged in -->
+                    {% if user.is_authenticated %}
 
-    .navbar .navbar-brand {
-        font-weight: bolder;
-        font-size: 1.5rem;
-        margin-right: 2rem;
-        text-decoration: none;
-        color: black;
-    }
+                        {% if user.buyer  %}
+                            <!-- Buyer-specific links -->
+                            <li class="active">
+                                <a class="new_link" href="{% url 'my_offers' %}">My offers</a>
+                            </li>
+                            <li class="active">
+                                <a class="new_link" href="{% url 'buyer_profile' %}">
+                                    <img src=" /media/{{user.buyer.profile_image_url}}" alt="Profile Picture" class="profile-pic">
+                                </a>
+                            </li>
+                        {% elif user.seller %}
+                            <!-- Seller-specific links -->
+                            <a class="navbar-brand" href="{% url 'seller_home' %}">Castle Apartments</a>
+                            <li class="active">
+                                <a class="new_link" href="{% url 'seller_offers' %}">Offers</a>
+                            </li>
+                            <li class="active">
+                                <a class="new_link" href="{% url 'manage_listings' %}">Manage Listings</a>
+                            </li>
+                            <li class="active">
+                                <a class="new_link" href="{% url 'profile' %}">
+                                    <img src="/media/{{user.seller.profile_image_url}}" alt="Profile Pic" class="profile-pic">  <!-- Same here for seller -->
+                                </a>
+                            </li>
+                        {% endif %}
 
-    .collapse.navbar-collapse {
-        display: flex;
-        align-items: center;
-    }
-
-    .navbar-nav {
-        list-style: none;
-        display: flex;
-        gap: 1.5rem;
-        margin: 0;
-        padding: 0;
-        align-items: center;
-    }
-
-    .navbar-nav li{
-        display: inline;
-    }
-
-    .new_link {
-       text-decoration: none;
-        color: black;
-        font-weight: 500;
-        font-size: 20px;
-    }
-
-    .new_link:hover{
-        text-decoration: underline;
-    }
-
-    #logIn {
-        padding: 0.5rem 1rem;
-        background-color: #DCDCFF;
-        border: 1px solid #cccccc;
-        color: black;
-        border-radius: 20px;
-        cursor: pointer;
-    }
-
-    #logOut {
-        padding: 0.5rem 1rem;
-        background-color: #DCDCFF;
-        border: 1px solid #cccccc;
-        color: black;
-        border-radius: 20px;
-        cursor: pointer;
-        font: inherit;
-    }
-
-    .profile-pic {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    object-fit: cover;
-    }
-</style>
-
-<nav class="navbar">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">Castle Apartments</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="active">
-                    <a class="new_link" href="{% url 'catalogue' %}">Catalogue</a>
-                </li>
-                <li class="active">
-                    <a class="new_link" href="{% url 'sellers' %}">Sellers</a>
-                </li>
-
-                {% if user.is_authenticated %}
-
-                    {% if user.buyer  %}
+                        <!-- Logout form for authenticated users -->
                         <li class="active">
-                            <a class="new_link" href="{% url 'my_offers' %}">My offers</a>
+                            <form method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="new_link" id="logOut">Logout</button>
+                            </form>
                         </li>
+                    {% else %}
+                        <!-- If not logged in, show login button -->
                         <li class="active">
-                            <a class="new_link" href="{% url 'buyer_profile' %}">
-                                <img src=" /media/{{user.buyer.profile_image_url}}" alt="Profile Picture" class="profile-pic">
-                            </a>
-                        </li>
-                    {% elif user.seller %}
-                        <a class="navbar-brand" href="{% url 'seller_home' %}">Castle Apartments</a>
-                        <li class="active">
-                            <a class="new_link" href="{% url 'seller_offers' %}">Offers</a>
-                        </li>
-                        <li class="active">
-                            <a class="new_link" href="{% url 'manage_listings' %}">Manage Listings</a>
-                        </li>
-                        <li class="active">
-                            <a class="new_link" href="{% url 'profile' %}">
-                                <img src="/media/{{user.seller.profile_image_url}}" alt="Profile Pic" class="profile-pic">  <!-- Same here for seller -->
-                            </a>
+                            <a class="new_link" id="logIn" href="{% url 'log_in' %}">Log In</a>
                         </li>
                     {% endif %}
-                    <li class="active">
-                        <form method="post" action="{% url 'logout' %}">
-                            {% csrf_token %}
-                            <button type="submit" class="new_link" id="logOut">Logout</button>
-                        </form>
-                    </li>
-                {% else %}
-                    <li class="active">
-                        <a class="new_link" id="logIn" href="{% url 'log_in' %}">Log In</a>
-                    </li>
-                {% endif %}
-            </ul>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
-
+    </nav>
+</body>
+</html>

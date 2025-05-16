@@ -10,14 +10,15 @@ from Offers.models import Offer
 from django.db.models import Q
 
 # Create your views here.
-
-# Er að assume-a að listing object heiti Listing
+# Assumes that the listing model is named Listing
 
 def catalogue(request):
-    # Check if filtering is applied
+    # Check if any filtering parameters are present in the GET request
     filter_applied = any(param in request.GET for param in ['search_filter', 'min_price', 'max_price', 'type', 'more'])
+    # Start with all listings
     propertys = Listing.objects.all()
 
+    # Extract possible query parameters from GET request
     query_params = {
         'search_filter': request.GET.get('search_filter'),
         'min_price': request.GET.get('min_price'),
@@ -26,28 +27,29 @@ def catalogue(request):
         'more': request.GET.get('more'),
         'sort': request.GET.get('sort'),
     }
-    
-    # Þarf að chekka fyrir hverja tegund af filter
 
+    # Apply search filter: search across city, zip, number, and street fields (case-insensitive)
     if query_params['search_filter']:
         search_filter = request.GET.get('search_filter', '')
         if search_filter and search_filter != '':
             propertys = propertys.filter(
-                Q(city__icontains=search_filter) | 
-                #Q(neighborhood__icontains=search_filter) | 
+                Q(city__icontains=search_filter) |
                 Q(zip__icontains=search_filter) |
                 Q(number__icontains=search_filter) |
                 Q(street__icontains=search_filter) 
             )
 
+    # Filter by minimum price if valid
     if query_params['min_price']:
         min_price = request.GET.get('min_price', '')
         if min_price and min_price.strip():
             try:
                 propertys = propertys.filter(price__gte=float(min_price))
             except ValueError:
+                # Ignore invalid min_price values (non-numeric)
                 pass
-    
+
+    # Filter by maximum price if valid
     if query_params['max_price']:
         max_price = request.GET.get('max_price', '')
         if max_price and max_price.strip():
@@ -169,40 +171,3 @@ def get_listing_by_id(request,id):
         "seller":seller,
         "button":button
     })
-
-
-# Fyrir testing
-#propertys = [
-#    {
-#        'id': 1,
-#        'street': 'Main St',
-#        'number': '121',
-#        'zip': '10001',
-#        'rooms': '331',
-#        'seller':'McJohn',
-#    },
-#    {
-#        'id': 2,
-#        'street': 'Main St',
-#        'number': '122',
-#        'zip': '10001',
-#        'rooms': '332',
-#        'seller':'McJeff',
-#    },
-#    {
-#        'id': 3,
-#        'street': 'Main St',
-#        'number': '123',
-#        'zip': '10001',
-#        'rooms': '333',
-#        'seller':'McClause',
-#    },
-#    {
-#        'id': 4,
-#        'street': 'Main St',
-#        'number': '124',
-#        'zip': '10001',
-#        'rooms': '334',
-#        'seller':'McGeorge',
-#    },
-#]
