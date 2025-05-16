@@ -35,9 +35,10 @@
         <div class="listings-grid" id="listing-listed">
             {% if listings %}
                 {% for property in listings %}
+                    
                     <a href="{% url 'listing-by-id' id=property.id %}">
                         <div class="property-card">
-                            <img src="/static/{{ property.thumbnail }}" alt="Property image">
+                            <img src="/media/{{ property.thumbnail }}" alt="Property image">
                             <div class="property-info">
                                 <p class="property-address">{{property.street}} {{property.number}} , {{property.type}}</p>
 
@@ -71,35 +72,6 @@
 
     {% include '_footer.html' %}
 
-
-
-
-
-
-
-       <!-- <div class="listing-card">
-                {% for listing in listings %}
-                    <a href="{% url 'listing-by-id' id=property.id %}">
-                        <div class="property-card">
-                            <img src="/static/{{ listing.thumbnail }}" alt="Property image">
-                            <div class="property-info">
-                                <p class="listing-address"><strong>{{listing.street}} {{listing.number}} , {{listing.type}}</strong></p>
-                                <p class="listing-description"><strong>Description: </strong>{{listing.description}}</p>
-                                <p><strong>Rooms:</strong> {{listing.rooms}}</p>
-                                {% if listing.status == "AVAILABLE" %}
-                                    <p><strong>Listing status: </strong> <span class="status available">{{ listing.status }}</span></p>
-                                {% elif listing.status == "PENDING" %}
-                                    <p><strong>Listing status: </strong> <span class="status pending">{{ listing.status }}</span></p>
-                                {% elif listing.status == "SOLD" %}
-                                    <p><strong>Listing status: </strong> <span class="status sold">{{ listing.status }}</span></p>
-                                {% endif %}
-
-                            </div>
-                        </div>
-
-                    </a>
-                {% endfor %}
-            </div> -->
 
 </body>
 </html>
