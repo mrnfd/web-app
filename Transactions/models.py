@@ -47,7 +47,7 @@ class Transaction(models.Model):
 
 
 class PaymentMethodCreditCard(models.Model):
-    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE,related_name='transactionCC')
+    transaction = models.OneToOneField(Transaction,on_delete=models.CASCADE,related_name='transactionCC')
 
     contact_name = models.CharField(max_length=255)
     card_number = models.CharField(max_length=16)
@@ -55,11 +55,11 @@ class PaymentMethodCreditCard(models.Model):
     CVC = models.CharField(max_length=4)
 
 class PaymentMethodBankTransfer(models.Model):
-    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE,related_name='transactionBT')
+    transaction = models.OneToOneField(Transaction,on_delete=models.CASCADE,related_name='transactionBT')
 
     bank_account =  models.CharField(max_length=17)
 
 class PaymentMethodMortgage(models.Model):
-    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE,related_name='transactionM')
+    transaction = models.OneToOneField(Transaction,on_delete=models.CASCADE,related_name='transactionM')
 
     mortgage_provider =  models.CharField(max_length=255)

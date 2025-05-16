@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from Listings.models import Listing
 from Buyers.models import Buyer
 from Offers.models import Offer
-from Transactions.models import Transaction
+from Transactions.models import Transaction, PaymentMethodCreditCard, PaymentMethodBankTransfer, PaymentMethodMortgage
 import datetime
 
 @login_required
@@ -82,15 +82,19 @@ def finalization(request, offer_id):
 def finalization_credit(request,transaction_id):
     transaction=get_object_or_404(Transaction,id=transaction_id)
     if request.method == "POST":
-        
-        form = CreditCardForm(request.POST)
+
+        try:
+            transactionCC = PaymentMethodCreditCard.objects.get(transaction=transaction_id)
+            form = CreditCardForm(request.POST,instance=transactionCC)
+        except PaymentMethodCreditCard.DoesNotExist:
+            form = CreditCardForm(request.POST)
 
         if form.is_valid():
 
             payment_info = form.save(commit=False)
-            payment_info.transaction_id = transaction
+            payment_info.transaction = transaction
             
-            #payment_info.save()
+            payment_info.save()
             return render(request,'transactions/finalization_credit.html',{
                 'form':form,
                 'transaction':transaction,
@@ -104,23 +108,108 @@ def finalization_credit(request,transaction_id):
             return render(request,'transactions/finalization_credit.html',{"form":form,
                                                                            'transaction':transaction,})
     else:
+        try:
+            transactionCC = PaymentMethodCreditCard.objects.get(transaction=transaction_id)
+            form = CreditCardForm(instance=transactionCC)
+        except PaymentMethodCreditCard.DoesNotExist:
+            form = CreditCardForm()
+        
     
         return render(request, 'transactions/finalization_credit.html',{
-            'form': CreditCardForm(),
+            'form': form,
             'transaction':transaction,
         })
    
 
 @login_required
-def finalization_bank(request):
-    return render(request, 'transactions/finalization_bank.html')
+def finalization_bank(request,transaction_id):
+    transaction=get_object_or_404(Transaction,id=transaction_id)
+    if request.method == "POST":
+
+        try:
+            transactionBT = PaymentMethodBankTransfer.objects.get(transaction=transaction_id)
+            form = BankTransferForm(request.POST,instance=transactionBT)
+        except PaymentMethodBankTransfer.DoesNotExist:
+            form = BankTransferForm(request.POST)
+
+        if form.is_valid():
+
+            payment_info = form.save(commit=False)
+            payment_info.transaction = transaction
+            
+            payment_info.save()
+            return render(request,'transactions/finalization_bank.html',{
+                'form':form,
+                'transaction':transaction,
+                })
+        
+        else:
+            messages.error(request, 'Form submission incorrect')
+            print(form.errors)
+            
+            # Rendera síðu ánþess að missa upplýsingar
+            return render(request,'transactions/finalization_bank.html',{"form":form,
+                                                                           'transaction':transaction,})
+    else:
+        try:
+            transactionBT = PaymentMethodBankTransfer.objects.get(transaction=transaction_id)
+            form = BankTransferForm(instance=transactionBT)
+        except PaymentMethodBankTransfer.DoesNotExist:
+            form = BankTransferForm()
+        
+    
+        return render(request, 'transactions/finalization_bank.html',{
+            'form': form,
+            'transaction':transaction,
+        })
+    
 
 @login_required
-def finalization_mortgage(request):
-    return render(request, 'transactions/finalization_mortgage.html')
+def finalization_mortgage(request,transaction_id):
+    transaction=get_object_or_404(Transaction,id=transaction_id)
+    if request.method == "POST":
+
+        try:
+            transactionM = PaymentMethodMortgage.objects.get(transaction=transaction_id)
+            form = MortgageForm(request.POST,instance=transactionM)
+        except PaymentMethodMortgage.DoesNotExist:
+            form = MortgageForm(request.POST)
+
+        if form.is_valid():
+
+            payment_info = form.save(commit=False)
+            payment_info.transaction = transaction
+            
+            payment_info.save()
+            return render(request,'transactions/finalization_mortgage.html',{
+                'form':form,
+                'transaction':transaction,
+                })
+        
+        else:
+            messages.error(request, 'Form submission incorrect')
+            print(form.errors)
+            
+            # Rendera síðu ánþess að missa upplýsingar
+            return render(request,'transactions/finalization_mortgage.html',{"form":form,
+                                                                           'transaction':transaction,})
+    else:
+        try:
+            transactionM = PaymentMethodMortgage.objects.get(transaction=transaction_id)
+            form = MortgageForm(instance=transactionM)
+        except PaymentMethodMortgage.DoesNotExist:
+            form = MortgageForm()
+        
+    
+        return render(request, 'transactions/finalization_mortgage.html',{
+            'form': form,
+            'transaction':transaction,
+        })
+    
 
 @login_required
-def finalization_revision(request):
+def finalization_revision(request,transaction_id):
+    transaction=get_object_or_404(Transaction,id=transaction_id)
     contact_name = request.session.get('contact_name')
     contact_email = request.session.get('contact_email')
     contact_address = request.session.get('contact_address')
@@ -150,11 +239,13 @@ def finalization_revision(request):
         'cvc': cvc,
         'bank_acc': bank_acc,
         'provider': provider,
+
+        'transaction':transaction
     })
 
 @login_required
-def finalization_success(request):
-    return render(request, 'transactions/finalization_success.html')
+def finalization_success(request,transaction_id):
+    return render(request, 'transactions/finalization_success.html',{'transaction_id':transaction_id})
 
 
 

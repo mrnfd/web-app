@@ -13,3 +13,18 @@ function showPaymentFields(method) {
       document.getElementById('bank-fields').style.display = 'block';
     }
   }
+
+document.addEventListener('DOMContentLoaded', function (){
+  
+  const reviewOfferBtn = document.querySelector('.review-offer-button');
+  
+  if (reviewOfferBtn) {
+    
+    reviewOfferBtn.addEventListener('click', function() {
+        const transactionId = this.getAttribute('data-id');
+        console.log(transactionId)
+        window.location.href = `/transaction/finalization/${transactionId}/revision`;
+    });
+  }
+
+});
