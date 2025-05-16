@@ -25,8 +25,13 @@ document.addEventListener('DOMContentLoaded', function() {
             url.searchParams.append('more', moreFilter || '');
             url.searchParams.append('sort', sortBy || '');
 
-            // Fetch filtered properties from the server
-            const response = await fetch(url);
+            // Fetch filtered properties from the server specifically as AJAX
+            
+            const response = await fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest' 
+                }
+            });
 
             if (response.ok){
                 const json = await response.json();
