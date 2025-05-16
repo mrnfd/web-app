@@ -7,6 +7,38 @@ from django.utils import timezone
 
 from Offers.models import Offer
 
+class City(models.TextChoices):
+    NEW_YORK = 'NEW_YORK', 'New York'
+    LOS_ANGELES = 'LOS_ANGELES', 'Los Angeles'
+    LONDON = 'LONDON', 'London'
+    PARIS = 'PARIS', 'Paris'
+    BERLIN = 'BERLIN', 'Berlin'
+    TOKYO = 'TOKYO', 'Tokyo'
+    SEOUL = 'SEOUL', 'Seoul'
+    SHANGHAI = 'SHANGHAI', 'Shanghai'
+    BEIJING = 'BEIJING', 'Beijing'
+    MUMBAI = 'MUMBAI', 'Mumbai'
+    DELHI = 'DELHI', 'Delhi'
+    SYDNEY = 'SYDNEY', 'Sydney'
+    TORONTO = 'TORONTO', 'Toronto'
+    VANCOUVER = 'VANCOUVER', 'Vancouver'
+    RIO_DE_JANEIRO = 'RIO_DE_JANEIRO', 'Rio de Janeiro'
+    MEXICO_CITY = 'MEXICO_CITY', 'Mexico City'
+    DUBAI = 'DUBAI', 'Dubai'
+    SINGAPORE = 'SINGAPORE', 'Singapore'
+    MOSCOW = 'MOSCOW', 'Moscow'
+    JOHANNESBURG = 'JOHANNESBURG', 'Johannesburg'
+    REYKJAVIK = 'REYKJAVIK', 'Reykjavík'
+    ROME = 'ROME', 'Rome'
+    BARCELONA = 'BARCELONA', 'Barcelona'
+    AMSTERDAM = 'AMSTERDAM', 'Amsterdam'
+    BANGKOK = 'BANGKOK', 'Bangkok'
+    HONG_KONG = 'HONG_KONG', 'Hong Kong'
+    CHICAGO = 'CHICAGO', 'Chicago'
+    SAN_FRANCISCO = 'SAN_FRANCISCO', 'San Francisco'
+    MIAMI = 'MIAMI', 'Miami'
+    CAIRO = 'CAIRO', 'Cairo'
+
 class Country(models.TextChoices):
     UNITED_STATES = 'UNITED_STATES', 'United States'
     CANADA = 'CANADA', 'Canada'
@@ -43,6 +75,7 @@ class Transaction(models.Model):
     contact_street = models.CharField(max_length=255)
     contact_house_number = models.IntegerField()
     contact_zip = models.IntegerField()
+    contact_city = models.CharField(max_length =30,choices = City)
     contact_country = models.CharField(max_length =30,choices = Country)
     contact_SSN = models.CharField(max_length=10)
 

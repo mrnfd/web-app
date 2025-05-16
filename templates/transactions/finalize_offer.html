@@ -19,7 +19,47 @@
     <!-- Finalization form -->
     <form method="post" id="finalization-form" action="{% url 'finalization' offer.id %}">
         {% csrf_token %}
-        {{ form }}
+        
+        <div class="input-fields">
+                <label for="contact-name">Contact name:</label>
+                
+                {{ form.contact_name }}
+            </div>
+
+            <div class="input-fields">
+                <label for="contact-email">Contact email:</label>
+                {{ form.contact_email }}
+            </div>
+
+            <div class="input-fields">
+                <label for="contact-address">Contact street: </label>
+                {{ form.contact_street }} 
+            </div>
+
+            <div class="input-fields">
+                <label for="contact-address">Contact house number: </label>
+                {{ form.contact_house_number }}
+            </div>
+
+            <div class="input-fields">
+                <label for="contact-zip">Contact ZIP: </label>
+                {{ form.contact_zip }}
+            </div>
+
+            <div class="input-fields">
+                <label for="city">City:</label>
+                {{ form.contact_city }}
+            </div>
+
+            <div class="input-fields">
+                <label for="country">Country:</label>
+                {{ form.contact_country }}
+            </div>
+
+            <div class="input-fields">
+                <label for="contact-id">National ID:</label>
+                {{ form.contact_SSN }}
+            </div>
 
         <!-- Payment options radio buttons -->
         <div class="payment">

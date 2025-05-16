@@ -30,14 +30,14 @@ class Country(models.TextChoices):
 class Buyer(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
 
-    name = models.CharField(max_length=100,null=True)
+    name = models.CharField(max_length=100,null=True,blank=True)
     email = models.EmailField(unique=True)
-    contact_number = models.CharField(max_length=20,null=True)
+    contact_number = models.CharField(max_length=20,null=True,blank=True)
     profile_image_url = models.ImageField(upload_to='images/',null=True, blank=True)
     
     street = models.CharField(max_length=255, null=True, blank=True)
     house_numb = models.CharField(max_length=255, null=True, blank=True)
-    zip_code = models.IntegerField(null=True)
+    zip_code = models.IntegerField(null=True,blank=True)
     country = models.CharField(max_length =30,choices = Country, default='ICELAND')
 
     def __str__(self):
