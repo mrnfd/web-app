@@ -27,6 +27,7 @@ urlpatterns = [
     path('', include('Buyers.urls')),
     path('catalogue/', include('Listings.urls')),
     path('offers/', include('Offers.urls')),
+    path('transaction/', include('Transactions.urls')),
 
     path('login_success/', views.login_success, name='login_success'),
     

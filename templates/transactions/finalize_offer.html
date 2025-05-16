@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Finalization</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/finalization_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    {% include "_navigation.html" %}
+
+    {% for msg in messages %}
+        {{ msg }}
+    {% endfor %}
+
+    <!-- The key fix is to include payment options IN the form and remove the JavaScript that prevents submission -->
+    <form method="post" id="finalization-form" action="{% url 'finalization' offer.id %}">
+        {% csrf_token %}
+        {{ form }}
+        
+        <div class="payment">
+            <label>Payment option:</label>
+            <input type="radio" id="credit-card" name="payment_option" value="credit_card" required>
+            <label for="credit-card">Credit card</label>
+            <input type="radio" id="bank_transfer" name="payment_option" value="bank_transfer" required>
+            <label for="bank_transfer">Bank transfer</label>
+            <input type="radio" id="mortgage" name="payment_option" value="mortgage" required>
+            <label for="mortgage">Mortgage</label>
+        </div>
+
+        <div class="buttons">
+            <button type="button" data-id="{{ offer.offer.id }}" class="back-to-offers-button">Cancel</button>
+            
+            <button type="submit" id="go-to-payment">Go to Payment Page</button>
+        </div>
+    </form>
+
+    {% include "_footer.html" %}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const BackToOffersBtn = document.querySelector(".back-to-offers-button");
+            
+            if (BackToOffersBtn) {
+
+                BackToOffersBtn.addEventListener('click', function() {
+                    const transactionID = this.getAttribute('data-id');
+                    console.log(transactionID)
+                    
+                    window.location.href = `/transaction/finalization/${transactionID}/delete-transaction`;
+                })
+            }
+
+        })
+    </script>
+</body>
+</html>

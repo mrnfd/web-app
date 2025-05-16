@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{% static 'css/buyer/buyer_offers_style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <script src="{% static 'js/offer_filter.js' %}"></script>
+    <script ></script>
 </head>
 <body>
     {% include "_navigation.html" %}
@@ -75,7 +75,11 @@
 
                             <button type="button" onclick = "redirectToDelete( '{{offer.id}}' )" >Delete offer</button>
                             <button type="button"  onclick = "redirectToUpdate( '{{offer.id}}' )">Edit offer</button>
-                             <button type="button" onclick = "redirectToFinalization()" >Finalize offer</button>
+                            {% autoescape off %}
+                                {{offer.button}}
+                            {% endautoescape %}
+                            <!-- <button type="button" onclick = "redirectToFinalization( '{{offer.id}}' )" >Finalize offer</button>
+                            -->
                         </div>
                     </div>
                     {% endfor %}
@@ -90,25 +94,9 @@
 
     {% include "_footer.html" %}
 
-    <script>
-        function redirectToFinalization() {
-            // Redirecting directly to the buyer's interface (e.g., catalogue page) without checking login credentials
-            window.location.href = "{% url 'finalization' %}";
-        }
-        function redirectToDelete(offerID) {
-            window.location.href = `/offers/delete_offer/${offerID}`;
-        }
+    <script src="{% static 'js/offer_filter.js' %}">
 
-        function redirectToUpdate(offerID) {
-            window.location.href = `/offers/update_offer/${offerID}`;
-        }
-        //document.querySelector('.ToFinalizeOffer-button').addEventListener('click', function () {
-        //    window.location.href = "{% url 'finalization' %}";
-        //});
-        //document.querySelector('.DeleteOffer-button').addEventListener('click', function () {
-        //    window.location.href = `/offers/delete_offer/${this.dataset.id}`;
-        //
-        //});
+        
     </script>
 
 </body>

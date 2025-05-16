@@ -67,6 +67,7 @@ def delete_offer(request,id):
     offer.delete()
     messages.error(request, 'Offer deleted successfully')
     return redirect('my_offers')
+
 @login_required
 def update_offer(request,offer_id):
     offer = get_object_or_404(Offer,id=offer_id)

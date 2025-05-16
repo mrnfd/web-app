@@ -21,4 +21,4 @@ class Offer(models.Model):
     status = models.CharField(max_length=20, choices=OfferStatus.choices, default=OfferStatus.PENDING)
     
     def __str__(self):
-        return f"Offer #{self.id} for {self.property_listing.type},{self.property_listing.numb} {self.property_listing.street}"
+        return f"Offer #{self.id} for {self.property_listing.type},{self.property_listing.number} {self.property_listing.street}"

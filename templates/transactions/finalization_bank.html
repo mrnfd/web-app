@@ -14,14 +14,15 @@
 
         <div class="page-container">
 
-            <form id="payment-form" method="post" action="{% url 'finalization_credit' %}">
+            <form id="payment-form" method="post" action="{% url 'finalization_bank' transaction.id %}">
                 {% csrf_token %}
                 <div class="payment">
 
-                    <div id="mortgage-fields" class="payment-fields">
+
+                    <div id="bank-fields" class="payment-fields">
                         <div class="input-fields">
-                            <label for="provider">Mortgage provider:</label>
-                            <input type="text" id="provider" name="provider">
+                            <label for="provider">Bank account:</label>
+                            {{ form.bank_account }}
                         </div>
                     </div>
 
@@ -30,13 +31,14 @@
         </div>
 
         <div class="buttons">
-            <button type="button" onclick="window.history.back()">Cancel</button>
+            <button type="button" data-id="{{ transaction.offer.id }}" class="back-contact-info-button">Back</button>
             <button type="submit" form="payment-form">Submit</button>
         </div>
 
     </main>
 
     {% include "_footer.html" %}
+    <script src="{% static 'js/finalization.js' %}"></script>
 
 </body>
 </html>

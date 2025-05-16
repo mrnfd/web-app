@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="buttons">
                                 <button type="button" onclick = "redirectToDelete( '${offer.id}' )" >Delete offer</button>
                                 <button type="button"  onclick = "redirectToUpdate( '${offer.id}' )">Edit offer</button>
-                                <button type="button" onclick = "redirectToFinalization()" >Finalize offer</button>
+                                ${ offer.button }
                             </div>
                         </div>
                     `});
@@ -84,6 +84,16 @@ document.addEventListener('DOMContentLoaded', function() {
     if (sortSelect) {
         sortSelect.addEventListener('change', function () {
             document.getElementById('apply-filters').click();
+        });
+    }
+
+    const finalizeOfferBtn = document.querySelector(".finalize-offer-button");
+    console.log("THIS WAS RUNN2")
+    if (finalizeOfferBtn) {
+        console.log("THIS WAS RUNN")
+        finalizeOfferBtn.addEventListener('click', function() {
+            const offerID = this.getAttribute('data-id');
+            window.location.href = `/transaction/${offerID}/finalization`;
         });
     }
 });
