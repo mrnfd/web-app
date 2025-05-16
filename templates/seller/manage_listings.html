@@ -35,7 +35,6 @@
         <div class="listings-grid" id="listing-listed">
             {% if listings %}
                 {% for property in listings %}
-                    
                     <a href="{% url 'listing-by-id' id=property.id %}">
                         <div class="property-card">
                             <img src="/media/{{ property.thumbnail }}" alt="Property image">

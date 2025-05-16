@@ -14,11 +14,11 @@
     <div class="homescreen">
         <!-- Search input for address, city, zip code or neighborhood -->
         <form id="search-form" action="/" method ="get">
-            <input type="text" id="search-value" name="search_filter" placeholder="Enter an address, City, Zip or Neighborhood">
-            <button type="submit" id="apply-filters" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <div class="search-bar">
+                <input type="text" id="search-value" name="search_filter" placeholder="Enter an address, City, Zip or Neighborhood">
+                <button type="submit" id="apply-filters" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
         </form>
-
-               
     </div>
 
     {% include "_footer.html" %}
