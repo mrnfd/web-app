@@ -12,7 +12,7 @@
     <div class="input-fields-container">
         <h2>Review Your payment information</h2>
 
-        <form id="finalization-form" method="GET" action="{% url 'finalization_revision' transaction.id %}">
+        <form id="finalization-form" method="GET" action="{% url 'finalization_revision' transaction.id paymentmethod %}">
             <h3> contact info</h3>
             <div class="input-fields">
                 <label for="contact-name">Contact name:</label>

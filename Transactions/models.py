@@ -36,6 +36,7 @@ class Country(models.TextChoices):
 # Create your models here.
 class Transaction(models.Model):
     offer = models.OneToOneField(Offer,on_delete=models.CASCADE,related_name='offer')
+    finalized = models.BooleanField(default=False)
     
     contact_name = models.CharField(max_length=255)
     contact_email = models.EmailField(max_length = 254)
@@ -44,6 +45,7 @@ class Transaction(models.Model):
     contact_zip = models.IntegerField()
     contact_country = models.CharField(max_length =30,choices = Country)
     contact_SSN = models.CharField(max_length=10)
+
 
 
 class PaymentMethodCreditCard(models.Model):
