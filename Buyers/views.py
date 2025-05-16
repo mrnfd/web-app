@@ -15,8 +15,11 @@ from Sellers.models import Seller
 
 # Create your views here.
 
+
 def index(request):
-    
+    return render(request, 'buyers/base_buyer.html')
+
+def buyer_home(request):
     return render(request, 'buyers/base_buyer.html')
 
 def register(request):
