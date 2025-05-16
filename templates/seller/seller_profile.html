@@ -17,32 +17,38 @@
             <div class="form-container">
 
                 <div class="images-container">
-                    <div class="banner-container custom-upload">
-                        <img id="banner-preview" src="/static/images/seller_photos/test_seller2/cover_seller2.png" alt="Cover Image">
-                        <div class="overlay-btn">
-                            <button type="button" onclick="document.getElementById('coverInput').click()">Change Cover Image</button>
-                            <input type="file" id="coverInput" name="profile_image_url" accept="image/*" style="display:none;" onchange="previewImage(this, 'banner-preview')">
+                    <div class="banner-wrapper">
+                        <div class="banner-container">
+                            <img id="banner-preview" src="/static/images/seller_photos/test_seller2/cover_seller2.png" alt="Cover Image">
+                            <div class="banner-overlay-btn">
+                                <button type="button" onclick="document.getElementById('coverInput').click()">Change</button>
+                                <input type="file" id="coverInput" name="cover_image" accept="image/*" onchange="previewImage(this, 'banner-preview')">
+                            </div>
                         </div>
-                    </div>
-                    <div class="img-container custom-upload">
-                        <img id="profile-preview" src="/static/images/seller_photos/test_seller2/profile_seller2.png" alt="Profile Picture">
-                        <div class="overlay-btn">
-                            <button type="button" onclick="document.getElementById('profileInput').click()">Change Profile Picture</button>
-                            <input type="file" id="profileInput" name="profile_image_url" accept="image/*" style="display:none;" onchange="previewImage(this, 'profile-preview')">
-                        </div>
-                    </div>
-                    <div class="logo-container custom-upload">
-                        <img id="logo-preview" src="/static/images/seller_photos/test_seller2/logo_seller2.png" alt="Logo">
-                        <div class="overlay-btn">
-                            <button type="button" onclick="document.getElementById('logoInput').click()">Change Logo</button>
-                            <input type="file" id="logoInput" name="profile_image_url" accept="image/*" style="display:none;" onchange="previewImage(this, 'logo-preview')">
+
+                        <div class="floating-images">
+                            <div class="profile-container custom-upload">
+                                <img id="profile-preview" src="/static/images/seller_photos/test_seller2/profile_seller2.png" alt="Profile Picture">
+                                <div class="profile-overlay-btn">
+                                    <button type="button" onclick="document.getElementById('profileInput').click()">Change</button>
+                                    <input type="file" id="profileInput" name="profile_image_url" accept="image/*" style="display:none;" onchange="previewImage(this, 'profile-preview')">
+                                </div>
+                            </div>
+
+                            <div class="logo-container custom-upload">
+                                <img id="logo-preview" src="/static/images/seller_photos/test_seller2/logo_seller2.png" alt="Logo">
+                                <div class="logo-overlay-btn">
+                                    <button type="button" onclick="document.getElementById('logoInput').click()">Change</button>
+                                    <input type="file" id="logoInput" name="logo" accept="image/*" style="display:none;" onchange="previewImage(this, 'logo-preview')">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="input-fields-container">
                     <div class="input-field">
-                        <label for="name">Name</label>
+                        <label for="name">Name: </label>
                         <input type="text" id="name" name="name" value="{{ user.seller.name }}">
                     </div>
                     <div class="input-field">
