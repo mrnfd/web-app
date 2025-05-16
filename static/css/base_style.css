@@ -21,7 +21,16 @@ html, body {
     width: 100%;
 }
 
-.homescreen input[type=text] {
+.homescreen input[type=search] {
+    font-size: 30px;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    width: 90%;
+    font-family: inherit;
+    max-width: 1000px;
+}
+.homescreen input[type=button] {
     font-size: 30px;
     padding: 0.75rem 1.5rem;
     border: 2px solid #ccc;

@@ -14,8 +14,10 @@ from Sellers.models import Seller
 
 
 # Create your views here.
+
 def index(request):
-    return render(request, 'base.html')
+    
+    return render(request, 'buyers/base_buyer.html')
 
 def register(request):
     if request.method == 'POST':
@@ -66,11 +68,7 @@ def edit_buyer_profile(request, buyer_id):
         form = BuyerProfileForm(instance=buyer)
     return render(request, 'edit_buyer_profile.html', {'form': form})
 
-def index(request):
-    return render(request, 'buyers/base_buyer.html')
 
-def buyer_home(request):
-    return render(request, 'buyers/base_buyer.html')
 
 @login_required
 def my_offers(request):
