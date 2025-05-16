@@ -16,18 +16,29 @@ body {
     padding: 1rem 2rem;
 }
 
-.search-and-add {
+.search-container {
     display: flex;
     gap: 1rem;
     margin-bottom: 1rem;
-    align-items: stretch;
+    align-items: center;
     flex-wrap: wrap;
     flex-shrink: 0;
 }
 
-.search-and-add input[type="search"] {
+.search-container input[type="search"] {
     margin-left: 0.5rem;
     width: 400px;
+    padding: 0.2rem;
+    background-color: #F8F8FF;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 18px;
+    font-family: 'Times New Roman', serif;
+}
+
+.status-filter select{
+    margin-left: 0.5rem;
+    width: 100px;
     padding: 0.2rem;
     background-color: #F8F8FF;
     border: 1px solid #cccccc;

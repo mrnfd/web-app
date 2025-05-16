@@ -9,69 +9,49 @@
 <body>
     <nav class="navbar">
         <div class="container-fluid">
-             <!-- App logo/title -->
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- Brand on the left -->
+            {% if user.is_authenticated %}
+                {% if user.buyer %}
+                    <a class="navbar-brand" href="/">Castle Apartments</a>
+                {% elif user.seller %}
+                    <a class="navbar-brand" href="{% url 'seller_home' %}">Castle Apartments</a>
+                {% endif %}
+            {% else %}
+                <a class="navbar-brand" href="/">Castle Apartments</a>
+            {% endif %}
+
+            <!-- Navigation links on the right -->
+            <div class="nav-links">
                 <ul class="navbar-nav">
-                    
-
-                    <!-- Conditional rendering if user is logged in -->
                     {% if user.is_authenticated %}
-
-                        {% if user.buyer  %}
-                            <a class="navbar-brand" href="/">Castle Apartments</a>
-                            <li class="active">
-                                <a class="new_link" href="{% url 'catalogue' %}">Catalogue</a>
-                            </li>
-                            <li class="active">
-                                <a class="new_link" href="{% url 'sellers' %}">Sellers</a>
-                            </li>
-                            <!-- Buyer-specific links -->
-                            <li class="active">
-                                <a class="new_link" href="{% url 'my_offers' %}">My offers</a>
-                            </li>
-                            <li class="active">
-                                <a class="new_link" href="{% url 'buyer_profile' %}">
-                                    <img src=" /media/{{user.buyer.profile_image_url}}" alt="Profile Picture" class="profile-pic">
+                        {% if user.buyer %}
+                            <li><a class="new_link" href="{% url 'catalogue' %}">Catalogue</a></li>
+                            <li><a class="new_link" href="{% url 'sellers' %}">Sellers</a></li>
+                            <li><a class="new_link" href="{% url 'my_offers' %}">My offers</a></li>
+                            <li>
+                                <a href="{% url 'buyer_profile' %}">
+                                    <img src="/media/{{user.buyer.profile_image_url}}" alt="Profile Picture" class="profile-pic">
                                 </a>
                             </li>
                         {% elif user.seller %}
-                            <!-- Seller-specific links -->
-                            <a class="navbar-brand" href="{% url 'seller_home' %}">Castle Apartments</a>
-                            <li class="active">
-                                <a class="new_link" href="{% url 'seller_offers' %}">Offers</a>
-                            </li>
-                            <li class="active">
-                                <a class="new_link" href="{% url 'seller_listings' %}">Manage Listings</a>
-                            </li>
-                            <li class="active">
-                                <a class="new_link" href="{% url 'seller_profile' %}">
-                                    <img src="/media/{{user.seller.profile_image_url}}" alt="Profile Pic" class="profile-pic">  <!-- Same here for seller -->
+                            <li><a class="new_link" href="{% url 'seller_offers' %}">Offers</a></li>
+                            <li><a class="new_link" href="{% url 'seller_listings' %}">Manage Listings</a></li>
+                            <li>
+                                <a href="{% url 'seller_profile' %}">
+                                    <img src="/media/{{user.seller.profile_image_url}}" alt="Profile Pic" class="profile-pic">
                                 </a>
                             </li>
-                            
                         {% endif %}
-
-                        <!-- Logout form for authenticated users -->
-                        <li class="active">
+                        <li>
                             <form method="post" action="{% url 'logout' %}">
                                 {% csrf_token %}
                                 <button type="submit" class="new_link" id="logOut">Logout</button>
                             </form>
                         </li>
                     {% else %}
-                        <!-- Static navigation links -->
-                         <a class="navbar-brand" href="/">Castle Apartments</a>
-                        <li class="active">
-                            <a class="new_link" href="{% url 'catalogue' %}">Catalogue</a>
-                        </li>
-                        <li class="active">
-                            <a class="new_link" href="{% url 'sellers' %}">Sellers</a>
-                        </li>
-                        <!-- If not logged in, show login button -->
-                        <li class="active">
-                            <a class="new_link" id="logIn" href="{% url 'log_in' %}">Log In</a>
-                        </li>
+                        <li><a class="new_link" href="{% url 'catalogue' %}">Catalogue</a></li>
+                        <li><a class="new_link" href="{% url 'sellers' %}">Sellers</a></li>
+                        <li><a class="new_link" id="logIn" href="{% url 'log_in' %}">Log In</a></li>
                     {% endif %}
                 </ul>
             </div>
