@@ -21,11 +21,11 @@
             <div class="custom-carousel">
                 <div class="carousel-images">
                     <!-- Main thumbnail image -->
-                    <img src="/static/{{ listing.thumbnail }}" class="carousel-item" alt="Property Image">
+                    <img src="/media/{{ listing.thumbnail }}" class="carousel-item" alt="Property Image">
                     <!-- Loop through additional images except thumbnails -->
                     {% for image in images %}
                         {% if not image.thumbnail %}
-                            <img src="/static/{{ image.image_url }}" class="carousel-item" alt="Property Image">
+                            <img src="/media/{{ image.image_url }}" class="carousel-item" alt="Property Image">
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -59,7 +59,7 @@
             <div class="seller">
                 <label for="seller-link"><strong>Seller: </strong></label>
                 <div class="seller-card">
-                    <img src="/static/{{ seller.profile_image_url }}" alt="Seller image">
+                    <img src="/media/{{ seller.profile_image_url }}" alt="Seller image">
                     <div class="seller-info">
                         <p class="seller-name">{{seller.name}}, {{seller.seller_type}} </p>
                         <a href="/sellers/{{seller.id}}/"> See more </a>
