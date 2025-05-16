@@ -114,6 +114,11 @@ body {
     display: block;
 }
 
+.property-info {
+    display: flex;
+    flex-direction: column;
+}
+
 .status {
     padding: 0.1rem;
 }

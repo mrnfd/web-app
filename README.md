@@ -13,7 +13,7 @@ As well as these **extra requirements**:
 6.     Search functionality is also integrated across multiple sections of the site, including the catalogue page, sellers page, My Offers page (for buyers), as well as the Listings and Offers pages (for sellers).    
 7.     A seller directory page listing all registered sellers on the platform
 8.     Home page, displays seller's offers and listings
-9.     Listings page, allows sellers to view all of their property listings, add new ones, and edit existing entries
+9.     Listings page, allows sellers to view all of their property listings and add new ones
 10.     Offers page, displays all purchase offers made by buyers on the seller's properties, with options to accept or decline each offer
 
 
