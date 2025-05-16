@@ -48,8 +48,14 @@
                 BackToOffersBtn.addEventListener('click', function() {
                     const transactionID = this.getAttribute('data-id');
                     console.log(transactionID)
+
+                    if (transactionID){
+                        window.location.href = `/transaction/finalization/${transactionID}/delete-transaction`;
+                    }
+                    else{
+                        window.location.href = `/buyer/my_offers/`;
+                    }
                     
-                    window.location.href = `/transaction/finalization/${transactionID}/delete-transaction`;
                 })
             }
 

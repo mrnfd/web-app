@@ -19,6 +19,9 @@ def finalization(request, offer_id):
         try:
             transaction = Transaction.objects.get(offer=offer)
             form = TransactionForm(request.POST,instance=transaction)
+            for field in form.fields.values():
+                field.disabled = False
+
         except Transaction.DoesNotExist:
             form = TransactionForm(request.POST)
         
@@ -61,19 +64,21 @@ def finalization(request, offer_id):
 
         try:
             transaction = Transaction.objects.get(offer=offer)
-            form = TransactionForm(instance=transaction)
-            for field in form.fields.values():
-                field.disabled = False
+            if not transaction.finalized:
+                transaction.delete()
+            
         except Transaction.DoesNotExist:
-            form = TransactionForm(initial={
-            'contact_email': request.user.email,
-            'contact_name': request.user.buyer.name,
-            'contact_street': request.user.buyer.street,
-            'contact_house_number': request.user.buyer.house_numb,
-            'contact_zip': request.user.buyer.zip_code,
-            'contact_country': request.user.buyer.country,
-            }
-        )
+            pass
+        
+        form = TransactionForm(initial={
+        'contact_email': request.user.email,
+        'contact_name': request.user.buyer.name,
+        'contact_street': request.user.buyer.street,
+        'contact_house_number': request.user.buyer.house_numb,
+        'contact_zip': request.user.buyer.zip_code,
+        'contact_country': request.user.buyer.country,
+        })
+        
         return render(request, 'transactions/finalize_offer.html', {
             'form': form,
             'offer': offer,
@@ -97,7 +102,7 @@ def finalization_credit(request,transaction_id):
             payment_info.transaction = transaction
             
             payment_info.save()
-            return redirect('finalization_revision', transaction.id)
+            return redirect('finalization_revision', transaction.id,'creditcard')
             #return render(request,'transactions/finalization_credit.html',{
             #    'form':form,
             #    'transaction':transaction,
@@ -143,7 +148,7 @@ def finalization_bank(request,transaction_id):
             payment_info.transaction = transaction
             
             payment_info.save()
-            return redirect('finalization_revision', transaction.id)
+            return redirect('finalization_revision', transaction.id,'banktransfer')
             
         
         else:
@@ -186,7 +191,7 @@ def finalization_mortgage(request,transaction_id):
             payment_info.transaction = transaction
             
             payment_info.save()
-            return redirect('finalization_revision', transaction.id)
+            return redirect('finalization_revision', transaction.id,'mortgage')
         
         else:
             messages.error(request, 'Form submission incorrect')
@@ -212,7 +217,7 @@ def finalization_mortgage(request,transaction_id):
     
 
 @login_required
-def finalization_revision(request,transaction_id):
+def finalization_revision(request,transaction_id,paymentmethod):
     transaction=get_object_or_404(Transaction,id=transaction_id)
 
     if request.method == "POST":
@@ -221,16 +226,26 @@ def finalization_revision(request,transaction_id):
     else:
         form1 = TransactionForm(instance=transaction)
 
-        paymentmethod = ''
-        if hasattr(transaction, 'transactionCC'):
-            paymentmethod = 'transactionCC'
+        paymenttype = ''
+        if paymentmethod == 'creditcard':
+            paymenttype = 'transactionCC'
             form2 = CreditCardForm(instance=transaction.transactionCC)
-        elif hasattr(transaction, 'transactionBT'):
-            paymentmethod = 'transactionBT'
+        elif paymentmethod == 'banktransfer':
+            paymenttype = 'transactionBT'
             form2 = BankTransferForm(instance=transaction.transactionBT)
-        elif hasattr(transaction, 'transactionM'):
-            paymentmethod = 'transactionM'
+        elif paymentmethod == 'mortgage':
+            paymenttype = 'transactionM'
             form2 = MortgageForm(instance=transaction.transactionM)
+
+        #if hasattr(transaction, 'transactionCC'):
+        #    paymentmethod = 'transactionCC'
+        #    form2 = CreditCardForm(instance=transaction.transactionCC)
+        #elif hasattr(transaction, 'transactionBT'):
+        #    paymentmethod = 'transactionBT'
+        #    form2 = BankTransferForm(instance=transaction.transactionBT)
+        #elif hasattr(transaction, 'transactionM'):
+        #    paymentmethod = 'transactionM'
+        #    form2 = MortgageForm(instance=transaction.transactionM)
 
         # Gera form readonly
         for field in form1.fields.values():
@@ -242,11 +257,14 @@ def finalization_revision(request,transaction_id):
             'form1':form1,
             'form2':form2,
             'transaction':transaction,
-            'paymentmethod':paymentmethod
+            'paymentmethod':paymenttype
         })
 
 @login_required
 def finalization_success(request,transaction_id):
+    transaction = get_object_or_404(Transaction, id=transaction_id)
+    transaction.finalized = True
+    transaction.save()
     return render(request, 'transactions/finalization_success.html',{'transaction_id':transaction_id})
 
 @login_required
