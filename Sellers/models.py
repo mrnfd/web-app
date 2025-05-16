@@ -2,6 +2,38 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+class City(models.TextChoices):
+    NEW_YORK = 'NEW_YORK', 'New York'
+    LOS_ANGELES = 'LOS_ANGELES', 'Los Angeles'
+    LONDON = 'LONDON', 'London'
+    PARIS = 'PARIS', 'Paris'
+    BERLIN = 'BERLIN', 'Berlin'
+    TOKYO = 'TOKYO', 'Tokyo'
+    SEOUL = 'SEOUL', 'Seoul'
+    SHANGHAI = 'SHANGHAI', 'Shanghai'
+    BEIJING = 'BEIJING', 'Beijing'
+    MUMBAI = 'MUMBAI', 'Mumbai'
+    DELHI = 'DELHI', 'Delhi'
+    SYDNEY = 'SYDNEY', 'Sydney'
+    TORONTO = 'TORONTO', 'Toronto'
+    VANCOUVER = 'VANCOUVER', 'Vancouver'
+    RIO_DE_JANEIRO = 'RIO_DE_JANEIRO', 'Rio de Janeiro'
+    MEXICO_CITY = 'MEXICO_CITY', 'Mexico City'
+    DUBAI = 'DUBAI', 'Dubai'
+    SINGAPORE = 'SINGAPORE', 'Singapore'
+    MOSCOW = 'MOSCOW', 'Moscow'
+    JOHANNESBURG = 'JOHANNESBURG', 'Johannesburg'
+    REYKJAVIK = 'REYKJAVIK', 'Reykjavík'
+    ROME = 'ROME', 'Rome'
+    BARCELONA = 'BARCELONA', 'Barcelona'
+    AMSTERDAM = 'AMSTERDAM', 'Amsterdam'
+    BANGKOK = 'BANGKOK', 'Bangkok'
+    HONG_KONG = 'HONG_KONG', 'Hong Kong'
+    CHICAGO = 'CHICAGO', 'Chicago'
+    SAN_FRANCISCO = 'SAN_FRANCISCO', 'San Francisco'
+    MIAMI = 'MIAMI', 'Miami'
+    CAIRO = 'CAIRO', 'Cairo'
+
 class Country(models.TextChoices):
     UNITED_STATES = 'UNITED_STATES', 'United States'
     CANADA = 'CANADA', 'Canada'
@@ -39,7 +71,7 @@ class Seller(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     contact_number = models.CharField(max_length=20)
-    profile_image_url = models.CharField(max_length=4096, blank=True)
+    profile_image_url = models.ImageField(upload_to='images/',null=True, blank=True)
 
     #seller type
     seller_type = models.CharField(max_length=20, choices=SELLER_TYPE_CHOICES)
@@ -47,7 +79,7 @@ class Seller(models.Model):
     #Address info, only relevant if seller type has 'Agency'
     street = models.CharField(max_length=255, null=True, blank=True)
     house_numb = models.CharField(max_length=255, null=True, blank=True)
-    city = models.CharField(max_length=50, null=True, blank=True)
+    city = models.CharField(max_length =30,choices = City, default='REYKJAVIK')
     zip_code = models.CharField(max_length=20, null=True, blank=True)
     country = models.CharField(max_length =30,choices = Country, default='ICELAND')
 

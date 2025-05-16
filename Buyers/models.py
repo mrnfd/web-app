@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+
 class Country(models.TextChoices):
     UNITED_STATES = 'UNITED_STATES', 'United States'
     CANADA = 'CANADA', 'Canada'

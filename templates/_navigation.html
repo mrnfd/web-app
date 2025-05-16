@@ -10,21 +10,22 @@
     <nav class="navbar">
         <div class="container-fluid">
              <!-- App logo/title -->
-            <a class="navbar-brand" href="/">Castle Apartments</a>
+            
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <!-- Static navigation links -->
-                    <li class="active">
-                        <a class="new_link" href="{% url 'catalogue' %}">Catalogue</a>
-                    </li>
-                    <li class="active">
-                        <a class="new_link" href="{% url 'sellers' %}">Sellers</a>
-                    </li>
+                    
 
                     <!-- Conditional rendering if user is logged in -->
                     {% if user.is_authenticated %}
 
                         {% if user.buyer  %}
+                            <a class="navbar-brand" href="/">Castle Apartments</a>
+                            <li class="active">
+                                <a class="new_link" href="{% url 'catalogue' %}">Catalogue</a>
+                            </li>
+                            <li class="active">
+                                <a class="new_link" href="{% url 'sellers' %}">Sellers</a>
+                            </li>
                             <!-- Buyer-specific links -->
                             <li class="active">
                                 <a class="new_link" href="{% url 'my_offers' %}">My offers</a>
@@ -41,13 +42,14 @@
                                 <a class="new_link" href="{% url 'seller_offers' %}">Offers</a>
                             </li>
                             <li class="active">
-                                <a class="new_link" href="{% url 'manage_listings' %}">Manage Listings</a>
+                                <a class="new_link" href="{% url 'seller_listings' %}">Manage Listings</a>
                             </li>
                             <li class="active">
-                                <a class="new_link" href="{% url 'profile' %}">
+                                <a class="new_link" href="{% url 'seller_profile' %}">
                                     <img src="/media/{{user.seller.profile_image_url}}" alt="Profile Pic" class="profile-pic">  <!-- Same here for seller -->
                                 </a>
                             </li>
+                            
                         {% endif %}
 
                         <!-- Logout form for authenticated users -->
@@ -58,6 +60,14 @@
                             </form>
                         </li>
                     {% else %}
+                        <!-- Static navigation links -->
+                         <a class="navbar-brand" href="/">Castle Apartments</a>
+                        <li class="active">
+                            <a class="new_link" href="{% url 'catalogue' %}">Catalogue</a>
+                        </li>
+                        <li class="active">
+                            <a class="new_link" href="{% url 'sellers' %}">Sellers</a>
+                        </li>
                         <!-- If not logged in, show login button -->
                         <li class="active">
                             <a class="new_link" id="logIn" href="{% url 'log_in' %}">Log In</a>

@@ -33,9 +33,9 @@ class CreateSellerForm(ModelForm):
             'logo': forms.FileInput(attrs={'accept': 'image/*', 'class': 'form-control'}),
             'street': forms.TextInput(attrs={'class': 'form-control'}),
             'house_numb': forms.NumberInput(attrs={'class': 'form-control'}),
-            'city': forms.TextInput(attrs={'class': 'form-control'}),
+            'city': forms.Select(attrs={'class':'form-control'}),
             'zip_code': forms.TextInput(attrs={'class': 'form-control'}),
-            'country': forms.TextInput(attrs={'class': 'form-control'}),
+            'country': forms.Select(attrs={'class':'form-control'}),
             'bio': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
