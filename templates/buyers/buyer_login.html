@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    {% include "_navigation.html" %}
+
+    <!-- Display any messages sent by the backend (e.g., login errors) -->
+    {% for msg in messages %}
+            {{ msg }}
+    {% endfor %}
+
+    <!-- Login form that posts to the 'login_as_buyer' URL -->
+    <form method="post" action="{% url 'login_as_buyer' %}">
+        {% csrf_token %}
+        <div class="credentials-constructor">
+            <h3>Login</h3>
+            <!-- Django form rendering -->
+            {{ form }}
+        </div>
+
+        <div class="buttons">
+            <!-- Cancel button returns to previous page -->
+            <button type="button" onclick="window.history.back()">Cancel</button>
+            <!-- Submit button to log in -->
+            <input type="submit" value="Login">
+        </div>
+    </form>
+
+    <!-- Link to registration page for new users -->
+    <div class="registration-link">
+        <a href="{% url 'register_as_buyer' %}">Register here</a>
+    </div>
+    
+
+    {% include "_footer.html" %}
+    <script>
+        function redirectToBuyer() {
+            // Function to redirect user directly to buyer home page
+            window.location.href = "{% url 'index' %}";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+/* Main navigation bar background and padding */
+.navbar {
+    background-color: #F8F8FF;
+    padding: 1rem;
+}
+
+/* Flex layout to space out navbar elements */
+.container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Brand styling (application name) */
+.navbar .navbar-brand {
+    font-weight: bolder;
+    font-size: 1.5rem;
+    margin-right: 2rem;
+    text-decoration: none;
+    color: black;
+}
+
+/* Collapsible navbar container */
+.collapse.navbar-collapse {
+    display: flex;
+    align-items: center;
+}
+
+/* Navigation menu list styling */
+.navbar-nav {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for navigation links */
+.new_link {
+   text-decoration: none;
+    color: black;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.new_link:hover{
+    text-decoration: underline;
+}
+
+/* Log In and Log Out buttons styled similarly */
+#logIn,
+#logOut {
+    padding: 0.5rem 1rem;
+    background-color: #DCDCFF;
+    border: 1px solid #cccccc;
+    color: black;
+    border-radius: 20px;
+    cursor: pointer;
+    font: inherit;
+}
+
+/* User profile picture (circle-shaped) */
+.profile-pic {
+width: 45px;
+height: 45px;
+border-radius: 50%;
+object-fit: cover;
+}

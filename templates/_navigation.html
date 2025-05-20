@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Navigation</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/_navigation_style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container-fluid">
+             <!-- Brand on the left -->
+            {% if user.is_authenticated %}
+                {% if user.buyer %}
+                    <a class="navbar-brand" href="/">Castle Apartments</a>
+                {% elif user.seller %}
+                    <a class="navbar-brand" href="{% url 'seller_home' %}">Castle Apartments</a>
+                {% endif %}
+            {% else %}
+                <a class="navbar-brand" href="/">Castle Apartments</a>
+            {% endif %}
+
+            <!-- Navigation links on the right -->
+            <div class="nav-links">
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        {% if user.buyer %}
+                            <li><a class="new_link" href="{% url 'catalogue' %}">Catalogue</a></li>
+                            <li><a class="new_link" href="{% url 'sellers' %}">Sellers</a></li>
+                            <li><a class="new_link" href="{% url 'my_offers' %}">My offers</a></li>
+                            <li>
+                                <a href="{% url 'buyer_profile' %}">
+                                    <img src="/media/{{user.buyer.profile_image_url}}" alt="Profile Picture" class="profile-pic">
+                                </a>
+                            </li>
+                        {% elif user.seller %}
+                            <li><a class="new_link" href="{% url 'seller_offers' %}">Offers</a></li>
+                            <li><a class="new_link" href="{% url 'seller_listings' %}">Manage Listings</a></li>
+                            <li>
+                                <a href="{% url 'seller_profile' %}">
+                                    <img src="/media/{{user.seller.profile_image_url}}" alt="Profile Pic" class="profile-pic">
+                                </a>
+                            </li>
+                         {% endif %}
+                        <li>
+                            <form method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="new_link" id="logOut">Logout</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li><a class="new_link" href="{% url 'catalogue' %}">Catalogue</a></li>
+                        <li><a class="new_link" href="{% url 'sellers' %}">Sellers</a></li>
+                        <li><a class="new_link" id="logIn" href="{% url 'log_in' %}">Log In</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>

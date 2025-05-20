@@ -1,0 +1,151 @@
+/* Make html and body fill full viewport height and remove default margin */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Body uses flexbox column layout for sticky footer and main */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main content fills remaining space, vertical layout */
+main.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Container for the form: centers content with max width */
+.page-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    max-width: 600px;
+    margin: auto;
+}
+
+/* Container for payment fields with vertical spacing */
+.payment-fields {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+}
+
+/* Input field container aligns label and input horizontally */
+.input-fields {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+/* Label styling: fixed width, right aligned for neat form */
+.input-fields label {
+    flex: 0 0 180px;
+    text-align: right;
+    margin-right: 1rem;
+    font-size: 18px;
+}
+
+/* Input styling: fills remaining space, with padding and border */
+.input-fields input {
+    flex: 1;
+    padding: 0.2rem;
+    border: 2px solid #cccccc;
+    border-radius: 8px;
+    font-size: 18px;
+    font-family: inherit;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 300px;
+}
+
+/* Highlight input on focus */
+input:focus {
+  background-color: #fff;
+}
+
+/* Change border color on hover */
+input:hover {
+  border-color: #888;
+}
+
+/* Buttons container: horizontal layout with space between */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 2rem;
+}
+
+/* Button styling with rounded edges and subtle hover effect */
+.buttons button {
+    padding: 10px 20px;
+    font-family: inherit;
+    font-size: 1rem;
+    border-radius: 100px;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    background-color: #F8F8FF;
+    color: black;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Button hover effect */
+.buttons button:hover,
+.buttons input[type="submit"]:hover {
+    background-color: #DCDCFF;
+}
+
+/* Footer sticks to bottom with light background and padding */
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Container for all messages */
+.messages {
+    margin-bottom: 1.5rem;
+}
+
+/* Base styling for all messages */
+.message {
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Success message style */
+.message.success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+/* Error message style */
+.message.error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+/* Warning message style */
+.message.warning {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+}
+
+/* Info message style */
+.message.info {
+    background-color: #d1ecf1;
+    border: 1px solid #bee5eb;
+    color: #0c5460;
+}

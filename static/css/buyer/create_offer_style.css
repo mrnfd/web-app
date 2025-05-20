@@ -1,0 +1,170 @@
+/* Base styles for html and body to fill viewport height */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Flex container to stack body elements vertically */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main container for offer page */
+.my-offer-grid {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 2rem auto;
+    align-items: flex-start;
+}
+
+/* Container holding listing photo and offer form side by side */
+.listing-and-offer {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    width: 100%;
+    align-items: flex-start;
+
+}
+
+/* Heading margin */
+h3 {
+    margin-bottom: 2rem;
+}
+
+/* Card container */
+.card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Card body with photo and details */
+.card-body {
+    display: flex;
+    flex-direction: row;
+    margin-right: 0.5rem;
+    gap: 3rem;
+}
+
+/* Listing image styling */
+.card-body img {
+    flex-shrink: 0;
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Container for listing details text */
+.listing-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+}
+
+/* Header inside the offer form */
+.offer-header {
+    font-size: 21px;
+}
+
+/* Container for the offer form */
+.form-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Form groups have bottom margin */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Labels for inputs */
+.form-group label {
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+
+/* Styling inputs inside form */
+.form-group input {
+    padding: 0.2rem;
+    font-size: 14px;
+    border: 1px solid #aaaaaa;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+/* Small helper text styling */
+.form-group small {
+    display: flex;
+    flex-direction: column;
+    padding: 0.2rem;
+    color: #7D7D7D;
+}
+
+/* Container for buttons below the form */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 2rem 0 3rem 0;
+    gap: 1rem;
+    margin-top: 5rem;
+}
+
+/* Buttons styling */
+.buttons button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border: 2px solid #cccccc;
+    background-color: white;
+    border-radius: 0.5rem;
+    font-family: 'Times New Roman', serif;
+    font-size: 16px;
+}
+
+/* Hover effect on buttons */
+.buttons button:hover {
+    background-color: #DCDCFF;
+}
+
+/* Footer styling to stay at bottom */
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .card-body img {
+        max-width: 300px;
+        height: auto;
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+    }
+
+}
+
+/* Error message box styling */
+.text-danger {
+    background-color: #ffe6e6;
+    border: 1px solid #e01e1e;
+    color: #a10000;
+    padding: 1rem;
+    border-radius: 5px;
+    margin: 0 auto;
+    font-size: 16px;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: block;
+}

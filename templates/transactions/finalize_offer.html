@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Finalization</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/finalization_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    {% include "_navigation.html" %}
+
+     <!-- Display any Django messages -->
+    {% for msg in messages %}
+        {{ msg }}
+    {% endfor %}
+
+    <!-- Finalization form -->
+    <form method="post" id="finalization-form" action="{% url 'finalization' offer.id %}">
+        {% csrf_token %}
+        
+        <div class="input-fields">
+                <label for="contact-name">Contact name:</label>
+                {{ form.contact_name }}
+            </div>
+
+            <div class="input-fields">
+                <label for="contact-email">Contact email:</label>
+                {{ form.contact_email }}
+            </div>
+
+            <div class="input-fields">
+                <label for="contact-address">Contact street: </label>
+                {{ form.contact_street }} 
+            </div>
+
+            <div class="input-fields">
+                <label for="contact-address">Contact house number: </label>
+                {{ form.contact_house_number }}
+            </div>
+
+            <div class="input-fields">
+                <label for="contact-zip">Contact ZIP: </label>
+                {{ form.contact_zip }}
+            </div>
+
+            <div class="input-fields">
+                <label for="city">City:</label>
+                {{ form.contact_city }}
+            </div>
+
+            <div class="input-fields">
+                <label for="country">Country:</label>
+                {{ form.contact_country }}
+            </div>
+
+            <div class="input-fields">
+                <label for="contact-id">National ID:</label>
+                {{ form.contact_SSN }}
+            </div>
+
+        <!-- Payment options radio buttons -->
+        <div class="payment">
+            <div class="payment-label">
+                <label>Payment option:</label>
+            </div>
+            <div class="payment-options">
+                <div class="payment-option">
+                    <input type="radio" id="credit-card" name="payment_option" value="credit_card" required>
+                    <label for="credit-card">Credit card</label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" id="bank_transfer" name="payment_option" value="bank_transfer" required>
+                    <label for="bank_transfer">Bank transfer</label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" id="mortgage" name="payment_option" value="mortgage" required>
+                    <label for="mortgage">Mortgage</label>
+                </div>
+            </div>
+
+
+        </div>
+
+         <!-- Buttons -->
+        <div class="buttons">
+            <!-- Cancel button navigates back to offers or deletes transaction -->
+            <button type="button" data-id="{{ offer.offer.id }}" class="back-to-offers-button">Cancel</button>
+            <!-- Submit button sends form to payment page -->
+            <button type="submit" id="go-to-payment">Go to Payment Page</button>
+        </div>
+    </form>
+
+    {% include "_footer.html" %}
+    <!-- JavaScript to handle Cancel button functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const BackToOffersBtn = document.querySelector(".back-to-offers-button");
+
+            if (BackToOffersBtn) {
+                BackToOffersBtn.addEventListener('click', function() {
+                    const transactionID = this.getAttribute('data-id');
+                    console.log(transactionID)
+
+                    // Redirect to delete transaction if ID is present, else to offers list
+                    if (transactionID){
+                        window.location.href = `/transaction/finalization/${transactionID}/delete-transaction`;
+                    }
+                    else{
+                        window.location.href = `/buyer/my_offers/`;
+                    }
+                    
+                })
+            }
+
+        })
+    </script>
+</body>
+</html>

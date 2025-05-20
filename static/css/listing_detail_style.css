@@ -1,0 +1,224 @@
+/* Set full height and remove default margin for html and body */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Use flexbox to layout body vertically */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main container for property info and images, with spacing */
+.property-card {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin: 3rem 3rem 3rem 3rem;
+}
+
+/* Carousel container, relative positioning for arrows */
+.custom-carousel {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    max-height: 500px;
+    max-width: 500px;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Carousel images arranged horizontally for sliding effect */
+.carousel-images {
+    display: flex;
+    max-height: 100%;
+    max-width: 100%;
+    transition: transform 0.5s ease-in-out; /* smooth slide animation */
+}
+
+/* Each carousel image item takes full container size */
+.carousel-item {
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0; /* Prevent shrinking */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Ensure images scale properly inside carousel */
+.carousel-item img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    vertical-align: middle;
+}
+
+/* Carousel navigation arrows */
+.carousel-prev, .carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent bg */
+    color: white;
+    border: none;
+    font-size: 30px;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10; /* keep on top */
+}
+
+.carousel-prev {
+    left: 10px;
+}
+
+.carousel-next {
+    right: 10px;
+}
+
+/* Font size for status paragraph */
+.image-and-status p{
+    font-size: 18px;
+}
+
+/* Different background colors for listing status badges */
+.status.available {
+    background-color: #9CFF9F;
+    padding: 0.2rem;
+}
+
+.status.pending {
+    background-color: #91CEFF;
+    padding: 0.2rem;
+}
+
+.status.sold {
+    background-color: #FF9999;
+    padding: 0.2rem;
+}
+
+/* Layout and spacing for property details section */
+.property-details {
+    margin-top: 1.5rem;
+    padding-left: 2rem;
+    display: flex;
+    flex: 1.2;
+    flex-direction: column;
+    font-size: 18px;
+}
+
+/* Layout for seller info */
+.seller {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Styling for seller card with border and padding */
+.seller-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    padding: 0.5rem;
+}
+
+/* Slight scale effect on hover for seller card */
+.seller-card:hover {
+    transform: scale(1.05);
+}
+
+/* Round seller profile image */
+.seller-card img {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+}
+
+/* Vertical layout inside seller info */
+.seller-info {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style seller link */
+.seller-info a{
+    color: black;
+    font-size: 16px;
+}
+
+/* Style for the "Additional information" label */
+#toggle-info {
+    margin-top: 1.5rem;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
+/* Additional info hidden by default */
+.additional-info {
+    display: none;
+}
+
+/* Buttons container layout */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 2rem;
+}
+
+/* Style for buttons */
+.buttons button {
+    padding: 10px 20px;
+    font-family: inherit;
+    font-size: 1rem;
+    border-radius: 100px;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    background-color: #F8F8FF;
+    color: black;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Button hover effect */
+.buttons button:hover,
+.buttons input[type="submit"]:hover {
+    background-color: #DCDCFF;
+}
+
+/* Footer styling */
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .property-card {
+        flex-direction: column;
+        align-items: center;
+        margin: 1rem;
+    }
+
+    .custom-carousel {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .property-details {
+        padding-left: 0;
+        margin-top: 2rem;
+        width: 100%;
+    }
+
+    .seller-card {
+        justify-content: flex-start;
+    }
+}

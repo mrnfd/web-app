@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalogue</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/catalogue_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- FYRIR FILTERA -->
+    <script src="{% static 'js/listing_filter.js' %}"></script>
+
+</head>
+<body>
+    {% include "_navigation.html" %}
+
+    <div class="catalogue-page-container">
+
+            <!-- Filter -->
+            <form id="filter-form" method="GET" action="{% url 'catalogue' %}">
+
+                <div class="search-and-filters">
+                    <!-- Search Filter -->
+                    <input type="search" id="search-value" name="search_filter" placeholder="Enter an address, City, Zip or Neighborhood">
+
+                    <div class="filter-container">
+                        <!-- Price Filter -->
+                        <div class="price-container">
+                            <div class="price-range-filter">
+                                <div class="price-inputs">
+                                    <div class="min-price">
+                                        <span>Price Range</span>
+                                        <input type="text" name="min_price" placeholder="No Min" id="min-price-input">
+                                    </div>
+                                    <div class="separator">-</div>
+                                    <div class="max-price">
+                                        <input type="text" name="max_price" placeholder="No Max" id="max-price-input">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                       <!-- Property type dropdown filter -->
+                        <div class="mb-3">
+                            <select class="form-select" id="property-filter" name="type">
+                                <option value="" disabled selected>Property type</option>
+                                <option value="ANY">Any</option>
+                                <option value="HOUSE">House</option>
+                                <option value="CONDO">Condo</option>
+                                <option value="TOWNHOME">Townhome</option>
+                                <option value="MULTIFAMILY">Multi family</option>
+                                <option value="MOBILE">Mobile</option>
+                                <option value="FARM">Farm</option>
+                                <option value="LAND">Land</option>
+                                <option value="COMMERCIAL">Commercial</option>
+                            </select>
+                        </div>
+
+                       <!-- Additional filter dropdown -->
+                        <div class="more-container">
+                            <select id="more-filter" name="more">
+                                <option value="">More</option>
+                                <option value="2br">2 bedroom property</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Button to apply filters -->
+                    <button type="button" id="apply-filters" class="search-button">Apply</button>
+                </div>
+
+                <!-- Sorting options -->
+                <div class="sort">
+                    <label for="sort-button"> Sort by </label>
+                    <select class="search_show_img_1" id="sort-button" name="sort">
+                        <option class="sort_option" value="">  </option>
+                        <option class="sort_option" value="price_asc" {% if request.GET.sort == "price_asc" %}selected{% endif %}>Price (Low to High)</option>
+                        <option class="sort_option" value="price_desc" {% if request.GET.sort == "price_desc" %}selected{% endif %}>Price (High to Low)</option>
+                        <option class="sort_option" value="street" {% if request.GET.sort == "street" %}selected{% endif %}>Street name (Alphabetical)</option>
+                    </select>
+                </div>
+            
+        </form>
+
+        <!-- Grid container for property listings -->
+        <div class="property-grid" id="properties-listed">
+            <!-- Loop through properties and display each as a card -->
+            {% for property in propertys %}
+            <a href="{% url 'listing-by-id' id=property.id %}">
+                <div class="property-card">
+                    <img src="/media/{{ property.thumbnail }}" alt="Property image">
+                    <div class="property-info">
+                        <p class="property-address">{{property.street}} {{property.number}} , {{property.type}}</p>
+
+                        <!-- Display listing status with different styles -->
+                        {% if property.status == "AVAILABLE" %}
+                            <p><strong>Listing status: </strong> <span class="status available">{{ property.status }}</span></p>
+                        {% elif property.status == "PENDING" %}
+                            <p><strong>Listing status: </strong> <span class="status pending">{{ property.status }}</span></p>
+                        {% elif property.status == "SOLD" %}
+                            <p><strong>Listing status: </strong> <span class="status sold">{{ property.status }}</span></p>
+                        {% endif %}
+
+                        <p class="property-price">Price: ${{property.price}}</p>
+                        <div class="rooms-seller">
+                            <span><strong>Rooms:</strong> {{property.rooms}}</span>
+                            <span><strong>Seller:</strong>{{property.seller}}</span>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    {% include "_footer.html" %}
+    <!-- Bootstrap JS bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

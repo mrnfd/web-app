@@ -1,0 +1,264 @@
+/* Make html and body take full viewport height */
+html, body {
+    height: 100%;
+}
+
+/* Body is a vertical flex container for page layout */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main container stacks children vertically, with spacing */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Left align content */
+    gap: 2rem; /* Space between sections */
+}
+
+/* Image container holds cover image and overlays profile & logo */
+.img-container {
+    position: relative; /* To position profile and logo absolutely */
+    max-width: 1400px;
+    width: 100%;
+    max-height: 500px;
+    margin: 0 auto; /* Center horizontally */
+    aspect-ratio: 3 / 1; /* Maintain wide banner ratio */
+}
+
+/* Cover image fills container, cropping if needed */
+.cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover whole area, crop excess */
+    display: block;
+    max-width: 100%;
+}
+
+/* Profile picture styled as circular overlay on bottom left */
+.seller-profile-picture {
+    position: absolute;
+    bottom: -50px; /* Positioned below the banner */
+    left: 3rem;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 1px solid #cccccc;
+    object-fit: cover; /* Crop image inside circle */
+    background-color: white; /* White background for clean edges */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    z-index: 2; /* Ensure above cover image */
+}
+
+/* Logo styled as circular overlay on bottom left */
+.logo {
+    position: absolute;
+    bottom: -50px; /* Positioned below the banner */
+    left: 15rem;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 1px solid #cccccc;
+    object-fit: cover; /* Crop image inside circle */
+    background-color: white; /* White background for clean edges */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    z-index: 2; /* Ensure above cover image */
+}
+
+/* Shared styling for logo and property thumbnails */
+#logo,
+#property-img {
+    width: 8rem;
+    height: 8rem;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #cccccc;
+    margin-bottom: 1rem;
+}
+
+/* Details container displays seller info and property list side-by-side */
+.details-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 3rem;
+    box-sizing: border-box;
+}
+
+/* Seller info column with consistent spacing */
+.info-container {
+    flex-grow: 1; /* Take available space */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 3rem 3rem 2rem 3rem;
+}
+
+/* Strong and paragraph font size consistency */
+.info-container strong,
+.info-container p {
+    font-size: 18px;
+}
+
+/* Property list container grows more to show multiple cards */
+.properties-container {
+    flex: 2;
+    margin: 3rem auto auto auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Property list heading font size */
+.properties-container p{
+    font-size: 18px;
+}
+
+/* Property cards grid layout for responsive wrapping */
+.property-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive columns */
+    width: 100%;
+    max-width: 1400px;
+    gap: 1rem;
+    box-sizing: border-box;
+    justify-items: flex-end; /* Align cards right within grid cells */
+}
+
+/* Remove underline from links wrapping cards */
+.property-cards a{
+    text-decoration: none;
+}
+
+/* Individual property card styling */
+.property-card {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    height: 250px;
+}
+
+/* Property image centered, contained inside card */
+.property-card img {
+    object-fit: contain;
+    display: block;
+    margin: 0.5rem auto auto auto;
+}
+
+/* Hover effect to emphasize card */
+.property-card:hover {
+    transform: scale(1.05);
+}
+
+/* Property info text styling */
+.property-info p,
+.rooms {
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+    margin: 0 auto 0.5rem 0.5rem;
+}
+
+/* Buttons container aligned left */
+.buttons {
+    display: flex;
+    justify-content: left;
+    margin: 2rem;
+}
+
+/* Button styling with rounded shape and subtle hover effect */
+.buttons button{
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 100px; /* Pill shape */
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    background-color: #F8F8FF;
+    font-family: inherit;
+    color: black;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.buttons button:hover {
+    background-color: #DCDCFF;
+}
+
+/* Footer sticks to bottom with light background */
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Medium-large screen tweak: limit property cards to 2 columns */
+@media (min-width: 1024px) {
+    .property-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile styles: stack content vertically and adjust widths */
+@media (max-width: 768px) {
+    .img-container {
+        aspect-ratio: 3 / 1;
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+    }
+    .img-container img:first-child {
+        width: 100%;
+        max-width: 768px;
+    }
+
+    .page-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center content on small screens */
+        gap: 2rem;
+        width: 100%;
+    }
+
+    /* Stack details vertically on mobile */
+    .details-container {
+        display: flex;
+        flex-direction: column;  /* Change to column */
+        justify-content: flex-start;
+        gap: 2rem;
+        width: 100%;
+        padding: 0 3rem;
+        box-sizing: border-box;
+    }
+
+     /* Make info container full width and align left */
+    .info-container {
+        width: 100%;
+        max-width: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+
+    /* Properties take full width without side margins */
+     .properties-container {
+        width: 100%;
+        margin: 0;
+    }
+
+     /* Property cards padding and max width */
+    .property-cards {
+        width: 100%;
+        max-width: 768px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+        padding: 2rem;
+    }
+
+}

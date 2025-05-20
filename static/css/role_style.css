@@ -1,0 +1,58 @@
+html, body {
+    height: 100%; /* Full viewport height */
+    margin: 0; /* Remove default margin */
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+}
+
+.page-container {
+    flex: 1; /* Take up remaining vertical space */
+}
+
+.user_type_container {
+    flex: 1; /* Grow to fill space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center;     /* Center content horizontally */
+    text-align: center;
+    margin-bottom: auto;  /* Push footer down */
+}
+
+#type {
+    margin-bottom: 2rem; /* Space below main heading */
+}
+
+.btn_container {
+    display: flex;
+    justify-content: center;  /* Center buttons horizontally */
+    gap: 2rem;                /* Space between buttons */
+}
+
+.type_btn {
+    display: inline-block;   /* Inline container for buttons */
+}
+
+.btn {
+    padding: 1rem 2rem;
+    background-color: #F8F8FF;
+    border: 1px solid grey;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 22px;
+}
+
+.btn:hover {
+    background-color: #DCDCFF;
+}
+
+footer {
+    margin-top: auto;  /* Stick footer to bottom */
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}

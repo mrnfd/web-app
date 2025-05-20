@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/buyer/buyer_profile.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    {% include "_navigation.html" %}
+    <!-- Display messages (success, error, warning) from backend -->
+    {% for msg in messages %}
+      <div class="message {{ msg.tags }}">
+        {{ msg }}
+      </div>
+    {% endfor %}
+
+    <!-- Main container for the profile form -->
+    <div class="page-container">
+        <!-- Form to update buyer profile, allows file uploads -->
+        <form method="post" enctype="multipart/form-data" action="{% url 'buyer_profile' %}">
+            {% csrf_token %}
+
+            <div class="form-container">
+                <!-- Section for profile picture -->
+                <div class="profile-pic-container">
+                    <!-- Display current profile image -->
+                    <img src="/media/{{user.buyer.profile_image_url}}" alt="Profile Picture">
+                    <label>Set new profile picture</label>
+                    <!-- File input for new profile image -->
+                    <div class="file-input-wrapper">
+                        {{ form.profile_image_url }}
+                    </div>
+                </div>
+
+                <!-- Container for all textual input fields -->
+                <div class="input-fields-container">
+                    <!-- Each input field with label -->
+                    <div class="input-field">
+                        <label>{{form.name.label}}</label>
+                        {{form.name}}
+                    </div>
+                    <div class="input-field">
+                        <label>{{form.contact_number.label}}</label>
+                        {{form.contact_number}}
+                    </div>
+                    <div class="input-field">
+                        <label>{{form.email.label}}</label>
+                        {{form.email}}
+                    </div>
+                    <div class="input-field">
+                        <label>{{form.street.label}}</label>
+                        {{form.street}}
+                    </div>
+                    <div class="input-field">
+                        <label>House number</label>
+                        {{form.house_numb}}
+                    </div>
+                    <div class="input-field">
+                        <label>{{form.zip_code.label}}</label>
+                        {{form.zip_code}}
+                    </div>
+                    <div class="input-field">
+                        <label>{{form.country.label}}</label>
+                        {{form.country}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form action buttons -->
+            <div class="buttons">
+                 <!-- Go back to previous page -->
+                <button type="button" onclick="window.history.back()">Go Back</button>
+                <!-- Submit updated profile -->
+                <input type="submit" value="Save" onclick="console.log(form)">
+            </div>
+        </form>
+    </div>
+    {% include "_footer.html" %}
+</body>
+</html>

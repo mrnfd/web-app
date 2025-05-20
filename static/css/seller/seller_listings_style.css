@@ -1,0 +1,166 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.page-container {
+    padding: 1rem 2rem;
+}
+
+.search-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+}
+
+.search-container input[type="search"] {
+    margin-left: 0.5rem;
+    width: 400px;
+    padding: 0.2rem;
+    background-color: #F8F8FF;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 18px;
+    font-family: 'Times New Roman', serif;
+}
+
+.status-filter select{
+    margin-left: 0.5rem;
+    width: 100px;
+    padding: 0.2rem;
+    background-color: #F8F8FF;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: 'Times New Roman', serif;
+}
+
+#apply-filters {
+    padding: 0.2rem 0.5rem;
+    background-color: #DCDCFF;
+    color: black;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    height: 30px;
+    width: 40px;
+}
+
+#new-listing-btn {
+    padding: 0.2rem 0.5rem;
+    background-color: #DCDCFF;
+    color: black;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    height: 30px;
+}
+
+#apply-filters:hover,
+#new-listing-btn:hover {
+    color: white;
+    background-color: mediumpurple;
+}
+
+.listings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+
+.listings-grid a{
+    color: black;
+    text-decoration: none;
+}
+
+.property-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    height: 400px;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.property-card:hover {
+    transform: scale(1.05);
+}
+
+.property-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.property-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.status {
+    padding: 0.1rem;
+}
+
+.status.available {
+    background-color: #9CFF9F;
+}
+
+.status.pending {
+    background-color: #91CEFF;
+}
+
+.status.sold {
+    background-color: #FF9999;
+}
+
+@media (max-width: 768px) {
+    .listing-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .listing-grid a{
+        color: black;
+        text-decoration: none;
+    }
+
+    .property-card {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .property-card image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+}
+
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}

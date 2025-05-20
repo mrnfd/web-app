@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Review</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/finalization_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    {% include '_navigation.html' %}
+    <!-- Container for all input fields in the review form -->
+    <div class="input-fields-container">
+        <h2>Review Your payment information</h2>
+
+        <!-- Form to display and review transaction and payment info -->
+        <!-- Uses GET to allow page reloads without modifying data -->
+        <form id="finalization-form" method="GET" action="{% url 'finalization_revision' transaction.id paymentmethod %}">
+            <h3> contact info</h3>
+            <div class="input-fields">
+                 <!-- Label and field for Contact Name -->
+                {{ form1.contact_name.label_tag }}
+                {{form1.contact_name}}
+            </div>
+            <div class="input-fields">
+                <!-- Label and field for Contact Email -->
+                {{ form1.contact_email.label_tag }}
+                {{form1.contact_email}}
+            </div>
+            <div class="input-fields">
+                <!-- Label and fields for Street and House Number -->
+                {{ form1.contact_house_number.label_tag }}
+                {{form1.contact_street}} {{form1.contact_house_number}}
+            </div>
+            <div class="input-fields">
+                <!-- Label and field for ZIP code -->
+                {{ form1.contact_zip.label_tag }}
+                {{form1.contact_zip}}
+            </div>
+            <div class="input-fields">
+                <!-- Label and dropdown/select for Country -->
+                {{ form1.contact_country.label_tag }}
+                {{form1.contact_country}}
+            </div>
+            <div class="input-fields">
+                <!-- Label and field for Social Security Number -->
+                {{ form1.contact_SSN.label_tag }}
+                {{form1.contact_SSN}}
+            </div>
+            
+            <h3> payment info</h3>
+            <!-- Render payment form fields with default paragraph tags -->
+            {{ form2.as_p}}
+        </form>
+
+        <!-- Buttons below the form -->
+        <div class="buttons">
+            <!-- Button to edit payment info: has data attributes for JS logic -->
+            <button type="button" data-id2= "{{ paymentmethod }}" data-id = "{{ transaction.id }}" class= "change-finalize-button">Edit</button>
+            <!-- Button to finalize payment and move to success page -->
+            <button type="button" data-id3 = "{{ transaction.id }}" class="finalize-button">Finalize</button>
+        </div>
+    </div>
+
+    {% include "_footer.html"%}
+
+     <!-- Inline script for button click handling -->
+    <script>
+        // Wait for DOM content to load before running JS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Edit button: redirect user to the right payment info edit page
+            const ChangePaymentInfoOfferBtn = document.querySelector(".change-finalize-button");
+
+            if (ChangePaymentInfoOfferBtn) {
+
+                ChangePaymentInfoOfferBtn.addEventListener('click', function() {
+                    const transactionID = this.getAttribute('data-id');
+                    const paymentmethod = this.getAttribute('data-id2');
+
+                    // Redirect based on payment method
+                    switch(paymentmethod) {
+                                case 'transactionBT':
+                                    window.location.href = `/transaction/finalization/${transactionID}/bank-transafer`;
+                                    break;
+                                case 'transactionM':
+                                    window.location.href = `/transaction/finalization/${transactionID}/mortgage`;
+                                    break;
+                                default:
+                                    window.location.href = `/transaction/finalization/${transactionID}/credit-card`;
+
+                            }
+                });
+            }
+
+            // Finalize button: redirect user to success page on click
+            const FinalizeOfferBtn = document.querySelector(".finalize-button");
+
+            if (FinalizeOfferBtn) {
+
+                FinalizeOfferBtn.addEventListener('click', function() {
+                    const transactionID2 = this.getAttribute('data-id3');
+                    window.location.href = `/transaction/finalization/${transactionID2}/success`;
+
+                });
+            }
+
+        })
+    </script>
+
+</body>
+</html>

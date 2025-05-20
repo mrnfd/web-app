@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    {% include "_navigation.html" %}
+
+    <!-- Display any Django messages (like errors or info) -->
+    {% for msg in messages %}
+      <div class="message {{ msg.tags }}">
+        {{ msg }}
+      </div>
+    {% endfor %}
+
+    <!-- Container for login form inputs -->
+    <div class="credentials-constructor">
+        <div class="input-row">
+            <label for="email">Email: </label>
+            <input type="text" id="email">
+        </div>
+        <div class="input-row">
+            <label for="pw">Password: </label>
+            <input type="text" id="pw">
+        </div>
+    </div>
+
+    <!-- Link to registration page -->
+    <div class="registration-link">
+        <a href="{% url 'register' %}">Register here</a>
+    </div>
+
+    <!-- Buttons for cancel and submit actions -->
+    <div class="buttons">
+        <button type="button" onclick="window.history.back()">Cancel</button>
+        <input type="submit" value="OK" onclick="redirectToBuyer()">
+    </div>
+
+    {% include "_footer.html" %}
+    <script>
+        function redirectToBuyer() {
+            // Redirect user directly to buyer's home page on clicking OK
+            window.location.href = "{% url 'buyer_home' %}";
+        }
+    </script>
+</body>
+</html>

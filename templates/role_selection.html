@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Type</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/role_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="page-container">
+        {% include "_navigation.html" %}
+
+         <div class="user_type_container">
+             <!-- Main heading -->
+             <h1 id="type">User Type</h1>
+             <div class="btn_container">
+                 <!-- Buttons to choose user type -->
+                 <div class="type_btn">
+                     <a href="{% url 'login_as_buyer' %}">
+                         <button class="btn">Buyer</button>
+                     </a>
+                 </div>
+                 <div class="type_btn">
+                     <a href="{% url 'login_as_seller' %}">
+                         <button class="btn">Seller</button>
+                     </a>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    {% include "_footer.html" %}
+</body>
+</html>

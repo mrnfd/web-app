@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offers</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/seller/seller_offers_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    {% include '_navigation.html' %}
+    <div class="page-container">
+        <div class="search">
+            <input type="search" id="search-value" name="search" placeholder="Enter an address, City, Zip or Neighborhood">
+            <button type="button" id="apply-filters" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+
+
+         <div class="offers-grid">
+             {% for offer in "12345" %}
+                    <div class="offer-card">
+                        <div class="offer-content">
+                            <img src="/static/images/background.png" alt="Property Image">
+                            <div class="offer-details">
+                                <p><strong>Street 123, 76002 City, Type</strong></p>
+
+                                <div class="buyer">
+                                    <label for="buyer-card">Buyer: </label>
+                                        <div class="buyer-card">
+                                            <img src="/static/images/seller_photos/profile_placeholder.jpg" alt="Buyer image">
+                                            <div class="buyer-info">
+                                                <p class="buyer-name">Sophie L.</p>
+                                                <a href="/buyers/{{ offer.buyer_id }}"> See more </a>
+                                            </div>
+                                        </div>
+                                </div>
+
+                                <p>Date of submission: 25.03.25</p>
+                                <p>Listing price: $ 635000</p>
+                                <p>Offer price: $ 615000</p>
+                        </div>
+
+                    </div>
+
+                    <div class="buttons">
+                        <button type="button" id="decline">Decline</button>
+                        <button type="button" id="accept">Accept</button>
+                    </div>
+
+                </div>
+                {% endfor %}
+        </div>
+
+       <!-- <div class="offers-grid">
+            {% for offer in offers %}
+                <div class="offer-card">
+                    <img src="/static/{{ offer.thumbnail }}" alt="Property Image">
+                    <div class="offer-details">
+                        <p>{{offer.street}} {{offer.house_numb}}, {{offer.zip}} {{offer.city}}, {{offer.type}}</p>
+                        
+                        <div class="buyer">
+                            <label for="buyer-card">Buyer: </label>
+                            <div class="buyer-card">
+                                <img src="/static/{{ offer.buyer_profile_image_url }}" alt="Buyer image">
+                                <div class="buyer-info">
+                                    <p class="buyer-name">{{ offer.buyer }}</p>
+                                    <a href="/buyers/{{ offer.buyer_id }}"> See more </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p>Date of submission: {{offer.submission_date}}</p>
+                        <p>Listing price: {{ offer.price }}</p>
+                        <p>Offer price: {{ offer.offer_price }}</p>
+
+                    </div>
+
+                    <div class="buttons">
+                        <button type="button">Decline</button>
+                        <button type="button">Accept</button>
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div> -->
+
+    </div>
+
+
+    {% include '_footer.html' %}
+
+</body>
+</html>

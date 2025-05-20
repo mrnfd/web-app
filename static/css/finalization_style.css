@@ -1,0 +1,153 @@
+/* Make html and body fill full viewport height and remove default margin */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Allow body to flex and fill available space */
+body {
+    flex: 1;
+}
+
+/* Style form to fill available space, center content vertically and horizontally */
+form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Add margin to form from top */
+#finalization-form {
+    margin-top: 2rem;
+}
+
+/* Containers for input fields and payment options - max width and centered */
+.input-fields-container,
+.payment {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+}
+
+/* Group form controls and payment options with horizontal layout and spacing */
+.input-fields, .form-control,
+.payment, .payment-fields {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Label styling with fixed width for alignment */
+.input-fields label,
+.form-control label,
+.payment label {
+    font-size: 18px;
+    text-align: right;
+    width: 150px;
+}
+
+/* Style all input fields for consistency */
+input:not([type="radio"]),
+select {
+  flex: 1;
+  width: 50%;
+  padding: 0.2rem;
+  margin: 1rem 0;
+  border: 2px solid #cccccc;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+/* Highlight input when focused */
+input:focus,
+select:focus {
+  background-color: #fff;
+}
+
+/* Change border color on hover for better UX */
+input:hover,
+select:hover {
+  border-color: #888;
+}
+
+/* Specific styles for form controls to add margin and transition */
+.form-control {
+    width: 50%;
+    padding: 0.2rem;
+    margin: 8px 0;
+    border: 2px solid #cccccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+/* Payment options container with horizontal layout and spacing */
+.payment {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+}
+
+.payment-label {
+    width: 150px;
+    text-align: right;
+    padding-right: 1rem;
+    font-size: 18px;
+}
+
+.payment-options {
+    display: flex;
+    flex-direction: row;
+}
+
+.payment-option {
+    margin-right: 1.5rem;
+}
+
+/* Buttons container with space between and gap */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Styling buttons with rounded edges, subtle border, and hover effect */
+.buttons button {
+    padding: 10px 20px;
+    font-family: inherit;
+    font-size: 1rem;
+    border-radius: 100px;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    background-color: #F8F8FF;
+    color: black;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Change background on hover for buttons */
+.buttons button:hover,
+.buttons input[type="submit"]:hover {
+    background-color: #DCDCFF;
+}
+
+/* Footer style: stick to bottom, light background and centered text */
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}

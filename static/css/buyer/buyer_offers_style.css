@@ -1,0 +1,247 @@
+/* Make html and body full height and remove default margin */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Use flexbox to make body take full viewport height, column layout */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Main wrapper that expands to fill available space */
+.content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Container for the page content */
+.page-container {
+    flex: 1;
+}
+
+/* Search container styles: flex row with spacing */
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 1rem 2rem;
+}
+
+/* Search input and status dropdown share styles */
+.search-container input[type="search"],
+.status-filter select {
+    padding: 10px;
+    background-color: #F8F8FF;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font: inherit;
+    font-size: 1rem;
+    width: 500px;
+    height: 40px;
+}
+
+/* Search button styling */
+.search-button {
+    padding: 0.2rem 0.5rem;
+    background-color: #DCDCFF;
+    color: black;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+}
+
+.search-button:hover {
+    background-color: mediumpurple;
+    color: white;
+}
+
+.status-filter select {
+    padding: 0.5rem;
+    width: 180px;
+    font-family: 'Times New Roman', serif;
+}
+
+.search-container input[type="text"],
+.status-filter select {
+    padding: 10px;
+    background-color: #F8F8FF;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+/* Grid container for property offer cards */
+.my-offer-grid {
+    display: grid;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+/* Individual property card styling */
+.property-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    padding: 20px;
+}
+
+/* Property content flex container */
+.property-content {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+/* Property image */
+.property-image {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    margin-right: 8px;
+    max-height: 250px;
+}
+
+.property-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.property-details a{
+    color: black;
+    text-decoration: none;
+}
+
+.property-details a:hover {
+    text-decoration: underline;
+}
+
+.seller {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.seller-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    padding: 0.2rem;
+}
+
+/* Seller card hover effect */
+.seller-card:hover {
+    transform: scale(1.05);
+}
+
+.seller-card img {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+}
+
+.seller-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.seller-info a{
+    color: black;
+    font-size: 16px;
+}
+
+.status {
+    padding: 4px 8px;
+    display: inline-block;
+}
+
+/* Offer status color coding */
+.status.accepted {
+    background-color: #9CFF9F;
+}
+
+.status.pending {
+    background-color: #91CEFF;
+}
+
+.status.contingent {
+    background-color: #FF99F3;
+}
+
+.status.rejected {
+    background-color: #FF9999;
+}
+
+/* Buttons container aligned to the right */
+.buttons {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    justify-content: flex-end;
+}
+
+.buttons button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border: 2px solid #cccccc;
+    background-color: white;
+    border-radius: 0.5rem;
+    font-family: 'Times New Roman', serif;
+}
+
+
+.buttons button:hover {
+    background-color: #DCDCFF;
+}
+
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+    flex-shrink: 0; /* Ensure the footer doesn't shrink */
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .property-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .property-image {
+        width: 80%;
+        height: auto;
+        margin-right: 0;
+    }
+
+    .property-details {
+        align-items: center;
+        text-align: center;
+    }
+
+    .seller-card {
+        margin-top: 1rem;
+    }
+
+    .buttons {
+        justify-content: center;
+    }
+}

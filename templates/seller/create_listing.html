@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Listing</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/seller/seller_create_listing_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    {% include '_navigation.html' %}
+    <div class="page-container">
+        {% if messages %}
+            <div class="text-danger">
+                {% for msg in messages %}
+                    <div>{{ msg }}</div>
+                {% endfor %}
+                {% if form.errors %}
+                    <div>{{ form.errors }}</div>
+                {% endif %}
+                {% if form.expiration_date.errors %}
+                    <div>{{ form.expiration_date.errors }}</div>
+                {% endif %}
+            </div>
+        {% endif %}
+        <h2>Create listing</h2>
+        <form method="POST" enctype="multipart/form-data" id="create-listing" action="{% url 'seller_add_listing' %}">
+            {% csrf_token %}
+            <div class="form-fields">
+                <div class="input-fields">
+                
+                    <div class="input-field">
+                        <label for="street"><strong>Street:</strong></label>
+                        {{ form.street }}
+                    </div>
+                    <div class="input-field">
+                        <label for="house_numb"><strong>House number:</strong></label>
+                        {{ form.number }}
+                    </div>
+                    <div class="input-field">
+                        <label for="zip"><strong>ZIP:</strong></label>
+                        {{ form.zip }}
+                    </div>
+                    <div class="input-field">
+                        <label for="city"><strong>City:</strong></label>
+                        {{ form.city }}
+                    </div>
+                    <div class="input-field">
+                        <label for="description"><strong>Description:</strong></label>
+                        {{ form.description }}
+                    </div>
+                    <div class="input-field">
+                        <label for="type"><strong>Type:</strong></label>
+                        {{ form.type }}
+                    </div>
+                    <div class="input-field">
+                        <label for="price"><strong>Listing price:</strong></label>
+                        {{ form.price }}
+                    </div>
+                    <div class="input-field">
+                        <label for="date"><strong>Listing date:</strong></label>
+                        {{ form.listing_date }}
+                    </div>
+                    <div class="input-field">
+                        <label for="rooms"><strong>Number of rooms:</strong></label>
+                        {{ form.numb_of_rooms }}
+                    </div>
+                    <div class="input-field">
+                        <label for="bedrooms"><strong>Number of bedrooms:</strong></label>
+                        {{ form.bed_rooms }}
+                    </div>
+                    <div class="input-field">
+                        <label for="bathrooms"><strong>Number of bathrooms:</strong></label>
+                        {{ form.bath_rooms }}
+                    </div>
+                    <div class="input-field">
+                        <label for="square_meters"><strong>Number of square meters:</strong></label>
+                        {{ form.size_sqm }}
+                    </div>
+
+                </div>
+
+                <div class="images-input">
+
+                    <label for="images"><strong>Upload Images: </strong></label>
+                    
+                        <img src="/media/{{ form.thumbnail.value }}" alt="Profile Picture" width="200">
+                        <label>Set new listing thumbnail </label>
+                        <!-- File input for new profile image -->
+                        <div class="file-input-wrapper">
+                            {{ form.thumbnail }}
+                        </div>
+
+                        <label> <strong>Add images to property gallery</strong></label>
+                        <div class="file-input-wrapper">
+                            {{ form2.image_url }}
+                        </div>
+                        
+                </div>
+
+                    <div id="preview"></div>
+                </div>
+
+            </div>
+            <div class="buttons">
+                <button type="button" onclick="window.history.back()">Go Back</button>
+                <button type="submit" form="create-listing" >Save</button>
+            </div>
+        </form>
+
+        
+    </div>
+
+    {% include '_footer.html' %}
+
+</body>
+</html>

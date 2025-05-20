@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Offer</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/buyer/create_offer_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <script src="{% static 'js/offer_filter.js' %}"></script>
+</head>
+<body>
+    {% include "_navigation.html" %}
+
+    <div class="my-offer-grid" id="offer-listed">
+        <!-- Display error messages if any -->
+        {% if messages %}
+            <div class="text-danger">
+                {% for msg in messages %}
+                    <div>{{ msg }}</div>
+                {% endfor %}
+                {% if form.price.errors %}
+                    <div>{{ form.price.errors }}</div>
+                {% endif %}
+                {% if form.expiration_date.errors %}
+                    <div>{{ form.expiration_date.errors }}</div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <!-- Offer heading with listing type and address -->
+        <h3>Make an Offer for {{ listing.type }} at {{ listing.numb }} {{ listing.street }}</h3>
+
+
+        <div class="listing-and-offer">
+             <div class="card">
+                <div class="card-body">
+                    <!-- Listing image -->
+                    <img src="/media/{{ listing.thumbnail }}" alt="Listing Photo">
+                    <div class="listing-details">
+                        <!-- Listing address -->
+                        <p><strong>Address:</strong> {{ listing.number }} {{ listing.street }}, {{ listing.zip }} {{ listing.city }}</p>
+                        <p><strong>Listed Price:</strong> ${{ listing.price }}</p>
+
+                        <div class="offer">
+                            <div class="offer-header">
+                                <h5>Your Offer</h5>
+                            </div>
+                            <div class="form-container">
+                                <form id="offer-form" method="post" action="{% url 'create-offer' listing.id %}">
+
+                                    {% csrf_token %}
+                                    <!-- Offer Price input -->
+                                    <div class="form-group">
+                                        <label for="{{ form.price.id_for_label }}">Your Offer Price ($):</label>
+                                        {{ form.price }}
+                                    </div>
+
+                                    <!-- Offer expiration date input -->
+                                    <div class="form-group">
+                                        <label for="{{ form.expiration_date.id_for_label }}">Offer Valid Until:</label>
+                                        {{ form.expiration_date }}
+                                        <small class="form-text text-muted">The expiration date of the offer.</small>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="buttons">
+            <button type="button" onclick="redirectToOffers()">Cancel</button>
+            <button type="submit" form="offer-form" class="btn btn-primary">Submit Offer</button>
+        </div>
+        
+    </div>
+
+    {% include "_footer.html" %}
+
+    <script>
+        function redirectToOffers() {
+            // Redirecting directly to the buyer's interface (e.g., catalogue page) without checking login credentials
+            window.location.href = "{% url 'listing-by-id' listing.id %}";
+        }
+        const sortSelect = document.getElementById('sort-button');
+        if (sortSelect) {
+            sortSelect.addEventListener('change', function () {
+                document.getElementById('apply-filters').click();
+            });
+        }
+    </script>
+
+</body>
+</html>

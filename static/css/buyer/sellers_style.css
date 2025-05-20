@@ -1,0 +1,127 @@
+/* Ensure html and body fill full height and reset margin */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Make body a vertical flex container for page layout */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Container takes remaining vertical space */
+.page-container {
+    flex: 1;
+}
+
+/* Search bar layout: horizontal flex with spacing, wrapping if needed */
+.search {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: stretch;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+}
+
+/* Search input expands to fill available space */
+.search input[type="search"]{
+    flex-grow: 1;
+    padding: 0.2rem;
+    background-color: #F8F8FF;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: 'Times New Roman', serif;
+    max-width: 500px;
+}
+
+/* Search button styling with subtle background and pointer cursor */
+.search button {
+    padding: 0.2rem 0.5rem;
+    background-color: #DCDCFF;
+    color: black;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Hover effect for search button */
+.search button:hover {
+    background-color: mediumpurple;
+    color: white;
+}
+
+/* Padding around sellers content */
+.sellers-page-container {
+    padding: 2rem;
+}
+
+/* Sellers grid: responsive columns with consistent gaps */
+.sellers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+/* Individual seller card: horizontal flex with spacing and shadow */
+.seller-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    min-width: 280px;
+    flex-grow: 1;
+}
+
+/* Seller name styling */
+.seller-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Allow seller address text to wrap */
+.seller-address {
+    text-wrap: wrap;
+}
+
+/* Link styling inside seller info */
+.seller-info a{
+    color: black;
+}
+
+/* Change link color on hover for clarity */
+.seller-info a:hover{
+    color: blue;
+}
+
+/* Scale seller card slightly on hover to highlight */
+.seller-card:hover {
+    transform: scale(1.05);
+}
+
+/* Seller image as circular thumbnail with border */
+.seller-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #cccccc;
+}
+
+/* Footer sticks to bottom with light background and padding */
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}

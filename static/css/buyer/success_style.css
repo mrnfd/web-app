@@ -1,0 +1,39 @@
+/* Make html and body take full height and remove default margin */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Use flex layout for body to push footer to bottom */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Make page container flex-grow so it fills available space */
+.page-container {
+    flex: 1;
+}
+
+/* Styling for the success message container */
+.alert-success {
+    margin: 1rem;
+    border: 1px solid #cccccc;
+    border-radius: 0.5rem;
+    background-color: #d1ffbd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    flex: 1;
+}
+
+/* Footer styles to keep it at bottom with padding and background */
+footer {
+    margin-top: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}

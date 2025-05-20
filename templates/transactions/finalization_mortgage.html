@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/buyer/finalization_payment_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    {% include "_navigation.html" %}
+
+    <main class="main-content">
+        <div class="page-container">
+            <!-- Display any Django messages -->
+            {% if messages %}
+              <div class="messages">
+                {% for message in messages %}
+                  <div class="message {{ message.tags }}">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <form id="payment-form" method="post" action="{% url 'finalization_mortgage' transaction.id %}">
+                {% csrf_token %}
+                <!-- Container for mortgage input field -->
+                <div class="payment">
+                    <div id="mortgage-fields" class="payment-fields">
+                        <div class="input-fields">
+                            <label for="provider">Mortgage provider:</label>
+                            {{ form.mortgage_provider }}
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+        <!-- Buttons container -->
+        <div class="buttons">
+            <!-- Back button triggers JS to navigate back -->
+            <button type="button" data-id="{{ transaction.offer.id }}" class="back-contact-info-button">Back</button>
+            <!-- Submit button posts the form -->
+            <button type="submit" form="payment-form">Submit</button>
+        </div>
+
+    </main>
+
+    {% include "_footer.html" %}
+    <!-- JS for handling button clicks and form actions -->
+    <script src="{% static 'js/finalization.js' %}"></script>
+
+</body>
+</html>
