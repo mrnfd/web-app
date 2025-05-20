@@ -1,49 +1,29 @@
-# VLN2_Group47
-**Castle Apartments**
-_Castle Apartments_ is a real estate platform developed as part of the course T-220-VLN2. 
-The site is designed to serve both buyers and property sellers through an elegant, responsive web application built using Django, PostgreSQL, and Python.
+Castle Apartments is a full-featured real estate web application developed as a practical project for the university course. This project was created to demonstrate skills in full-stack web development, database design, and user experience — it is an academic exercise and not a commercial or real-world product.
 
-We successfully implemented all the core requirements outlined in the project description.
-As well as these **extra requirements**:
-1.     User registration for both Buyers and Sellers
-2.     Login system with role-based access
-3.     Editable user profiles, tailored to each user type
-4.     Enhanced buyer profiles, including details such as email, phone number, street name, house number, city, and ZIP code
-5.     The home page features a search bar that allows buyers to search for properties by address, city, ZIP code, or neighborhood. Matching properties are dynamically displayed based on the input.
-6.     Search functionality is also integrated across multiple sections of the site, including the catalogue page, sellers page, My Offers page (for buyers), as well as the Listings and Offers pages (for sellers).    
-7.     A seller directory page listing all registered sellers on the platform
-8.     Home page, displays seller's offers and listings
-9.     Listings page, allows sellers to view all of their property listings and add new ones
-10.     Offers page, displays all purchase offers made by buyers on the seller's properties, with options to accept or decline each offer
+The application is built using Django as the backend framework, PostgreSQL as the database engine, and Python as the core programming language. It offers a clean, responsive interface that simplifies property browsing, purchase offers, and transaction finalization.
+
+**Core Features**
+Responsive site layout with navigation bar and footer
+User profiles showing editable personal information and profile images
+Property catalogue displaying available listings with filters by postal code, price, type, and search by street name
+Detailed property pages with address, description, images, seller info, and purchase offer submission
+Seller profiles with contact details, bio, and list of their available properties
+Submission and management of purchase offers with statuses (Pending, Accepted, Rejected, Contingent)
+Multi-step purchase offer finalization, including contact info, payment options, review, and confirmation steps
 
 
-**Usage**
-To run the website you must
-Set up a virtual environment:
+**Additional Features Implemented**
+User registration system supporting both Buyers and Sellers with role-based access control
+Enhanced, editable user profiles tailored to user type, including contact and address details
+Dynamic search bars integrated on multiple pages for improved property and seller lookup
+Seller directory listing all registered sellers with links to their profiles
+Home page showcasing personalized offers and listings for users
+Separate Listings and Offers pages allowing sellers to manage properties and offers efficiently
+Interactive offer management for sellers, enabling accepting or declining purchase offers
 
-python -m venv env
+**Technologies Used**
+Django
+PostgreSQL (Cloud-hosted on Azure)
+HTML/CSS/JavaScript
+Git
 
-source env/bin/activate 
-
-Install the necessary dependencies:
-
-pip install -r requirements.txt
-
-Start the server:
-
-python manage.py runserver
-
-Then the website should be running on http://localhost:8000/
-
-_For the demonstration several test users were created._
-Their credentials are listed below:
-Buyers
-Username: TestBuyerOne
-Password: ABC12345ABC
-
-Sellers
-Username: TestSellerOne
-Password: ABC12345ABC
-
-Username: TestSellerTwo
-Password: KALLI24680
